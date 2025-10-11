@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="e3135ff5-fe0f-44b1-9bd7-afd2dbbaf5d8" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Licencjat/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Licencjat/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/InputSystem_Actions.inputactions" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/InputSystem_Actions.inputactions" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Game.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Game.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/PlayerMovementController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/PlayerMovementController.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,6 +33,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "feat/character-movement",
+    "ignore.virus.scanning.warn.message": "true",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -95,7 +102,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1760175244140</updated>
-      <workItem from="1760175247444" duration="406000" />
+      <workItem from="1760175247444" duration="5761000" />
     </task>
     <servers />
   </component>
