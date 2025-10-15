@@ -1,53 +1,56 @@
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerMovementController : MonoBehaviour
 {
-    [SerializeField] private float movementSensivity;
+    [SerializeField] private float cameraSensivity;
+    [SerializeField] private float moveSpeed;
     
     private Camera _playerCamera;
     private InputAction _lookInput;
     private InputAction _moveInput;
-    private Rigidbody _playerRb;
+    private CharacterController _characterController;
     
     private float _yMoveOffset, _xMoveOffset;
+    private float _cameraPitch;
 
     private void Awake()
     {
         _playerCamera = GetComponentInChildren<Camera>();
-        _playerRb = GetComponent<Rigidbody>();
+        _characterController = GetComponent<CharacterController>();
         
         _lookInput = InputSystem.actions.FindAction("Look");
         _moveInput = InputSystem.actions.FindAction("Move");
     }
-    
-    void Start()
-    {
-        
-    }
-    
-    void Update()
+
+    private void Update()
     {
         Rotate();
-    }
-
-    private void FixedUpdate()
-    {
+        
         var input = _moveInput.ReadValue<Vector2>();
-        var move = new Vector3(input.x * movementSensivity, 0f, input.y * movementSensivity);
+        
+        if (input == Vector2.zero) return;
+        
+        var move = new Vector3(input.x * moveSpeed, 0f, input.y * moveSpeed);
         var moveDirection = transform.TransformDirection(move);
         
-        _playerRb.linearVelocity = moveDirection;
+        _characterController.SimpleMove(moveDirection);
     }
 
     private void Rotate()
     {
-        _yMoveOffset += _lookInput.ReadValue<Vector2>().y * movementSensivity * Time.deltaTime;
-        _xMoveOffset = _lookInput.ReadValue<Vector2>().x * movementSensivity * Time.deltaTime;
+        Vector2 lookInput = _lookInput.ReadValue<Vector2>();
+        if (lookInput == Vector2.zero) return;
         
-        var clampedAngle = Mathf.Clamp(-_yMoveOffset, -55f, 55f);
-        _playerCamera.transform.localRotation = Quaternion.Euler(clampedAngle, 0f, 0f);
-        transform.Rotate(0, _xMoveOffset, 0);
+        float mouseX = lookInput.x * cameraSensivity * Time.fixedDeltaTime;
+        float mouseY = lookInput.y * cameraSensivity * Time.fixedDeltaTime;
+        
+        _cameraPitch -= mouseY;
+        _cameraPitch = Mathf.Clamp(_cameraPitch, -55f, 55f);
+        
+        _playerCamera.transform.localEulerAngles = new Vector3(_cameraPitch, 0f, 0f);
+        
+        transform.Rotate(0f, mouseX, 0f);
     }
+
 }
