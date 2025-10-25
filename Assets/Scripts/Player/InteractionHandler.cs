@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using Interactions;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Player
 {
@@ -10,53 +11,66 @@ namespace Player
     {
         [Range(0.05f, 1.0f)]
         [SerializeField] private float tickDuration;
+
+        [SerializeField] private GameObject interactionUI;
+        private IInteractable _currentInteractable;
+        private InputAction _interactAction;
         
-        private const float RAYCAST_RANGE = 100f;
-        private RaycastHit[] hits = new RaycastHit[10];
+        [Range(0.5f, 3f)]
+        [SerializeField] private float raycastMaxDistance = 2f;
+        private RaycastHit[] _hitResults = new RaycastHit[5];
+        
         private Camera _playerCamera;
+
+        private Awaitable _checkForInteractable;
 
         private void Awake()
         {
             _playerCamera = GetComponent<Camera>();
+            _interactAction = InputSystem.actions.FindAction("Interact");
         }
 
         private void OnEnable()
         {
-            StartCoroutine(CheckIfInteractable());
+            _interactAction.performed += Interact;
+            _checkForInteractable = CheckIfInteractable();
         }
 
-        private IEnumerator CheckIfInteractable()
+        private void Interact(InputAction.CallbackContext context)
+        {
+            _currentInteractable?.Interact();
+        }
+        
+        private async Awaitable CheckIfInteractable()
         {
             while (true)
             {
-                yield return new WaitForSeconds(tickDuration);
+                await Awaitable.WaitForSecondsAsync(tickDuration);
+
+                Ray ray = _playerCamera.ScreenPointToRay(new Vector3(Screen.width / 2f, Screen.height / 2f, 0f));
+                int hitsCount = Physics.RaycastNonAlloc(ray.origin, ray.direction, _hitResults, raycastMaxDistance);
+
+                _currentInteractable = null;
+                Debug.Log("awaitable");
                 
-                Ray ray = _playerCamera.ScreenPointToRay(_playerCamera.transform.position * RAYCAST_RANGE);
-                Physics.RaycastNonAlloc(ray, hits, RAYCAST_RANGE);
-                Debug.DrawRay(_playerCamera.transform.position, ray.direction * RAYCAST_RANGE, Color.red, 10f);
-                
-                try
+                for (int i = 0; i < hitsCount; i++)
                 {
-                    foreach (var hit in hits)
-                    {
-                        if (hit.collider.TryGetComponent<IInteractable>(out var interactable))
-                        {
-                            interactable.Interact();
-                            Debug.Log("can Interact");
-                            break;
-                        }
-                    }
+                    var hit = _hitResults[i];
+                    
+                    if (!hit.collider || !hit.collider.TryGetComponent(out IInteractable interactable)) continue;
+                    
+                    _currentInteractable = interactable;
+                    break;
                 }
-                catch (Exception e)
-                {
-                    Debug.LogException(e);
-                }
+
+                interactionUI.SetActive(_currentInteractable != null);
             }
         }
 
-        private void OnDestroy()
+        private void OnDisable()
         {
-            StopAllCoroutines();
+            _interactAction.performed -= Interact;
+            _checkForInteractable?.Cancel();
         }
     }
 }

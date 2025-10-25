@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 namespace Interactions
@@ -7,7 +6,7 @@ namespace Interactions
     {
         public void Interact()
         {
-            Debug.Log("Interacting...");
+            Debug.Log($"Interacted with {name}");
         }
     }
 }
