@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -16,7 +15,6 @@ namespace UI
 
         void Update()
         {
-            Debug.Log("Update");
             var mousePos = Mouse.current.position.ReadValue();
 
             RectTransformUtility.ScreenPointToLocalPointInRectangle(
@@ -30,6 +28,27 @@ namespace UI
             float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
             
             arrow.localRotation = Quaternion.Euler(0, 0, angle - 90f);
+
+            GetPauseOption(angle);
+        }
+
+        private static PauseOptions GetPauseOption(float angle)
+        {
+            return angle switch
+            {
+                >= 260 and <= 335 => PauseOptions.Resume,
+                >= 155 and <= 205 => PauseOptions.Settings,
+                >= 25 and <= 90 => PauseOptions.MainMenu,
+                _ => PauseOptions.None
+            };
+        }
+        
+        private enum PauseOptions
+        {
+            None,
+            Resume,
+            Settings,
+            MainMenu
         }
     }
 }
