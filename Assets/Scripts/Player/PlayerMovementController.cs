@@ -1,9 +1,10 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace Player
 {
-    public class PlayerMovementController : MonoBehaviour
+    public class PlayerMovementController : MonoBehaviour, IRegister
     {
         [SerializeField] private float cameraSensivity;
         [SerializeField] private float moveSpeed;
@@ -27,6 +28,16 @@ namespace Player
             _lookInput = InputSystem.actions.FindAction("Look");
             _moveInput = InputSystem.actions.FindAction("Move");
             _sprintInput = InputSystem.actions.FindAction("Sprint");
+        }
+
+        private void Start()
+        {
+            Register();
+        }
+
+        private void OnDestroy()
+        {
+            Unregister();
         }
 
         private void Update()
@@ -76,5 +87,14 @@ namespace Player
             transform.Rotate(0f, mouseX, 0f);
         }
 
+        public void Register()
+        {
+            Registry.Instance.Register(this);
+        }
+
+        public void Unregister()
+        {
+            Registry.Instance.Unregister(this);
+        }
     }
 }
