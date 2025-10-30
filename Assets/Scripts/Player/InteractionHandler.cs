@@ -23,11 +23,18 @@ namespace Player
         private Camera _playerCamera;
 
         private Awaitable _checkForInteractable;
+        
+        private GameManager _gameManager;
 
         private void Awake()
         {
             _playerCamera = GetComponent<Camera>();
             _interactAction = InputSystem.actions.FindAction("Interact");
+        }
+
+        private void Start()
+        {
+            _gameManager = Registry.Instance.Get<GameManager>();
         }
 
         private void OnEnable()
@@ -38,7 +45,8 @@ namespace Player
 
         private void Interact(InputAction.CallbackContext context)
         {
-            _currentInteractable?.Interact();
+            if (_gameManager.CurrentGameState == GameState.Game)
+                _currentInteractable?.Interact();
         }
         
         private async Awaitable CheckIfInteractable()
