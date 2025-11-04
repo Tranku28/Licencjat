@@ -16,25 +16,21 @@ namespace UI
 
         [SerializeField] private TMP_Text resume, backToMenu, settings;
         private PauseOptions _currentOption;
-
-        private InputAction _clickInput;
         
-        private PlayerMovementController _playerMovementController;
         private GameManager _gameManager;
 
         private void Awake()
         {
             _canvas = GetComponentInParent<Canvas>();
-            _clickInput = InputSystem.actions.FindAction("Click");
         }
 
-        private void ShowPauseMenu(bool isPaused)
+        private void Start()
         {
-            pauseMenuVisual.SetActive(true);
-            _playerMovementController.enabled = false;
+            PlayerControls.OnClickEvent += OnMenuClick;
+            _gameManager = Registry.Instance.GetType<GameManager>();
         }
 
-        private void OnMenuClick(InputAction.CallbackContext obj)
+        private void OnMenuClick()
         {
             switch (_currentOption)
             {
@@ -47,8 +43,6 @@ namespace UI
                 case PauseOptions.Resume:
                     
                     pauseMenuVisual.SetActive(false);
-                    _clickInput.performed -= OnMenuClick;
-                    _playerMovementController.enabled = true;
                     _gameManager.CurrentGameState = GameState.Game;
                     
                     break;
@@ -87,11 +81,6 @@ namespace UI
                 >= 25 and <= 90 => PauseOptions.MainMenu,
                 _ => PauseOptions.None
             };
-        }
-
-        private void OnDestroy()
-        {
-            _clickInput.performed -= OnMenuClick;
         }
     }
     

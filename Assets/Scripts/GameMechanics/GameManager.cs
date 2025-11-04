@@ -24,7 +24,7 @@ namespace Core
         {
             CurrentGameState = GameState.MainMenu;
         
-            _mainMenuManager = Registry.Instance.Get<MainMenuManager>();
+            _mainMenuManager = Registry.Instance.GetType<MainMenuManager>();
             if (!_mainMenuManager) throw new Exception("GameManager not initialized");
         
             _mainMenuManager.OnGameStarted += StartGame;

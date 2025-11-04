@@ -1,16 +1,16 @@
 using System;
 using Player;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace UI.MainMenu
 {
     public class MainMenuManager : MonoBehaviour, IRegister
     {
+        [SerializeField] private PlayerMovementController playerMovementController;
         [SerializeField] private Transform mainMenuCameraTransform;
-        [SerializeField] private Transform playerCameraTransform;
         [SerializeField] private float cameraMoveSpeed;
+        private float cameraRotateSpeed;
 
         [Header("Menu Buttons")]
         [SerializeField] private Button playButton;
@@ -24,8 +24,11 @@ namespace UI.MainMenu
 
         private Button[] _menuMainButtons = new Button[4];
         
+        private Vector3 _playerHeadTargetPosition;
+        private Quaternion _playerHeadTargetRotation;
         private bool _gameStarted;
-        [SerializeField] private Camera playerCamera;
+        private Camera _playerCamera;
+        private bool _moveDone;
 
         public Action OnGameStarted;
 
@@ -46,9 +49,16 @@ namespace UI.MainMenu
 
         private void Start()
         {
-            playerCameraTransform = playerCamera.transform;
+            playerMovementController.enabled = false;
+            _moveDone = false;
+            cameraRotateSpeed = cameraMoveSpeed * 36;
             
-            playerCamera.transform.position = mainMenuCameraTransform.position;
+            _playerCamera = playerMovementController.gameObject.GetComponentInChildren<Camera>();
+            _playerHeadTargetPosition = _playerCamera.transform.position;
+            _playerHeadTargetRotation = _playerCamera.transform.rotation;
+            
+            _playerCamera.transform.position = mainMenuCameraTransform.position;
+            _playerCamera.transform.rotation = mainMenuCameraTransform.rotation;
         }
 
         private void OnDestroy()
@@ -60,24 +70,51 @@ namespace UI.MainMenu
         {
             if (!_gameStarted) return;
 
-            SmoothGameplayTransition();
+            switch (_moveDone)
+            {
+                case false:
+                    SmoothTransform();
+                    return;
+                case true:
+                    SmoothRotate();
+                    break;
+            }
         }
 
-        private void SmoothGameplayTransition()
+        private void SmoothTransform()
         {
             var step = cameraMoveSpeed * Time.deltaTime;
                 
-            playerCamera.transform.position = 
+            _playerCamera.transform.position = 
                 Vector3.MoveTowards(
-                    playerCamera.transform.position,
-                    playerCameraTransform.position,
+                    _playerCamera.transform.position,
+                    _playerHeadTargetPosition,
                     step
                 );
 
-            if (Vector3.Distance(playerCamera.transform.position, playerCameraTransform.position) < 0.1f)
+            var distance = Vector3.Distance(_playerCamera.transform.position, _playerHeadTargetPosition);
+                
+            if (distance < 0.1f)
             {
-                enabled = false;
+                Debug.Log("Done");
+                _moveDone = true;
             }
+        }
+        
+        private void SmoothRotate()
+        {
+            var step = cameraRotateSpeed * Time.deltaTime;
+
+            _playerCamera.transform.rotation = Quaternion.RotateTowards(
+                _playerCamera.transform.rotation, 
+                _playerHeadTargetRotation,
+                step
+                );
+
+            if (!(Quaternion.Angle(_playerCamera.transform.rotation, _playerHeadTargetRotation) < 0.1f)) return;
+            
+            playerMovementController.enabled = true;
+            enabled = false;
         }
 
         public void ButtonVisibilitySwitch(bool switchFlag)

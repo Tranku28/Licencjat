@@ -13,9 +13,9 @@ public class Registry : MonoBehaviour
             Destroy(gameObject);
     }
 
-    private List<IRegister> _registeredObjects = new();
+    private static List<IRegister> _registeredObjects = new();
 
-    public T Get<T>() where T : class
+    public T GetType<T>() where T : class
     {
         foreach (var item in _registeredObjects)
         {

@@ -24,7 +24,7 @@ namespace GameMechanics.UI.MainMenu
 
         private void BackToMainMenu()
         {
-            MainMenuManager menuManager = Registry.Instance.Get<MainMenuManager>();
+            MainMenuManager menuManager = Registry.Instance.GetType<MainMenuManager>();
 
             if (!menuManager) return;
             
