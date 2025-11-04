@@ -34,6 +34,7 @@ namespace GameMechanics
 
         private void CloseUI()
         {
+            Debug.Log("Close UI");
             if (_currentElement == null)
             {
                 pauseMenu.SetVisualVisibility(true);

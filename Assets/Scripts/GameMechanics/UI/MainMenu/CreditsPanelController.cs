@@ -27,7 +27,7 @@ namespace UI.MainMenu
         {
             Debug.Log("Back to MainMenu");
             
-            MainMenuManager menuManager = Registry.Instance.Get<MainMenuManager>();
+            MainMenuManager menuManager = Registry.Instance.GetType<MainMenuManager>();
 
             if (!menuManager) return;
             

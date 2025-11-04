@@ -42,7 +42,7 @@ namespace GameMechanics
         {
             Passenger.OnPassengerInteracted += UpdateTicketUI;
             
-            _gameManager = Registry.Instance.Get<GameManager>();
+            _gameManager = Registry.Instance.GetType<GameManager>();
         }
 
         private void OnDestroy()

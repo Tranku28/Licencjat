@@ -35,7 +35,7 @@ namespace Player
 
         private void Start()
         {
-            _gameManager = Registry.Instance.Get<GameManager>();
+            _gameManager = Registry.Instance.GetType<GameManager>();
         }
 
         private void OnEnable()
