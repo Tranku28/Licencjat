@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: acecc751a12ea0244b7bd035b07eda1f, type: 3}
-  m_Name: Passenger2
+  m_Name: Vampiress
   m_EditorClassIdentifier: 
-  passengerName: Arelliana
-  passengerSurname: Windrunner
-  destination: Dalaran
+  passengerName: 
+  passengerSurname: 
+  destination: 
   validUntil:
-    Day: 4
-    Month: 7
-    Hour: 15
-    Minute: 19
+    Day: 0
+    Month: 0
+    Hour: 0
+    Minute: 0
