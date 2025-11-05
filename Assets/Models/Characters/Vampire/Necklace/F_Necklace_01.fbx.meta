@@ -3,7 +3,17 @@ guid: 88e6fd886640daa40a0942832433e660
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Necklace_01
+    second: {fileID: 2100000, guid: 64f7fffa612f8c442a44c288109c9739, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Necklace_02
+    second: {fileID: 2100000, guid: d1f09046a3efff94099fbbc77dc09774, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

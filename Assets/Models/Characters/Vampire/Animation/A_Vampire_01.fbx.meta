@@ -3,7 +3,27 @@ guid: 36ac21d2c9638a24bb6cde96bd011455
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Bag_01
+    second: {fileID: 2100000, guid: 8593ba16107b73d43bc3febba3ca10e1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Feather_01.003
+    second: {fileID: 2100000, guid: 4758e673aac749845b5f7287fbb47f9e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Vampire_UV_01.003
+    second: {fileID: 2100000, guid: 734f22504e89c67498822f8b3893086c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Vampire_UV_02.003
+    second: {fileID: 2100000, guid: 47dc310d726b5a74bb8f05ab80e0ab70, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
