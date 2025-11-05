@@ -1,9 +1,8 @@
-using System;
 using System.Linq;
 using System.Reflection;
 using UnityEngine;
 
-namespace Systems
+namespace Core
 {
     public class Bootloader : MonoBehaviour
     {

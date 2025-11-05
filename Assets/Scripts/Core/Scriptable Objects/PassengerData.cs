@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Scriptable_Objects
+namespace Core.Scriptable_Objects
 {
     [CreateAssetMenu(fileName = "PassengerData", menuName = "Scriptable Objects/PassengerData")]
     public class PassengerData : ScriptableObject

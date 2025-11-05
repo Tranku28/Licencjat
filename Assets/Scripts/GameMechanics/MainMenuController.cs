@@ -1,11 +1,14 @@
 using System;
+using Core;
+using GameMechanics.Player;
+using GameMechanics.UI;
 using Player;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace UI.MainMenu
 {
-    public class MainMenuManager : MonoBehaviour, IRegister
+    public class MainMenuController : UIElement
     {
         [SerializeField] private PlayerMovementController playerMovementController;
         [SerializeField] private Transform mainMenuCameraTransform;
@@ -29,10 +32,15 @@ namespace UI.MainMenu
         private bool _gameStarted;
         private Camera _playerCamera;
         private bool _moveDone;
-
-        public Action OnGameStarted;
+        
+        public static Action PlayButtonPressed;
 
         private void Awake()
+        {
+            AssignButtons();
+        }
+
+        private void AssignButtons()
         {
             playButton.onClick.AddListener(StartGame);
             _menuMainButtons[0] = playButton;
@@ -42,28 +50,24 @@ namespace UI.MainMenu
             _menuMainButtons[2] = creditsButton;
             quitButton.onClick.AddListener(QuitGame);
             _menuMainButtons[3] = quitButton;
-            
-            Register();
         }
-        
 
         private void Start()
         {
-            playerMovementController.enabled = false;
             _moveDone = false;
             cameraRotateSpeed = cameraMoveSpeed * 36;
             
+            CameraSetup();
+        }
+
+        private void CameraSetup()
+        {
             _playerCamera = playerMovementController.gameObject.GetComponentInChildren<Camera>();
             _playerHeadTargetPosition = _playerCamera.transform.position;
             _playerHeadTargetRotation = _playerCamera.transform.rotation;
             
             _playerCamera.transform.position = mainMenuCameraTransform.position;
             _playerCamera.transform.rotation = mainMenuCameraTransform.rotation;
-        }
-
-        private void OnDestroy()
-        {
-            Unregister();
         }
 
         private void Update()
@@ -96,7 +100,6 @@ namespace UI.MainMenu
                 
             if (distance < 0.1f)
             {
-                Debug.Log("Done");
                 _moveDone = true;
             }
         }
@@ -112,8 +115,10 @@ namespace UI.MainMenu
                 );
 
             if (!(Quaternion.Angle(_playerCamera.transform.rotation, _playerHeadTargetRotation) < 0.1f)) return;
+
+            var gameStateMachine = DependencyResoler.Instance.GetType<GameStateMachine>();
+            gameStateMachine.StartGame();
             
-            playerMovementController.enabled = true;
             enabled = false;
         }
 
@@ -127,7 +132,7 @@ namespace UI.MainMenu
         
         private void StartGame()
         {
-            OnGameStarted?.Invoke();
+            PlayButtonPressed?.Invoke();
             _gameStarted = true;
         }
 
@@ -147,18 +152,7 @@ namespace UI.MainMenu
         }
         private void QuitGame()
         {
-            
-        }
-
-
-        public void Register()
-        {
-            Registry.Instance.Register(this);
-        }
-
-        public void Unregister()
-        {
-            Registry.Instance.Unregister(this);
+            Application.Quit();
         }
     }
 }

@@ -1,10 +1,9 @@
 using System;
 using Core;
+using Core.Scriptable_Objects;
 using GameMechanics.UI;
 using Interactions;
-using Scriptable_Objects;
 using TMPro;
-using UI;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -20,29 +19,19 @@ namespace GameMechanics
         [SerializeField] private TMP_Text passengerFullNameText;
         [SerializeField] private TMP_Text passengerDestinationText;
         [SerializeField] private TMP_Text passengerExpireDateText;
-
-        private InputAction _quitTicketUIInput;
-        private GameManager _gameManager;
+        
+        private GameStateMachine _gameManager;
 
         private void Awake()
         {
             if (Camera.main == null) throw new Exception("Camera not found");
-            
-            _quitTicketUIInput = InputSystem.actions.FindAction("Interact");
-            _quitTicketUIInput.performed += QuitTicketUI;
-        }
-
-        private void QuitTicketUI(InputAction.CallbackContext obj)
-        {
-            if (holeParentObject.activeSelf) holeParentObject.SetActive(false);
-            _gameManager.CurrentGameState = GameState.Game;
         }
 
         private void Start()
         {
             Passenger.OnPassengerInteracted += UpdateTicketUI;
             
-            _gameManager = Registry.Instance.GetType<GameManager>();
+            _gameManager = DependencyResoler.Instance.GetType<GameStateMachine>();
         }
 
         private void OnDestroy()
@@ -63,11 +52,10 @@ namespace GameMechanics
 
         private void ShowUI()
         {
-            _gameManager.CurrentGameState = GameState.Paused;
+            _gameManager.ChangeGameState(GameState.UIOpened);
             holeParentObject.SetActive(true);
-            _quitTicketUIInput.Enable();
         }
-
+        
         public void OnPointerClick(PointerEventData eventData)
         {
             if (!gameObject.activeInHierarchy) return;

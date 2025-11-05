@@ -1,3 +1,4 @@
+using Core;
 using UI.MainMenu;
 using UnityEngine.UI;
 
@@ -24,11 +25,11 @@ namespace GameMechanics.UI.MainMenu
 
         private void BackToMainMenu()
         {
-            MainMenuManager menuManager = Registry.Instance.GetType<MainMenuManager>();
+            MainMenuController menuController = GetComponentInParent<MainMenuController>();
 
-            if (!menuManager) return;
+            if (!menuController) return;
             
-            menuManager.ButtonVisibilitySwitch(true);
+            menuController.ButtonVisibilitySwitch(true);
             
             gameObject.SetActive(false);
         }

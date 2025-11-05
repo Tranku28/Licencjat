@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using Core;
+using Core.Scriptable_Objects;
 using GameMechanics.Interactions;
 using Interactions;
 using UnityEngine;
@@ -25,7 +26,7 @@ namespace Player
 
         private Awaitable _checkForInteractable;
         
-        private GameManager _gameManager;
+        private GameStateMachine _gameManager;
 
         private void Awake()
         {
@@ -35,7 +36,7 @@ namespace Player
 
         private void Start()
         {
-            _gameManager = Registry.Instance.GetType<GameManager>();
+            _gameManager = DependencyResoler.Instance.GetType<GameStateMachine>();
         }
 
         private void OnEnable()
@@ -45,7 +46,7 @@ namespace Player
 
         private void Interact()
         {
-            if (_gameManager.CurrentGameState == GameState.Game)
+            if (_gameManager.GetGameState() == GameState.Gameplay)
                 _currentInteractable?.Interact();
         }
         
@@ -59,7 +60,6 @@ namespace Player
                 int hitsCount = Physics.RaycastNonAlloc(ray.origin, ray.direction, _hitResults, raycastMaxDistance);
 
                 _currentInteractable = null;
-                Debug.Log("awaitable");
                 
                 for (int i = 0; i < hitsCount; i++)
                 {
