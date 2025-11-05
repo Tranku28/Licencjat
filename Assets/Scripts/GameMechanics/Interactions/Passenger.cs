@@ -1,6 +1,6 @@
 using System;
+using Core.Scriptable_Objects;
 using GameMechanics.Interactions;
-using Scriptable_Objects;
 using UnityEngine;
 
 namespace Interactions
@@ -13,7 +13,6 @@ namespace Interactions
 
         public void Interact()
         {
-            Debug.Log("Interacted");
             OnPassengerInteracted?.Invoke(passengerData);
         }
 

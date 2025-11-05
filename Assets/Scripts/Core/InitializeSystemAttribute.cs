@@ -1,6 +1,6 @@
 using System;
 
-namespace Systems
+namespace Core
 {
     [AttributeUsage(AttributeTargets.Class)]
     public class InitializeSystemAttribute : Attribute

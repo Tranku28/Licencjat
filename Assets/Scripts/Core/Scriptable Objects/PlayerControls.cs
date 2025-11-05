@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
-namespace Player
+namespace Core.Scriptable_Objects
 {
     [CreateAssetMenu(fileName = "PlayerControls", menuName = "Scriptable Objects/PlayerControls")]
     public class PlayerControls : ScriptableObject
@@ -14,7 +14,7 @@ namespace Player
         private InputAction _clickAction;
 
         public static event UnityAction OnInteractEvent;
-        public static event UnityAction OnQuitEvent;
+        public static event UnityAction OnEscapePressedEvent;
         public static event UnityAction OnClickEvent;
 
         private void OnEnable()
@@ -23,9 +23,9 @@ namespace Player
             _interactAction = playerInputAsset.FindAction("Interact");
             _clickAction = playerInputAsset.FindAction("Click");
 
-            _quitAction.started += OnQuit;
-            _quitAction.performed += OnQuit;
-            _quitAction.canceled += OnQuit;
+            _quitAction.started += OnEscapePressed;
+            _quitAction.performed += OnEscapePressed;
+            _quitAction.canceled += OnEscapePressed;
 
             _interactAction.started += OnInteract;
             _interactAction.performed += OnInteract;
@@ -42,9 +42,9 @@ namespace Player
 
         private void OnDisable()
         {
-            _quitAction.started -= OnQuit;
-            _quitAction.performed -= OnQuit;
-            _quitAction.canceled -= OnQuit;
+            _quitAction.started -= OnEscapePressed;
+            _quitAction.performed -= OnEscapePressed;
+            _quitAction.canceled -= OnEscapePressed;
             
             _interactAction.started -= OnInteract;
             _interactAction.performed -= OnInteract;
@@ -64,9 +64,9 @@ namespace Player
             if (context.performed) OnInteractEvent?.Invoke();
         }
 
-        private void OnQuit(InputAction.CallbackContext context)
+        private void OnEscapePressed(InputAction.CallbackContext context)
         {
-            if (context.performed) OnQuitEvent?.Invoke();
+            if (context.performed) OnEscapePressedEvent?.Invoke();
         }
         
         private void OnClick(InputAction.CallbackContext context)

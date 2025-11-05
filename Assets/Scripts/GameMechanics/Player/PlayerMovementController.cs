@@ -1,10 +1,11 @@
 using System;
+using Core;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace Player
+namespace GameMechanics.Player
 {
-    public class PlayerMovementController : MonoBehaviour, IRegister
+    public class PlayerMovementController : MonoBehaviour
     {
         [SerializeField] private float cameraSensivity;
         [SerializeField] private float moveSpeed;
@@ -19,6 +20,10 @@ namespace Player
     
         private float _yMoveOffset, _xMoveOffset;
         private float _cameraPitch;
+        
+        private bool canMove = false;
+        
+        private GameStateMachine _gameStateMachine;
 
         private void Awake()
         {
@@ -30,22 +35,38 @@ namespace Player
             _sprintInput = InputSystem.actions.FindAction("Sprint");
         }
 
-        private void Start()
+        private void OnEnable()
         {
-            Register();
+            GameStateMachine.OnGameStateChanged += MovementEnabler;
         }
 
-        private void OnDestroy()
+        private void OnDisable()
         {
-            Unregister();
+            GameStateMachine.OnGameStateChanged -= MovementEnabler;
         }
 
         private void Update()
         {
+            if (!canMove) return;
+            
             Rotate();
             Move();
         }
 
+        private void MovementEnabler(GameState obj)
+        {
+            if (obj == GameState.Paused
+                || obj == GameState.UIOpened
+                || obj == GameState.MainMenu
+                )
+            {
+                canMove = false;
+                return;
+            }
+            
+            canMove = true;
+        }
+        
         private void Move()
         {
             var input = _moveInput.ReadValue<Vector2>();
@@ -85,16 +106,6 @@ namespace Player
             _playerCamera.transform.localEulerAngles = new Vector3(_cameraPitch, 0f, 0f);
         
             transform.Rotate(0f, mouseX, 0f);
-        }
-
-        public void Register()
-        {
-            Registry.Instance.Register(this);
-        }
-
-        public void Unregister()
-        {
-            Registry.Instance.Unregister(this);
         }
     }
 }
