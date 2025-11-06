@@ -1,4 +1,3 @@
-using System;
 using Core;
 using Core.Scriptable_Objects;
 using GameMechanics.UI;
@@ -80,7 +79,7 @@ namespace GameMechanics
         private void OnEscapePressed()
         {
             Debug.Log("Escape pressed");
-            if (_currentElement == null)
+            if (_currentElement == null && _gameStateMachine.GetGameState() == GameState.Gameplay)
             {
                 pauseMenu.SetVisualVisibility(true);
                 _currentElement = pauseMenu;
@@ -95,6 +94,8 @@ namespace GameMechanics
                 _gameStateMachine.ChangeGameState(GameState.Gameplay);
                 return;
             }
+
+            if (!_currentElement) return;
             
             _currentElement.SetVisualVisibility(false);
             _currentElement = null;

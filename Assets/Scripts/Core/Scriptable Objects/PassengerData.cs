@@ -6,6 +6,8 @@ namespace Core.Scriptable_Objects
     [CreateAssetMenu(fileName = "PassengerData", menuName = "Scriptable Objects/PassengerData")]
     public class PassengerData : ScriptableObject
     {
+        public TextAsset inkJSON;
+        
         public string passengerName;
         public string passengerSurname;
 

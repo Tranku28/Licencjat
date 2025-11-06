@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acecc751a12ea0244b7bd035b07eda1f, type: 3}
   m_Name: Vampiress
   m_EditorClassIdentifier: 
+  inkJSON: {fileID: 4900000, guid: e2a34b0d21d903548928a0ee967a17fe, type: 3}
   passengerName: 
   passengerSurname: 
   destination: 

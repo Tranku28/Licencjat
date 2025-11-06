@@ -12,16 +12,20 @@ namespace Core.Scriptable_Objects
         private InputAction _quitAction;
         private InputAction _interactAction;
         private InputAction _clickAction;
+        private InputAction _singleClickAction;
 
         public static event UnityAction OnInteractEvent;
         public static event UnityAction OnEscapePressedEvent;
         public static event UnityAction OnClickEvent;
+        
+        public static event UnityAction OnSingleClickEvent;
 
         private void OnEnable()
         {
             _quitAction = playerInputAsset.FindAction("Quit");
             _interactAction = playerInputAsset.FindAction("Interact");
             _clickAction = playerInputAsset.FindAction("Click");
+            _singleClickAction = playerInputAsset.FindAction("SingleClick");
 
             _quitAction.started += OnEscapePressed;
             _quitAction.performed += OnEscapePressed;
@@ -34,10 +38,15 @@ namespace Core.Scriptable_Objects
             _clickAction.started += OnClick;
             _clickAction.performed += OnClick;
             _clickAction.canceled += OnClick;
+            
+            _singleClickAction.started += OnSingleClick;
+            _singleClickAction.performed += OnSingleClick;
+            _singleClickAction.canceled += OnSingleClick;
 
             _quitAction.Enable();
             _interactAction.Enable();
             _clickAction.Enable();
+            _singleClickAction.Enable();
         }
 
         private void OnDisable()
@@ -54,9 +63,14 @@ namespace Core.Scriptable_Objects
             _clickAction.performed -= OnClick;
             _clickAction.canceled -= OnClick;
             
+            _singleClickAction.started -= OnSingleClick;
+            _singleClickAction.performed -= OnSingleClick;
+            _singleClickAction.canceled -= OnSingleClick;
+            
             _quitAction.Disable();
             _interactAction.Disable();
             _clickAction.Disable();
+            _singleClickAction.Disable();
         }
 
         private void OnInteract(InputAction.CallbackContext context)
@@ -72,6 +86,11 @@ namespace Core.Scriptable_Objects
         private void OnClick(InputAction.CallbackContext context)
         {
             if (context.performed) OnClickEvent?.Invoke();
+        }
+        
+        private void OnSingleClick(InputAction.CallbackContext context)
+        {
+            if (context.canceled) OnSingleClickEvent?.Invoke();
         }
     }
 }
