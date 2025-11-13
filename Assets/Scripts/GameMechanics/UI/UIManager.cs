@@ -14,6 +14,7 @@ namespace GameMechanics
         [SerializeField] private MainMenuController mainMenuController;
         [SerializeField] private PauseMenuController pauseMenu;
         [SerializeField] private TicketMinigameManager ticketTab;
+        [SerializeField] private DiaryController diaryTab;
         
         private UIElement _currentElement;
         private InputAction _currentAction;
@@ -32,6 +33,7 @@ namespace GameMechanics
             PauseMenuController.OnResume += OnResume;
             
             Passenger.OnPassengerInteracted += OnPassengerInteracted;
+            Diary.OnDiaryInteracted += OnDiaryInteracted;
             
             MainMenuController.PlayButtonPressed += QuitMenu;
         }
@@ -43,10 +45,11 @@ namespace GameMechanics
             PauseMenuController.OnResume -= OnResume;
 
             Passenger.OnPassengerInteracted -= OnPassengerInteracted;
+            Diary.OnDiaryInteracted -= OnDiaryInteracted;
             
             MainMenuController.PlayButtonPressed -= QuitMenu;
         }
-        
+
         private void OnPassengerInteracted(PassengerData obj)
         {
             if (_gameStateMachine.GetGameState() == GameState.Paused) return;
@@ -76,6 +79,15 @@ namespace GameMechanics
             _currentElement = null;
         }
 
+        private void OnDiaryInteracted()
+        {
+            if (!ReferenceEquals(_currentElement, null)) return;
+            
+            _currentElement = diaryTab;
+            diaryTab.SetVisualVisibility(true);
+            _gameStateMachine.ChangeGameState(GameState.UIOpened);
+        }
+        
         private void OnEscapePressed()
         {
             Debug.Log("Escape pressed");

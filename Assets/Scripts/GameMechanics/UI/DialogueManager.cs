@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Core.Scriptable_Objects;
 using Ink.Runtime;
@@ -12,10 +13,12 @@ namespace GameMechanics.UI
     {
         [SerializeField] TMP_Text displayedText;
         [SerializeField] GameObject choiceContainer;
+
+        private int _currentSpeakerIndex;
         
         private Dictionary<Button, TMP_Text> choicesToDisplay = new();
         
-        private Story story;
+        private Story _story;
 
         private void Awake()
         {
@@ -48,23 +51,61 @@ namespace GameMechanics.UI
 
         private void StartStory(PassengerData obj)
         {
-            story = new Story(obj.inkJSON.text);
+            _story = new Story(obj.inkJSON.text);
         }
         
         private void StoryHop()
         {
-            if (!story) return;
-
-            Debug.Log("Story Hop");
+            if (ReferenceEquals(_story, null)) return;
             
-            if (story.currentChoices.Count > 0)
+            int speakerIndex = (int) _story.variablesState["speakerIndex"];
+
+            if (_currentSpeakerIndex != speakerIndex)
             {
-                Debug.Log(story.currentChoices.Count);
+                SwitchSpeaker();
+                _currentSpeakerIndex = speakerIndex;
             }
             
-            string text = story.Continue().Trim();
-            Debug.Log(text);
+            if (_story.currentChoices.Count > 0)
+            {
+                displayedText.enabled = false;
+                
+                choiceContainer.SetActive(true);
+                
+                int index = 0;
+
+                foreach (var choice in choicesToDisplay)
+                {
+                    if (index < _story.currentChoices.Count)
+                    {
+                        Button button = choice.Key;
+                        
+                        button.gameObject.SetActive(true);
+                        button.onClick.RemoveAllListeners();
+                        var index1 = index;
+                        button.onClick.AddListener(() => _story.ChooseChoiceIndex(index1));
+                        
+                        choice.Value.text = _story.currentChoices[index].text;
+                    }
+                    
+                    if (index >= _story.currentChoices.Count)
+                    {
+                        choice.Key.gameObject.SetActive(false);
+                    }
+                    
+                    index++;
+                }
+            }
+            
+            if (!_story.canContinue) return;
+            
+            string text = _story.Continue().Trim();
             displayedText.text = text;
+        }
+
+        private void SwitchSpeaker()
+        {
+            Debug.Log(_currentSpeakerIndex);
         }
     }
 }
