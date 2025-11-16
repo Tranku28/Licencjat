@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: Vampiress
   m_EditorClassIdentifier: 
   inkJSON: {fileID: 4900000, guid: e2a34b0d21d903548928a0ee967a17fe, type: 3}
-  passengerName: 
-  passengerSurname: 
-  destination: 
+  passengerName: Charlotte
+  passengerSurname: Bloodrose
+  destination: Maplewood
   validUntil:
-    Day: 0
-    Month: 0
-    Hour: 0
-    Minute: 0
+    Day: 12
+    Month: 3
+    Hour: 14
+    Minute: 7

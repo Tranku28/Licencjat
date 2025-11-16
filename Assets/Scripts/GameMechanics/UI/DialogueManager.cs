@@ -1,5 +1,8 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Text;
+using System.Threading.Tasks;
 using Core.Scriptable_Objects;
 using Ink.Runtime;
 using Interactions;
@@ -13,6 +16,7 @@ namespace GameMechanics.UI
     {
         [SerializeField] TMP_Text displayedText;
         [SerializeField] GameObject choiceContainer;
+        [SerializeField] private float timeBetweenChars;
 
         private int _currentSpeakerIndex;
         
@@ -52,60 +56,89 @@ namespace GameMechanics.UI
         private void StartStory(PassengerData obj)
         {
             _story = new Story(obj.inkJSON.text);
+            string text = _story.Continue().Trim();
+            displayedText.text = text;
         }
         
         private void StoryHop()
         {
-            if (ReferenceEquals(_story, null)) return;
+            if (_story == null) return;
             
-            int speakerIndex = (int) _story.variablesState["speakerIndex"];
-
-            if (_currentSpeakerIndex != speakerIndex)
+            if (_story.canContinue)
             {
-                SwitchSpeaker();
-                _currentSpeakerIndex = speakerIndex;
+                string text = _story.Continue().Trim();
+                Debug.Log(text);
+                displayedText.text = text;
+                
+                HideChoices();
             }
             
             if (_story.currentChoices.Count > 0)
             {
-                displayedText.enabled = false;
-                
-                choiceContainer.SetActive(true);
-                
-                int index = 0;
-
-                foreach (var choice in choicesToDisplay)
-                {
-                    if (index < _story.currentChoices.Count)
-                    {
-                        Button button = choice.Key;
-                        
-                        button.gameObject.SetActive(true);
-                        button.onClick.RemoveAllListeners();
-                        var index1 = index;
-                        button.onClick.AddListener(() => _story.ChooseChoiceIndex(index1));
-                        
-                        choice.Value.text = _story.currentChoices[index].text;
-                    }
-                    
-                    if (index >= _story.currentChoices.Count)
-                    {
-                        choice.Key.gameObject.SetActive(false);
-                    }
-                    
-                    index++;
-                }
+                ShowChoices();
             }
-            
-            if (!_story.canContinue) return;
-            
-            string text = _story.Continue().Trim();
-            displayedText.text = text;
+
+            if (!_story.canContinue && _story.currentChoices.Count == 0)
+            {
+                Debug.Log("The end of story");
+            }
+        }
+        
+        
+        private void ShowChoices()
+        {
+            choiceContainer.SetActive(true);
+
+            int index = 0;
+
+            foreach (var pair in choicesToDisplay)
+            {
+                Button button = pair.Key;
+                TMP_Text text = pair.Value;
+
+                if (index < _story.currentChoices.Count)
+                {
+                    button.gameObject.SetActive(true);
+                    button.onClick.RemoveAllListeners();
+
+                    int capturedIndex = index;
+                    button.onClick.AddListener(() => MakeChoice(capturedIndex));
+
+                    text.text = _story.currentChoices[index].text;
+                }
+                else
+                {
+                    button.onClick.RemoveAllListeners();
+                    button.gameObject.SetActive(false);
+                }
+
+                index++;
+            }
         }
 
-        private void SwitchSpeaker()
+
+        private void HideChoices()
         {
-            Debug.Log(_currentSpeakerIndex);
+            foreach (var pair in choicesToDisplay)
+            {
+                Button button = pair.Key;
+                
+                button.onClick.RemoveAllListeners();
+                button.gameObject.SetActive(false);
+            }
+
+            choiceContainer.SetActive(false);
         }
+
+
+        private void MakeChoice(int index)
+        {
+            HideChoices();
+            
+            _story.ChooseChoiceIndex(index);
+            
+            StoryHop();
+        }
+
     }
 }
