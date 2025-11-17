@@ -15,10 +15,5 @@ namespace Interactions
         {
             OnPassengerInteracted?.Invoke(passengerData);
         }
-
-        public void DisplayUI()
-        {
-            
-        }
     }
 }

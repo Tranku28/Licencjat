@@ -17,12 +17,19 @@ namespace GameMechanics.UI
         [SerializeField] TMP_Text displayedText;
         [SerializeField] GameObject choiceContainer;
         [SerializeField] private float timeBetweenChars;
+        
+        [SerializeField] private Image playerNameBackground, npcNameBackground;
+        [SerializeField] private TMP_Text playerNameText, npcNameText;
 
+        private PassengerData _currentPassengerData;
+        
         private int _currentSpeakerIndex;
         
         private Dictionary<Button, TMP_Text> choicesToDisplay = new();
         
         private Story _story;
+
+        private bool _clickedBeforeChoices = false;
 
         private void Awake()
         {
@@ -58,6 +65,10 @@ namespace GameMechanics.UI
             _story = new Story(obj.inkJSON.text);
             string text = _story.Continue().Trim();
             displayedText.text = text;
+            
+            _story.ObserveVariable("speakerIndex", (string varName, object newValue) => {
+                UpdateNameDisplays((int)newValue);
+            });
         }
         
         private void StoryHop()
@@ -69,12 +80,19 @@ namespace GameMechanics.UI
                 string text = _story.Continue().Trim();
                 Debug.Log(text);
                 displayedText.text = text;
+                displayedText.enabled = true;
                 
                 HideChoices();
             }
             
             if (_story.currentChoices.Count > 0)
             {
+                if (!_clickedBeforeChoices)
+                {
+                    _clickedBeforeChoices = true;
+                    return;
+                }
+                
                 ShowChoices();
             }
 
@@ -83,10 +101,38 @@ namespace GameMechanics.UI
                 Debug.Log("The end of story");
             }
         }
-        
+
+        private void UpdateNameDisplays(int index)
+        {
+            Debug.Log("Switch");
+            switch (index)
+            {
+                case 0:
+                    playerNameBackground.enabled = true;
+                    playerNameText.enabled = true;
+                    npcNameBackground.enabled = false;
+                    npcNameText.enabled = false;
+                    break;
+                case 1:
+                    playerNameBackground.enabled = false;
+                    playerNameText.enabled = false;
+                    npcNameBackground.enabled = true;
+                    npcNameText.enabled = true;
+                    break;
+                default:
+                    playerNameBackground.enabled = false;
+                    playerNameText.enabled = false;
+                    npcNameBackground.enabled = false;
+                    npcNameText.enabled = false;
+                    break;
+            }
+        }
         
         private void ShowChoices()
         {
+            _clickedBeforeChoices = false;
+            displayedText.enabled = false;
+            
             choiceContainer.SetActive(true);
 
             int index = 0;

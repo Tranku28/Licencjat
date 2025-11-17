@@ -5,14 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e3135ff5-fe0f-44b1-9bd7-afd2dbbaf5d8" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Licencjat/.idea/AndroidProjectSystem.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Licencjat/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Licencjat/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Ink/Stories/Vampiress.ink" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Ink/Stories/Vampiress.ink" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Ink/Stories/Vampiress.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Ink/Stories/Vampiress.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Models/F_base mesh guard's van.fbx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Models/F_base mesh guard's van.fbx.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Models/F_base mesh_ passenger car.fbx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Models/F_base mesh_ passenger car.fbx.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Main Canvas.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Main Canvas.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Game.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Game.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Core/Scriptable Objects/PassengerData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Core/Scriptable Objects/PassengerData.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Core/Scriptable Objects/Passengers/Vampiress.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Core/Scriptable Objects/Passengers/Vampiress.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameMechanics/Interactions/Passenger.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameMechanics/Interactions/Passenger.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameMechanics/UI/DialogueManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameMechanics/UI/DialogueManager.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -153,6 +153,8 @@
       <workItem from="1762993338155" duration="3365000" />
       <workItem from="1763243465543" duration="3367000" />
       <workItem from="1763301128353" duration="6610000" />
+      <workItem from="1763321337826" duration="1959000" />
+      <workItem from="1763406067623" duration="441000" />
     </task>
     <servers />
   </component>
