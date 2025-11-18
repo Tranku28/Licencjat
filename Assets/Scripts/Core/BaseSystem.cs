@@ -12,8 +12,6 @@ namespace Core
         private void InitSystem()
         {
             DependencyResoler.Instance.Register(this);
-            
-            Debug.Log($"System {name} initialized.");
         }
 
         private void UnregisterSystem()

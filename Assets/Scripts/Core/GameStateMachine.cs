@@ -28,7 +28,6 @@ namespace Core
         public void ChangeGameState(GameState gameState)
         {
             _gameState = gameState;
-            Debug.Log($"GameState changed to {gameState}");
             
             OnGameStateChanged?.Invoke(_gameState);
         }

@@ -1,8 +1,4 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
 using Core.Scriptable_Objects;
 using Ink.Runtime;
 using Interactions;
@@ -12,7 +8,7 @@ using UnityEngine.UI;
 
 namespace GameMechanics.UI
 {
-    public class DialogueManager : MonoBehaviour
+    public class DialogueManager : UIElement
     {
         [SerializeField] TMP_Text displayedText;
         [SerializeField] GameObject choiceContainer;
@@ -21,11 +17,14 @@ namespace GameMechanics.UI
         [SerializeField] private Image playerNameBackground, npcNameBackground;
         [SerializeField] private TMP_Text playerNameText, npcNameText;
 
+        [SerializeField] private TicketMinigame ticketMinigame;
+        [SerializeField] private Button showTicketButton;
+
         private PassengerData _currentPassengerData;
         
         private int _currentSpeakerIndex;
         
-        private Dictionary<Button, TMP_Text> choicesToDisplay = new();
+        private readonly Dictionary<Button, TMP_Text> _choicesToDisplay = new();
         
         private Story _story;
 
@@ -39,38 +38,48 @@ namespace GameMechanics.UI
             {
                 TMP_Text buttonTexts = button.GetComponentInChildren<TMP_Text>();
                 
-                choicesToDisplay.Add(button, buttonTexts);
-            }
-
-            foreach (var choice in choicesToDisplay.Keys)
-            {
-                Debug.Log(choice.name);
+                _choicesToDisplay.Add(button, buttonTexts);
             }
         }
 
         private void OnEnable()
         {
-            Passenger.OnPassengerInteracted += StartStory;
+            Passenger.OnPassengerInteracted += LoadAndStart;
             PlayerControls.OnSingleClickEvent += StoryHop;
+            
+            showTicketButton.onClick.AddListener(DisplayTicket);
         }
 
         private void OnDisable()
         {
-            Passenger.OnPassengerInteracted -= StartStory;
+            Passenger.OnPassengerInteracted -= LoadAndStart;
             PlayerControls.OnSingleClickEvent -= StoryHop;
+            
+            showTicketButton.onClick.RemoveAllListeners();
         }
 
-        private void StartStory(PassengerData obj)
+        private void LoadAndStart(PassengerData passengerData)
         {
-            _story = new Story(obj.inkJSON.text);
+            ticketMinigame.UpdateTicketUI(passengerData);
+            StartStory(passengerData);
+        }
+        
+        private void StartStory(PassengerData data)
+        {
+            _story = new Story(data.inkJSON.text);
             string text = _story.Continue().Trim();
             displayedText.text = text;
             
             _story.ObserveVariable("speakerIndex", (string varName, object newValue) => {
                 UpdateNameDisplays((int)newValue);
             });
+            
+            _story.ObserveVariable("canScan", (string varName, object newValue) =>
+            {
+                SetScannable((bool)newValue);
+            });
         }
-        
+
         private void StoryHop()
         {
             if (_story == null) return;
@@ -78,7 +87,6 @@ namespace GameMechanics.UI
             if (_story.canContinue)
             {
                 string text = _story.Continue().Trim();
-                Debug.Log(text);
                 displayedText.text = text;
                 displayedText.enabled = true;
                 
@@ -104,7 +112,6 @@ namespace GameMechanics.UI
 
         private void UpdateNameDisplays(int index)
         {
-            Debug.Log("Switch");
             switch (index)
             {
                 case 0:
@@ -128,6 +135,8 @@ namespace GameMechanics.UI
             }
         }
         
+        private void SetScannable(bool value) => ticketMinigame.canScan = value;
+        
         private void ShowChoices()
         {
             _clickedBeforeChoices = false;
@@ -137,7 +146,7 @@ namespace GameMechanics.UI
 
             int index = 0;
 
-            foreach (var pair in choicesToDisplay)
+            foreach (var pair in _choicesToDisplay)
             {
                 Button button = pair.Key;
                 TMP_Text text = pair.Value;
@@ -165,7 +174,7 @@ namespace GameMechanics.UI
 
         private void HideChoices()
         {
-            foreach (var pair in choicesToDisplay)
+            foreach (var pair in _choicesToDisplay)
             {
                 Button button = pair.Key;
                 
@@ -186,5 +195,10 @@ namespace GameMechanics.UI
             StoryHop();
         }
 
+        
+        private void DisplayTicket()
+        {
+            ticketMinigame.ShowUI();
+        }
     }
 }

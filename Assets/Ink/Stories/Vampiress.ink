@@ -1,11 +1,12 @@
 VAR speakerIndex = -1
+VAR canScan = false
 VAR acceptTicket = false
 
 ~ speakerIndex = 0
 Good evening, madam. Your ticket, please.
 
 ~ speakerIndex = 1
-Here it is. Station ***, one-way ticket. No return.
+Here it is. Station Maplewood, one-way ticket. No return.
 
 ~ speakerIndex = 0
 Understood. And may I ask the purpose of your journey?
@@ -19,6 +20,7 @@ Madam, your ticket expired… seventy years ago.
 ~ speakerIndex = 1
 Aye. It was purchased long ago. Back when I still believed in a brighter morrow.
 
+~ speakerIndex = 0
 * [A ‘brighter morrow’?]
         -> a_brighter_morrow
         
@@ -35,6 +37,7 @@ Aye. It was purchased long ago. Back when I still believed in a brighter morrow.
 That ticket was bought when these very rails were still being forged, young man.
 Back then, my dreams had yet to be buried beneath dust and silence.
 
+~ speakerIndex = 0
 * [Your dreams, milady? Could you be more specific?]
     -> regret
 
@@ -57,6 +60,7 @@ I….
 I lacked that courage…
 And now I bear the weight of that regret…
 
+~ speakerIndex = 0
 * [What is it that you regret, madam?]
     -> love
 * [Why such remorse?]
@@ -75,16 +79,22 @@ Or rather, my failure to follow it.
 Not chasing after it.
 Not daring to reach for it.
 I regret that I lacked the courage. The courage to defy the elders. The courage to say “no”.
+~ speakerIndex = 0
 * [Your husband?]
     -> beloved_man
-    
+* [Olivier?]
+    -> is_dying
 * [Forgive me, but regardless of your reason - with an expired ticket, I cannot let you pass.]
     ~ speakerIndex = 1
     … And yet nothing has changed…
     Men still despise and fear the dreams and wishes of other beings.
     -> END
     
-    
+=== is_dying ===
+My beloved is dying. A mortal man, his time nearly spent - while I have far too much of mine.
+Young man, please… have mercy. Allow me to see him, if only this once. Now that I have finally learned what truly matters.
+    -> final_decision
+
 
 === remorse ===
 ~ speakerIndex = 1
@@ -92,6 +102,7 @@ Had I but possessed courage… had I only dared…
 My life might have taken another course.
 And yet… I…
 I lacked the voice to speak his name aloud - to tell the world how deeply I loved my Olivier.
+~ speakerIndex = 0
 * [Your husband?]
     -> beloved_man
 * [Olivier?]
@@ -116,6 +127,7 @@ And yet, with him, my hunger stilled and my power obeyed. He taught me restraint
 Though born of two opposing worlds, we fit together like pieces of the same design.
 Tell me, how could such a thing be?
 
+~ speakerIndex = 0
 * [I wish I knew the answer to your question, madam. But I do know this, love chooses none of us.]
     … It chooses none of us…
     Love is cruel.
@@ -146,6 +158,7 @@ And yet, with him, my hunger stilled and my power obeyed. He taught me restraint
 Though born of two opposing worlds, we fit together like pieces of the same design.
 Tell me, how could such a thing be?
 
+~ speakerIndex = 0
 * [I wish I knew the answer to your question, madam. But I do know this, love chooses none of us.]
     … It chooses none of us…
     Love is cruel.
@@ -167,8 +180,10 @@ Tell me, how could such a thing be?
 
 
 === final_decision ===
+~ speakerIndex = 0
 * [… Very well. Upon mine own responsibility, you may proceed to your destination.]
     ~ speakerIndex = 1
+    ~ canScan = true
     Thank you, young man. You have my eternal gratitude.
     But remember, never ignore your heart.
     It alone knows the way.

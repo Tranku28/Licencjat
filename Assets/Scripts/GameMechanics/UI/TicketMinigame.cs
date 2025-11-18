@@ -11,15 +11,23 @@ using UnityEngine.UI;
 
 namespace GameMechanics
 {
-    public class TicketMinigameManager : UIElement, IPointerClickHandler
+    public class TicketMinigame : UIElement, IPointerClickHandler
     {
         [SerializeField] private Image holeImage;
-        [SerializeField] private GameObject holeParentObject;
+        [SerializeField] private GameObject visual;
 
         [SerializeField] private TMP_Text passengerFullNameText;
         [SerializeField] private TMP_Text passengerDestinationText;
         [SerializeField] private TMP_Text passengerExpireDateText;
-        
+
+        private bool _canScan;
+
+        public bool canScan
+        {
+            get => _canScan;
+            set => _canScan = value;
+        }
+
         private GameStateMachine _gameManager;
 
         private void Awake()
@@ -27,40 +35,24 @@ namespace GameMechanics
             if (Camera.main == null) throw new Exception("Camera not found");
         }
 
-        private void Start()
-        {
-            Passenger.OnPassengerInteracted += UpdateTicketUI;
-            
-            _gameManager = DependencyResoler.Instance.GetType<GameStateMachine>();
-        }
-
-        private void OnDestroy()
-        {
-            Passenger.OnPassengerInteracted -= UpdateTicketUI;
-        }
-
-        private void UpdateTicketUI(PassengerData data)
+        public void UpdateTicketUI(PassengerData data)
         {
             Debug.Log($"UpdateTicketUI: {data}");
             
             passengerFullNameText.text = $"{data.passengerName} {data.passengerSurname}";
             passengerDestinationText.text = data.destination;
             passengerExpireDateText.text = data.GetDate();
-            
-            ShowUI();
         }
 
-        private void ShowUI()
+        public void ShowUI()
         {
-            _gameManager.ChangeGameState(GameState.UIOpened);
-            holeParentObject.SetActive(true);
+            visual.SetActive(!visual.activeSelf);
         }
         
         public void OnPointerClick(PointerEventData eventData)
         {
-            if (!gameObject.activeInHierarchy) return;
-            
-            MakeHole();
+            Debug.Log(_canScan);
+            if (_canScan) MakeHole();
         }
         
         private void MakeHole()
@@ -68,7 +60,7 @@ namespace GameMechanics
             var cursorPos = Mouse.current.position.ReadValue();
         
             var hole = Instantiate(holeImage,cursorPos, Quaternion.identity);
-            hole.transform.SetParent(holeParentObject.transform);
+            hole.transform.SetParent(visual.transform);
         }
     }
 }

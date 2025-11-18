@@ -13,7 +13,7 @@ namespace GameMechanics
         [Header("UI Elements")]
         [SerializeField] private MainMenuController mainMenuController;
         [SerializeField] private PauseMenuController pauseMenu;
-        [SerializeField] private TicketMinigameManager ticketTab;
+        [SerializeField] private DialogueManager dialogueTab;
         [SerializeField] private DiaryController diaryTab;
         
         private UIElement _currentElement;
@@ -56,16 +56,15 @@ namespace GameMechanics
             
             if (_gameStateMachine.GetGameState() == GameState.UIOpened)
             {
-                Debug.Log("Closing");
-                ticketTab.SetVisualVisibility(false);
+                dialogueTab.SetVisualVisibility(false);
                 _currentElement = null;
                 _gameStateMachine.ChangeGameState(GameState.Gameplay);
                 
                 return;
             }
             
-            ticketTab.SetVisualVisibility(true);
-            _currentElement = ticketTab;
+            dialogueTab.SetVisualVisibility(true);
+            _currentElement = dialogueTab;
             _gameStateMachine.ChangeGameState(GameState.UIOpened);
         }
         
