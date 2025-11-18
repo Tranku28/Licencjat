@@ -37,8 +37,6 @@ namespace GameMechanics
 
         public void UpdateTicketUI(PassengerData data)
         {
-            Debug.Log($"UpdateTicketUI: {data}");
-            
             passengerFullNameText.text = $"{data.passengerName} {data.passengerSurname}";
             passengerDestinationText.text = data.destination;
             passengerExpireDateText.text = data.GetDate();

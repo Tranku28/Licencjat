@@ -5,17 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e3135ff5-fe0f-44b1-9bd7-afd2dbbaf5d8" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Licencjat/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Licencjat/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Ink/Stories/Vampiress.ink" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Ink/Stories/Vampiress.ink" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Ink/Stories/Vampiress.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Ink/Stories/Vampiress.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Main Canvas.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Main Canvas.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Game.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Game.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Core/BaseSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Core/BaseSystem.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Core/GameStateMachine.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Core/GameStateMachine.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameMechanics/UI/DialogueManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameMechanics/UI/DialogueManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameMechanics/UI/TicketMinigameManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameMechanics/UI/TicketMinigame.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameMechanics/UI/TicketMinigameManager.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameMechanics/UI/TicketMinigame.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameMechanics/UI/UIManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameMechanics/UI/UIManager.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -162,7 +151,7 @@
       <workItem from="1763321337826" duration="1959000" />
       <workItem from="1763406067623" duration="441000" />
       <workItem from="1763464314059" duration="3971000" />
-      <workItem from="1763471351896" duration="3302000" />
+      <workItem from="1763471351896" duration="4113000" />
     </task>
     <servers />
   </component>

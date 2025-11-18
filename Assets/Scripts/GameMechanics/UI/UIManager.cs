@@ -89,7 +89,6 @@ namespace GameMechanics
         
         private void OnEscapePressed()
         {
-            Debug.Log("Escape pressed");
             if (_currentElement == null && _gameStateMachine.GetGameState() == GameState.Gameplay)
             {
                 pauseMenu.SetVisualVisibility(true);
