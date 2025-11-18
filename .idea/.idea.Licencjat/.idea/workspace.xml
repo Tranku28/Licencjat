@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e3135ff5-fe0f-44b1-9bd7-afd2dbbaf5d8" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameMechanics/UI/UIManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameMechanics/UI/UIManager.cs" afterDir="false" />
-    </list>
+    <list default="true" id="e3135ff5-fe0f-44b1-9bd7-afd2dbbaf5d8" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -151,7 +149,7 @@
       <workItem from="1763321337826" duration="1959000" />
       <workItem from="1763406067623" duration="441000" />
       <workItem from="1763464314059" duration="3971000" />
-      <workItem from="1763471351896" duration="4113000" />
+      <workItem from="1763471351896" duration="4768000" />
     </task>
     <servers />
   </component>
