@@ -46,6 +46,7 @@ namespace Player
 
         private void Interact()
         {
+            Debug.Log("Interacting...");
             if (_gameManager.GetGameState() == GameState.Gameplay)
                 _currentInteractable?.Interact();
         }

@@ -6,6 +6,8 @@ namespace Core.Scriptable_Objects
     [CreateAssetMenu(fileName = "PassengerData", menuName = "Scriptable Objects/PassengerData")]
     public class PassengerData : ScriptableObject
     {
+        public TextAsset inkJSON;
+        
         public string passengerName;
         public string passengerSurname;
 
@@ -14,7 +16,7 @@ namespace Core.Scriptable_Objects
 
         public string GetDate()
         {
-            return $"{validUntil.Day:D2} / {validUntil.Month:D2} / {validUntil.Hour}:{validUntil.Minute}";
+            return $"{validUntil.Day:D2} / {validUntil.Month:D2} / {validUntil.Hour}:{validUntil.Minute:D2}";
         }
     }
     
