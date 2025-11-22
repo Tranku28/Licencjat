@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="AudioFile" id="{b403cfe8-ae23-4ca1-8983-5e7e25b6de03}">
+		<property name="assetPath">
+			<value>Ambient/ambient_train_sound.ogg</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>661.86666666666667</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{2f081b59-10bf-4977-8143-0aa2085f5bd8}</destination>
+		</relationship>
+	</object>
+</objects>
