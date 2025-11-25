@@ -4,15 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e3135ff5-fe0f-44b1-9bd7-afd2dbbaf5d8" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Licencjat/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Licencjat/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animations/Start Board Controller.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animations/Start Board Controller.controller" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animations/Start Board/follow-to-camera.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animations/Start Board/follow-to-camera.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animations/Start Board/jump-out.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animations/Start Board/jump-out.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animations/Start Board/to-top.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animations/Start Board/to-top.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Player.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Game.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Game.unity" afterDir="false" />
-    </list>
+    <list default="true" id="e3135ff5-fe0f-44b1-9bd7-afd2dbbaf5d8" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -170,7 +162,7 @@
       <workItem from="1763471351896" duration="6002000" />
       <workItem from="1763481834696" duration="2880000" />
       <workItem from="1763995799333" duration="716000" />
-      <workItem from="1764022324618" duration="527000" />
+      <workItem from="1764022324618" duration="1389000" />
     </task>
     <servers />
   </component>
