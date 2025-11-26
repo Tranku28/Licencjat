@@ -15,10 +15,10 @@ namespace UI.MainMenu
         [SerializeField] private float cameraMoveSpeed;
         private float cameraRotateSpeed;
 
-        [Header("Menu Buttons")]
+        [Header("Menu Elements")]
         [SerializeField] private Button playButton;
         [SerializeField] private Button settingsButton;
-        [SerializeField] private Button creditsButton;
+        [SerializeField] private CreditsScrollHandler creditsScroll;
         [SerializeField] private Button quitButton;
         
         [Header("Menu Panels")]
@@ -46,8 +46,6 @@ namespace UI.MainMenu
             _menuMainButtons[0] = playButton;
             settingsButton.onClick.AddListener(GoToSettings);
             _menuMainButtons[1] = settingsButton;
-            creditsButton.onClick.AddListener(GoToCredits);
-            _menuMainButtons[2] = creditsButton;
             quitButton.onClick.AddListener(QuitGame);
             _menuMainButtons[3] = quitButton;
         }
@@ -56,9 +54,17 @@ namespace UI.MainMenu
         {
             _moveDone = false;
             cameraRotateSpeed = cameraMoveSpeed * 36;
+
+            creditsScroll.ScrollClicked += GoToCredits;
             
             CameraSetup();
         }
+
+        private void OnDestroy()
+        {
+            creditsScroll.ScrollClicked -= GoToCredits;
+        }
+        
 
         private void CameraSetup()
         {
@@ -121,14 +127,7 @@ namespace UI.MainMenu
             
             enabled = false;
         }
-
-        public void ButtonVisibilitySwitch(bool switchFlag)
-        {
-            foreach (var button in _menuMainButtons)
-            {
-                button.gameObject.SetActive(switchFlag);
-            }
-        }
+        
         
         private void StartGame()
         {
@@ -139,15 +138,11 @@ namespace UI.MainMenu
 
         private void GoToSettings()
         {
-            ButtonVisibilitySwitch(false);
-
             settingsPanel.SetActive(true);
         }
 
         private void GoToCredits()
         {
-            ButtonVisibilitySwitch(false);
-            
             creditsPanel.SetActive(true);
         }
         private void QuitGame()

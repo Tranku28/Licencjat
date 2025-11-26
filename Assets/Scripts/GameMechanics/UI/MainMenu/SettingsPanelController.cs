@@ -25,12 +25,6 @@ namespace GameMechanics.UI.MainMenu
 
         private void BackToMainMenu()
         {
-            MainMenuController menuController = GetComponentInParent<MainMenuController>();
-
-            if (!menuController) return;
-            
-            menuController.ButtonVisibilitySwitch(true);
-            
             gameObject.SetActive(false);
         }
     }

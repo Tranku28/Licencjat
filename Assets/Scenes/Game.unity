@@ -3766,6 +3766,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1240795244}
+  - component: {fileID: 1240795246}
+  - component: {fileID: 1240795245}
   m_Layer: 0
   m_Name: Diary
   m_TagString: Untagged
@@ -3789,6 +3791,39 @@ Transform:
   - {fileID: 1585275592}
   m_Father: {fileID: 676751166}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1240795245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1240795243}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a03b49f19900834193ed3518673a9e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!65 &1240795246
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1240795243}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.35, y: 0.14, z: 0.3}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1249192196
 GameObject:
   m_ObjectHideFlags: 0
@@ -6791,6 +6826,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 640718053}
     - target: {fileID: 640296129650107917, guid: 94ed663a8f157aa4baa718043f3f4bcb, type: 3}
+      propertyPath: creditsScroll
+      value: 
+      objectReference: {fileID: 877261943}
+    - target: {fileID: 640296129650107917, guid: 94ed663a8f157aa4baa718043f3f4bcb, type: 3}
       propertyPath: mainMenuCameraTransform
       value: 
       objectReference: {fileID: 15798984}
@@ -6882,21 +6921,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Main Canvas
       objectReference: {fileID: 0}
-    - target: {fileID: 7058587605713669076, guid: 94ed663a8f157aa4baa718043f3f4bcb, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7752387374260256875, guid: 94ed663a8f157aa4baa718043f3f4bcb, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8865644213109930454, guid: 94ed663a8f157aa4baa718043f3f4bcb, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 8085060914334518089, guid: 94ed663a8f157aa4baa718043f3f4bcb, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 94ed663a8f157aa4baa718043f3f4bcb, type: 3}

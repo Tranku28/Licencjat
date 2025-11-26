@@ -1,12 +1,13 @@
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class CreditsScrollHandler : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
-
+    public event Action ScrollClicked;
     public void OnPointerClick(PointerEventData eventData)
     {
-        Debug.Log("Scroll clicked");
+        ScrollClicked?.Invoke();
     }
 
     public void OnPointerEnter(PointerEventData eventData)
