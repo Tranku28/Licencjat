@@ -65,11 +65,6 @@ namespace GameMechanics
             _gameStateMachine.ChangeGameState(GameState.UIOpened);
         }
         
-        private void QuitMenu()
-        {
-            mainMenuController.SetVisualVisibility(false);
-        }
-        
         private void OnResume()
         {
             _currentElement = null;
@@ -103,6 +98,11 @@ namespace GameMechanics
                 return;
             }
 
+            if (_currentElement == dialogueTab)
+            {
+                dialogueTab.SetVisualVisibility(false);
+            }
+            
             if (!_currentElement) return;
             
             _currentElement.SetVisualVisibility(false);

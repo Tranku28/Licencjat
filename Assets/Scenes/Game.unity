@@ -2037,7 +2037,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 60}
+  m_AnchoredPosition: {x: 0, y: 80}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &640718053
@@ -2097,7 +2097,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.29411766, g: 0.1764706, b: 0.03137255, a: 1}
+  m_Color: {r: 0.29411766, g: 0.1764706, b: 0.03137255, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3226,6 +3226,17 @@ Transform:
   - {fileID: 782009423}
   m_Father: {fileID: 676751166}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1031401549 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7465967282862157583, guid: 41aca29329c79694c8859a510e2c6e00, type: 3}
+  m_PrefabInstance: {fileID: 6295551306016286350}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e86c58b1459786749ae0032739a0f952, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!95 &1031401552 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 5789912410029638158, guid: 41aca29329c79694c8859a510e2c6e00, type: 3}
@@ -5713,6 +5724,7 @@ MonoBehaviour:
   startJourneyButton: {fileID: 640718053}
   goBackButton: {fileID: 1250005347}
   cameraAnimator: {fileID: 1031401552}
+  cameraAnimatorHandler: {fileID: 1031401549}
 --- !u!65 &1603191773
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6672,11 +6684,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1928234369}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &1962857884 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1018191274650033066, guid: 94ed663a8f157aa4baa718043f3f4bcb, type: 3}
-  m_PrefabInstance: {fileID: 4357297252065192325}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1969487937
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7019,10 +7026,6 @@ PrefabInstance:
       propertyPath: creditsScroll
       value: 
       objectReference: {fileID: 877261943}
-    - target: {fileID: 2000659542100353437, guid: 94ed663a8f157aa4baa718043f3f4bcb, type: 3}
-      propertyPath: settingsPanel
-      value: 
-      objectReference: {fileID: 1962857884}
     - target: {fileID: 2000659542100353437, guid: 94ed663a8f157aa4baa718043f3f4bcb, type: 3}
       propertyPath: settingsWatch
       value: 

@@ -49,7 +49,6 @@ namespace GameMechanics
         
         public void OnPointerClick(PointerEventData eventData)
         {
-            Debug.Log(eventData.position);
             if (_canScan) MakeHole();
         }
         

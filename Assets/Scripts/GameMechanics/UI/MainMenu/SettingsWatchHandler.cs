@@ -8,13 +8,6 @@ namespace GameMechanics.UI.MainMenu
     public class SettingsWatchHandler : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
         public event Action WatchClicked;
-        
-        private Button _goBackButton;
-
-        private void Awake()
-        {
-            _goBackButton = GetComponentInChildren<Button>();
-        }
     
         public void OnPointerClick(PointerEventData eventData)
         {

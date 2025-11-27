@@ -1,4 +1,5 @@
 using System;
+using Player;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -8,27 +9,35 @@ namespace GameMechanics.UI.MainMenu
     public class StartGameBoardHandler : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
         private static readonly int ZoomIn = Animator.StringToHash("ZoomIn");
+        private static readonly int GameStarted = Animator.StringToHash("GameStarted");
         [SerializeField] private Button startJourneyButton, goBackButton;
         [SerializeField] private Animator cameraAnimator;
+        [SerializeField] private InteractionHandler cameraAnimatorHandler;
         
-        public event Action OnStartClicked;
+        public event Action OnGameplayEntered;
         private Animator _animator;
+        private Collider _collider;
 
         private void Awake()
         {
             _animator = GetComponent<Animator>();
+            _collider = GetComponent<Collider>();
         }
 
         private void OnEnable()
         {
             startJourneyButton.onClick.AddListener(OnStartButtonClicked);
             goBackButton.onClick.AddListener(GoBackButtonClicked);
+            
+            cameraAnimatorHandler.GameStarted += OnStartGame;
         }
         
         private void OnDisable()
         {
             goBackButton.onClick.RemoveListener(GoBackButtonClicked);
             startJourneyButton.onClick.RemoveListener(OnStartButtonClicked);
+            
+            cameraAnimatorHandler.GameStarted -= OnStartGame;
         }
 
         public void OnPointerClick(PointerEventData eventData)
@@ -51,6 +60,8 @@ namespace GameMechanics.UI.MainMenu
         {
             startJourneyButton.interactable = true;
             goBackButton.interactable = true;
+            
+            _collider.enabled = false;
         }
 
         public void GoBackButtonClicked()
@@ -61,12 +72,21 @@ namespace GameMechanics.UI.MainMenu
             
             startJourneyButton.interactable = false;
             goBackButton.interactable = false;
+            
+            _collider.enabled = true;
         }
 
-        public void OnStartButtonClicked()
+        private void OnStartButtonClicked()
         {
-            Debug.Log("Start Game");
-            OnStartClicked?.Invoke();
+            cameraAnimator.SetBool(GameStarted, true);
+        }
+
+        private void OnStartGame()
+        {
+            cameraAnimator.enabled = false;
+            _animator.enabled = false;
+            
+            OnGameplayEntered?.Invoke();
         }
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using Core;
 using Core.Scriptable_Objects;
 using GameMechanics.Interactions;
@@ -23,6 +24,8 @@ namespace Player
         private Awaitable _checkForInteractable;
         
         private GameStateMachine _gameManager;
+        
+        public event Action GameStarted;
 
         private void Awake()
         {
@@ -54,10 +57,10 @@ namespace Player
 
                 if (_gameManager.GetGameState() != GameState.Gameplay)
                 {
-                    
+                    interactionUI.SetActive(false);
                     continue;
                 }
-
+                
                 Ray ray = _playerCamera.ScreenPointToRay(new Vector3(Screen.width / 2f, Screen.height / 2f, 0f));
                 int hitsCount = Physics.RaycastNonAlloc(ray.origin, ray.direction, _hitResults, raycastMaxDistance);
 
@@ -77,6 +80,11 @@ namespace Player
             }
         }
 
+        public void OnGameStarted()
+        {
+            GameStarted?.Invoke();
+        }
+        
         private void OnDisable()
         {
             _checkForInteractable?.Cancel();
