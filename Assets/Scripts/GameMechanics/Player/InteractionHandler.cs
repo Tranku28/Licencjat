@@ -1,11 +1,7 @@
-using System;
-using System.Collections;
 using Core;
 using Core.Scriptable_Objects;
 using GameMechanics.Interactions;
-using Interactions;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace Player
 {
@@ -46,7 +42,6 @@ namespace Player
 
         private void Interact()
         {
-            Debug.Log("Interacting...");
             if (_gameManager.GetGameState() == GameState.Gameplay)
                 _currentInteractable?.Interact();
         }
@@ -56,6 +51,12 @@ namespace Player
             while (true)
             {
                 await Awaitable.WaitForSecondsAsync(tickDuration);
+
+                if (_gameManager.GetGameState() != GameState.Gameplay)
+                {
+                    
+                    continue;
+                }
 
                 Ray ray = _playerCamera.ScreenPointToRay(new Vector3(Screen.width / 2f, Screen.height / 2f, 0f));
                 int hitsCount = Physics.RaycastNonAlloc(ray.origin, ray.direction, _hitResults, raycastMaxDistance);

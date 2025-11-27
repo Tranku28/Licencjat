@@ -1,5 +1,6 @@
 using Core;
 using Core.Scriptable_Objects;
+using GameMechanics.Interactions;
 using GameMechanics.UI;
 using Interactions;
 using UI.MainMenu;
@@ -34,8 +35,6 @@ namespace GameMechanics
             
             Passenger.OnPassengerInteracted += OnPassengerInteracted;
             Diary.OnDiaryInteracted += OnDiaryInteracted;
-            
-            MainMenuController.PlayButtonPressed += QuitMenu;
         }
 
         private void OnDisable()
@@ -46,8 +45,6 @@ namespace GameMechanics
 
             Passenger.OnPassengerInteracted -= OnPassengerInteracted;
             Diary.OnDiaryInteracted -= OnDiaryInteracted;
-            
-            MainMenuController.PlayButtonPressed -= QuitMenu;
         }
 
         private void OnPassengerInteracted(PassengerData obj)
@@ -80,6 +77,7 @@ namespace GameMechanics
 
         private void OnDiaryInteracted()
         {
+            Debug.Log("Diary interacted");
             if (!ReferenceEquals(_currentElement, null)) return;
             
             _currentElement = diaryTab;

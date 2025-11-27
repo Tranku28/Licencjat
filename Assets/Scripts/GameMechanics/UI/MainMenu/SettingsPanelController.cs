@@ -1,26 +1,22 @@
 using Core;
 using UI.MainMenu;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace GameMechanics.UI.MainMenu
 {
     public class SettingsPanelController : UIElement
     {
-        private Button _goBackButton;
-
-        private void Awake()
-        {
-            _goBackButton = GetComponentInChildren<Button>();
-        }
+        [SerializeField] private Button goBackButton;
 
         private void OnEnable()
         {
-            _goBackButton.onClick.AddListener(BackToMainMenu);
+            goBackButton.onClick.AddListener(BackToMainMenu);
         }
 
         private void OnDisable()
         {
-            _goBackButton.onClick.RemoveListener(BackToMainMenu);
+            goBackButton.onClick.RemoveListener(BackToMainMenu);
         }
 
         private void BackToMainMenu()

@@ -1,25 +1,24 @@
-using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 namespace GameMechanics.UI.MainMenu
 {
-    public class CreditsScrollHandler : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
+    public class QuitGameCandleHandler : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
-        public event Action ScrollClicked;
         public void OnPointerClick(PointerEventData eventData)
         {
-            ScrollClicked?.Invoke();
+            Debug.Log("Candle click");
+            Application.Quit();
         }
 
         public void OnPointerEnter(PointerEventData eventData)
         {
-            Debug.Log("Scroll selected");
+            Debug.Log("Candle enter");
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
-            Debug.Log("Scroll put back");
+            Debug.Log("Candle exit");
         }
     }
 }

@@ -49,16 +49,26 @@ namespace GameMechanics
         
         public void OnPointerClick(PointerEventData eventData)
         {
-            Debug.Log(_canScan);
+            Debug.Log(eventData.position);
             if (_canScan) MakeHole();
         }
         
         private void MakeHole()
         {
-            var cursorPos = Mouse.current.position.ReadValue();
-        
-            var hole = Instantiate(holeImage,cursorPos, Quaternion.identity);
-            hole.transform.SetParent(visual.transform);
+            Vector2 cursorPos = Mouse.current.position.ReadValue();
+            
+            if (RectTransformUtility.ScreenPointToLocalPointInRectangle(
+                    visual.transform as RectTransform,
+                    cursorPos,
+                    Camera.main,
+                    out Vector2 localPoint))
+            {
+                var hole = Instantiate(holeImage, visual.transform);
+                
+                hole.rectTransform.anchoredPosition = localPoint;
+                hole.rectTransform.localRotation = Quaternion.identity;
+                hole.rectTransform.localScale = Vector3.one;
+            }
         }
     }
 }

@@ -1,13 +1,15 @@
 using System;
-using GameMechanics.Interactions;
 using UnityEngine;
 
-public class Diary : MonoBehaviour, IInteractable
+namespace GameMechanics.Interactions
 {
-    public static Action OnDiaryInteracted;
-    
-    public void Interact()
+    public class Diary : MonoBehaviour, IInteractable
     {
-        OnDiaryInteracted?.Invoke();
+        public static Action OnDiaryInteracted;
+    
+        public void Interact()
+        {
+            OnDiaryInteracted?.Invoke();
+        }
     }
 }

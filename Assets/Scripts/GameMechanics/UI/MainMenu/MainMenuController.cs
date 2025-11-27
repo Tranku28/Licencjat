@@ -2,6 +2,7 @@ using System;
 using Core;
 using GameMechanics.Player;
 using GameMechanics.UI;
+using GameMechanics.UI.MainMenu;
 using Player;
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,16 +17,14 @@ namespace UI.MainMenu
         private float cameraRotateSpeed;
 
         [Header("Menu Elements")]
-        [SerializeField] private Button playButton;
-        [SerializeField] private Button settingsButton;
+        [SerializeField] private StartGameBoardHandler startBoard;
+        [SerializeField] private SettingsWatchHandler settingsWatch;
         [SerializeField] private CreditsScrollHandler creditsScroll;
-        [SerializeField] private Button quitButton;
+        [SerializeField] private QuitGameCandleHandler candleQuit;
         
         [Header("Menu Panels")]
         [SerializeField] private GameObject settingsPanel;
         [SerializeField] private GameObject creditsPanel;
-
-        private Button[] _menuMainButtons = new Button[4];
         
         private Vector3 _playerHeadTargetPosition;
         private Quaternion _playerHeadTargetRotation;
@@ -34,28 +33,15 @@ namespace UI.MainMenu
         private bool _moveDone;
         
         public static Action PlayButtonPressed;
-
-        private void Awake()
-        {
-            AssignButtons();
-        }
-
-        private void AssignButtons()
-        {
-            playButton.onClick.AddListener(StartGame);
-            _menuMainButtons[0] = playButton;
-            settingsButton.onClick.AddListener(GoToSettings);
-            _menuMainButtons[1] = settingsButton;
-            quitButton.onClick.AddListener(QuitGame);
-            _menuMainButtons[3] = quitButton;
-        }
-
+        
         private void Start()
         {
             _moveDone = false;
             cameraRotateSpeed = cameraMoveSpeed * 36;
 
             creditsScroll.ScrollClicked += GoToCredits;
+            settingsWatch.WatchClicked += GoToSettings;
+            startBoard.OnStartClicked += StartGame;
             
             CameraSetup();
         }
@@ -63,6 +49,8 @@ namespace UI.MainMenu
         private void OnDestroy()
         {
             creditsScroll.ScrollClicked -= GoToCredits;
+            settingsWatch.WatchClicked -= GoToSettings;
+            startBoard.OnStartClicked -= StartGame;
         }
         
 
@@ -144,10 +132,6 @@ namespace UI.MainMenu
         private void GoToCredits()
         {
             creditsPanel.SetActive(true);
-        }
-        private void QuitGame()
-        {
-            Application.Quit();
         }
     }
 }
