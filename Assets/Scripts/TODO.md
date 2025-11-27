@@ -4,3 +4,6 @@ UI Logic
 3. Check active UI element
    1. if any - open Pause
    2. If found, assign current UI element
+
+# Main Menu
+- UI Manager start game obsever

@@ -1,5 +1,6 @@
 using Core;
 using Core.Scriptable_Objects;
+using GameMechanics.Interactions;
 using GameMechanics.UI;
 using Interactions;
 using UI.MainMenu;
@@ -34,8 +35,6 @@ namespace GameMechanics
             
             Passenger.OnPassengerInteracted += OnPassengerInteracted;
             Diary.OnDiaryInteracted += OnDiaryInteracted;
-            
-            MainMenuController.PlayButtonPressed += QuitMenu;
         }
 
         private void OnDisable()
@@ -46,8 +45,6 @@ namespace GameMechanics
 
             Passenger.OnPassengerInteracted -= OnPassengerInteracted;
             Diary.OnDiaryInteracted -= OnDiaryInteracted;
-            
-            MainMenuController.PlayButtonPressed -= QuitMenu;
         }
 
         private void OnPassengerInteracted(PassengerData obj)
@@ -68,11 +65,6 @@ namespace GameMechanics
             _gameStateMachine.ChangeGameState(GameState.UIOpened);
         }
         
-        private void QuitMenu()
-        {
-            mainMenuController.SetVisualVisibility(false);
-        }
-        
         private void OnResume()
         {
             _currentElement = null;
@@ -80,6 +72,7 @@ namespace GameMechanics
 
         private void OnDiaryInteracted()
         {
+            Debug.Log("Diary interacted");
             if (!ReferenceEquals(_currentElement, null)) return;
             
             _currentElement = diaryTab;
@@ -105,6 +98,11 @@ namespace GameMechanics
                 return;
             }
 
+            if (_currentElement == dialogueTab)
+            {
+                dialogueTab.SetVisualVisibility(false);
+            }
+            
             if (!_currentElement) return;
             
             _currentElement.SetVisualVisibility(false);
