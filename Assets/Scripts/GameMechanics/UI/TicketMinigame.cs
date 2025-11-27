@@ -19,6 +19,10 @@ namespace GameMechanics
         [SerializeField] private TMP_Text passengerFullNameText;
         [SerializeField] private TMP_Text passengerDestinationText;
         [SerializeField] private TMP_Text passengerExpireDateText;
+        [SerializeField] private TMP_Text passengerCarNumber;
+        [SerializeField] private TMP_Text passengerSeatNumber;
+        [SerializeField] private TMP_Text ticketNumberText;
+        [SerializeField] private Image passengerPortrait;
 
         private bool _canScan;
 
@@ -38,8 +42,12 @@ namespace GameMechanics
         public void UpdateTicketUI(PassengerData data)
         {
             passengerFullNameText.text = $"{data.passengerName} {data.passengerSurname}";
+            passengerCarNumber.text = data.car.ToString();
+            passengerSeatNumber.text = data.seat.ToString();
+            ticketNumberText.text = $"No. {data.ticketNumber.ToString()}";
             passengerDestinationText.text = data.destination;
             passengerExpireDateText.text = data.GetDate();
+            passengerPortrait.sprite = data.passengerPortrait;
         }
 
         public void ShowUI()

@@ -1,23 +1,31 @@
 using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Core.Scriptable_Objects
 {
     [CreateAssetMenu(fileName = "PassengerData", menuName = "Scriptable Objects/PassengerData")]
     public class PassengerData : ScriptableObject
     {
+        public Sprite passengerPortrait;
+        
         public TextAsset inkJSON;
         
         public string passengerName;
         public string passengerSurname;
 
+        public int car;
+        public int seat;
+        
         public string destination;
         public ValidUntil validUntil;
 
         public string GetDate()
         {
-            return $"{validUntil.Day:D2} / {validUntil.Month:D2} / {validUntil.Hour}:{validUntil.Minute:D2}";
+            return $"{validUntil.Day}.{validUntil.Month:D2}.{validUntil.Year} {validUntil.Hour}:{validUntil.Minute:D2}";
         }
+
+        public int ticketNumber => Random.Range(000000000, 999999999);
     }
     
     [Serializable]
@@ -25,6 +33,7 @@ namespace Core.Scriptable_Objects
     {
         public int Day;
         public int Month;
+        public int Year;
 
         public int Hour;
         public int Minute;
