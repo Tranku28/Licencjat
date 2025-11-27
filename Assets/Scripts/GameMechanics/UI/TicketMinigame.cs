@@ -62,6 +62,8 @@ namespace GameMechanics
         
         private void MakeHole()
         {
+            AudioManager.Instance.PlayOneShot(FMODEvents.Instance.puncherSound, transform.position);
+            
             Vector2 cursorPos = Mouse.current.position.ReadValue();
             
             if (RectTransformUtility.ScreenPointToLocalPointInRectangle(

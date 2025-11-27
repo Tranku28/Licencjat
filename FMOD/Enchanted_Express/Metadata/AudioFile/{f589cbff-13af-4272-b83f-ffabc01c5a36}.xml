@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="AudioFile" id="{f589cbff-13af-4272-b83f-ffabc01c5a36}">
+		<property name="assetPath">
+			<value>Diary Open.ogg</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>1.536</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{2f081b59-10bf-4977-8143-0aa2085f5bd8}</destination>
+		</relationship>
+	</object>
+</objects>

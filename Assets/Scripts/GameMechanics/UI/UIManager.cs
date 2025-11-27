@@ -75,6 +75,7 @@ namespace GameMechanics
             Debug.Log("Diary interacted");
             if (!ReferenceEquals(_currentElement, null)) return;
             
+            AudioManager.Instance.PlayOneShot(FMODEvents.Instance.diaryOpenSound, transform.position);
             _currentElement = diaryTab;
             diaryTab.SetVisualVisibility(true);
             _gameStateMachine.ChangeGameState(GameState.UIOpened);
@@ -101,6 +102,12 @@ namespace GameMechanics
             if (_currentElement == dialogueTab)
             {
                 dialogueTab.SetVisualVisibility(false);
+            }
+
+            if (_currentElement == diaryTab)
+            {
+                dialogueTab.SetVisualVisibility(false);
+                AudioManager.Instance.PlayOneShot(FMODEvents.Instance.diaryCloseSound, transform.position);
             }
             
             if (!_currentElement) return;

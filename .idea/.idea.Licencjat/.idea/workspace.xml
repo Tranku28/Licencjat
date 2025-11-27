@@ -5,15 +5,32 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e3135ff5-fe0f-44b1-9bd7-afd2dbbaf5d8" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/FMOD/Enchanted_Express/.cache/buildrecords/Desktop/Ambient.br" beforeDir="false" afterPath="$PROJECT_DIR$/FMOD/Enchanted_Express/.cache/buildrecords/Desktop/Ambient.br" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Core/AudioManager.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Core/AudioManager.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Licencjat/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Licencjat/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Animations/Start Board Controller.controller" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Animations/Start Board Controller.controller.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/HDRPDefaultResources/HDRenderPipelineGlobalSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HDRPDefaultResources/HDRenderPipelineGlobalSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Main Canvas.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Main Canvas.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Player.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Game.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Game.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Core/Core.asmdef" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Core/Core.asmdef" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameMechanics/GameMechanics.asmdef" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameMechanics/GameMechanics.asmdef" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameMechanics/Interactions/Diary.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameMechanics/Interactions/Diary.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameMechanics/Player/PlayerMovementController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameMechanics/Player/PlayerMovementController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameMechanics/UI/DialogueManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameMechanics/UI/DialogueManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameMechanics/UI/MainMenu/CreditsScrollHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameMechanics/UI/MainMenu/CreditsScrollHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameMechanics/UI/MainMenu/SettingsPanelController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameMechanics/UI/MainMenu/SettingsPanelController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameMechanics/UI/MainMenu/SettingsWatchHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameMechanics/UI/MainMenu/SettingsWatchHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameMechanics/UI/PauseMenuController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameMechanics/UI/PauseMenuController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameMechanics/UI/TicketMinigame.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameMechanics/UI/TicketMinigame.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameMechanics/UI/UIManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameMechanics/UI/UIManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FMOD/Enchanted_Express/.cache/buildrecords/Desktop/Master.br" beforeDir="false" afterPath="$PROJECT_DIR$/FMOD/Enchanted_Express/.cache/buildrecords/Desktop/Master.br" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FMOD/Enchanted_Express/.cache/buildrecords/Desktop/SFX.br" beforeDir="false" afterPath="$PROJECT_DIR$/FMOD/Enchanted_Express/.cache/buildrecords/Desktop/SFX.br" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FMOD/Enchanted_Express/.cache/fsbcache/Desktop/217DE0EE.fobj" beforeDir="false" afterPath="$PROJECT_DIR$/FMOD/Enchanted_Express/.cache/fsbcache/Desktop/217DE0EE.fobj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FMOD/Enchanted_Express/.cache/fsbcache/Desktop/247BADC2.fobj" beforeDir="false" afterPath="$PROJECT_DIR$/FMOD/Enchanted_Express/.cache/fsbcache/Desktop/247BADC2.fobj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FMOD/Enchanted_Express/.cache/{b403cfe8-ae23-4ca1-8983-5e7e25b6de03}.pdc" beforeDir="false" afterPath="$PROJECT_DIR$/FMOD/Enchanted_Express/.cache/{b403cfe8-ae23-4ca1-8983-5e7e25b6de03}.pdc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FMOD/Enchanted_Express/.cache/{c14a64b9-e310-4cb7-b1f5-6b56d851c96f}.pdc" beforeDir="false" afterPath="$PROJECT_DIR$/FMOD/Enchanted_Express/.cache/{c14a64b9-e310-4cb7-b1f5-6b56d851c96f}.pdc" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FMOD/Enchanted_Express/Build/Desktop/Master.strings.bank" beforeDir="false" afterPath="$PROJECT_DIR$/FMOD/Enchanted_Express/Build/Desktop/Master.strings.bank" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FMOD/Enchanted_Express/Build/Desktop/SFX.bank" beforeDir="false" afterPath="$PROJECT_DIR$/FMOD/Enchanted_Express/Build/Desktop/SFX.bank" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FMOD/Enchanted_Express/Metadata/Event/{246435d6-d7a4-4e7a-826c-8ec901fe766f}.xml" beforeDir="false" afterPath="$PROJECT_DIR$/FMOD/Enchanted_Express/Metadata/Event/{246435d6-d7a4-4e7a-826c-8ec901fe766f}.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,6 +45,7 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/InputLoader.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Core/AudioManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Core/GameStateMachine.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Core/Scriptable Objects/PrefabContainer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.universal@1e752e39e60c/Shaders/Lit.shader" root0="SKIP_HIGHLIGHTING" />
@@ -44,28 +62,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Attach to Unity Editor.Attach to Unity Editor.executor": "Debug",
-    "Device#class com.jetbrains.rider.plugins.unity.run.devices.UnityEditorDeviceKind#com.jetbrains.rider.plugins.unity.run.devices.UnityDevicesProvider#Unity Attach To: Attach to": "Unity Editor",
-    "DeviceKind#com.jetbrains.rider.plugins.unity.run.devices.UnityDevicesProvider": "Unity Editor",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "Unity Attach To.Attach to.executor": "Debug",
-    "git-widget-placeholder": "feature/prebuild-polishing",
-    "ignore.virus.scanning.warn.message": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.keymap",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Attach to Unity Editor.Attach to Unity Editor.executor&quot;: &quot;Debug&quot;,
+    &quot;Device#class com.jetbrains.rider.plugins.unity.run.devices.UnityEditorDeviceKind#com.jetbrains.rider.plugins.unity.run.devices.UnityDevicesProvider#Unity Attach To: Attach to&quot;: &quot;Unity Editor&quot;,
+    &quot;DeviceKind#com.jetbrains.rider.plugins.unity.run.devices.UnityDevicesProvider&quot;: &quot;Unity Editor&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;Unity Attach To.Attach to.executor&quot;: &quot;Debug&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feature/prebuild-polishing&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
     <configuration name="Standalone Player" type="RunUnityExe" factoryName="Unity Executable">
       <option name="EXE_PATH" value="$PROJECT_DIR$/Build\Licencjat.exe" />
@@ -174,7 +192,8 @@
       <workItem from="1763995799333" duration="716000" />
       <workItem from="1764022324618" duration="1389000" />
       <workItem from="1764111800038" duration="2508000" />
-      <workItem from="1764213264762" duration="1921000" />
+      <workItem from="1764213264762" duration="2029000" />
+      <workItem from="1764242373070" duration="6065000" />
     </task>
     <servers />
   </component>

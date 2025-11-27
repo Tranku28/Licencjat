@@ -7,6 +7,8 @@ namespace GameMechanics.UI.MainMenu
 {
     public class SettingsWatchHandler : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
+        private static readonly int Selected = Animator.StringToHash("Selected");
+        [SerializeField] private Animator watchAnimator;
         public event Action WatchClicked;
     
         public void OnPointerClick(PointerEventData eventData)
@@ -17,12 +19,12 @@ namespace GameMechanics.UI.MainMenu
 
         public void OnPointerEnter(PointerEventData eventData)
         {
-            Debug.Log("Watch enter");
+            watchAnimator.SetBool(Selected, true);
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
-            Debug.Log("Watch exit");
+            watchAnimator.SetBool(Selected, false);
         }
     }
 }
