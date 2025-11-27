@@ -5,17 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e3135ff5-fe0f-44b1-9bd7-afd2dbbaf5d8" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Licencjat/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Licencjat/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Models/Characters/Vampire/Animation/M_Bag_01.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Models/Characters/Vampire/Animation/M_Bag_01.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Models/Characters/Vampire/Animation/M_Feather_01.003.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Models/Characters/Vampire/Animation/M_Feather_01.003.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Models/Characters/Vampire/Bag/M_Bag_01.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Models/Characters/Vampire/Bag/M_Bag_01.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Models/Characters/Vampire/Character/M_Vampire_01.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Models/Characters/Vampire/Character/M_Vampire_01.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Models/Characters/Vampire/Character/M_Vampire_02.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Models/Characters/Vampire/Character/M_Vampire_02.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Models/Characters/Vampire/Part2.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Models/Characters/Vampire/Part2.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Main Canvas.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Main Canvas.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Game.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Game.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Core/Scriptable Objects/PassengerData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Core/Scriptable Objects/PassengerData.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameMechanics/UI/TicketMinigame.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameMechanics/UI/TicketMinigame.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FMOD/Enchanted_Express/.cache/buildrecords/Desktop/Ambient.br" beforeDir="false" afterPath="$PROJECT_DIR$/FMOD/Enchanted_Express/.cache/buildrecords/Desktop/Ambient.br" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FMOD/Enchanted_Express/.cache/buildrecords/Desktop/Master.br" beforeDir="false" afterPath="$PROJECT_DIR$/FMOD/Enchanted_Express/.cache/buildrecords/Desktop/Master.br" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FMOD/Enchanted_Express/.cache/buildrecords/Desktop/SFX.br" beforeDir="false" afterPath="$PROJECT_DIR$/FMOD/Enchanted_Express/.cache/buildrecords/Desktop/SFX.br" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FMOD/Enchanted_Express/.cache/fsbcache/Desktop/217DE0EE.fobj" beforeDir="false" afterPath="$PROJECT_DIR$/FMOD/Enchanted_Express/.cache/fsbcache/Desktop/217DE0EE.fobj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FMOD/Enchanted_Express/.cache/fsbcache/Desktop/247BADC2.fobj" beforeDir="false" afterPath="$PROJECT_DIR$/FMOD/Enchanted_Express/.cache/fsbcache/Desktop/247BADC2.fobj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FMOD/Enchanted_Express/.cache/{b403cfe8-ae23-4ca1-8983-5e7e25b6de03}.pdc" beforeDir="false" afterPath="$PROJECT_DIR$/FMOD/Enchanted_Express/.cache/{b403cfe8-ae23-4ca1-8983-5e7e25b6de03}.pdc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FMOD/Enchanted_Express/.cache/{c14a64b9-e310-4cb7-b1f5-6b56d851c96f}.pdc" beforeDir="false" afterPath="$PROJECT_DIR$/FMOD/Enchanted_Express/.cache/{c14a64b9-e310-4cb7-b1f5-6b56d851c96f}.pdc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FMOD/Enchanted_Express/Build/Desktop/Master.strings.bank" beforeDir="false" afterPath="$PROJECT_DIR$/FMOD/Enchanted_Express/Build/Desktop/Master.strings.bank" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FMOD/Enchanted_Express/Build/Desktop/SFX.bank" beforeDir="false" afterPath="$PROJECT_DIR$/FMOD/Enchanted_Express/Build/Desktop/SFX.bank" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -176,7 +174,7 @@
       <workItem from="1763995799333" duration="716000" />
       <workItem from="1764022324618" duration="1389000" />
       <workItem from="1764111800038" duration="2508000" />
-      <workItem from="1764213264762" duration="1324000" />
+      <workItem from="1764213264762" duration="1921000" />
     </task>
     <servers />
   </component>
