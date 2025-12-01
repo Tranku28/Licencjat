@@ -79,6 +79,7 @@ namespace GameMechanics.UI.MainMenu
         private void OnStartButtonClicked()
         {
             cameraAnimator.SetBool(GameStarted, true);
+            _animator.SetBool(ZoomIn, false);
         }
 
         private void OnStartGame()
