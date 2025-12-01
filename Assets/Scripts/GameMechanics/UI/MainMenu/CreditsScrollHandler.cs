@@ -6,6 +6,8 @@ namespace GameMechanics.UI.MainMenu
 {
     public class CreditsScrollHandler : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
+        private static readonly int Selected = Animator.StringToHash("Selected");
+        [SerializeField] private Animator scrollAnimator;
         public event Action ScrollClicked;
         public void OnPointerClick(PointerEventData eventData)
         {
@@ -14,12 +16,12 @@ namespace GameMechanics.UI.MainMenu
 
         public void OnPointerEnter(PointerEventData eventData)
         {
-            Debug.Log("Scroll selected");
+            scrollAnimator.SetBool(Selected, true);
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
-            Debug.Log("Scroll put back");
+            scrollAnimator.SetBool(Selected, false);
         }
     }
 }

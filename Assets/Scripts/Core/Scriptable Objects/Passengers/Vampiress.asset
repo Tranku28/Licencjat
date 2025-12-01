@@ -12,12 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acecc751a12ea0244b7bd035b07eda1f, type: 3}
   m_Name: Vampiress
   m_EditorClassIdentifier: 
+  passengerPortrait: {fileID: 21300000, guid: c09be1b55c20f48499febe3cc31f4b64, type: 3}
   inkJSON: {fileID: 4900000, guid: e2a34b0d21d903548928a0ee967a17fe, type: 3}
   passengerName: Charlotte
   passengerSurname: Bloodrose
+  car: 3
+  seat: 11
   destination: Maplewood
   validUntil:
-    Day: 12
-    Month: 3
-    Hour: 14
-    Minute: 7
+    Day: 30
+    Month: 11
+    Year: 1930
+    Hour: 11
+    Minute: 30

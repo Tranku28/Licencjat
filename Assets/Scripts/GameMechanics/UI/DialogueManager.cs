@@ -61,6 +61,8 @@ namespace GameMechanics.UI
         private void LoadAndStart(PassengerData passengerData)
         {
             ticketMinigame.UpdateTicketUI(passengerData);
+            npcNameText.text = passengerData.passengerName;
+            
             StartStory(passengerData);
         }
         

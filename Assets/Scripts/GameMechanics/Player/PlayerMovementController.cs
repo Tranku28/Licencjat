@@ -11,7 +11,9 @@ namespace GameMechanics.Player
         [SerializeField] private float moveSpeed;
         [SerializeField] private bool canSprint;
         [SerializeField] private float sprintMultiplier;
-    
+        [SerializeField] private float stepSoundCooldown = 0.5f;
+        
+        private float _currentTime = 0;
         private Camera _playerCamera;
         private InputAction _lookInput;
         private InputAction _moveInput;
@@ -72,6 +74,14 @@ namespace GameMechanics.Player
             var input = _moveInput.ReadValue<Vector2>();
         
             if (input == Vector2.zero) return;
+            
+            _currentTime += Time.deltaTime;
+
+            if (_currentTime > stepSoundCooldown)
+            {
+                _currentTime = 0;
+                AudioManager.Instance.PlayOneShot(FMODEvents.Instance.stepSound, transform.position);
+            }
 
             if (_sprintInput.IsPressed() && canSprint)
             {

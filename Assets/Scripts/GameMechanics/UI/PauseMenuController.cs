@@ -16,6 +16,7 @@ namespace GameMechanics
         private Canvas _canvas;
 
         [SerializeField] private TMP_Text resume, backToMenu, settings;
+        [SerializeField] private GameObject pauseSettingsPanel;
         private PauseOptions _currentOption;
 
         public static Action OnResume;
@@ -51,6 +52,8 @@ namespace GameMechanics
         {
             var gameStateMachine = DependencyResoler.Instance.GetType<GameStateMachine>();
             
+            if (pauseSettingsPanel.activeSelf) return;
+            
             switch (_currentOption)
             {
                 case PauseOptions.MainMenu:
@@ -59,7 +62,7 @@ namespace GameMechanics
                     break;
                 
                 case PauseOptions.Settings:
-                    Debug.Log("Settings");
+                    pauseSettingsPanel.SetActive(true);
                     break;
                 
                 case PauseOptions.Resume:
