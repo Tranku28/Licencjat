@@ -6,6 +6,7 @@ using Interactions;
 using UI.MainMenu;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 namespace GameMechanics
 {
@@ -14,7 +15,7 @@ namespace GameMechanics
         [Header("UI Elements")]
         [SerializeField] private MainMenuController mainMenuController;
         [SerializeField] private PauseMenuController pauseMenu;
-        [SerializeField] private DialogueManager dialogueTab;
+        [SerializeField] private DialogueManager dialogueManager;
         [SerializeField] private DiaryController diaryTab;
         
         private UIElement _currentElement;
@@ -53,15 +54,15 @@ namespace GameMechanics
             
             if (_gameStateMachine.GetGameState() == GameState.UIOpened)
             {
-                dialogueTab.SetVisualVisibility(false);
+                dialogueManager.SetVisualVisibility(false);
                 _currentElement = null;
                 _gameStateMachine.ChangeGameState(GameState.Gameplay);
                 
                 return;
             }
             
-            dialogueTab.SetVisualVisibility(true);
-            _currentElement = dialogueTab;
+            dialogueManager.SetVisualVisibility(true);
+            _currentElement = dialogueManager;
             _gameStateMachine.ChangeGameState(GameState.UIOpened);
         }
         
@@ -99,14 +100,20 @@ namespace GameMechanics
                 return;
             }
 
-            if (_currentElement == dialogueTab)
+            if (_currentElement == dialogueManager)
             {
-                dialogueTab.SetVisualVisibility(false);
+                if (dialogueManager.ticketScanned || dialogueManager.ticketRejected)
+                {
+                    dialogueManager.SetVisualVisibility(false);
+                    dialogueManager.HideTicketDisplay();
+                }
+                else
+                    return;
             }
 
             if (_currentElement == diaryTab)
             {
-                dialogueTab.SetVisualVisibility(false);
+                dialogueManager.SetVisualVisibility(false);
                 AudioManager.Instance.PlayOneShot(FMODEvents.Instance.diaryCloseSound, transform.position);
             }
             

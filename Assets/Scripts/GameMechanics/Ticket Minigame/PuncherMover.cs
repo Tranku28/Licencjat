@@ -21,10 +21,10 @@ public class PuncherMover : MonoBehaviour
     {
         camera = Camera.main;
 
-        ticketMinigame.OnTicketClicked += RepositionPuncher;
+        ticketMinigame.OnTicketMoved += RepositionPuncher;
     }
 
-    private void OnDestroy() => ticketMinigame.OnTicketClicked -= RepositionPuncher;
+    private void OnDestroy() => ticketMinigame.OnTicketMoved -= RepositionPuncher;
 
     private void RepositionPuncher(object sender, TicketMinigame.OnTicketClickedEventArgs e)
     {

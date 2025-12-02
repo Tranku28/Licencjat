@@ -24,19 +24,19 @@ namespace GameMechanics
         [SerializeField] private TMP_Text ticketNumberText;
         [SerializeField] private Image passengerPortrait;
 
+        public event Action OnTicketScanned;
+        
         public class OnTicketClickedEventArgs : EventArgs
         {
             public PuncherOrientation Orientation;
-            public bool CanScan;
 
-            public OnTicketClickedEventArgs(PuncherOrientation orientation, bool canScan)
+            public OnTicketClickedEventArgs(PuncherOrientation orientation)
             {
                 Orientation = orientation;
-                CanScan = canScan;
             }
         }
 
-        public event EventHandler<OnTicketClickedEventArgs> OnTicketClicked;
+        public event EventHandler<OnTicketClickedEventArgs> OnTicketMoved;
         private Camera _camera;
 
         private bool _canScan;
@@ -66,10 +66,8 @@ namespace GameMechanics
             passengerPortrait.sprite = data.passengerPortrait;
         }
 
-        public void ShowUI()
-        {
-            visual.SetActive(!visual.activeSelf);
-        }
+        public void ShowUI() => visual.SetActive(!visual.activeSelf);
+        public void HideUI() => visual.SetActive(false);
         
         public void OnPointerClick(PointerEventData eventData)
         {
@@ -88,35 +86,35 @@ namespace GameMechanics
             );
 
             Rect rect = rectTransform.rect;
-
-            // poprawne odległości: xMin = left, xMax = right, yMin = bottom, yMax = top
+            
             float distLeft = Mathf.Abs(localPoint.x - rect.xMin);
             float distRight = Mathf.Abs(localPoint.x - rect.xMax);
-            float distBottom = Mathf.Abs(localPoint.y - rect.yMin); // bottom = yMin
-            float distTop = Mathf.Abs(localPoint.y - rect.yMax);    // top    = yMax
-
-            // wybieramy jednoznacznie najmniejszą wartość (if/else aby nie wywoływać wielu eventów)
+            float distBottom = Mathf.Abs(localPoint.y - rect.yMin);
+            float distTop = Mathf.Abs(localPoint.y - rect.yMax);
+            
             if (distLeft <= distRight && distLeft <= distTop && distLeft <= distBottom)
             {
-                OnTicketClicked?.Invoke(this, new OnTicketClickedEventArgs(PuncherOrientation.Left, _canScan));
+                OnTicketMoved?.Invoke(this, new OnTicketClickedEventArgs(PuncherOrientation.Left));
             }
             else if (distRight <= distLeft && distRight <= distTop && distRight <= distBottom)
             {
-                OnTicketClicked?.Invoke(this, new OnTicketClickedEventArgs(PuncherOrientation.Right, _canScan));
+                OnTicketMoved?.Invoke(this, new OnTicketClickedEventArgs(PuncherOrientation.Right));
             }
             else if (distTop <= distLeft && distTop <= distRight && distTop <= distBottom)
             {
-                OnTicketClicked?.Invoke(this, new OnTicketClickedEventArgs(PuncherOrientation.Bottom, _canScan));
+                OnTicketMoved?.Invoke(this, new OnTicketClickedEventArgs(PuncherOrientation.Bottom));
             }
-            else // bottom
+            else
             {
-                OnTicketClicked?.Invoke(this, new OnTicketClickedEventArgs(PuncherOrientation.Top, _canScan));
+                OnTicketMoved?.Invoke(this, new OnTicketClickedEventArgs(PuncherOrientation.Top));
             }
         }
 
 
         private void MakeHole()
         {
+            OnTicketScanned?.Invoke();
+            
             AudioManager.Instance.PlayOneShot(FMODEvents.Instance.puncherSound, transform.position);
             
             Vector2 cursorPos = Mouse.current.position.ReadValue();
