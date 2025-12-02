@@ -24,6 +24,21 @@ namespace GameMechanics
         [SerializeField] private TMP_Text ticketNumberText;
         [SerializeField] private Image passengerPortrait;
 
+        public class OnTicketClickedEventArgs : EventArgs
+        {
+            public PuncherOrientation Orientation;
+            public bool CanScan;
+
+            public OnTicketClickedEventArgs(PuncherOrientation orientation, bool canScan)
+            {
+                Orientation = orientation;
+                CanScan = canScan;
+            }
+        }
+
+        public event EventHandler<OnTicketClickedEventArgs> OnTicketClicked;
+        private Camera _camera;
+
         private bool _canScan;
 
         public bool canScan
@@ -37,6 +52,7 @@ namespace GameMechanics
         private void Awake()
         {
             if (Camera.main == null) throw new Exception("Camera not found");
+            _camera = Camera.main;
         }
 
         public void UpdateTicketUI(PassengerData data)
@@ -58,6 +74,32 @@ namespace GameMechanics
         public void OnPointerClick(PointerEventData eventData)
         {
             if (_canScan) MakeHole();
+
+            RectTransform rectTransform = visual.GetComponent<RectTransform>();
+            
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(
+                rectTransform,
+                eventData.position,
+                _camera,
+                out var localPoint
+                );
+
+            Rect rect = rectTransform.rect;
+            float distLeft = Mathf.Abs(localPoint.x - rect.xMin);
+            float distRight = Mathf.Abs(localPoint.x - rect.xMax);
+            float distTop = Mathf.Abs(localPoint.y - rect.yMin);
+            float distBottom = Mathf.Abs(localPoint.y - rect.yMax);
+            
+            float minDist = Mathf.Min(distLeft, distRight, distTop, distBottom);
+
+            if (Mathf.Approximately(minDist, distLeft))
+                OnTicketClicked?.Invoke(this, new OnTicketClickedEventArgs(PuncherOrientation.Left, _canScan));
+            if (Mathf.Approximately(minDist, distRight))
+                OnTicketClicked?.Invoke(this, new OnTicketClickedEventArgs(PuncherOrientation.Right, _canScan));
+            if (Mathf.Approximately(minDist, distTop))
+                OnTicketClicked?.Invoke(this, new OnTicketClickedEventArgs(PuncherOrientation.Top, _canScan));
+            if (Mathf.Approximately(minDist, distBottom))
+                OnTicketClicked?.Invoke(this, new OnTicketClickedEventArgs(PuncherOrientation.Bottom, _canScan));
         }
         
         private void MakeHole()
@@ -79,5 +121,13 @@ namespace GameMechanics
                 hole.rectTransform.localScale = Vector3.one;
             }
         }
+    }
+
+    public enum PuncherOrientation
+    {
+        Left,
+        Right,
+        Top,
+        Bottom
     }
 }
