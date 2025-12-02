@@ -9,34 +9,43 @@ public class PuncherMover : MonoBehaviour
     [SerializeField] private RectTransform uiTransform;
     [SerializeField] private TicketMinigame ticketMinigame;
     
+    private PuncherOrientation _orientation;
+    private Quaternion _initialRotation;
+
+    private void Awake()
+    {
+        _initialRotation = transform.rotation;
+    }
+
     private void Start()
     {
         camera = Camera.main;
 
-        ticketMinigame.OnTicketClicked += PunchHole;
+        ticketMinigame.OnTicketClicked += RepositionPuncher;
     }
 
-    private void OnDestroy() => ticketMinigame.OnTicketClicked -= PunchHole;
+    private void OnDestroy() => ticketMinigame.OnTicketClicked -= RepositionPuncher;
 
-    private void PunchHole(object sender, TicketMinigame.OnTicketClickedEventArgs e)
+    private void RepositionPuncher(object sender, TicketMinigame.OnTicketClickedEventArgs e)
     {
-        switch (e.Orientation)
+        if (e.Orientation == _orientation)
         {
-            case PuncherOrientation.Left:
-                transform.localEulerAngles = new Vector3(90f, transform.rotation.y, 0f);
-                break;
-            case PuncherOrientation.Right:
-                transform.localEulerAngles = new Vector3(-90f, transform.rotation.y, 0f);
-                break;
-            case PuncherOrientation.Top:
-                transform.localEulerAngles = new Vector3(-180f, transform.rotation.y, 0f);
-                break;
-            case PuncherOrientation.Bottom:
-                transform.localEulerAngles = new Vector3(0f, transform.rotation.y, 0f);
-                break;
-            default:
-                throw new ArgumentOutOfRangeException();
+            Debug.Log(_orientation);
+            return;
         }
+        
+        float targetY = e.Orientation switch
+        {
+            PuncherOrientation.Left => -90f,
+            PuncherOrientation.Right => 90f,
+            PuncherOrientation.Top => 180f,
+            PuncherOrientation.Bottom => 0f,
+            _ => 0f
+        };
+        
+        transform.rotation = _initialRotation * Quaternion.Euler(0f, targetY, 0f);
+
+        _orientation = e.Orientation;
     }
 
     private void Update()

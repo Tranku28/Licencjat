@@ -11,7 +11,7 @@ using UnityEngine.UI;
 
 namespace GameMechanics
 {
-    public class TicketMinigame : UIElement, IPointerClickHandler
+    public class TicketMinigame : UIElement, IPointerClickHandler, IPointerMoveHandler
     {
         [SerializeField] private Image holeImage;
         [SerializeField] private GameObject visual;
@@ -74,34 +74,47 @@ namespace GameMechanics
         public void OnPointerClick(PointerEventData eventData)
         {
             if (_canScan) MakeHole();
+        }
 
+        public void OnPointerMove(PointerEventData eventData)
+        {
             RectTransform rectTransform = visual.GetComponent<RectTransform>();
-            
+
             RectTransformUtility.ScreenPointToLocalPointInRectangle(
                 rectTransform,
                 eventData.position,
                 _camera,
                 out var localPoint
-                );
+            );
 
             Rect rect = rectTransform.rect;
+
+            // poprawne odległości: xMin = left, xMax = right, yMin = bottom, yMax = top
             float distLeft = Mathf.Abs(localPoint.x - rect.xMin);
             float distRight = Mathf.Abs(localPoint.x - rect.xMax);
-            float distTop = Mathf.Abs(localPoint.y - rect.yMin);
-            float distBottom = Mathf.Abs(localPoint.y - rect.yMax);
-            
-            float minDist = Mathf.Min(distLeft, distRight, distTop, distBottom);
+            float distBottom = Mathf.Abs(localPoint.y - rect.yMin); // bottom = yMin
+            float distTop = Mathf.Abs(localPoint.y - rect.yMax);    // top    = yMax
 
-            if (Mathf.Approximately(minDist, distLeft))
+            // wybieramy jednoznacznie najmniejszą wartość (if/else aby nie wywoływać wielu eventów)
+            if (distLeft <= distRight && distLeft <= distTop && distLeft <= distBottom)
+            {
                 OnTicketClicked?.Invoke(this, new OnTicketClickedEventArgs(PuncherOrientation.Left, _canScan));
-            if (Mathf.Approximately(minDist, distRight))
+            }
+            else if (distRight <= distLeft && distRight <= distTop && distRight <= distBottom)
+            {
                 OnTicketClicked?.Invoke(this, new OnTicketClickedEventArgs(PuncherOrientation.Right, _canScan));
-            if (Mathf.Approximately(minDist, distTop))
-                OnTicketClicked?.Invoke(this, new OnTicketClickedEventArgs(PuncherOrientation.Top, _canScan));
-            if (Mathf.Approximately(minDist, distBottom))
+            }
+            else if (distTop <= distLeft && distTop <= distRight && distTop <= distBottom)
+            {
                 OnTicketClicked?.Invoke(this, new OnTicketClickedEventArgs(PuncherOrientation.Bottom, _canScan));
+            }
+            else // bottom
+            {
+                OnTicketClicked?.Invoke(this, new OnTicketClickedEventArgs(PuncherOrientation.Top, _canScan));
+            }
         }
-        
+
+
         private void MakeHole()
         {
             AudioManager.Instance.PlayOneShot(FMODEvents.Instance.puncherSound, transform.position);

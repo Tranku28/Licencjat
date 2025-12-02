@@ -186,7 +186,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 450915817231186506}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.49597186, y: -0.49597186, z: 0.503996, w: 0.503996}
+  m_LocalRotation: {x: -0.5, y: -0.5, z: 0.5, w: 0.5}
   m_LocalPosition: {x: 0, y: 250.00008, z: -2}
   m_LocalScale: {x: 374.99994, y: 374.99994, z: 374.99994}
   m_ConstrainProportionsScale: 1
@@ -206,6 +206,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b936fdafbe1c22249b60168c37c06519, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  camera: {fileID: 1188166517907454173}
+  uiTransform: {fileID: 3803114082876638513}
+  ticketMinigame: {fileID: 5983828101409596313}
 --- !u!1 &1378198633729590604
 GameObject:
   m_ObjectHideFlags: 0
@@ -2043,7 +2046,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 5d121ce426189e647a54e1844f23a809, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5d121ce426189e647a54e1844f23a809, type: 3}
       propertyPath: m_LocalPosition.y
