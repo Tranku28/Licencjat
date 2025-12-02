@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Core.Scriptable_Objects;
 using Ink.Runtime;
@@ -30,6 +31,11 @@ namespace GameMechanics.UI
 
         private bool _clickedBeforeChoices = false;
 
+        private bool _ticketScanned, _ticketRejected = false;
+
+        public bool ticketScanned => _ticketScanned;
+        public bool ticketRejected => _ticketRejected;
+
         private void Awake()
         {
             Button[] buttons = choiceContainer.GetComponentsInChildren<Button>();
@@ -44,24 +50,41 @@ namespace GameMechanics.UI
 
         private void OnEnable()
         {
-            Passenger.OnPassengerInteracted += LoadAndStart;
+            Passenger.OnPassengerInteracted += LoadTicketDataAndStart;
             PlayerControls.OnSingleClickEvent += StoryHop;
             
-            showTicketButton.onClick.AddListener(DisplayTicket);
+            showTicketButton.onClick.AddListener(ToggleTicketDisplay);
         }
 
         private void OnDisable()
         {
-            Passenger.OnPassengerInteracted -= LoadAndStart;
+            Passenger.OnPassengerInteracted -= LoadTicketDataAndStart;
             PlayerControls.OnSingleClickEvent -= StoryHop;
             
             showTicketButton.onClick.RemoveAllListeners();
         }
 
-        private void LoadAndStart(PassengerData passengerData)
+        private void Start()
+        {
+            ticketMinigame.OnTicketScanned += SetScanned;
+        }
+
+        private void OnDestroy()
+        {
+            ticketMinigame.OnTicketScanned -= SetScanned;
+        }
+
+        private void SetScanned()
+        {
+            _ticketScanned = true;
+        }
+
+        private void LoadTicketDataAndStart(PassengerData passengerData)
         {
             ticketMinigame.UpdateTicketUI(passengerData);
             npcNameText.text = passengerData.passengerName;
+            _ticketScanned = false;
+            _ticketRejected = false;
             
             StartStory(passengerData);
         }
@@ -79,6 +102,12 @@ namespace GameMechanics.UI
             _story.ObserveVariable("canScan", (string varName, object newValue) =>
             {
                 SetScannable((bool)newValue);
+            });
+            
+            _story.ObserveVariable("ticketRejected", (string varName, object newValue) =>
+            {
+                Debug.Log("rejected");
+                _ticketRejected = (bool)newValue;
             });
         }
 
@@ -198,9 +227,8 @@ namespace GameMechanics.UI
         }
 
         
-        private void DisplayTicket()
-        {
-            ticketMinigame.ShowUI();
-        }
+        private void ToggleTicketDisplay() => ticketMinigame.ShowUI();
+
+        public void HideTicketDisplay() => ticketMinigame.HideUI();
     }
 }

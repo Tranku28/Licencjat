@@ -1,6 +1,6 @@
 VAR speakerIndex = -1
 VAR canScan = false
-VAR acceptTicket = false
+VAR ticketRejected = false
 
 ~ speakerIndex = 0
 Good evening, madam. Your ticket, please.
@@ -30,6 +30,7 @@ Aye. It was purchased long ago. Back when I still believed in a brighter morrow.
     I possess too much of it.
     Others, far too little.
     I shall alight at the next station…
+    ~ ticketRejected = true
         -> END
         
 === a_brighter_morrow ===
@@ -46,6 +47,7 @@ Back then, my dreams had yet to be buried beneath dust and silence.
     … Perhaps they were right after all.
     One cannot live upon dreams alone.
     Thank you for reminding me of that truth, just as I began to doubt it.
+    ~ ticketRejected = true
     -> END
 
 === regret ===
@@ -70,6 +72,7 @@ And now I bear the weight of that regret…
     ~ speakerIndex = 1
     … And yet nothing has changed…
     Men still despise and fear the dreams and wishes of other beings.
+    ~ ticketRejected = true
     -> END
 
 === love ===
@@ -88,6 +91,7 @@ I regret that I lacked the courage. The courage to defy the elders. The courage 
     ~ speakerIndex = 1
     … And yet nothing has changed…
     Men still despise and fear the dreams and wishes of other beings.
+    ~ ticketRejected = true
     -> END
     
 === is_dying ===
@@ -113,6 +117,7 @@ I lacked the voice to speak his name aloud - to tell the world how deeply I love
     When there was still time.
     But now…
     … Forget it.
+    ~ ticketRejected = true
     -> END
     
 
@@ -145,6 +150,7 @@ Tell me, how could such a thing be?
     …And yet, I was wrong.
     We were never meant for one another. For had we been, fate would have guided us together…
     Would it not..?
+    ~ ticketRejected = true
     -> END
 
 
@@ -176,6 +182,7 @@ Tell me, how could such a thing be?
     …And yet, I was wrong.
     We were never meant for one another. For had we been, fate would have guided us together…
     Would it not..?
+    ~ ticketRejected = true
     -> END
 
 
@@ -197,4 +204,5 @@ Tell me, how could such a thing be?
     But remember, young man. 
     Never let them silence you. Never let them shape you. Be the master of your own fate.
     Unlike me…
+    ~ ticketRejected = true
     -> END

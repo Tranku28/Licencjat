@@ -3700,7 +3700,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainMenuController: {fileID: 2000659542100353437}
   pauseMenu: {fileID: 7900038724635669078}
-  dialogueTab: {fileID: 2197324477993738153}
+  dialogueManager: {fileID: 2197324477993738153}
   diaryTab: {fileID: 2454029817300402451}
 --- !u!1 &6999711768443806063
 GameObject:

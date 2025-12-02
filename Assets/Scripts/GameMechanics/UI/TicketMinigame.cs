@@ -11,7 +11,7 @@ using UnityEngine.UI;
 
 namespace GameMechanics
 {
-    public class TicketMinigame : UIElement, IPointerClickHandler
+    public class TicketMinigame : UIElement, IPointerClickHandler, IPointerMoveHandler
     {
         [SerializeField] private Image holeImage;
         [SerializeField] private GameObject visual;
@@ -23,6 +23,21 @@ namespace GameMechanics
         [SerializeField] private TMP_Text passengerSeatNumber;
         [SerializeField] private TMP_Text ticketNumberText;
         [SerializeField] private Image passengerPortrait;
+
+        public event Action OnTicketScanned;
+        
+        public class OnTicketClickedEventArgs : EventArgs
+        {
+            public PuncherOrientation Orientation;
+
+            public OnTicketClickedEventArgs(PuncherOrientation orientation)
+            {
+                Orientation = orientation;
+            }
+        }
+
+        public event EventHandler<OnTicketClickedEventArgs> OnTicketMoved;
+        private Camera _camera;
 
         private bool _canScan;
 
@@ -37,6 +52,7 @@ namespace GameMechanics
         private void Awake()
         {
             if (Camera.main == null) throw new Exception("Camera not found");
+            _camera = Camera.main;
         }
 
         public void UpdateTicketUI(PassengerData data)
@@ -50,18 +66,55 @@ namespace GameMechanics
             passengerPortrait.sprite = data.passengerPortrait;
         }
 
-        public void ShowUI()
-        {
-            visual.SetActive(!visual.activeSelf);
-        }
+        public void ShowUI() => visual.SetActive(!visual.activeSelf);
+        public void HideUI() => visual.SetActive(false);
         
         public void OnPointerClick(PointerEventData eventData)
         {
             if (_canScan) MakeHole();
         }
-        
+
+        public void OnPointerMove(PointerEventData eventData)
+        {
+            RectTransform rectTransform = visual.GetComponent<RectTransform>();
+
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(
+                rectTransform,
+                eventData.position,
+                _camera,
+                out var localPoint
+            );
+
+            Rect rect = rectTransform.rect;
+            
+            float distLeft = Mathf.Abs(localPoint.x - rect.xMin);
+            float distRight = Mathf.Abs(localPoint.x - rect.xMax);
+            float distBottom = Mathf.Abs(localPoint.y - rect.yMin);
+            float distTop = Mathf.Abs(localPoint.y - rect.yMax);
+            
+            if (distLeft <= distRight && distLeft <= distTop && distLeft <= distBottom)
+            {
+                OnTicketMoved?.Invoke(this, new OnTicketClickedEventArgs(PuncherOrientation.Left));
+            }
+            else if (distRight <= distLeft && distRight <= distTop && distRight <= distBottom)
+            {
+                OnTicketMoved?.Invoke(this, new OnTicketClickedEventArgs(PuncherOrientation.Right));
+            }
+            else if (distTop <= distLeft && distTop <= distRight && distTop <= distBottom)
+            {
+                OnTicketMoved?.Invoke(this, new OnTicketClickedEventArgs(PuncherOrientation.Bottom));
+            }
+            else
+            {
+                OnTicketMoved?.Invoke(this, new OnTicketClickedEventArgs(PuncherOrientation.Top));
+            }
+        }
+
+
         private void MakeHole()
         {
+            OnTicketScanned?.Invoke();
+            
             AudioManager.Instance.PlayOneShot(FMODEvents.Instance.puncherSound, transform.position);
             
             Vector2 cursorPos = Mouse.current.position.ReadValue();
@@ -79,5 +132,13 @@ namespace GameMechanics
                 hole.rectTransform.localScale = Vector3.one;
             }
         }
+    }
+
+    public enum PuncherOrientation
+    {
+        Left,
+        Right,
+        Top,
+        Bottom
     }
 }
