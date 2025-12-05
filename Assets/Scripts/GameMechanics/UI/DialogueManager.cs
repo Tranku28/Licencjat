@@ -36,6 +36,8 @@ namespace GameMechanics.UI
         public bool ticketScanned => _ticketScanned;
         public bool ticketRejected => _ticketRejected;
 
+        public static event EventHandler<DialogueEndedEventArgs> OnDialogueEnded;
+
         private void Awake()
         {
             Button[] buttons = choiceContainer.GetComponentsInChildren<Button>();
@@ -230,5 +232,30 @@ namespace GameMechanics.UI
         private void ToggleTicketDisplay() => ticketMinigame.ShowUI();
 
         public void HideTicketDisplay() => ticketMinigame.HideUI();
+
+        public void OnDialogueQuit()
+        {
+            OnDialogueEnded?.Invoke(
+                this,
+                new DialogueEndedEventArgs(
+                    _ticketScanned,
+                    _ticketRejected,
+                    _currentPassengerData)
+            );
+        }
+    }
+
+    public class DialogueEndedEventArgs : EventArgs
+    {
+        public bool ticketScanned;
+        public bool ticketRejected;
+        public PassengerData passengerData;
+
+        public DialogueEndedEventArgs(bool scanned, bool rejected, PassengerData passenger)
+        {
+            passengerData = passenger;
+            ticketScanned = scanned;
+            ticketRejected = rejected;
+        }
     }
 }

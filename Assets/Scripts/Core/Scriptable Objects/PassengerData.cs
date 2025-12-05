@@ -20,6 +20,12 @@ namespace Core.Scriptable_Objects
         public string destination;
         public ValidUntil validUntil;
 
+        [Header("Consequences")]
+        public GameObject souvenirPrefab;
+        [TextArea(minLines: 5, maxLines: 10)]
+        public string newspaperText, souvenirNote;
+        public string souvenirText;
+
         public string GetDate()
         {
             return $"{validUntil.Day}.{validUntil.Month:D2}.{validUntil.Year} {validUntil.Hour}:{validUntil.Minute:D2}";

@@ -9,38 +9,43 @@ public class BlinkPanelUI : MonoBehaviour
     [SerializeField] private Image panelImage;
     private Awaitable _fadeInOut;
 
-    private void Start()
+    public void ClosePlayerEyes()
     {
         _fadeInOut = FadeIn();
+    }
+
+    public void OpenPlayerEyes()
+    {
+        _fadeInOut = FadeOut();
     }
 
     private async Awaitable FadeIn()
     {
         float currentAlpha = 0;
         float hop = effectDuration / 10;
-        while (currentAlpha < effectDuration)
+        while (currentAlpha <= 1)
         {
-            Debug.Log("Fade In:" + currentAlpha);
             await Awaitable.WaitForSecondsAsync(hop);
             currentAlpha += hop/effectDuration;
             panelImage.color = new Color(0, 0, 0, currentAlpha);
         }
-        
-        _fadeInOut = FadeOut();
+
+        _fadeInOut = null;
     }
 
     private async Awaitable FadeOut()
     {
-        float currentAlpha = 0;
+        float currentAlpha = 1;
         float hop = effectDuration / 10;
-        while (currentAlpha < effectDuration)
+        while (currentAlpha >= 0)
         {
-            Debug.Log("Fade In:" + currentAlpha);
             await Awaitable.WaitForSecondsAsync(hop);
-            currentAlpha += hop/effectDuration;
-            panelImage.color = new Color(0, 0, 0, 1 - currentAlpha);
+            currentAlpha -= hop/effectDuration;
+            panelImage.color = new Color(0, 0, 0, currentAlpha);
         }
         
         _fadeInOut = null;
     }
+
+    private void OnDestroy() => _fadeInOut = null;
 }

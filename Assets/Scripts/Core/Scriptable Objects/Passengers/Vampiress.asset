@@ -25,3 +25,10 @@ MonoBehaviour:
     Year: 1930
     Hour: 11
     Minute: 30
+  souvenirPrefab: {fileID: 3923819191764239479, guid: 77b5e666ce472604aaa02b658cc2926b, type: 3}
+  newspaperText: The body of a dead woman was found
+  souvenirNote: "\u201CYou once said the night would never end.\r\nBut you were wrong
+    - \r\nIt ends the moment someone dares to light a candle.\r\n\r\nYou were my
+    light.\u201D\r\n\r\n[There is an inscription on the back]\r\n\r\n\u201CLove ~\r\nEven
+    when the world forbiddeth it.\r\nFor love alone is the law worth breaking.\u201D\r"
+  souvenirText: The Old Necklace
