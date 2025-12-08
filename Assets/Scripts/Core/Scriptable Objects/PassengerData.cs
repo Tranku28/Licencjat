@@ -23,8 +23,8 @@ namespace Core.Scriptable_Objects
         [Header("Consequences")]
         public GameObject souvenirPrefab;
         [TextArea(minLines: 5, maxLines: 10)]
-        public string newspaperText, souvenirNote;
-        public string souvenirText;
+        public string newspaperText, souvenirNote, diaryContent;
+        public string souvenirName;
 
         public string GetDate()
         {

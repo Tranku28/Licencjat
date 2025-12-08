@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace Core
 {
+    [InitializeSystem("GameStateMachine")]
     public class GameStateMachine : BaseSystem
     {
         GameState _gameState;

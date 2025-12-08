@@ -35,7 +35,7 @@ namespace Player
 
         private void Start()
         {
-            _gameManager = DependencyResoler.Instance.GetType<GameStateMachine>();
+            _gameManager = DependencyResolver.Instance.GetType<GameStateMachine>();
         }
 
         private void OnEnable()

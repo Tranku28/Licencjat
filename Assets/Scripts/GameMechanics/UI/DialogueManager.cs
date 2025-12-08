@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Core;
 using Core.Scriptable_Objects;
 using Ink.Runtime;
 using Interactions;
@@ -21,6 +22,8 @@ namespace GameMechanics.UI
         [SerializeField] private TicketMinigame ticketMinigame;
         [SerializeField] private Button showTicketButton;
 
+        private Passenger _currentPassenger;
+
         private PassengerData _currentPassengerData;
         
         private int _currentSpeakerIndex;
@@ -35,8 +38,6 @@ namespace GameMechanics.UI
 
         public bool ticketScanned => _ticketScanned;
         public bool ticketRejected => _ticketRejected;
-
-        public static event EventHandler<DialogueEndedEventArgs> OnDialogueEnded;
 
         private void Awake()
         {
@@ -81,14 +82,17 @@ namespace GameMechanics.UI
             _ticketScanned = true;
         }
 
-        private void LoadTicketDataAndStart(PassengerData passengerData)
+        private void LoadTicketDataAndStart(object sender, PassengerInteractedEventArgs passengerArgs)
         {
-            ticketMinigame.UpdateTicketUI(passengerData);
-            npcNameText.text = passengerData.passengerName;
+            _currentPassenger = sender as Passenger;
+            
+            _currentPassengerData = passengerArgs.PassengerData;
+            ticketMinigame.UpdateTicketUI(passengerArgs.PassengerData);
+            npcNameText.text = passengerArgs.PassengerData.passengerName;
             _ticketScanned = false;
             _ticketRejected = false;
             
-            StartStory(passengerData);
+            StartStory(passengerArgs.PassengerData);
         }
         
         private void StartStory(PassengerData data)
@@ -235,27 +239,12 @@ namespace GameMechanics.UI
 
         public void OnDialogueQuit()
         {
-            OnDialogueEnded?.Invoke(
-                this,
-                new DialogueEndedEventArgs(
-                    _ticketScanned,
-                    _ticketRejected,
-                    _currentPassengerData)
-            );
-        }
-    }
-
-    public class DialogueEndedEventArgs : EventArgs
-    {
-        public bool ticketScanned;
-        public bool ticketRejected;
-        public PassengerData passengerData;
-
-        public DialogueEndedEventArgs(bool scanned, bool rejected, PassengerData passenger)
-        {
-            passengerData = passenger;
-            ticketScanned = scanned;
-            ticketRejected = rejected;
+            SaveSystem saveSystem = DependencyResolver.Instance.GetType<SaveSystem>();
+            
+            saveSystem.Save(_currentPassengerData, _ticketScanned);
+            
+            // TODO: handle NPC train quit better way
+            if (_ticketRejected) Destroy(_currentPassenger.gameObject);
         }
     }
 }

@@ -50,7 +50,7 @@ namespace GameMechanics
 
         private void InvokeOption()
         {
-            var gameStateMachine = DependencyResoler.Instance.GetType<GameStateMachine>();
+            var gameStateMachine = DependencyResolver.Instance.GetType<GameStateMachine>();
             
             if (pauseSettingsPanel.activeSelf) return;
             

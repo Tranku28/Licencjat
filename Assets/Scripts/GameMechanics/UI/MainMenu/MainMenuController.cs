@@ -46,7 +46,7 @@ namespace UI.MainMenu
         {
             DisableMenu();
             
-            GameStateMachine gameStateMachine = DependencyResoler.Instance.GetType<GameStateMachine>();
+            GameStateMachine gameStateMachine = DependencyResolver.Instance.GetType<GameStateMachine>();
             
             gameStateMachine.StartGame();
         }

@@ -9,11 +9,21 @@ namespace Interactions
     {
         [SerializeField] private PassengerData passengerData;
         
-        public static Action<PassengerData> OnPassengerInteracted;
+        public static event EventHandler<PassengerInteractedEventArgs> OnPassengerInteracted;
 
         public void Interact()
         {
-            OnPassengerInteracted?.Invoke(passengerData);
+            OnPassengerInteracted?.Invoke(this, new PassengerInteractedEventArgs(passengerData));
+        }
+    }
+    
+    public class PassengerInteractedEventArgs : EventArgs
+    {
+        public PassengerData PassengerData;
+
+        public PassengerInteractedEventArgs(PassengerData passengerData)
+        {
+            PassengerData = passengerData;
         }
     }
 }

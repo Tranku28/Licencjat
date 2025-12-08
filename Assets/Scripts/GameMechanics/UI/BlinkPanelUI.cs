@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
+// TODO: Set blinking for loading a new day
 public class BlinkPanelUI : MonoBehaviour
 {
     [SerializeField] private float effectDuration;
