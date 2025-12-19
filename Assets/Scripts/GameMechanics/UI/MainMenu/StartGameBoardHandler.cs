@@ -64,9 +64,8 @@ namespace GameMechanics.UI.MainMenu
             _collider.enabled = false;
         }
 
-        public void GoBackButtonClicked()
+        private void GoBackButtonClicked()
         {
-            Debug.Log("GoBack");
             _animator.SetBool(ZoomIn, false);
             cameraAnimator.SetBool(ZoomIn, false);
             

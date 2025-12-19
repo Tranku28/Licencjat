@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Core;
+using Core.Save_System;
 using Core.Scriptable_Objects;
 using Ink.Runtime;
 using Interactions;
@@ -15,6 +16,7 @@ namespace GameMechanics.UI
         [SerializeField] TMP_Text displayedText;
         [SerializeField] GameObject choiceContainer;
         [SerializeField] private float timeBetweenChars;
+        [SerializeField] private BlinkPanelUI blinkPanelUI;
         
         [SerializeField] private Image playerNameBackground, npcNameBackground;
         [SerializeField] private TMP_Text playerNameText, npcNameText;
@@ -38,6 +40,8 @@ namespace GameMechanics.UI
 
         public bool ticketScanned => _ticketScanned;
         public bool ticketRejected => _ticketRejected;
+
+        private Awaitable _dialogueAwaitable;
 
         private void Awake()
         {
@@ -112,7 +116,6 @@ namespace GameMechanics.UI
             
             _story.ObserveVariable("ticketRejected", (string varName, object newValue) =>
             {
-                Debug.Log("rejected");
                 _ticketRejected = (bool)newValue;
             });
         }
@@ -139,11 +142,6 @@ namespace GameMechanics.UI
                 }
                 
                 ShowChoices();
-            }
-
-            if (!_story.canContinue && _story.currentChoices.Count == 0)
-            {
-                Debug.Log("The end of story");
             }
         }
 
@@ -239,12 +237,23 @@ namespace GameMechanics.UI
 
         public void OnDialogueQuit()
         {
+            _dialogueAwaitable = AwaitableDialogueQuit();
+        }
+        
+        private async Awaitable AwaitableDialogueQuit()
+        {
             SaveSystem saveSystem = DependencyResolver.Instance.GetType<SaveSystem>();
             
             saveSystem.Save(_currentPassengerData, _ticketScanned);
-            
-            // TODO: handle NPC train quit better way
-            if (_ticketRejected) Destroy(_currentPassenger.gameObject);
+                
+            _currentPassenger.gameObject.GetComponent<Collider>().enabled = false;
+                
+            await blinkPanelUI.ClosePlayerEyes();
+            Destroy(_currentPassenger.gameObject);
+            await Awaitable.WaitForSecondsAsync(1);
+            await blinkPanelUI.OpenPlayerEyes();
+
+            _dialogueAwaitable = null;
         }
     }
 }

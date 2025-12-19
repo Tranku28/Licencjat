@@ -1,0 +1,4 @@
+- Save System fields:
+  - current day
+  - tickets rejected
+  - passenger souvenir prefab

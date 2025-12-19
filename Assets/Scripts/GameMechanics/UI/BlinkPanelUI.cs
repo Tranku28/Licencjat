@@ -1,52 +1,77 @@
+
 using System;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-// TODO: Set blinking for loading a new day
 public class BlinkPanelUI : MonoBehaviour
 {
-    [SerializeField] private float effectDuration;
+    [SerializeField] private float effectDuration = 0.4f;
     [SerializeField] private Image panelImage;
-    private Awaitable _fadeInOut;
+    [SerializeField] private GameObject newspaperPanel;
+    
+    private Awaitable _current;
 
-    public void ClosePlayerEyes()
+    public bool showNewspaper { get; set; }
+
+    public event Action OnNextDayButtonClicked;
+    
+    private void OnDestroy()
     {
-        _fadeInOut = FadeIn();
+        _current = null;
     }
 
-    public void OpenPlayerEyes()
+    public void OnNextDayButtonClick()
     {
-        _fadeInOut = FadeOut();
+        newspaperPanel.SetActive(false);
+        showNewspaper = false;
+        OnNextDayButtonClicked?.Invoke();
+    }
+    
+    public Awaitable ClosePlayerEyes()
+    {
+        _current = FadeIn();
+        
+        return _current;
+    }
+    
+    public Awaitable OpenPlayerEyes()
+    {
+        _current = FadeOut();
+        return _current;
     }
 
     private async Awaitable FadeIn()
     {
-        float currentAlpha = 0;
-        float hop = effectDuration / 10;
-        while (currentAlpha <= 1)
+        float currentAlpha = 0f;
+        float hop = Mathf.Max(0.01f, effectDuration / 10f);
+
+        while (currentAlpha < 1f)
         {
             await Awaitable.WaitForSecondsAsync(hop);
-            currentAlpha += hop/effectDuration;
-            panelImage.color = new Color(0, 0, 0, currentAlpha);
+            currentAlpha += hop / effectDuration;
+            panelImage.color = new Color(0f, 0f, 0f, Mathf.Clamp01(currentAlpha));
         }
-
-        _fadeInOut = null;
+        
+        if (showNewspaper)
+            newspaperPanel.SetActive(true);
+        
+        panelImage.color = new Color(0f, 0f, 0f, 1f);
+        _current = null;
     }
 
     private async Awaitable FadeOut()
     {
-        float currentAlpha = 1;
-        float hop = effectDuration / 10;
-        while (currentAlpha >= 0)
+        float currentAlpha = 1f;
+        float hop = Mathf.Max(0.01f, effectDuration / 10f);
+
+        while (currentAlpha > 0f)
         {
             await Awaitable.WaitForSecondsAsync(hop);
-            currentAlpha -= hop/effectDuration;
-            panelImage.color = new Color(0, 0, 0, currentAlpha);
+            currentAlpha -= hop / effectDuration;
+            panelImage.color = new Color(0f, 0f, 0f, Mathf.Clamp01(currentAlpha));
         }
-        
-        _fadeInOut = null;
-    }
 
-    private void OnDestroy() => _fadeInOut = null;
+        panelImage.color = new Color(0f, 0f, 0f, 0f);
+        _current = null;
+    }
 }

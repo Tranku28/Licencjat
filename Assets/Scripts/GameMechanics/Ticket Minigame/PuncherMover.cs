@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 public class PuncherMover : MonoBehaviour
 {
-    [SerializeField] private Camera camera;
+    [SerializeField] private new Camera camera;
     [SerializeField] private RectTransform uiTransform;
     [SerializeField] private TicketMinigame ticketMinigame;
     
