@@ -1,4 +1,5 @@
 using System;
+using Core.Scriptable_Objects.Souvenirs;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -21,7 +22,7 @@ namespace Core.Scriptable_Objects
         public ValidUntil validUntil;
 
         [Header("Consequences")]
-        public GameObject souvenirPrefab;
+        public SouvenirData souvenirData;
         [TextArea(minLines: 5, maxLines: 10)]
         public string newspaperText, souvenirNote, diaryContent;
         public string souvenirName;

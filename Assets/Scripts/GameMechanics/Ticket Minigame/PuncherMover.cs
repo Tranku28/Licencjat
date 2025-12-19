@@ -30,7 +30,6 @@ public class PuncherMover : MonoBehaviour
     {
         if (e.Orientation == _orientation)
         {
-            Debug.Log(_orientation);
             return;
         }
         

@@ -1,94 +1,69 @@
 using System.Collections.Generic;
 using System.IO;
 using Core.Scriptable_Objects;
+using Core.Scriptable_Objects.Souvenirs;
 using UnityEngine;
 
 namespace Core.Save_System
 {
-    // TODO: Rework it to file save to JSON system later
     [InitializeSystem("Save System")]
     public class SaveSystem : BaseSystem
     {
         private static string _savePath, _filePath;
 
-        private List<SaveData> _cachedDataList = new();
+        public List<int> souvenirIDs;
+        public int ticketsAccepted, ticketsRejected;
+        public List<string> diaryEntries;
 
         protected override void Awake()
         {
             base.Awake();
             
             _savePath = Path.Combine(Application.persistentDataPath, "EnchantedExpressSaves");
-            
-            _cachedDataList = new List<SaveData>();
-            SaveToJson();
-            Debug.Log(GetSaveData());
         }
         
-        public void Save(PassengerData passengerData, bool ticketScanned)
+        public void SaveToJson()
         {
-            SaveData saveData = new SaveData(passengerData, ticketScanned);
-            _cachedDataList.Add(saveData);
-        }
-
-        public SaveData[] GetCachedSaveDataList()
-        {
-            return _cachedDataList.ToArray();
-        }
-        
-        private void SaveToJson()
-        {
-            GameSaveData saveData = new GameSaveData(1, 0, 1, new List<int>{1,4,6,12,3,329});
+            GameSaveData saveData = new GameSaveData(1, ticketsAccepted, ticketsRejected, souvenirIDs.ToArray(), diaryEntries.ToArray());
 
             string jsonText = JsonUtility.ToJson(saveData, prettyPrint: true);
             _savePath = Path.Combine(Application.persistentDataPath, "EnchantedExpressSaves");
             Directory.CreateDirectory(_savePath);
             _filePath = Path.Combine(_savePath, "save.json");
             
+            Debug.Log("Saved");
             File.WriteAllText(_filePath, jsonText);
         }
 
-        private GameSaveData? GetSaveData()
+        public GameSaveData GetSaveData()
         {
             if (!File.Exists(_filePath))
             {
                 Debug.LogError("Save file not found!");
-                return null;
             }
             
             string jsonText = File.ReadAllText(_filePath);
             GameSaveData data = JsonUtility.FromJson<GameSaveData>(jsonText);
 
-            Debug.Log(data);
-
             return data;
-        }
-    }
-    
-    public struct SaveData
-    {
-        public PassengerData passengerData;
-        public bool ticketScanned;
-            
-        public SaveData(PassengerData passengerData, bool ticketScanned)
-        {
-            this.passengerData = passengerData;
-            this.ticketScanned = ticketScanned;
         }
     }
 
     public struct GameSaveData
     {
-        public int currentDay;
-        public int ticketsAccepted;
-        public int ticketsDeclined;
-        public List<int> collectedSouvenirIdList;
+        public int CurrentDay;
+        public int TicketsAccepted;
+        public int TicketsRejected;
+        public int[] CollectedSouvenirIdList;
+        public string[] DiaryEntries;
 
-        public GameSaveData(int currentDay,  int ticketsAccepted, int ticketsDeclined, List<int> collectedSouvenirIdList)
+        public GameSaveData(int currentDay,  int ticketsAccepted, int ticketsRejected, int[] collectedSouvenirIdList, string[] diaryEntries)
         {
-            this.currentDay = currentDay;
-            this.ticketsAccepted  = ticketsAccepted;
-            this.ticketsDeclined = ticketsDeclined;
-            this.collectedSouvenirIdList = collectedSouvenirIdList;
+            CurrentDay = currentDay;
+            TicketsAccepted  = ticketsAccepted;
+            TicketsRejected = ticketsRejected;
+            CollectedSouvenirIdList = collectedSouvenirIdList;
+            DiaryEntries = diaryEntries;
         }
     }
 }

@@ -13,7 +13,6 @@ namespace GameMechanics.UI.MainMenu
     
         public void OnPointerClick(PointerEventData eventData)
         {
-            Debug.Log("Watch clicked");
             WatchClicked?.Invoke();
         }
 

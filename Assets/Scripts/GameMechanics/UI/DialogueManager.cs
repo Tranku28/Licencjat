@@ -36,7 +36,7 @@ namespace GameMechanics.UI
 
         private bool _clickedBeforeChoices = false;
 
-        private bool _ticketScanned, _ticketRejected = false;
+        private bool _ticketScanned, _ticketRejected;
 
         public bool ticketScanned => _ticketScanned;
         public bool ticketRejected => _ticketRejected;
@@ -244,7 +244,14 @@ namespace GameMechanics.UI
         {
             SaveSystem saveSystem = DependencyResolver.Instance.GetType<SaveSystem>();
             
-            saveSystem.Save(_currentPassengerData, _ticketScanned);
+            //TODO: Fix saving system
+            if (!_ticketRejected)
+            {
+                saveSystem.ticketsAccepted++;
+                saveSystem.souvenirIDs.Add(_currentPassengerData.souvenirData.souvenirID);
+                saveSystem.diaryEntries.Add(_currentPassengerData.diaryContent);
+                saveSystem.SaveToJson();
+            }
                 
             _currentPassenger.gameObject.GetComponent<Collider>().enabled = false;
                 

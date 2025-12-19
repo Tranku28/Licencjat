@@ -10,7 +10,7 @@ namespace GameMechanics.DayHandling
     {
         [SerializeField] private BlinkPanelUI blinkPanelUI;
         
-        public static Action<GameObject> OnCabinetSpawned;
+        public static Action<int> OnCabinetSpawned;
         public static Action<string> OnDiaryAddContent;
         public static Action<string> OnNewspaperLoadNews;
 
@@ -26,37 +26,30 @@ namespace GameMechanics.DayHandling
 
         private void LoadDay()
         {
-            SaveData[] saveDataArray = DependencyResolver.Instance.
+            GameSaveData saveData = DependencyResolver.Instance.
                     GetType<SaveSystem>().
-                    GetCachedSaveDataList()
-                ;
+                    GetSaveData();
 
-            Debug.Log(saveDataArray.Length);
-            
-            foreach (SaveData saveData in saveDataArray)
+
+            foreach (int ID in saveData.CollectedSouvenirIdList)
             {
-                Debug.Log(saveData.ticketScanned);
-                if (saveData.ticketScanned) 
-                    SpawnSouvenirs(saveData);
-                
-                DiaryAddContent(saveData);
-                NewspaperLoadNews(saveData);
+                SpawnSouvenirs(ID);
+            }
+
+            foreach (string entry in saveData.DiaryEntries)
+            {
+                DiaryAddContent(entry);
             }
         }
         
-        private void SpawnSouvenirs(SaveData saveData)
+        private void SpawnSouvenirs(int souvenirId)
         {
-            OnCabinetSpawned?.Invoke(saveData.passengerData.souvenirPrefab);
+            OnCabinetSpawned?.Invoke(souvenirId);
         }
         
-        private void DiaryAddContent(SaveData saveData)
+        private void DiaryAddContent(string entry)
         {
-            OnDiaryAddContent?.Invoke(saveData.passengerData.diaryContent);
-        }
-        
-        private void NewspaperLoadNews(SaveData saveData)
-        {
-            OnNewspaperLoadNews?.Invoke(saveData.passengerData.newspaperText);
+            OnDiaryAddContent?.Invoke(entry);
         }
 
         public void Interact()

@@ -71,6 +71,6 @@ public class SouvenirViewController : UIElement
         souvenirName.text = obj.souvenirName;
         souvenirDescription.text = obj.souvenirNote;
         receivedFrom.text = $"Received from: {obj.passengerName} {obj.passengerSurname}";
-        Instantiate(obj.souvenirPrefab, souvenirContainer);
+        Instantiate(obj.souvenirData.souvenirPrefab, souvenirContainer);
     }
 }

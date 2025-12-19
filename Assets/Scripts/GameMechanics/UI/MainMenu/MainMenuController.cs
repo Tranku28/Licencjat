@@ -54,7 +54,6 @@ namespace UI.MainMenu
 
         private void GoToSettings()
         {
-            Debug.Log("Settings opened");
             settingsPanel.SetActive(true);
         }
 

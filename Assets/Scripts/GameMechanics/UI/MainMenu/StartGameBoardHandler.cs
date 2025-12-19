@@ -48,12 +48,12 @@ namespace GameMechanics.UI.MainMenu
 
         public void OnPointerEnter(PointerEventData eventData)
         {
-            Debug.Log("Board Enter");
+            
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
-            Debug.Log("Board Exit");
+            
         }
 
         public void ZoomInFinished()

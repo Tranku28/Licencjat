@@ -43,7 +43,6 @@ namespace GameMechanics.UI
 
         private void AddDiaryContent(string content)
         {
-            Debug.Log(content);
             _diaryContents.Add(content);
             leftPageText.text = _diaryContents[0];
         }

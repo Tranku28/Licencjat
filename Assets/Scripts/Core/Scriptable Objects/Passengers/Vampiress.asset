@@ -25,7 +25,7 @@ MonoBehaviour:
     Year: 1930
     Hour: 11
     Minute: 30
-  souvenirPrefab: {fileID: 3923819191764239479, guid: 77b5e666ce472604aaa02b658cc2926b, type: 3}
+  souvenirData: {fileID: 11400000, guid: 9445aa4f19727c1499a6df95d5250517, type: 2}
   newspaperText: Some News
   souvenirNote: "\u201CYou once said the night would never end.\r\nBut you were wrong
     - \r\nIt ends the moment someone dares to light a candle.\r\n\r\nYou were my
