@@ -33,7 +33,7 @@ public class SouvenirViewController : UIElement
     {
         if (rotationDir == 0) return;
 
-        souvenirContainer.rotation *= Quaternion.Euler(0, 0, rotationDir * souvenirContainerRotationSpeed);
+        souvenirContainer.rotation *= Quaternion.Euler(0, rotationDir * souvenirContainerRotationSpeed, 0);
     }
 
     private void OnDestroy()

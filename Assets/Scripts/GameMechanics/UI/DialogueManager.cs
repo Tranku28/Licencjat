@@ -7,11 +7,12 @@ using Ink.Runtime;
 using Interactions;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace GameMechanics.UI
 {
-    public class DialogueManager : UIElement
+    public class DialogueManager : UIElement, IPointerClickHandler
     {
         [SerializeField] TMP_Text displayedText;
         [SerializeField] GameObject choiceContainer;
@@ -58,7 +59,6 @@ namespace GameMechanics.UI
         private void OnEnable()
         {
             Passenger.OnPassengerInteracted += LoadTicketDataAndStart;
-            PlayerControls.OnSingleClickEvent += StoryHop;
             
             showTicketButton.onClick.AddListener(ToggleTicketDisplay);
         }
@@ -66,7 +66,6 @@ namespace GameMechanics.UI
         private void OnDisable()
         {
             Passenger.OnPassengerInteracted -= LoadTicketDataAndStart;
-            PlayerControls.OnSingleClickEvent -= StoryHop;
             
             showTicketButton.onClick.RemoveAllListeners();
         }
@@ -116,6 +115,7 @@ namespace GameMechanics.UI
             
             _story.ObserveVariable("ticketRejected", (string varName, object newValue) =>
             {
+                Debug.Log(_ticketRejected);
                 _ticketRejected = (bool)newValue;
             });
         }
@@ -244,23 +244,32 @@ namespace GameMechanics.UI
         {
             SaveSystem saveSystem = DependencyResolver.Instance.GetType<SaveSystem>();
             
-            //TODO: Fix saving system
             if (!_ticketRejected)
             {
                 saveSystem.ticketsAccepted++;
                 saveSystem.souvenirIDs.Add(_currentPassengerData.souvenirData.souvenirID);
                 saveSystem.diaryEntries.Add(_currentPassengerData.diaryContent);
                 saveSystem.SaveToJson();
+                return;
             }
                 
             _currentPassenger.gameObject.GetComponent<Collider>().enabled = false;
-                
+            
+            saveSystem.ticketsRejected++;
+            saveSystem.SaveToJson();
+
             await blinkPanelUI.ClosePlayerEyes();
             Destroy(_currentPassenger.gameObject);
             await Awaitable.WaitForSecondsAsync(1);
             await blinkPanelUI.OpenPlayerEyes();
 
             _dialogueAwaitable = null;
+        }
+
+        public void OnPointerClick(PointerEventData eventData)
+        {
+            if (eventData.pointerCurrentRaycast.gameObject.GetComponent<TMP_Text>() == displayedText)
+                StoryHop();
         }
     }
 }

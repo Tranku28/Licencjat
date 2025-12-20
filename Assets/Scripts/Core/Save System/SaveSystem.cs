@@ -1,7 +1,5 @@
 using System.Collections.Generic;
 using System.IO;
-using Core.Scriptable_Objects;
-using Core.Scriptable_Objects.Souvenirs;
 using UnityEngine;
 
 namespace Core.Save_System
@@ -9,11 +7,13 @@ namespace Core.Save_System
     [InitializeSystem("Save System")]
     public class SaveSystem : BaseSystem
     {
+        //TODO: make multiple saving possible
         private static string _savePath, _filePath;
-
-        public List<int> souvenirIDs;
+        public List<int> souvenirIDs = new();
         public int ticketsAccepted, ticketsRejected;
-        public List<string> diaryEntries;
+        public List<string> diaryEntries = new();
+        private List<GameSaveData> _saves = new();
+        private int _currentLoadedSaveIndex;
 
         protected override void Awake()
         {
@@ -24,7 +24,7 @@ namespace Core.Save_System
         
         public void SaveToJson()
         {
-            GameSaveData saveData = new GameSaveData(1, ticketsAccepted, ticketsRejected, souvenirIDs.ToArray(), diaryEntries.ToArray());
+            GameSaveData saveData = new(1, ticketsAccepted, ticketsRejected, souvenirIDs.ToArray(), diaryEntries.ToArray());
 
             string jsonText = JsonUtility.ToJson(saveData, prettyPrint: true);
             _savePath = Path.Combine(Application.persistentDataPath, "EnchantedExpressSaves");

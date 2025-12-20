@@ -1,5 +1,6 @@
 
 using System;
+using Core;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -29,6 +30,9 @@ public class BlinkPanelUI : MonoBehaviour
     
     public Awaitable ClosePlayerEyes()
     {
+        GameStateMachine gameStateMachine = DependencyResolver.Instance.GetType<GameStateMachine>();
+        gameStateMachine.ChangeGameState(GameState.Paused);
+
         _current = FadeIn();
         
         return _current;
@@ -36,6 +40,9 @@ public class BlinkPanelUI : MonoBehaviour
     
     public Awaitable OpenPlayerEyes()
     {
+        GameStateMachine gameStateMachine = DependencyResolver.Instance.GetType<GameStateMachine>();
+        gameStateMachine.ChangeGameState(GameState.Gameplay);
+
         _current = FadeOut();
         return _current;
     }
