@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
+using Core;
 
 namespace GameMechanics.UI.MainMenu
 {
@@ -14,16 +14,19 @@ namespace GameMechanics.UI.MainMenu
         public void OnPointerClick(PointerEventData eventData)
         {
             WatchClicked?.Invoke();
+            AudioManager.Instance.PlayOneShot(FMODEvents.Instance.watchOpen, transform.position);
         }
 
         public void OnPointerEnter(PointerEventData eventData)
         {
             watchAnimator.SetBool(Selected, true);
+            AudioManager.Instance.PlayOneShot(FMODEvents.Instance.watchHover, transform.position);
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
             watchAnimator.SetBool(Selected, false);
+            AudioManager.Instance.PlayOneShot(FMODEvents.Instance.watchHover, transform.position);
         }
     }
 }

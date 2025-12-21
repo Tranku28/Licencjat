@@ -1,4 +1,5 @@
 using System;
+using Core;
 using Player;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -10,6 +11,7 @@ namespace GameMechanics.UI.MainMenu
     {
         private static readonly int ZoomIn = Animator.StringToHash("ZoomIn");
         private static readonly int GameStarted = Animator.StringToHash("GameStarted");
+        private static readonly int Hover = Animator.StringToHash("Hover");
         [SerializeField] private Button startJourneyButton, goBackButton;
         [SerializeField] private Animator cameraAnimator;
         [SerializeField] private InteractionHandler cameraAnimatorHandler;
@@ -17,6 +19,7 @@ namespace GameMechanics.UI.MainMenu
         public event Action OnGameplayEntered;
         private Animator _animator;
         private Collider _collider;
+        private bool _entered;
 
         private void Awake()
         {
@@ -44,16 +47,22 @@ namespace GameMechanics.UI.MainMenu
         {
             _animator.SetBool(ZoomIn, true);
             cameraAnimator.SetBool(ZoomIn, true);
+            AudioManager.Instance.PlayOneShot(FMODEvents.Instance.saveBoardOpen, transform.position);
+            _entered = true;
         }
 
         public void OnPointerEnter(PointerEventData eventData)
         {
-            
+            if (_entered) return;
+            _animator.SetBool(Hover, true);
+            AudioManager.Instance.PlayOneShot(FMODEvents.Instance.saveBoardHover, transform.position);
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
-            
+            if (_entered) return;
+            _animator.SetBool(Hover, false);
+            AudioManager.Instance.PlayOneShot(FMODEvents.Instance.saveBoardHover, transform.position);
         }
 
         public void ZoomInFinished()
@@ -73,6 +82,7 @@ namespace GameMechanics.UI.MainMenu
             goBackButton.interactable = false;
             
             _collider.enabled = true;
+            _entered = false;
         }
 
         private void OnStartButtonClicked()

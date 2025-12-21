@@ -81,6 +81,7 @@ namespace GameMechanics
 
         private void Update()
         {
+            // TODO: make sure to disable Update of pause menu when it is not Used
             var mousePos = Mouse.current.position.ReadValue();
 
             var localPoint = GetCursorPosition(mousePos);
