@@ -8,11 +8,19 @@ namespace Interactions
     public class Passenger : MonoBehaviour, IInteractable
     {
         [SerializeField] private PassengerData passengerData;
+        [SerializeField] private TutorialData passengerTutorial;
+        private bool _tutorialShown;
         
         public static event EventHandler<PassengerInteractedEventArgs> OnPassengerInteracted;
 
         public void Interact()
         {
+            // TODO: Tutorial single popup handling
+            if (!_tutorialShown)
+            {
+                TutorialInfoLoader.Instance.LoadTutorialPanel(passengerTutorial);
+                _tutorialShown = true;
+            }
             OnPassengerInteracted?.Invoke(this, new PassengerInteractedEventArgs(passengerData));
         }
     }

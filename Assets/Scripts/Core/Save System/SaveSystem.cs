@@ -39,7 +39,7 @@ namespace Core.Save_System
         {
             if (!File.Exists(_filePath))
             {
-                Debug.LogError("Save file not found!");
+                Debug.Log("No save data");
             }
             
             string jsonText = File.ReadAllText(_filePath);

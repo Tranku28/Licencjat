@@ -9,10 +9,12 @@ namespace GameMechanics.DayHandling
     public class DayHandler : MonoBehaviour, IInteractable
     {
         [SerializeField] private BlinkPanelUI blinkPanelUI;
+        [SerializeField] private TutorialData cannotProceedData;
         
         public static Action<int> OnCabinetSpawned;
         public static Action<string> OnDiaryAddContent;
         public static Action<string> OnNewspaperLoadNews;
+        private bool _tutorialShown;
 
         private void Start()
         {
@@ -27,8 +29,7 @@ namespace GameMechanics.DayHandling
         private void LoadDay()
         {
             GameSaveData saveData = DependencyResolver.Instance.
-                    GetType<SaveSystem>().
-                    GetSaveData();
+                    GetType<SaveSystem>().GetSaveData();
 
 
             foreach (int ID in saveData.CollectedSouvenirIdList)
@@ -54,6 +55,20 @@ namespace GameMechanics.DayHandling
 
         public void Interact()
         {
+            SaveSystem saveSystem = DependencyResolver.Instance.
+                    GetType<SaveSystem>();
+
+            if (saveSystem.ticketsAccepted == 0 && saveSystem.ticketsRejected == 0)
+            {
+                // TODO: Tutorial single popup handling
+                if (!_tutorialShown)
+                {
+                    TutorialInfoLoader.Instance.LoadTutorialPanel(cannotProceedData);
+                    _tutorialShown = true;
+                }
+                return;
+            }
+
             blinkPanelUI.showNewspaper = true;
             blinkPanelUI.ClosePlayerEyes();
             LoadDay();

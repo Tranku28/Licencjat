@@ -314,6 +314,7 @@ Transform:
   m_Children:
   - {fileID: 2102788062}
   - {fileID: 1603840981}
+  - {fileID: 404289261}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &64828381
@@ -1412,6 +1413,11 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!224 &404289261 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 3362617667604218658, guid: 94ed663a8f157aa4baa718043f3f4bcb, type: 3}
+  m_PrefabInstance: {fileID: 4357297252065192325}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &415597140
 GameObject:
   m_ObjectHideFlags: 0
@@ -2612,6 +2618,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UIVisual: {fileID: 0}
+  offset: 0
   goBackButton: {fileID: 1241189574}
   musicArrow: {fileID: 562377999}
   sfxArrow: {fileID: 703814314}
@@ -4023,6 +4030,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a03b49f19900834193ed3518673a9e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  diaryTutorial: {fileID: 11400000, guid: 1db07292c8742a34caccb84bdf8c0a7e, type: 2}
 --- !u!65 &1240795246
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5981,6 +5989,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blinkPanelUI: {fileID: 922340800}
+  cannotProceedData: {fileID: 11400000, guid: 820cf4eeae9342a44b660c353198b465, type: 2}
 --- !u!65 &1529623461
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6237,6 +6246,7 @@ MonoBehaviour:
   goBackButton: {fileID: 1250005347}
   cameraAnimator: {fileID: 1031401552}
   cameraAnimatorHandler: {fileID: 1031401549}
+  playerPurpose: {fileID: 11400000, guid: 3a7732d5fe8fa6247b024a4f89c87a6c, type: 2}
 --- !u!65 &1603191773
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8192,6 +8202,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4561848948388673170, guid: 1d1933194e0ea6a4b9fdba81506d17f4, type: 3}
+      propertyPath: passengerTutorial
+      value: 
+      objectReference: {fileID: 11400000, guid: 9484f287e37045a44bb286e3b196cbca, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8203,7 +8217,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 47171736}
     m_Modifications:
     - target: {fileID: 2000659542100353437, guid: 94ed663a8f157aa4baa718043f3f4bcb, type: 3}
       propertyPath: candleQuit
@@ -8407,7 +8421,6 @@ SceneRoots:
   - {fileID: 47171736}
   - {fileID: 6295551306016286350}
   - {fileID: 1447129497}
-  - {fileID: 4357297252065192325}
   - {fileID: 676751166}
   - {fileID: 15798984}
   - {fileID: 1615815050}
