@@ -46,7 +46,7 @@ namespace UI.MainMenu
         {
             DisableMenu();
             
-            GameStateMachine gameStateMachine = DependencyResoler.Instance.GetType<GameStateMachine>();
+            GameStateMachine gameStateMachine = DependencyResolver.Instance.GetType<GameStateMachine>();
             
             gameStateMachine.StartGame();
         }
@@ -54,7 +54,6 @@ namespace UI.MainMenu
 
         private void GoToSettings()
         {
-            Debug.Log("Settings opened");
             settingsPanel.SetActive(true);
         }
 

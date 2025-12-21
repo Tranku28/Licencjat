@@ -1,24 +1,15 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using Core;
 
 namespace GameMechanics.UI.MainMenu
 {
-    public class QuitGameCandleHandler : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
+    public class QuitGameCandleHandler : MonoBehaviour, IPointerClickHandler
     {
         public void OnPointerClick(PointerEventData eventData)
         {
-            Debug.Log("Candle click");
+            AudioManager.Instance.PlayOneShot(FMODEvents.Instance.candleBlow, transform.position);
             Application.Quit();
-        }
-
-        public void OnPointerEnter(PointerEventData eventData)
-        {
-            Debug.Log("Candle enter");
-        }
-
-        public void OnPointerExit(PointerEventData eventData)
-        {
-            Debug.Log("Candle exit");
         }
     }
 }

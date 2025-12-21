@@ -17,6 +17,7 @@ namespace GameMechanics
         [SerializeField] private PauseMenuController pauseMenu;
         [SerializeField] private DialogueManager dialogueManager;
         [SerializeField] private DiaryController diaryTab;
+        [SerializeField] private SouvenirViewController souvenirTab;
         
         private UIElement _currentElement;
         private InputAction _currentAction;
@@ -25,7 +26,7 @@ namespace GameMechanics
 
         private void Start()
         {
-            _gameStateMachine = DependencyResoler.Instance.GetType<GameStateMachine>();
+            _gameStateMachine = DependencyResolver.Instance.GetType<GameStateMachine>();
         }
 
         private void OnEnable()
@@ -36,6 +37,8 @@ namespace GameMechanics
             
             Passenger.OnPassengerInteracted += OnPassengerInteracted;
             Diary.OnDiaryInteracted += OnDiaryInteracted;
+
+            Souvenir.OnSouvenirInteracted += OnSouvenirInteracted;
         }
 
         private void OnDisable()
@@ -46,9 +49,29 @@ namespace GameMechanics
 
             Passenger.OnPassengerInteracted -= OnPassengerInteracted;
             Diary.OnDiaryInteracted -= OnDiaryInteracted;
+
+            Souvenir.OnSouvenirInteracted -= OnSouvenirInteracted;
+        }
+        
+        private void OnSouvenirInteracted(PassengerData obj)
+        {
+            if (_gameStateMachine.GetGameState() == GameState.Paused) return;
+            
+            if (_gameStateMachine.GetGameState() == GameState.UIOpened)
+            {
+                souvenirTab.SetVisualVisibility(false);
+                _currentElement = null;
+                _gameStateMachine.ChangeGameState(GameState.Gameplay);
+                
+                return;
+            }
+            
+            souvenirTab.SetVisualVisibility(true);
+            _currentElement = souvenirTab;
+            _gameStateMachine.ChangeGameState(GameState.UIOpened);
         }
 
-        private void OnPassengerInteracted(PassengerData obj)
+        private void OnPassengerInteracted(object sender, PassengerInteractedEventArgs obj)
         {
             if (_gameStateMachine.GetGameState() == GameState.Paused) return;
             
@@ -106,6 +129,7 @@ namespace GameMechanics
                 {
                     dialogueManager.SetVisualVisibility(false);
                     dialogueManager.HideTicketDisplay();
+                    dialogueManager.OnDialogueQuit();
                 }
                 else
                     return;

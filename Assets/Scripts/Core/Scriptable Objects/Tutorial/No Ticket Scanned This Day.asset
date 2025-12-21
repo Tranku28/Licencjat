@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d9d4c9857f691d41aaf578e2cd293f6, type: 3}
+  m_Name: No Ticket Scanned This Day
+  m_EditorClassIdentifier: 
+  ID: 1
+  text: To proceed to the next day you have to talk to at least one passenger. Proceed
+    only if you do so.

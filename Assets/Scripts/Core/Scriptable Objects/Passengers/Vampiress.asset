@@ -25,3 +25,11 @@ MonoBehaviour:
     Year: 1930
     Hour: 11
     Minute: 30
+  souvenirData: {fileID: 11400000, guid: 9445aa4f19727c1499a6df95d5250517, type: 2}
+  newspaperText: Some News
+  souvenirNote: "\u201CYou once said the night would never end.\r\nBut you were wrong
+    - \r\nIt ends the moment someone dares to light a candle.\r\n\r\nYou were my
+    light.\u201D\r\n\r\n[There is an inscription on the back]\r\n\r\n\u201CLove ~\r\nEven
+    when the world forbiddeth it.\r\nFor love alone is the law worth breaking.\u201D\r"
+  diaryContent: Entry about Charlotte
+  souvenirName: The Old Necklace

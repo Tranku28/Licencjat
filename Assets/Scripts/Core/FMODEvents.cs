@@ -15,6 +15,20 @@ public class FMODEvents : MonoBehaviour
     
     [field: Header("Diary Close Sound")] 
     [field: SerializeField] public EventReference diaryCloseSound { get; set; }
+    [field: Header("Save Board Hover")] 
+    [field: SerializeField] public EventReference saveBoardHover { get; set; }
+    [field: Header("Save Board Open")] 
+    [field: SerializeField] public EventReference saveBoardOpen { get; set; }
+    [field: Header("Watch Hover")] 
+    [field: SerializeField] public EventReference watchHover { get; set; }
+    [field: Header("Watch Open")] 
+    [field: SerializeField] public EventReference watchOpen { get; set; }
+    [field: Header("Credits Hover")] 
+    [field: SerializeField] public EventReference creditsHover { get; set; }
+    [field: Header("Credits Open")] 
+    [field: SerializeField] public EventReference creditsOpen { get; set; }
+    [field: Header("Candle Blow")] 
+    [field: SerializeField] public EventReference candleBlow { get; set; }
 
     public static FMODEvents Instance;
 

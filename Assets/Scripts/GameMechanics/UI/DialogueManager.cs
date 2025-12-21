@@ -1,25 +1,31 @@
 using System;
 using System.Collections.Generic;
+using Core;
+using Core.Save_System;
 using Core.Scriptable_Objects;
 using Ink.Runtime;
 using Interactions;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace GameMechanics.UI
 {
-    public class DialogueManager : UIElement
+    public class DialogueManager : UIElement, IPointerClickHandler
     {
         [SerializeField] TMP_Text displayedText;
         [SerializeField] GameObject choiceContainer;
         [SerializeField] private float timeBetweenChars;
+        [SerializeField] private BlinkPanelUI blinkPanelUI;
         
         [SerializeField] private Image playerNameBackground, npcNameBackground;
         [SerializeField] private TMP_Text playerNameText, npcNameText;
 
         [SerializeField] private TicketMinigame ticketMinigame;
         [SerializeField] private Button showTicketButton;
+
+        private Passenger _currentPassenger;
 
         private PassengerData _currentPassengerData;
         
@@ -31,10 +37,12 @@ namespace GameMechanics.UI
 
         private bool _clickedBeforeChoices = false;
 
-        private bool _ticketScanned, _ticketRejected = false;
+        private bool _ticketScanned, _ticketRejected;
 
         public bool ticketScanned => _ticketScanned;
         public bool ticketRejected => _ticketRejected;
+
+        private Awaitable _dialogueAwaitable;
 
         private void Awake()
         {
@@ -51,7 +59,6 @@ namespace GameMechanics.UI
         private void OnEnable()
         {
             Passenger.OnPassengerInteracted += LoadTicketDataAndStart;
-            PlayerControls.OnSingleClickEvent += StoryHop;
             
             showTicketButton.onClick.AddListener(ToggleTicketDisplay);
         }
@@ -59,7 +66,6 @@ namespace GameMechanics.UI
         private void OnDisable()
         {
             Passenger.OnPassengerInteracted -= LoadTicketDataAndStart;
-            PlayerControls.OnSingleClickEvent -= StoryHop;
             
             showTicketButton.onClick.RemoveAllListeners();
         }
@@ -79,14 +85,17 @@ namespace GameMechanics.UI
             _ticketScanned = true;
         }
 
-        private void LoadTicketDataAndStart(PassengerData passengerData)
+        private void LoadTicketDataAndStart(object sender, PassengerInteractedEventArgs passengerArgs)
         {
-            ticketMinigame.UpdateTicketUI(passengerData);
-            npcNameText.text = passengerData.passengerName;
+            _currentPassenger = sender as Passenger;
+            
+            _currentPassengerData = passengerArgs.PassengerData;
+            ticketMinigame.UpdateTicketUI(passengerArgs.PassengerData);
+            npcNameText.text = passengerArgs.PassengerData.passengerName;
             _ticketScanned = false;
             _ticketRejected = false;
             
-            StartStory(passengerData);
+            StartStory(passengerArgs.PassengerData);
         }
         
         private void StartStory(PassengerData data)
@@ -106,7 +115,7 @@ namespace GameMechanics.UI
             
             _story.ObserveVariable("ticketRejected", (string varName, object newValue) =>
             {
-                Debug.Log("rejected");
+                Debug.Log(_ticketRejected);
                 _ticketRejected = (bool)newValue;
             });
         }
@@ -133,11 +142,6 @@ namespace GameMechanics.UI
                 }
                 
                 ShowChoices();
-            }
-
-            if (!_story.canContinue && _story.currentChoices.Count == 0)
-            {
-                Debug.Log("The end of story");
             }
         }
 
@@ -230,5 +234,42 @@ namespace GameMechanics.UI
         private void ToggleTicketDisplay() => ticketMinigame.ShowUI();
 
         public void HideTicketDisplay() => ticketMinigame.HideUI();
+
+        public void OnDialogueQuit()
+        {
+            _dialogueAwaitable = AwaitableDialogueQuit();
+        }
+        
+        private async Awaitable AwaitableDialogueQuit()
+        {
+            SaveSystem saveSystem = DependencyResolver.Instance.GetType<SaveSystem>();
+            
+            if (!_ticketRejected)
+            {
+                saveSystem.ticketsAccepted++;
+                saveSystem.souvenirIDs.Add(_currentPassengerData.souvenirData.souvenirID);
+                saveSystem.diaryEntries.Add(_currentPassengerData.diaryContent);
+                saveSystem.SaveToJson();
+                return;
+            }
+                
+            _currentPassenger.gameObject.GetComponent<Collider>().enabled = false;
+            
+            saveSystem.ticketsRejected++;
+            saveSystem.SaveToJson();
+
+            await blinkPanelUI.ClosePlayerEyes();
+            Destroy(_currentPassenger.gameObject);
+            await Awaitable.WaitForSecondsAsync(1);
+            await blinkPanelUI.OpenPlayerEyes();
+
+            _dialogueAwaitable = null;
+        }
+
+        public void OnPointerClick(PointerEventData eventData)
+        {
+            if (eventData.pointerCurrentRaycast.gameObject.GetComponent<TMP_Text>() == displayedText)
+                StoryHop();
+        }
     }
 }

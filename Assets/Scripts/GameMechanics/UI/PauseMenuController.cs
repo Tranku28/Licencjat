@@ -50,7 +50,7 @@ namespace GameMechanics
 
         private void InvokeOption()
         {
-            var gameStateMachine = DependencyResoler.Instance.GetType<GameStateMachine>();
+            var gameStateMachine = DependencyResolver.Instance.GetType<GameStateMachine>();
             
             if (pauseSettingsPanel.activeSelf) return;
             
@@ -81,6 +81,7 @@ namespace GameMechanics
 
         private void Update()
         {
+            // TODO: make sure to disable Update of pause menu when it is not Used
             var mousePos = Mouse.current.position.ReadValue();
 
             var localPoint = GetCursorPosition(mousePos);

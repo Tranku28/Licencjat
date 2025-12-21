@@ -1,4 +1,5 @@
 using System;
+using Core;
 using Player;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -10,13 +11,16 @@ namespace GameMechanics.UI.MainMenu
     {
         private static readonly int ZoomIn = Animator.StringToHash("ZoomIn");
         private static readonly int GameStarted = Animator.StringToHash("GameStarted");
+        private static readonly int Hover = Animator.StringToHash("Hover");
         [SerializeField] private Button startJourneyButton, goBackButton;
         [SerializeField] private Animator cameraAnimator;
         [SerializeField] private InteractionHandler cameraAnimatorHandler;
+        [SerializeField] private TutorialData playerPurpose;
         
         public event Action OnGameplayEntered;
         private Animator _animator;
         private Collider _collider;
+        private bool _entered, _tutorialShown;
 
         private void Awake()
         {
@@ -44,16 +48,22 @@ namespace GameMechanics.UI.MainMenu
         {
             _animator.SetBool(ZoomIn, true);
             cameraAnimator.SetBool(ZoomIn, true);
+            AudioManager.Instance.PlayOneShot(FMODEvents.Instance.saveBoardOpen, transform.position);
+            _entered = true;
         }
 
         public void OnPointerEnter(PointerEventData eventData)
         {
-            Debug.Log("Board Enter");
+            if (_entered) return;
+            _animator.SetBool(Hover, true);
+            AudioManager.Instance.PlayOneShot(FMODEvents.Instance.saveBoardHover, transform.position);
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
-            Debug.Log("Board Exit");
+            if (_entered) return;
+            _animator.SetBool(Hover, false);
+            AudioManager.Instance.PlayOneShot(FMODEvents.Instance.saveBoardHover, transform.position);
         }
 
         public void ZoomInFinished()
@@ -64,9 +74,8 @@ namespace GameMechanics.UI.MainMenu
             _collider.enabled = false;
         }
 
-        public void GoBackButtonClicked()
+        private void GoBackButtonClicked()
         {
-            Debug.Log("GoBack");
             _animator.SetBool(ZoomIn, false);
             cameraAnimator.SetBool(ZoomIn, false);
             
@@ -74,6 +83,7 @@ namespace GameMechanics.UI.MainMenu
             goBackButton.interactable = false;
             
             _collider.enabled = true;
+            _entered = false;
         }
 
         private void OnStartButtonClicked()
@@ -87,6 +97,15 @@ namespace GameMechanics.UI.MainMenu
             cameraAnimator.enabled = false;
             _animator.enabled = false;
             
+            //TODO: remake tutorial
+            // TODO: Tutorial single popup handling
+            if (!_tutorialShown)
+            {
+                TutorialInfoLoader.Instance.LoadTutorialPanel(playerPurpose);
+                _tutorialShown = true;
+            }
+
+
             OnGameplayEntered?.Invoke();
         }
     }
