@@ -2,6 +2,7 @@ using System;
 using Core;
 using Core.Save_System;
 using GameMechanics.Interactions;
+using Unity.Cinemachine;
 using UnityEngine;
 
 namespace GameMechanics.DayHandling
@@ -10,11 +11,17 @@ namespace GameMechanics.DayHandling
     {
         [SerializeField] private BlinkPanelUI blinkPanelUI;
         [SerializeField] private TutorialData cannotProceedData;
+        [SerializeField] private CinemachineCamera playerCamera, dayEndCamera;
         
         public static Action<int> OnCabinetSpawned;
         public static Action<string> OnDiaryAddContent;
         public static Action<string> OnNewspaperLoadNews;
         private bool _tutorialShown;
+
+        void Awake()
+        {
+            playerCamera.Prioritize();
+        }
 
         private void Start()
         {
@@ -69,8 +76,10 @@ namespace GameMechanics.DayHandling
                 return;
             }
 
-            blinkPanelUI.showNewspaper = true;
-            blinkPanelUI.ClosePlayerEyes();
+            dayEndCamera.Prioritize();
+
+            //blinkPanelUI.showNewspaper = true;
+            //blinkPanelUI.ClosePlayerEyes();
             LoadDay();
         }
         
