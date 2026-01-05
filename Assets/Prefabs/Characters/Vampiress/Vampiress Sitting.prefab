@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   passengerData: {fileID: 11400000, guid: f59162cd698ea344ba9103086900d09b, type: 2}
+  passengerTutorial: {fileID: 11400000, guid: 9484f287e37045a44bb286e3b196cbca, type: 2}
 --- !u!136 &8069898151530528364
 CapsuleCollider:
   m_ObjectHideFlags: 0
