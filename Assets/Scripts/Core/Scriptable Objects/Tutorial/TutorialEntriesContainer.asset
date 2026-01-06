@@ -18,12 +18,13 @@ MonoBehaviour:
       check their tickets. Passengers with invalid tickets should leave the train.
   - id: 1
     tutorialEntryText: To proceed to the next day you have to talk to at least one
-      passenger. Proceed only if you do so.
+      passenger and reject or validate their ticket.
   - id: 2
-    tutorialEntryText: It is your personal <b>Diary</b>. Any thoughts that come to
-      your mind about the passengers you spoke with will be recorded here.
-  - id: 3
     tutorialEntryText: Once you enter a dialogue with a passenger, you cannot leave
       until you validate or reject the ticket. You can reject the ticket at any time
       by clicking proper dialogue option. Accepting the ticket is only possible after
       a properly conducted dialogue.
+  - id: 3
+    tutorialEntryText: By interacting with Diary on your desk you can read short
+      recap about what happened earlier. Any thoughts that come to your mind about
+      the passengers you spoke with will be recorded here.
