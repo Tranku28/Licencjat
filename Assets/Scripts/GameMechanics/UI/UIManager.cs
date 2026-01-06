@@ -1,3 +1,4 @@
+using System;
 using Core;
 using Core.Scriptable_Objects;
 using GameMechanics.Interactions;
@@ -18,9 +19,9 @@ namespace GameMechanics
         [SerializeField] private DialogueManager dialogueManager;
         [SerializeField] private DiaryController diaryTab;
         [SerializeField] private SouvenirViewController souvenirTab;
+        [SerializeField] private TutorialNotesController tutorialNotesTab;
         
         private UIElement _currentElement;
-        private InputAction _currentAction;
         
         private GameStateMachine _gameStateMachine;
 
@@ -29,6 +30,7 @@ namespace GameMechanics
             _gameStateMachine = DependencyResolver.Instance.GetType<GameStateMachine>();
         }
 
+        //TODO: make actions non static
         private void OnEnable()
         {
             PlayerControls.OnEscapePressedEvent += OnEscapePressed;
@@ -39,6 +41,8 @@ namespace GameMechanics
             Diary.OnDiaryInteracted += OnDiaryInteracted;
 
             Souvenir.OnSouvenirInteracted += OnSouvenirInteracted;
+
+            TutorialNotes.OnTutorialNotesInteracted += OnTutorialNotesInteracted;
         }
 
         private void OnDisable()
@@ -51,6 +55,8 @@ namespace GameMechanics
             Diary.OnDiaryInteracted -= OnDiaryInteracted;
 
             Souvenir.OnSouvenirInteracted -= OnSouvenirInteracted;
+
+            TutorialNotes.OnTutorialNotesInteracted -= OnTutorialNotesInteracted;
         }
         
         private void OnSouvenirInteracted(PassengerData obj)
@@ -96,13 +102,23 @@ namespace GameMechanics
 
         private void OnDiaryInteracted()
         {
-            Debug.Log("Diary interacted");
             if (!ReferenceEquals(_currentElement, null)) return;
             
             AudioManager.Instance.PlayOneShot(FMODEvents.Instance.diaryOpenSound, transform.position);
             _currentElement = diaryTab;
             diaryTab.SetVisualVisibility(true);
             _gameStateMachine.ChangeGameState(GameState.UIOpened);
+        }
+
+        private void OnTutorialNotesInteracted()
+        {
+            if (!ReferenceEquals(_currentElement, null)) return;
+            {
+                AudioManager.Instance.PlayOneShot(FMODEvents.Instance.creditsOpen, transform.position);
+                _currentElement = tutorialNotesTab;
+                tutorialNotesTab.SetVisualVisibility(true);
+                _gameStateMachine.ChangeGameState(GameState.UIOpened);
+            }
         }
         
         private void OnEscapePressed()

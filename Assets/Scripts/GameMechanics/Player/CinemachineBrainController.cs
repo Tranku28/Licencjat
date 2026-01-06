@@ -4,14 +4,21 @@ using UnityEngine;
 public class CinemachineBrainController : MonoBehaviour
 {
     [SerializeField] private CinemachineBrain cinemachineBrain;
+    [SerializeField] private CinemachineCamera playerCamera;
 
-    private void Update()
+    public CinemachineCamera PlayerCamera { get; private set;}
+
+    public static CinemachineBrainController Instance;
+
+    void Awake()
     {
-        if (cinemachineBrain.IsBlending) return;
-
-        if (!cinemachineBrain.IsBlending)
+        if (Instance != null)
         {
-            Debug.Log("Blend Complete");
+            Destroy(gameObject);
         }
+
+        Instance = this;
+
+        playerCamera.Prioritize();
     }
 }

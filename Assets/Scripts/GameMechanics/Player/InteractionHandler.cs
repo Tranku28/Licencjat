@@ -2,6 +2,7 @@ using System;
 using Core;
 using Core.Scriptable_Objects;
 using GameMechanics.Interactions;
+using TMPro;
 using UnityEngine;
 
 namespace Player
