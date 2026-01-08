@@ -89,6 +89,8 @@ namespace GameMechanics.UI.MainMenu
         {
             cameraAnimator.SetBool(GameStarted, true);
             _animator.SetBool(ZoomIn, false);
+            _animator.SetBool(Hover, false);
+            _collider.enabled = false;
         }
 
         private void OnStartGame()

@@ -77,6 +77,10 @@ namespace GameMechanics.DayHandling
 
         private IEnumerator SitDownAndProceedToNextDay()
         {
+            GameStateMachine stateMachine = DependencyResolver.Instance.GetType<GameStateMachine>();
+
+            stateMachine.ChangeGameState(GameState.UIOpened);
+
             playerCamera2.Prioritize();
             yield return new WaitForSeconds(_cinemachineBlendDuration);
 
@@ -96,6 +100,10 @@ namespace GameMechanics.DayHandling
         private IEnumerator OpenEyes()
         {
             CinemachineBrainController.Instance.PlayerCamera.Prioritize();
+            
+            GameStateMachine stateMachine = DependencyResolver.Instance.GetType<GameStateMachine>();
+            stateMachine.ChangeGameState(GameState.Gameplay);
+
             yield return new WaitForSeconds(_cinemachineBlendDuration);
 
             blinkPanelUI.OpenPlayerEyes();

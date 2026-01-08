@@ -6,7 +6,7 @@ public class CinemachineBrainController : MonoBehaviour
     [SerializeField] private CinemachineBrain cinemachineBrain;
     [SerializeField] private CinemachineCamera playerCamera;
 
-    public CinemachineCamera PlayerCamera { get; private set;}
+    public CinemachineCamera PlayerCamera { get => playerCamera;}
 
     public static CinemachineBrainController Instance;
 

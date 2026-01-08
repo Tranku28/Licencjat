@@ -19,7 +19,6 @@ namespace GameMechanics.UI
         [SerializeField] private float timeBetweenChars;
         [SerializeField] private BlinkPanelUI blinkPanelUI;
         
-        [SerializeField] private Image playerNameBackground, npcNameBackground;
         [SerializeField] private TMP_Text playerNameText, npcNameText;
 
         [SerializeField] private TicketMinigame ticketMinigame;
@@ -150,21 +149,15 @@ namespace GameMechanics.UI
             switch (index)
             {
                 case 0:
-                    playerNameBackground.enabled = true;
                     playerNameText.enabled = true;
-                    npcNameBackground.enabled = false;
                     npcNameText.enabled = false;
                     break;
                 case 1:
-                    playerNameBackground.enabled = false;
                     playerNameText.enabled = false;
-                    npcNameBackground.enabled = true;
                     npcNameText.enabled = true;
                     break;
                 default:
-                    playerNameBackground.enabled = false;
                     playerNameText.enabled = false;
-                    npcNameBackground.enabled = false;
                     npcNameText.enabled = false;
                     break;
             }
