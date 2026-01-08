@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4561848948388673170}
   - component: {fileID: 8069898151530528364}
   m_Layer: 0
-  m_Name: Vampiress Sitting
+  m_Name: Vampiress
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

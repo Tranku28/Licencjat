@@ -1,9 +1,19 @@
 fileFormatVersion: 2
-guid: 210fabecb21932b40bd8e61e7d66dcb5
+guid: 7d20b59f96d9a024c85f41fe311a8624
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_GhostClothes_01
+    second: {fileID: 2100000, guid: 830404f097c02684084fa46be6419c29, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_GhostFacial_01
+    second: {fileID: 2100000, guid: b1f2865372f64ef479be5794eb0456d2, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
