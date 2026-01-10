@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using Core;
 using Core.Save_System;
 using GameMechanics.Interactions;
@@ -10,17 +11,18 @@ namespace GameMechanics.DayHandling
     public class DayHandler : MonoBehaviour, IInteractable
     {
         [SerializeField] private BlinkPanelUI blinkPanelUI;
-        [SerializeField] private TutorialData cannotProceedData;
-        [SerializeField] private CinemachineCamera playerCamera, dayEndCamera;
+        [SerializeField] private CinemachineCamera playerCamera, playerCamera2, dayEndCamera;
         
         public static Action<int> OnCabinetSpawned;
         public static Action<string> OnDiaryAddContent;
         public static Action<string> OnNewspaperLoadNews;
-        private bool _tutorialShown;
+        private CinemachineBrain _cinemachineBrain;
+        private float _cinemachineBlendDuration;
 
         void Awake()
         {
-            playerCamera.Prioritize();
+            _cinemachineBrain = CinemachineBrainController.Instance.GetComponent<CinemachineBrain>();
+            _cinemachineBlendDuration = _cinemachineBrain.DefaultBlend.BlendTime;
         }
 
         private void Start()
@@ -67,24 +69,43 @@ namespace GameMechanics.DayHandling
 
             if (saveSystem.ticketsAccepted == 0 && saveSystem.ticketsRejected == 0)
             {
-                // TODO: Tutorial single popup handling
-                if (!_tutorialShown)
-                {
-                    TutorialInfoLoader.Instance.LoadTutorialPanel(cannotProceedData);
-                    _tutorialShown = true;
-                }
                 return;
             }
 
-            dayEndCamera.Prioritize();
+            StartCoroutine(SitDownAndProceedToNextDay());
+        }
 
-            //blinkPanelUI.showNewspaper = true;
-            //blinkPanelUI.ClosePlayerEyes();
+        private IEnumerator SitDownAndProceedToNextDay()
+        {
+            GameStateMachine stateMachine = DependencyResolver.Instance.GetType<GameStateMachine>();
+
+            stateMachine.ChangeGameState(GameState.UIOpened);
+
+            playerCamera2.Prioritize();
+            yield return new WaitForSeconds(_cinemachineBlendDuration);
+
+            dayEndCamera.Prioritize();
+            yield return new WaitForSeconds(_cinemachineBlendDuration);
+
+            blinkPanelUI.showNewspaper = true;
+            blinkPanelUI.ClosePlayerEyes();
             LoadDay();
         }
         
         private void OpenPlayerEyes()
         {
+            StartCoroutine(OpenEyes());
+        }
+
+        private IEnumerator OpenEyes()
+        {
+            CinemachineBrainController.Instance.PlayerCamera.Prioritize();
+            
+            GameStateMachine stateMachine = DependencyResolver.Instance.GetType<GameStateMachine>();
+            stateMachine.ChangeGameState(GameState.Gameplay);
+
+            yield return new WaitForSeconds(_cinemachineBlendDuration);
+
             blinkPanelUI.OpenPlayerEyes();
         }
     }

@@ -15,7 +15,6 @@ namespace GameMechanics.UI.MainMenu
         [SerializeField] private Button startJourneyButton, goBackButton;
         [SerializeField] private Animator cameraAnimator;
         [SerializeField] private InteractionHandler cameraAnimatorHandler;
-        [SerializeField] private TutorialData playerPurpose;
         
         public event Action OnGameplayEntered;
         private Animator _animator;
@@ -90,6 +89,8 @@ namespace GameMechanics.UI.MainMenu
         {
             cameraAnimator.SetBool(GameStarted, true);
             _animator.SetBool(ZoomIn, false);
+            _animator.SetBool(Hover, false);
+            _collider.enabled = false;
         }
 
         private void OnStartGame()
@@ -98,12 +99,6 @@ namespace GameMechanics.UI.MainMenu
             _animator.enabled = false;
             
             //TODO: remake tutorial
-            // TODO: Tutorial single popup handling
-            if (!_tutorialShown)
-            {
-                TutorialInfoLoader.Instance.LoadTutorialPanel(playerPurpose);
-                _tutorialShown = true;
-            }
 
 
             OnGameplayEntered?.Invoke();

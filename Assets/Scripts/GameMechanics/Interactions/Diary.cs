@@ -12,12 +12,6 @@ namespace GameMechanics.Interactions
     
         public void Interact()
         {
-            // TODO: Tutorial single popup handling
-            if (!_tutorialShown)
-            {
-                TutorialInfoLoader.Instance.LoadTutorialPanel(diaryTutorial);
-                _tutorialShown = true;
-            }
             OnDiaryInteracted?.Invoke();
         }
     }
