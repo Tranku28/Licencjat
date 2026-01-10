@@ -35,21 +35,10 @@ namespace GameMechanics.DayHandling
             blinkPanelUI.OnNextDayButtonClicked -= OpenPlayerEyes;
         }
 
+        //TODO: refine load save logic
         private void LoadDay()
         {
-            GameSaveData saveData = DependencyResolver.Instance.
-                    GetType<SaveSystem>().GetSaveData();
-
-
-            foreach (int ID in saveData.CollectedSouvenirIdList)
-            {
-                SpawnSouvenirs(ID);
-            }
-
-            foreach (string entry in saveData.DiaryEntries)
-            {
-                DiaryAddContent(entry);
-            }
+            
         }
         
         private void SpawnSouvenirs(int souvenirId)

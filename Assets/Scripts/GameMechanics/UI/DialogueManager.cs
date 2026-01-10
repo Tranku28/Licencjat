@@ -235,21 +235,7 @@ namespace GameMechanics.UI
         
         private async Awaitable AwaitableDialogueQuit()
         {
-            SaveSystem saveSystem = DependencyResolver.Instance.GetType<SaveSystem>();
-            
-            if (!_ticketRejected)
-            {
-                saveSystem.ticketsAccepted++;
-                saveSystem.souvenirIDs.Add(_currentPassengerData.souvenirData.souvenirID);
-                saveSystem.diaryEntries.Add(_currentPassengerData.diaryContent);
-                saveSystem.SaveToJson();
-                return;
-            }
-                
-            _currentPassenger.gameObject.GetComponent<Collider>().enabled = false;
-            
-            saveSystem.ticketsRejected++;
-            saveSystem.SaveToJson();
+            //TODO: refine save system logic
 
             await blinkPanelUI.ClosePlayerEyes();
             Destroy(_currentPassenger.gameObject);

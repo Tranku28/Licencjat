@@ -9,67 +9,107 @@ namespace Core.Save_System
     public class SaveSystem : BaseSystem
     {
         //TODO: make multiple saving possible
+        private const string SAVE_FOLDER = "EnchantedExpress";
+        private const string SAVE_FILE_BASE_FORMAT = "EnchantedExpress_";
+        private const int SAVES_COUNT = 4;
         private int _saveIndex, _currentDay;
         private static string _savePath, _filePath;
         public List<int> souvenirIDs = new();
         public int ticketsAccepted, ticketsRejected;
         public List<string> tutorialNotes = new();
         public List<string> diaryEntries = new();
-        private List<GameSaveData> _saves = new();
+        private List<GameSaveData> _saves = new ();
         private int _currentLoadedSaveIndex;
+        private List<ISaveElement> _saveElements = new();
 
         protected override void Awake()
         {
             base.Awake();
             
-            _savePath = Path.Combine(Application.persistentDataPath, "EnchantedExpressSaves");
+            Debug.Log("Save system Initialized");
+            _savePath = Path.Combine(Application.persistentDataPath, SAVE_FOLDER);
+
+            ReadAllSaveData();
         }
         
-        public void SaveToJson()
+        public void SaveGame(int saveIndex = 1)
         {
-            GameSaveData saveData = new(_saveIndex, _currentDay, ticketsAccepted, ticketsRejected, souvenirIDs.ToArray(), diaryEntries.ToArray(), tutorialNotes.ToArray());
+            if (saveIndex > SAVES_COUNT) return;
+            if (_saves.Count-1 < saveIndex) _saves.Add(new GameSaveData());
 
-            string jsonText = JsonUtility.ToJson(saveData, prettyPrint: true);
-            Directory.CreateDirectory(_savePath);
-            _filePath = Path.Combine(_savePath, $"save_{_saveIndex}.json");
-            
-            Debug.Log("Saved");
-            File.WriteAllText(_filePath, jsonText);
-        }
-
-        public GameSaveData GetSaveData()
-        {
-            if (!File.Exists(_filePath))
+            try
             {
-                Debug.Log("No save data");
+                Directory.CreateDirectory(_savePath);
+
+                foreach(ISaveElement saveElement in _saveElements)
+                {
+                    saveElement.SaveData(_saves[saveIndex]);
+                }
+
+                string saveData = JsonUtility.ToJson(_saves[saveIndex], true);
+
+                string fullPath = Path.Combine(_savePath, $"{SAVE_FILE_BASE_FORMAT}{saveIndex}");
+
+                using (FileStream fileStream = new FileStream(fullPath, FileMode.Create))
+                {
+                    using (StreamWriter streamWriter = new StreamWriter(fileStream))
+                    {
+                        streamWriter.Write(saveData);
+                    }
+                }
             }
-            
-            string jsonText = File.ReadAllText(_filePath);
-            GameSaveData data = JsonUtility.FromJson<GameSaveData>(jsonText);
-
-            return data;
+            catch (Exception e)
+            {
+                Debug.LogError($"Exception while saving game: {e}");
+            }
         }
-    }
 
-    public struct GameSaveData
-    {
-        public int SaveIndex;
-        public int CurrentDay;
-        public int TicketsAccepted;
-        public int TicketsRejected;
-        public int[] CollectedSouvenirIdList;
-        public string[] DiaryEntries;
-        public string[] TutorialNotes;
-
-        public GameSaveData(int saveIndex, int currentDay,  int ticketsAccepted, int ticketsRejected, int[] collectedSouvenirIdList, string[] diaryEntries, string[] tutorialNotes)
+        //TODO: set this private later
+        public void LoadSave(int saveIndex)
         {
-            SaveIndex = saveIndex;
-            CurrentDay = currentDay;
-            TicketsAccepted  = ticketsAccepted;
-            TicketsRejected = ticketsRejected;
-            CollectedSouvenirIdList = collectedSouvenirIdList;
-            DiaryEntries = diaryEntries;
-            TutorialNotes = tutorialNotes;
+            foreach (ISaveElement saveElement in _saveElements)
+            {
+                saveElement.LoadSave(_saves[saveIndex]);
+            }
+        }
+
+        private void ReadAllSaveData()
+        {
+            for(int i=0; i < SAVES_COUNT; i++)
+            {
+                string currentSavePath = Path.Combine(_savePath, $"{SAVE_FILE_BASE_FORMAT}{i}");
+
+                if (!File.Exists(currentSavePath)) continue;
+
+                Debug.Log($"File {i} found");
+
+                try
+                {
+                    string saveJson = "";
+                    using (FileStream fileStream = new FileStream(currentSavePath, FileMode.Open))
+                    {
+                        using (StreamReader streamReader = new StreamReader(fileStream))
+                        {
+                            saveJson = streamReader.ReadToEnd();
+                        }
+                        GameSaveData gameSaveData = JsonUtility.FromJson<GameSaveData>(saveJson);
+                        _saves.Add(gameSaveData);
+                    }
+                }
+                catch (Exception e)
+                {
+                    Debug.LogError($"Error during game load on file {i}: {e}");
+                }
+            }
+
+            Debug.Log($"Saves count: {_saves.Count}");
+        }
+
+        public void RegisterToSaveSystem(ISaveElement saveElement)
+        {
+            if (_saveElements.Contains(saveElement)) return;
+
+            _saveElements.Add(saveElement);
         }
     }
 }
