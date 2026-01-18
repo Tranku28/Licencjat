@@ -18,10 +18,10 @@ namespace Core.Save_System
         private static string _savePath, _filePath;
 #region Fields To Save
         private int _currentDay;
-        public List<int> souvenirIDs = new();
-        public int ticketsAccepted, ticketsRejected;
-        public List<string> tutorialNotes = new();
-        public List<string> diaryEntries = new();
+        private List<int> _souvenirIDs = new();
+        private int _ticketsAccepted, _ticketsRejected;
+        private List<string> _tutorialNotes = new();
+        private List<string> _diaryEntries = new();
         private List<GameSaveData> _saves = new ();
         private List<ISaveElement> _saveElements = new();
 #endregion
@@ -35,7 +35,7 @@ namespace Core.Save_System
 
             ReadAllSaveData();
         }
-        
+
         public void SaveGame()
         {
             if (_loadedSaveIndex > SAVES_COUNT) return;

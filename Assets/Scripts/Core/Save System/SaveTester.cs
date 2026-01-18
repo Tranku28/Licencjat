@@ -1,13 +1,16 @@
 using System.Linq;
 using Core;
 using Core.Save_System;
+using Core.Scriptable_Objects;
 using Unity.Android.Gradle;
 using UnityEngine;
 using UnityEngine.UI;
 
+//TODO: Scrap later
 public class SaveTester : MonoBehaviour, ISaveElement
 {
     [SerializeField] int saveToLoad;
+    [SerializeField] GameObject prefabTest;
     public int currentDay, saveIndex, ticketsAccepted, ticketRejected;
     public int[] souvenirs = {1,2,3,4};
     public string[] diaryEntries = {"ala", "ola", "ela"};

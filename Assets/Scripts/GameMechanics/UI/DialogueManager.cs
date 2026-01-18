@@ -12,7 +12,7 @@ using UnityEngine.UI;
 
 namespace GameMechanics.UI
 {
-    public class DialogueManager : UIElement, IPointerClickHandler
+    public class DialogueManager : UIElement, IPointerClickHandler, ISaveElement
     {
         [SerializeField] TMP_Text displayedText;
         [SerializeField] GameObject choiceContainer;
@@ -40,6 +40,9 @@ namespace GameMechanics.UI
 
         public bool ticketScanned => _ticketScanned;
         public bool ticketRejected => _ticketRejected;
+
+        //TODO: To refactor
+        private int _rejectedCount, _scannedCount;
 
         private Awaitable _dialogueAwaitable;
 
@@ -97,6 +100,7 @@ namespace GameMechanics.UI
             StartStory(passengerArgs.PassengerData);
         }
         
+        //TODO: Observe variable for counting rejected/scanned tickets
         private void StartStory(PassengerData data)
         {
             _story = new Story(data.inkJSON.text);
@@ -114,7 +118,6 @@ namespace GameMechanics.UI
             
             _story.ObserveVariable("ticketRejected", (string varName, object newValue) =>
             {
-                Debug.Log(_ticketRejected);
                 _ticketRejected = (bool)newValue;
             });
         }
@@ -249,6 +252,21 @@ namespace GameMechanics.UI
         {
             if (eventData.pointerCurrentRaycast.gameObject.GetComponent<TMP_Text>() == displayedText)
                 StoryHop();
+        }
+
+        public void SaveData(GameSaveData gameSaveData)
+        {
+            
+        }
+
+        public void LoadSave(GameSaveData gameSaveData)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Register()
+        {
+            throw new NotImplementedException();
         }
     }
 }

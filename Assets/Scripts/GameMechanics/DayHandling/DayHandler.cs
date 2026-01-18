@@ -51,15 +51,11 @@ namespace GameMechanics.DayHandling
             OnDiaryAddContent?.Invoke(entry);
         }
 
+        //TODO: Prevent player from ending day without talking to passengers
         public void Interact()
         {
             SaveSystem saveSystem = DependencyResolver.Instance.
                     GetType<SaveSystem>();
-
-            if (saveSystem.ticketsAccepted == 0 && saveSystem.ticketsRejected == 0)
-            {
-                return;
-            }
 
             StartCoroutine(SitDownAndProceedToNextDay());
         }

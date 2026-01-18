@@ -8799,6 +8799,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   saveToLoad: 0
+  prefabTest: {fileID: 1401786878}
   currentDay: 0
   saveIndex: 1
   ticketsAccepted: 0
@@ -10205,6 +10206,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1396403086}
   m_CullTransparentMesh: 1
+--- !u!1 &1401786878 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 876877347200367612, guid: 1d1933194e0ea6a4b9fdba81506d17f4, type: 3}
+  m_PrefabInstance: {fileID: 3500546895368387539}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1403510792
 GameObject:
   m_ObjectHideFlags: 0
