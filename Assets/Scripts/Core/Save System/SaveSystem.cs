@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using UnityEditor.Overlays;
 using UnityEngine;
 
 namespace Core.Save_System
@@ -12,30 +13,33 @@ namespace Core.Save_System
         private const string SAVE_FOLDER = "EnchantedExpress";
         private const string SAVE_FILE_BASE_FORMAT = "EnchantedExpress_";
         private const int SAVES_COUNT = 4;
-        private int _saveIndex, _currentDay;
+        //TODO: Deserialize it
+        [SerializeField] private int _loadedSaveIndex;
         private static string _savePath, _filePath;
+#region Fields To Save
+        private int _currentDay;
         public List<int> souvenirIDs = new();
         public int ticketsAccepted, ticketsRejected;
         public List<string> tutorialNotes = new();
         public List<string> diaryEntries = new();
         private List<GameSaveData> _saves = new ();
-        private int _currentLoadedSaveIndex;
         private List<ISaveElement> _saveElements = new();
+#endregion
 
         protected override void Awake()
         {
             base.Awake();
-            
-            Debug.Log("Save system Initialized");
+
             _savePath = Path.Combine(Application.persistentDataPath, SAVE_FOLDER);
+            _loadedSaveIndex = 0;
 
             ReadAllSaveData();
         }
         
-        public void SaveGame(int saveIndex = 1)
+        public void SaveGame()
         {
-            if (saveIndex > SAVES_COUNT) return;
-            if (_saves.Count-1 < saveIndex) _saves.Add(new GameSaveData());
+            if (_loadedSaveIndex > SAVES_COUNT) return;
+            if (_saves.Count-1 < _loadedSaveIndex) _saves.Add(new GameSaveData());
 
             try
             {
@@ -43,12 +47,12 @@ namespace Core.Save_System
 
                 foreach(ISaveElement saveElement in _saveElements)
                 {
-                    saveElement.SaveData(_saves[saveIndex]);
+                    saveElement.SaveData(_saves[_loadedSaveIndex]);
                 }
 
-                string saveData = JsonUtility.ToJson(_saves[saveIndex], true);
+                string saveData = JsonUtility.ToJson(_saves[_loadedSaveIndex], true);
 
-                string fullPath = Path.Combine(_savePath, $"{SAVE_FILE_BASE_FORMAT}{saveIndex}");
+                string fullPath = Path.Combine(_savePath, $"{SAVE_FILE_BASE_FORMAT}{_loadedSaveIndex}");
 
                 using (FileStream fileStream = new FileStream(fullPath, FileMode.Create))
                 {
@@ -67,6 +71,10 @@ namespace Core.Save_System
         //TODO: set this private later
         public void LoadSave(int saveIndex)
         {
+            if (_saves.Count == 0) return;
+
+            _loadedSaveIndex = saveIndex;
+
             foreach (ISaveElement saveElement in _saveElements)
             {
                 saveElement.LoadSave(_saves[saveIndex]);
@@ -111,5 +119,7 @@ namespace Core.Save_System
 
             _saveElements.Add(saveElement);
         }
+
+        public GameSaveData[] GetSaves => _saves.ToArray();
     }
 }

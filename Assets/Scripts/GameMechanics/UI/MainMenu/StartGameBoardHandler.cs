@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using Core;
+using Core.Save_System;
 using Player;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -12,9 +14,13 @@ namespace GameMechanics.UI.MainMenu
         private static readonly int ZoomIn = Animator.StringToHash("ZoomIn");
         private static readonly int GameStarted = Animator.StringToHash("GameStarted");
         private static readonly int Hover = Animator.StringToHash("Hover");
+        [Header("General")]
         [SerializeField] private Button startJourneyButton, goBackButton;
-        [SerializeField] private Animator cameraAnimator;
+        [SerializeField] private List<SaveDisplayerUI> saveDisplayers = new();
+
+        [Header("External Dependencies")]
         [SerializeField] private InteractionHandler cameraAnimatorHandler;
+        [SerializeField] private Animator cameraAnimator;
         
         public event Action OnGameplayEntered;
         private Animator _animator;
@@ -32,7 +38,7 @@ namespace GameMechanics.UI.MainMenu
             startJourneyButton.onClick.AddListener(OnStartButtonClicked);
             goBackButton.onClick.AddListener(GoBackButtonClicked);
             
-            cameraAnimatorHandler.GameStarted += OnStartGame;
+            cameraAnimatorHandler.GameStarted += OnStartJourney;
         }
         
         private void OnDisable()
@@ -40,7 +46,7 @@ namespace GameMechanics.UI.MainMenu
             goBackButton.onClick.RemoveListener(GoBackButtonClicked);
             startJourneyButton.onClick.RemoveListener(OnStartButtonClicked);
             
-            cameraAnimatorHandler.GameStarted -= OnStartGame;
+            cameraAnimatorHandler.GameStarted -= OnStartJourney;
         }
 
         public void OnPointerClick(PointerEventData eventData)
@@ -67,10 +73,29 @@ namespace GameMechanics.UI.MainMenu
 
         public void ZoomInFinished()
         {
+            Debug.Log("Zoom In Finished");
+            LoadSaves();
+
             startJourneyButton.interactable = true;
             goBackButton.interactable = true;
             
             _collider.enabled = false;
+        }
+
+        private void LoadSaves()
+        {
+            GameSaveData[] saves = DependencyResolver.Instance.GetType<SaveSystem>().GetSaves;
+            Debug.Log(saves.Length);
+            if (saves.Length == 0) return;
+
+            for (int i=0; i < saves.Length; i++)
+            {
+                saveDisplayers[i].saveName.text = $"Save {i}";
+                saveDisplayers[i].dateSaved.text = $"{saves[i].DateSaved}";
+                saveDisplayers[i].inGameDay.text = $"{saves[i].CurrentDay}";
+                saveDisplayers[i].harmonyStatus.text = $"{saves[i].HarmonyStatus}";
+                saveDisplayers[i].gameObject.SetActive(true);
+            }
         }
 
         private void GoBackButtonClicked()
@@ -93,14 +118,28 @@ namespace GameMechanics.UI.MainMenu
             _collider.enabled = false;
         }
 
-        private void OnStartGame()
+        //TODO: Prevent starting new journey when there are 5 saves
+        private void OnStartJourney()
         {
             cameraAnimator.enabled = false;
             _animator.enabled = false;
             
             //TODO: remake tutorial
 
+            OnGameplayEntered?.Invoke();
+        }
 
+        /// <summary>
+        /// SaveDisplayerUI Button onclick event
+        /// </summary>
+        /// <param name="saveIndex"></param>
+        public void OnSaveFieldClicked(int saveIndex)
+        {
+            SaveSystem saveSystem = DependencyResolver.Instance.GetType<SaveSystem>();
+            saveSystem.LoadSave(saveIndex);
+
+            cameraAnimator.enabled = false;
+            _animator.enabled = false;
             OnGameplayEntered?.Invoke();
         }
     }
