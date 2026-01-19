@@ -21,7 +21,7 @@ public class SaveTester : MonoBehaviour, ISaveElement
 
     public void Awake()
     {
-        Register();
+        (this as ISaveElement).Register(this);
         saveButton.onClick.AddListener(SaveGameInvoke);
     }
 
@@ -46,19 +46,6 @@ public class SaveTester : MonoBehaviour, ISaveElement
         souvenirs = gameSaveData.CollectedSouvenirIdList.ToArray();
     }
 
-    public void Register()
-    {
-        _saveSystem = DependencyResolver.Instance.GetType<SaveSystem>();
-
-        if (!_saveSystem) 
-        {
-            Debug.LogError("SaveSystem does not exists");
-            return;
-        }
-
-        _saveSystem.RegisterToSaveSystem(this);
-        Debug.Log("Registered to save system");
-    }
 
     public void SaveData(GameSaveData gameSaveData)
     {
