@@ -639,6 +639,7 @@ MonoBehaviour:
   <dateSaved>k__BackingField: {fileID: 8128599848443743276}
   <inGameDay>k__BackingField: {fileID: 6010104350847414362}
   <harmonyStatus>k__BackingField: {fileID: 6033838455807242084}
+  <saveLoadButton>k__BackingField: {fileID: 7241755394912915830}
 --- !u!222 &171871658297577015
 CanvasRenderer:
   m_ObjectHideFlags: 0

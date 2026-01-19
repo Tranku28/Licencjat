@@ -35,18 +35,18 @@ namespace GameMechanics.UI.MainMenu
 
         private void OnEnable()
         {
-            startJourneyButton.onClick.AddListener(OnStartButtonClicked);
+            startJourneyButton.onClick.AddListener(OnNewGame);
             goBackButton.onClick.AddListener(GoBackButtonClicked);
             
-            cameraAnimatorHandler.GameStarted += OnStartJourney;
+            cameraAnimatorHandler.GameStarted += OnStartGame;
         }
         
         private void OnDisable()
         {
+            startJourneyButton.onClick.RemoveListener(OnNewGame);
             goBackButton.onClick.RemoveListener(GoBackButtonClicked);
-            startJourneyButton.onClick.RemoveListener(OnStartButtonClicked);
             
-            cameraAnimatorHandler.GameStarted -= OnStartJourney;
+            cameraAnimatorHandler.GameStarted -= OnStartGame;
         }
 
         public void OnPointerClick(PointerEventData eventData)
@@ -73,7 +73,6 @@ namespace GameMechanics.UI.MainMenu
 
         public void ZoomInFinished()
         {
-            Debug.Log("Zoom In Finished");
             LoadSaves();
 
             startJourneyButton.interactable = true;
@@ -82,6 +81,7 @@ namespace GameMechanics.UI.MainMenu
             _collider.enabled = false;
         }
 
+        //TODO: move it to SaveDisplayer
         private void LoadSaves()
         {
             GameSaveData[] saves = DependencyResolver.Instance.GetType<SaveSystem>().GetSaves;
@@ -90,10 +90,10 @@ namespace GameMechanics.UI.MainMenu
 
             for (int i=0; i < saves.Length; i++)
             {
-                saveDisplayers[i].saveName.text = $"Save {i}";
+                saveDisplayers[i].saveName.text = $"Save {i+1}";
                 saveDisplayers[i].dateSaved.text = $"{saves[i].DateSaved}";
-                saveDisplayers[i].inGameDay.text = $"{saves[i].CurrentDay}";
-                saveDisplayers[i].harmonyStatus.text = $"{saves[i].HarmonyStatus}";
+                saveDisplayers[i].inGameDay.text = $"Day {saves[i].CurrentDay}";
+                saveDisplayers[i].harmonyStatus.text = $"Harmony: {saves[i].HarmonyStatus}%";
                 saveDisplayers[i].gameObject.SetActive(true);
             }
         }
@@ -118,15 +118,31 @@ namespace GameMechanics.UI.MainMenu
             _collider.enabled = false;
         }
 
-        //TODO: Prevent starting new journey when there are 5 saves
-        private void OnStartJourney()
+        private void OnStartGame()
         {
+            OnGameplayEntered?.Invoke();
             cameraAnimator.enabled = false;
             _animator.enabled = false;
+        }
+
+        //TODO: Prevent starting new journey when there are 5 saves
+        private void OnNewGame()
+        {
+            SaveSystem saveSystem = DependencyResolver.Instance.GetType<SaveSystem>();
+            GameSaveData[] saves = saveSystem.GetSaves;
+
+            if (saves.Length == 5) 
+            {
+                return;
+            }
+
+            saveSystem.SaveGame();
+            //TODO: Make event to inform player that he can't start new journey (not enough slots)
             
             //TODO: remake tutorial
 
-            OnGameplayEntered?.Invoke();
+            Debug.Log("OnStartButtonClicked New Journey");
+            OnStartButtonClicked();
         }
 
         /// <summary>
@@ -138,9 +154,8 @@ namespace GameMechanics.UI.MainMenu
             SaveSystem saveSystem = DependencyResolver.Instance.GetType<SaveSystem>();
             saveSystem.LoadSave(saveIndex);
 
-            cameraAnimator.enabled = false;
-            _animator.enabled = false;
-            OnGameplayEntered?.Invoke();
+            Debug.Log("OnStartButtonClicked SaveField");
+            OnStartButtonClicked();
         }
     }
 }

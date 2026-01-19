@@ -12,24 +12,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acecc751a12ea0244b7bd035b07eda1f, type: 3}
   m_Name: Vampiress
   m_EditorClassIdentifier: 
-  passengerPortrait: {fileID: 21300000, guid: c09be1b55c20f48499febe3cc31f4b64, type: 3}
-  inkJSON: {fileID: 4900000, guid: e2a34b0d21d903548928a0ee967a17fe, type: 3}
-  passengerName: Charlotte
-  passengerSurname: Bloodrose
-  car: 3
-  seat: 11
-  destination: Maplewood
-  validUntil:
-    Day: 30
-    Month: 11
-    Year: 1930
-    Hour: 11
-    Minute: 30
-  souvenirData: {fileID: 11400000, guid: 9445aa4f19727c1499a6df95d5250517, type: 2}
-  newspaperText: Some News
-  souvenirNote: "\u201CYou once said the night would never end.\r\nBut you were wrong
-    - \r\nIt ends the moment someone dares to light a candle.\r\n\r\nYou were my
-    light.\u201D\r\n\r\n[There is an inscription on the back]\r\n\r\n\u201CLove ~\r\nEven
-    when the world forbiddeth it.\r\nFor love alone is the law worth breaking.\u201D\r"
-  diaryContent: Entry about Charlotte
-  souvenirName: The Old Necklace
+  <passengerPortrait>k__BackingField: {fileID: 21300000, guid: c09be1b55c20f48499febe3cc31f4b64, type: 3}
+  <prefab>k__BackingField: {fileID: 876877347200367612, guid: 1d1933194e0ea6a4b9fdba81506d17f4, type: 3}
+  <inkJSON>k__BackingField: {fileID: 4900000, guid: e2a34b0d21d903548928a0ee967a17fe, type: 3}
+  <passengerName>k__BackingField: Charlotte
+  <passengerSurname>k__BackingField: Bloodrose
+  <dayAppears>k__BackingField: 1
+  <car>k__BackingField: 11
+  <seat>k__BackingField: 4
+  <destination>k__BackingField: Maplewood
+  <validUntil>k__BackingField:
+    <Day>k__BackingField: 12
+    <Month>k__BackingField: 4
+    <Year>k__BackingField: 1203
+    <Hour>k__BackingField: 11
+    <Minute>k__BackingField: 30
+  <species>k__BackingField: Vampire
+  <causeOfDeath>k__BackingField: Sunlight
+  <biography>k__BackingField: "The firstborn daughter of the Bloodrose family. After
+    her father\u2019s death, she took over the family business. However, she never
+    married, and the Bloodrose line ended with her."
+  <souvenirData>k__BackingField: {fileID: 11400000, guid: 9445aa4f19727c1499a6df95d5250517, type: 2}
+  <newspaperText>k__BackingField: A body of a dead woman was found
+  <souvenirNote>k__BackingField: "\u201CYou once said the night would never end.\r\nBut
+    you were wrong - \r\nIt ends the moment someone dares to light a candle.\r\n\r\nYou
+    were my light.\u201D\r\n\r\nThere is also short note on the back:\r\n\r\n\u201CLove
+    ~\r\nEven when the world forbiddeth it.\r\nFor love alone is the law worth breaking.\u201D\r\n"
+  <diaryContent>k__BackingField: 
+  <souvenirName>k__BackingField: The Old Necklace

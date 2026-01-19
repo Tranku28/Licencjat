@@ -9,22 +9,13 @@ namespace Core.Save_System
     [InitializeSystem("Save System")]
     public class SaveSystem : BaseSystem
     {
-        //TODO: make multiple saving possible
         private const string SAVE_FOLDER = "EnchantedExpress";
         private const string SAVE_FILE_BASE_FORMAT = "EnchantedExpress_";
-        private const int SAVES_COUNT = 4;
-        //TODO: Deserialize it
-        [SerializeField] private int _loadedSaveIndex;
-        private static string _savePath, _filePath;
-#region Fields To Save
-        private int _currentDay;
-        private List<int> _souvenirIDs = new();
-        private int _ticketsAccepted, _ticketsRejected;
-        private List<string> _tutorialNotes = new();
-        private List<string> _diaryEntries = new();
+        private const int SAVES_COUNT = 5;
+        private int _loadedSaveIndex;
+        private static string _savePath;
         private List<GameSaveData> _saves = new ();
         private List<ISaveElement> _saveElements = new();
-#endregion
 
         protected override void Awake()
         {
@@ -39,7 +30,9 @@ namespace Core.Save_System
         public void SaveGame()
         {
             if (_loadedSaveIndex > SAVES_COUNT) return;
-            if (_saves.Count-1 < _loadedSaveIndex) _saves.Add(new GameSaveData());
+
+            _saves.Add(new GameSaveData());
+            _loadedSaveIndex = _saves.Count-1;
 
             try
             {
@@ -49,6 +42,9 @@ namespace Core.Save_System
                 {
                     saveElement.SaveData(_saves[_loadedSaveIndex]);
                 }
+
+                string dateOfSave = DateTime.Now.ToString("dd/MM/yyyy HH:mm");
+                _saves[_loadedSaveIndex].DateSaved = dateOfSave;
 
                 string saveData = JsonUtility.ToJson(_saves[_loadedSaveIndex], true);
 

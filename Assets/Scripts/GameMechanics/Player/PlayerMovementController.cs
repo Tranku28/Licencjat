@@ -49,7 +49,6 @@ namespace GameMechanics.Player
 
         private void Update()
         {
-            Debug.Log(_canMove);
             if (!_canMove) return;
             
             Rotate();

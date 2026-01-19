@@ -8,24 +8,32 @@ namespace Core.Scriptable_Objects
     [CreateAssetMenu(fileName = "PassengerData", menuName = "Scriptable Objects/PassengerData")]
     public class PassengerData : ScriptableObject
     {
-        public Sprite passengerPortrait;
+        [field: SerializeField] public Sprite passengerPortrait {get; private set;}
         
-        public TextAsset inkJSON;
+        [field: SerializeField] public GameObject prefab {get; private set;}
+        [field: SerializeField] public TextAsset inkJSON {get; private set;}
         
-        public string passengerName;
-        public string passengerSurname;
+        [field: SerializeField] public string passengerName {get; private set;}
+        [field: SerializeField] public string passengerSurname {get; private set;}
+        [field: SerializeField] public int dayAppears {get; private set;}
 
-        public int car;
-        public int seat;
+        [field: SerializeField] public int car {get; private set;}
+        [field: SerializeField] public int seat {get; private set;}
         
-        public string destination;
-        public ValidUntil validUntil;
+        [field: SerializeField] public string destination {get; private set;}
+        [field: SerializeField] public ValidUntil validUntil {get; private set;}
+
+        [Header("Card Details")]
+        [field: SerializeField] public string species {get; private set;}
+        [field: SerializeField] public string causeOfDeath {get; private set;}
+        [field: SerializeField, TextArea(3,5)] public string biography {get; private set;}
 
         [Header("Consequences")]
-        public SouvenirData souvenirData;
-        [TextArea(minLines: 5, maxLines: 10)]
-        public string newspaperText, souvenirNote, diaryContent;
-        public string souvenirName;
+        [field: SerializeField] public SouvenirData souvenirData {get; private set;}
+        [field: SerializeField, TextArea(3, 5)] public string newspaperText {get; private set;}
+        [field: SerializeField, TextArea(3, 5)] public string souvenirNote {get; private set;}
+        [field: SerializeField, TextArea(3, 5)] public string diaryContent {get; private set;}
+        [field: SerializeField] public string souvenirName {get; private set;}
 
         public string GetDate()
         {
@@ -38,11 +46,11 @@ namespace Core.Scriptable_Objects
     [Serializable]
     public struct ValidUntil
     {
-        public int Day;
-        public int Month;
-        public int Year;
+        [field: SerializeField] public int Day {get; private set;}
+        [field: SerializeField] public int Month {get; private set;}
+        [field: SerializeField] public int Year {get; private set;}
 
-        public int Hour;
-        public int Minute;
+        [field: SerializeField] public int Hour {get; private set;}
+        [field: SerializeField] public int Minute {get; private set;}
     } 
 }

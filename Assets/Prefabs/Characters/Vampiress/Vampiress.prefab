@@ -26,14 +26,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 876877347200367612}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.21487582, y: 0.6687086, z: -0.3040173}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -4.54, y: 0.159, z: 1.18}
   m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 5431708187568241597}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!114 &4561848948388673170
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -47,7 +47,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   passengerData: {fileID: 11400000, guid: f59162cd698ea344ba9103086900d09b, type: 2}
-  passengerTutorial: {fileID: 11400000, guid: 9484f287e37045a44bb286e3b196cbca, type: 2}
 --- !u!136 &8069898151530528364
 CapsuleCollider:
   m_ObjectHideFlags: 0
