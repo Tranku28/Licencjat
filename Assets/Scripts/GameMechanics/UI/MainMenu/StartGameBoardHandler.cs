@@ -1,8 +1,10 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using Core;
 using Core.Save_System;
 using Player;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -16,6 +18,7 @@ namespace GameMechanics.UI.MainMenu
         private static readonly int Hover = Animator.StringToHash("Hover");
         [Header("General")]
         [SerializeField] private Button startJourneyButton, goBackButton;
+        [SerializeField] private TMP_Text noSaveSlotsText;
         [SerializeField] private List<SaveDisplayerUI> saveDisplayers = new();
 
         [Header("External Dependencies")]
@@ -133,16 +136,25 @@ namespace GameMechanics.UI.MainMenu
 
             if (saves.Length == 5) 
             {
+                StartCoroutine(OnSaveSlotsFull());
                 return;
             }
 
             saveSystem.SaveGame();
+            saveSystem.ReloadSaveOnNewJourney();
             //TODO: Make event to inform player that he can't start new journey (not enough slots)
             
             //TODO: remake tutorial
 
             Debug.Log("OnStartButtonClicked New Journey");
             OnStartButtonClicked();
+        }
+
+        private IEnumerator OnSaveSlotsFull()
+        {
+            noSaveSlotsText.enabled = true;
+            yield return new WaitForSeconds(5f);
+            noSaveSlotsText.enabled = false;
         }
 
         /// <summary>

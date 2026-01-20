@@ -6,13 +6,20 @@ public class PassengerSpawner : MonoBehaviour, ISaveElement
 {
     [SerializeField] private List<PassengerData> passengerDataList = new();
 
+    private void Awake()
+    {
+        (this as ISaveElement).Register(this);
+    }
+
     public void LoadSave(GameSaveData gameSaveData)
     {
         foreach(PassengerData passengerData in passengerDataList)
         {
+            Debug.Log("Spawning NPC's");
             if (passengerData.dayAppears == gameSaveData.CurrentDay)
             {
-                Instantiate(passengerData.prefab);
+                GameObject passenger = Instantiate(passengerData.prefab);
+                passenger.transform.SetParent(transform);
             }
         }
     }

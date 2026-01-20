@@ -9,4 +9,10 @@ public class GameSaveData
         public int[] CollectedSouvenirIdList;
         public string[] DiaryEntries;
         public string[] TutorialNotes;
+
+        public GameSaveData(int currentDay = 1, int harmonyStatus = 100)
+        {
+            CurrentDay = currentDay;
+            HarmonyStatus = harmonyStatus;
+        }
     }

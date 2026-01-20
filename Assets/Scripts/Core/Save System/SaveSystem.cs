@@ -12,7 +12,7 @@ namespace Core.Save_System
         private const string SAVE_FOLDER = "EnchantedExpress";
         private const string SAVE_FILE_BASE_FORMAT = "EnchantedExpress_";
         private const int SAVES_COUNT = 5;
-        private int _loadedSaveIndex;
+        private int _loadedSaveIndex = 0;
         private static string _savePath;
         private List<GameSaveData> _saves = new ();
         private List<ISaveElement> _saveElements = new();
@@ -22,7 +22,6 @@ namespace Core.Save_System
             base.Awake();
 
             _savePath = Path.Combine(Application.persistentDataPath, SAVE_FOLDER);
-            _loadedSaveIndex = 0;
 
             ReadAllSaveData();
         }
@@ -75,6 +74,21 @@ namespace Core.Save_System
             {
                 saveElement.LoadSave(_saves[saveIndex]);
             }
+        }
+
+        public void ReloadSaveOnNewJourney()
+        {
+            foreach (ISaveElement saveElement in _saveElements)
+            {
+                saveElement.LoadSave(_saves[^1]);
+                Debug.Log(_saves[^1].HarmonyStatus);
+            }
+        }
+
+        //TODO: Save slots removing
+        public void RemoveSaveSlot()
+        {
+            
         }
 
         private void ReadAllSaveData()
