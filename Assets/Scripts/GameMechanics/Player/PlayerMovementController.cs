@@ -23,7 +23,7 @@ namespace GameMechanics.Player
         private float _yMoveOffset, _xMoveOffset;
         private float _cameraPitch;
         
-        private bool canMove = false;
+        private bool _canMove = false;
         
         private GameStateMachine _gameStateMachine;
 
@@ -49,7 +49,7 @@ namespace GameMechanics.Player
 
         private void Update()
         {
-            if (!canMove) return;
+            if (!_canMove) return;
             
             Rotate();
             Move();
@@ -62,11 +62,11 @@ namespace GameMechanics.Player
                 || obj == GameState.MainMenu
                 )
             {
-                canMove = false;
+                _canMove = false;
                 return;
             }
             
-            canMove = true;
+            _canMove = true;
         }
         
         private void Move()

@@ -12,21 +12,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acecc751a12ea0244b7bd035b07eda1f, type: 3}
   m_Name: Ghost
   m_EditorClassIdentifier: 
-  passengerPortrait: {fileID: 0}
-  inkJSON: {fileID: 0}
-  passengerName: 
-  passengerSurname: 
-  car: 0
-  seat: 0
-  destination: 
-  validUntil:
-    Day: 0
-    Month: 0
-    Year: 0
-    Hour: 0
-    Minute: 0
-  souvenirData: {fileID: 0}
-  newspaperText: 
-  souvenirNote: 
-  diaryContent: 
-  souvenirName: 
+  <passengerPortrait>k__BackingField: {fileID: 21300000, guid: 050ab3ae83640384f9aaf3f77f94ae7f, type: 3}
+  <prefab>k__BackingField: {fileID: 5868356381961298923, guid: 1add31478c045774d8bca698bb614ebe, type: 3}
+  <inkJSON>k__BackingField: {fileID: 0}
+  <passengerName>k__BackingField: 
+  <passengerSurname>k__BackingField: 
+  <dayAppears>k__BackingField: 2
+  <car>k__BackingField: 0
+  <seat>k__BackingField: 0
+  <destination>k__BackingField: 
+  <validUntil>k__BackingField:
+    <Day>k__BackingField: 0
+    <Month>k__BackingField: 0
+    <Year>k__BackingField: 0
+    <Hour>k__BackingField: 0
+    <Minute>k__BackingField: 0
+  <species>k__BackingField: 
+  <causeOfDeath>k__BackingField: 
+  <biography>k__BackingField: 
+  <souvenirData>k__BackingField: {fileID: 0}
+  <newspaperText>k__BackingField: 
+  <souvenirNote>k__BackingField: 
+  <diaryContent>k__BackingField: 
+  <souvenirName>k__BackingField: 

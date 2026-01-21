@@ -12,7 +12,7 @@ using UnityEngine.UI;
 
 namespace GameMechanics.UI
 {
-    public class DialogueManager : UIElement, IPointerClickHandler
+    public class DialogueManager : UIElement, IPointerClickHandler, ISaveElement
     {
         [SerializeField] TMP_Text displayedText;
         [SerializeField] GameObject choiceContainer;
@@ -23,6 +23,12 @@ namespace GameMechanics.UI
 
         [SerializeField] private TicketMinigame ticketMinigame;
         [SerializeField] private Button showTicketButton;
+
+        private int _ticketsAccepted, _ticketsRejected;
+        private List<int> _souvenirsReceived = new();
+
+        //TODO: Replace with EventHandler
+        public static Action<int> OnHarmonyDecreased;
 
         private Passenger _currentPassenger;
 
@@ -41,6 +47,9 @@ namespace GameMechanics.UI
         public bool ticketScanned => _ticketScanned;
         public bool ticketRejected => _ticketRejected;
 
+        //TODO: To refactor
+        private int _rejectedCount, _scannedCount;
+
         private Awaitable _dialogueAwaitable;
 
         private void Awake()
@@ -53,6 +62,8 @@ namespace GameMechanics.UI
                 
                 _choicesToDisplay.Add(button, buttonTexts);
             }
+
+            (this as ISaveElement).Register(this);
         }
 
         private void OnEnable()
@@ -97,6 +108,7 @@ namespace GameMechanics.UI
             StartStory(passengerArgs.PassengerData);
         }
         
+        //TODO: Observe variable for counting rejected/scanned tickets
         private void StartStory(PassengerData data)
         {
             _story = new Story(data.inkJSON.text);
@@ -110,12 +122,14 @@ namespace GameMechanics.UI
             _story.ObserveVariable("canScan", (string varName, object newValue) =>
             {
                 SetScannable((bool)newValue);
+                //TODO: Rework souvenir give mechanic
+                _souvenirsReceived.Add(data.souvenirData.souvenirID);
             });
             
             _story.ObserveVariable("ticketRejected", (string varName, object newValue) =>
             {
-                Debug.Log(_ticketRejected);
                 _ticketRejected = (bool)newValue;
+                OnHarmonyDecreased?.Invoke(-25);
             });
         }
 
@@ -235,21 +249,7 @@ namespace GameMechanics.UI
         
         private async Awaitable AwaitableDialogueQuit()
         {
-            SaveSystem saveSystem = DependencyResolver.Instance.GetType<SaveSystem>();
-            
-            if (!_ticketRejected)
-            {
-                saveSystem.ticketsAccepted++;
-                saveSystem.souvenirIDs.Add(_currentPassengerData.souvenirData.souvenirID);
-                saveSystem.diaryEntries.Add(_currentPassengerData.diaryContent);
-                saveSystem.SaveToJson();
-                return;
-            }
-                
-            _currentPassenger.gameObject.GetComponent<Collider>().enabled = false;
-            
-            saveSystem.ticketsRejected++;
-            saveSystem.SaveToJson();
+            //TODO: refine save system logic
 
             await blinkPanelUI.ClosePlayerEyes();
             Destroy(_currentPassenger.gameObject);
@@ -263,6 +263,19 @@ namespace GameMechanics.UI
         {
             if (eventData.pointerCurrentRaycast.gameObject.GetComponent<TMP_Text>() == displayedText)
                 StoryHop();
+        }
+
+        public void SaveData(GameSaveData gameSaveData)
+        {
+            gameSaveData.TicketsAccepted = _ticketsAccepted;
+            gameSaveData.TicketsRejected = _ticketsRejected;
+            gameSaveData.CollectedSouvenirIdList.AddRange(_souvenirsReceived);
+        }
+
+        public void LoadSave(GameSaveData gameSaveData)
+        {
+            _ticketsAccepted = gameSaveData.TicketsAccepted;
+            _ticketsRejected = gameSaveData.TicketsRejected;
         }
     }
 }

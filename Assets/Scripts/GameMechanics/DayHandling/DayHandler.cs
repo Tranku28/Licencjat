@@ -12,8 +12,6 @@ namespace GameMechanics.DayHandling
     {
         [SerializeField] private BlinkPanelUI blinkPanelUI;
         [SerializeField] private CinemachineCamera playerCamera, playerCamera2, dayEndCamera;
-        
-        public static Action<int> OnCabinetSpawned;
         public static Action<string> OnDiaryAddContent;
         public static Action<string> OnNewspaperLoadNews;
         private CinemachineBrain _cinemachineBrain;
@@ -34,44 +32,15 @@ namespace GameMechanics.DayHandling
         {
             blinkPanelUI.OnNextDayButtonClicked -= OpenPlayerEyes;
         }
-
-        private void LoadDay()
-        {
-            GameSaveData saveData = DependencyResolver.Instance.
-                    GetType<SaveSystem>().GetSaveData();
-
-
-            foreach (int ID in saveData.CollectedSouvenirIdList)
-            {
-                SpawnSouvenirs(ID);
-            }
-
-            foreach (string entry in saveData.DiaryEntries)
-            {
-                DiaryAddContent(entry);
-            }
-        }
-        
-        private void SpawnSouvenirs(int souvenirId)
-        {
-            OnCabinetSpawned?.Invoke(souvenirId);
-        }
         
         private void DiaryAddContent(string entry)
         {
             OnDiaryAddContent?.Invoke(entry);
         }
 
+        //TODO: Prevent player from ending day without talking to passengers
         public void Interact()
         {
-            SaveSystem saveSystem = DependencyResolver.Instance.
-                    GetType<SaveSystem>();
-
-            if (saveSystem.ticketsAccepted == 0 && saveSystem.ticketsRejected == 0)
-            {
-                return;
-            }
-
             StartCoroutine(SitDownAndProceedToNextDay());
         }
 
@@ -89,7 +58,11 @@ namespace GameMechanics.DayHandling
 
             blinkPanelUI.showNewspaper = true;
             blinkPanelUI.ClosePlayerEyes();
-            LoadDay();
+
+            SaveSystem saveSystem = DependencyResolver.Instance.GetType<SaveSystem>();
+            saveSystem.SaveGame();
+            int saveIndex = saveSystem.RuntimeSaveIndex;
+            saveSystem.LoadSave(saveIndex);
         }
         
         private void OpenPlayerEyes()
