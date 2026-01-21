@@ -12,8 +12,6 @@ namespace GameMechanics.DayHandling
     {
         [SerializeField] private BlinkPanelUI blinkPanelUI;
         [SerializeField] private CinemachineCamera playerCamera, playerCamera2, dayEndCamera;
-        
-        public static Action<int> OnCabinetSpawned;
         public static Action<string> OnDiaryAddContent;
         public static Action<string> OnNewspaperLoadNews;
         private CinemachineBrain _cinemachineBrain;
@@ -34,17 +32,6 @@ namespace GameMechanics.DayHandling
         {
             blinkPanelUI.OnNextDayButtonClicked -= OpenPlayerEyes;
         }
-
-        //TODO: refine load save logic
-        private void LoadDay()
-        {
-            
-        }
-        
-        private void SpawnSouvenirs(int souvenirId)
-        {
-            OnCabinetSpawned?.Invoke(souvenirId);
-        }
         
         private void DiaryAddContent(string entry)
         {
@@ -54,9 +41,6 @@ namespace GameMechanics.DayHandling
         //TODO: Prevent player from ending day without talking to passengers
         public void Interact()
         {
-            SaveSystem saveSystem = DependencyResolver.Instance.
-                    GetType<SaveSystem>();
-
             StartCoroutine(SitDownAndProceedToNextDay());
         }
 
@@ -74,7 +58,11 @@ namespace GameMechanics.DayHandling
 
             blinkPanelUI.showNewspaper = true;
             blinkPanelUI.ClosePlayerEyes();
-            LoadDay();
+
+            SaveSystem saveSystem = DependencyResolver.Instance.GetType<SaveSystem>();
+            saveSystem.SaveGame();
+            int saveIndex = saveSystem.RuntimeSaveIndex;
+            saveSystem.LoadSave(saveIndex);
         }
         
         private void OpenPlayerEyes()

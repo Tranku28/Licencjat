@@ -128,7 +128,6 @@ namespace GameMechanics.UI.MainMenu
             _animator.enabled = false;
         }
 
-        //TODO: Prevent starting new journey when there are 5 saves
         private void OnNewGame()
         {
             SaveSystem saveSystem = DependencyResolver.Instance.GetType<SaveSystem>();
@@ -140,13 +139,10 @@ namespace GameMechanics.UI.MainMenu
                 return;
             }
 
-            saveSystem.SaveGame();
+            saveSystem.SaveGame(true);
             saveSystem.ReloadSaveOnNewJourney();
-            //TODO: Make event to inform player that he can't start new journey (not enough slots)
             
             //TODO: remake tutorial
-
-            Debug.Log("OnStartButtonClicked New Journey");
             OnStartButtonClicked();
         }
 

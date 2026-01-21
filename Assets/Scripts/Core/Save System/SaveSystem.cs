@@ -17,6 +17,8 @@ namespace Core.Save_System
         private List<GameSaveData> _saves = new ();
         private List<ISaveElement> _saveElements = new();
 
+        public int RuntimeSaveIndex => _loadedSaveIndex;
+
         protected override void Awake()
         {
             base.Awake();
@@ -26,12 +28,15 @@ namespace Core.Save_System
             ReadAllSaveData();
         }
 
-        public void SaveGame()
+        public void SaveGame(bool isNewGame = false)
         {
             if (_loadedSaveIndex > SAVES_COUNT) return;
-
-            _saves.Add(new GameSaveData());
-            _loadedSaveIndex = _saves.Count-1;
+            
+            if (isNewGame) 
+            {
+                _saves.Add(new GameSaveData());
+                _loadedSaveIndex = _saves.Count-1;
+            }
 
             try
             {
@@ -80,8 +85,7 @@ namespace Core.Save_System
         {
             foreach (ISaveElement saveElement in _saveElements)
             {
-                saveElement.LoadSave(_saves[^1]);
-                Debug.Log(_saves[^1].HarmonyStatus);
+                saveElement.LoadSave(_saves[_loadedSaveIndex]);
             }
         }
 
@@ -128,6 +132,11 @@ namespace Core.Save_System
             if (_saveElements.Contains(saveElement)) return;
 
             _saveElements.Add(saveElement);
+        }
+
+        private void OnDestroy()
+        {
+            _saveElements.Clear();
         }
 
         public GameSaveData[] GetSaves => _saves.ToArray();

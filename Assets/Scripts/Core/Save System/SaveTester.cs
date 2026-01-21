@@ -2,7 +2,6 @@ using System.Linq;
 using Core;
 using Core.Save_System;
 using Core.Scriptable_Objects;
-using Unity.Android.Gradle;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -50,11 +49,11 @@ public class SaveTester : MonoBehaviour, ISaveElement
     public void SaveData(GameSaveData gameSaveData)
     {
         gameSaveData.CurrentDay = currentDay;
-        gameSaveData.CollectedSouvenirIdList = souvenirs;
-        gameSaveData.DiaryEntries = diaryEntries;
+        gameSaveData.CollectedSouvenirIdList = souvenirs.ToList();
+        gameSaveData.DiaryEntries = diaryEntries.ToList();
         gameSaveData.SaveIndex = saveIndex;
         gameSaveData.TicketsAccepted = ticketsAccepted;
         gameSaveData.TicketsRejected = ticketRejected;
-        gameSaveData.TutorialNotes = tutorialNotes;
+        gameSaveData.TutorialNotes = tutorialNotes.ToList();
     }
 }

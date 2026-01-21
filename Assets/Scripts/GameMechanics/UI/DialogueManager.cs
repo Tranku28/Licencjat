@@ -24,6 +24,12 @@ namespace GameMechanics.UI
         [SerializeField] private TicketMinigame ticketMinigame;
         [SerializeField] private Button showTicketButton;
 
+        private int _ticketsAccepted, _ticketsRejected;
+        private List<int> _souvenirsReceived = new();
+
+        //TODO: Replace with EventHandler
+        public static Action<int> OnHarmonyDecreased;
+
         private Passenger _currentPassenger;
 
         private PassengerData _currentPassengerData;
@@ -56,6 +62,8 @@ namespace GameMechanics.UI
                 
                 _choicesToDisplay.Add(button, buttonTexts);
             }
+
+            (this as ISaveElement).Register(this);
         }
 
         private void OnEnable()
@@ -114,11 +122,14 @@ namespace GameMechanics.UI
             _story.ObserveVariable("canScan", (string varName, object newValue) =>
             {
                 SetScannable((bool)newValue);
+                //TODO: Rework souvenir give mechanic
+                _souvenirsReceived.Add(data.souvenirData.souvenirID);
             });
             
             _story.ObserveVariable("ticketRejected", (string varName, object newValue) =>
             {
                 _ticketRejected = (bool)newValue;
+                OnHarmonyDecreased?.Invoke(-25);
             });
         }
 
@@ -256,17 +267,15 @@ namespace GameMechanics.UI
 
         public void SaveData(GameSaveData gameSaveData)
         {
-            
+            gameSaveData.TicketsAccepted = _ticketsAccepted;
+            gameSaveData.TicketsRejected = _ticketsRejected;
+            gameSaveData.CollectedSouvenirIdList.AddRange(_souvenirsReceived);
         }
 
         public void LoadSave(GameSaveData gameSaveData)
         {
-            throw new NotImplementedException();
-        }
-
-        public void Register()
-        {
-            throw new NotImplementedException();
+            _ticketsAccepted = gameSaveData.TicketsAccepted;
+            _ticketsRejected = gameSaveData.TicketsRejected;
         }
     }
 }

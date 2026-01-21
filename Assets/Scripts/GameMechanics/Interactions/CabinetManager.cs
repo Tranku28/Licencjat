@@ -6,29 +6,42 @@ using GameMechanics.DayHandling;
 
 namespace GameMechanics.Interactions
 {
-    public class CabinetManager : MonoBehaviour
+    public class CabinetManager : MonoBehaviour, ISaveElement
     {
         [SerializeField] private List<Transform> souvenirPositions = new();
         [SerializeField] private SouvenirAtlas souvenirAtlas;
-        
-        private void Start() => DayHandler.OnCabinetSpawned += SpawnSouvenir;
-        private void OnDestroy() => DayHandler.OnCabinetSpawned -= SpawnSouvenir;
 
-        private void SpawnSouvenir(int ID)
+        private List<Souvenir> _souvenirs = new();
+
+        private void Awake()
         {
-            foreach (var souvenirPosition in souvenirPositions)
-            {
-                if (souvenirPosition.childCount != 0) continue;
+            (this as ISaveElement).Register(this);
+        }
 
-                foreach (SouvenirData souvenirData in souvenirAtlas.souvenirs)
+        public void LoadSave(GameSaveData gameSaveData)
+        {
+            SpawnSouvenirs(gameSaveData.CollectedSouvenirIdList.ToArray());
+        }
+
+        //TODO: Refactor to clear in another method on reload
+        public void SaveData(GameSaveData gameSaveData)
+        {
+            foreach(Souvenir souvenir in _souvenirs)
+            {
+                Destroy(souvenir);
+            }
+
+            _souvenirs.Clear();
+        }
+
+        private void SpawnSouvenirs(int[] IDs)
+        {
+            for (int i=0; i < IDs.Length; i++)
+            {
+                if (souvenirAtlas.GetSouvenirDataFromIndex(i, out SouvenirData saveData))
                 {
-                    if (souvenirData.souvenirID == ID)
-                    {
-                        Instantiate(souvenirData.souvenirPrefab, souvenirPosition,  false);
-                    }
+                    Souvenir newSouvenir = Instantiate(saveData.souvenirPrefab, souvenirPositions[i]).GetComponent<Souvenir>();
                 }
-                
-                return;
             }
         }
     }

@@ -17,7 +17,7 @@ MonoBehaviour:
   <inkJSON>k__BackingField: {fileID: 0}
   <passengerName>k__BackingField: 
   <passengerSurname>k__BackingField: 
-  <dayAppears>k__BackingField: 0
+  <dayAppears>k__BackingField: 2
   <car>k__BackingField: 0
   <seat>k__BackingField: 0
   <destination>k__BackingField: 
