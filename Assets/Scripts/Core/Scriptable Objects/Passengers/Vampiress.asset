@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <passengerPortrait>k__BackingField: {fileID: 21300000, guid: c09be1b55c20f48499febe3cc31f4b64, type: 3}
   <prefab>k__BackingField: {fileID: 876877347200367612, guid: 1d1933194e0ea6a4b9fdba81506d17f4, type: 3}
-  <inkJSON>k__BackingField: {fileID: 4900000, guid: e2a34b0d21d903548928a0ee967a17fe, type: 3}
+  <inkJSON>k__BackingField: {fileID: 4900000, guid: baea55cc2673a5245af9dd08b662e70a, type: 3}
   <passengerName>k__BackingField: Charlotte
   <passengerSurname>k__BackingField: Bloodrose
   <dayAppears>k__BackingField: 1
