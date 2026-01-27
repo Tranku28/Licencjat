@@ -22,6 +22,7 @@ Aye. It was purchased long ago. Back when I still believed in a brighter morrow.
 
 ~ speakerIndex = 0
 * [A ‘brighter morrow’?]
+~ speakerIndex = 1
         -> a_brighter_morrow
         
 * [Forgive me, milady, but with an expired ticket, I cannot allow you to proceed with your journey.]
