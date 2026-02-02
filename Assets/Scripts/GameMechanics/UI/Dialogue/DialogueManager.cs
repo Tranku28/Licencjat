@@ -122,7 +122,6 @@ namespace GameMechanics.UI
         {
             _story = new Story(data.inkJSON.text);
             displayedText.enabled = true;
-            StoryHop();
             
             _story.ObserveVariable("speakerIndex", (string varName, object newValue) => {
                 UpdateNameDisplays((int)newValue);
@@ -146,6 +145,13 @@ namespace GameMechanics.UI
         {
             if (_story == null) return;
             
+            if (textPrinter.IsPrinting)
+            {
+                textPrinter.ForcePrintEnd(displayedText);
+                Debug.Log("Forced");
+                return;
+            }
+
             if (_story.canContinue)
             {
                 if (textPrinter.IsPrinting)
@@ -163,12 +169,6 @@ namespace GameMechanics.UI
             
             if (_story.currentChoices.Count > 0)
             {
-                if (!_clickedBeforeChoices)
-                {
-                    _clickedBeforeChoices = true;
-                    return;
-                }
-                
                 ShowChoices();
             }
         }
