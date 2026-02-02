@@ -21,8 +21,12 @@ namespace GameMechanics.UI
         
         [SerializeField] private TMP_Text playerNameText, npcNameText;
 
-        [SerializeField] private TicketMinigame ticketMinigame;
         [SerializeField] private Button showTicketButton;
+
+        [Header("External")]
+        [SerializeField] private TicketMinigame ticketMinigame;
+        [SerializeField] private PassengerPersonalDataLoader personalId;
+
 
         private int _ticketsAccepted, _ticketsRejected;
         private List<int> _souvenirsReceived = new();
@@ -68,14 +72,14 @@ namespace GameMechanics.UI
 
         private void OnEnable()
         {
-            Passenger.OnPassengerInteracted += LoadTicketDataAndStart;
+            Passenger.OnPassengerInteracted += LoadPassengerDataAndStart;
             
             showTicketButton.onClick.AddListener(ToggleTicketDisplay);
         }
 
         private void OnDisable()
         {
-            Passenger.OnPassengerInteracted -= LoadTicketDataAndStart;
+            Passenger.OnPassengerInteracted -= LoadPassengerDataAndStart;
             
             showTicketButton.onClick.RemoveAllListeners();
         }
@@ -95,8 +99,10 @@ namespace GameMechanics.UI
             _ticketScanned = true;
         }
 
-        private void LoadTicketDataAndStart(object sender, PassengerInteractedEventArgs passengerArgs)
+        private void LoadPassengerDataAndStart(object sender, PassengerInteractedEventArgs passengerArgs)
         {
+            personalId.UpdatePassenderID(passengerArgs.PassengerData);
+
             _currentPassenger = sender as Passenger;
             
             _currentPassengerData = passengerArgs.PassengerData;
@@ -238,7 +244,11 @@ namespace GameMechanics.UI
         }
 
         
-        private void ToggleTicketDisplay() => ticketMinigame.ShowUI();
+        private void ToggleTicketDisplay()
+        {
+            ticketMinigame.ShowUI();
+            personalId.gameObject.SetActive(!personalId.gameObject.activeSelf);
+        }
 
         public void HideTicketDisplay() => ticketMinigame.HideUI();
 

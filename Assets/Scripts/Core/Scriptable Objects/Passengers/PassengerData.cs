@@ -1,4 +1,5 @@
 using System;
+using System.Text;
 using Core.Scriptable_Objects.Souvenirs;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -39,6 +40,8 @@ namespace Core.Scriptable_Objects
         {
             return $"{validUntil.Day}.{validUntil.Month:D2}.{validUntil.Year} {validUntil.Hour}:{validUntil.Minute:D2}";
         }
+
+        public string GetFullName() => $"{passengerName} {passengerSurname}";
 
         public int ticketNumber => Random.Range(000000000, 999999999);
     }
