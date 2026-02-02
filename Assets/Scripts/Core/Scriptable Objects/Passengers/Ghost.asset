@@ -18,17 +18,17 @@ MonoBehaviour:
   <passengerName>k__BackingField: Eliah
   <passengerSurname>k__BackingField: 
   <dayAppears>k__BackingField: 2
-  <car>k__BackingField: 0
-  <seat>k__BackingField: 0
+  <car>k__BackingField: 1
+  <seat>k__BackingField: 9
   <destination>k__BackingField: 
   <validUntil>k__BackingField:
-    <Day>k__BackingField: 0
-    <Month>k__BackingField: 0
-    <Year>k__BackingField: 0
-    <Hour>k__BackingField: 0
-    <Minute>k__BackingField: 0
-  <species>k__BackingField: 
-  <causeOfDeath>k__BackingField: 
+    <Day>k__BackingField: 13
+    <Month>k__BackingField: 4
+    <Year>k__BackingField: 1273
+    <Hour>k__BackingField: 18
+    <Minute>k__BackingField: 6
+  <species>k__BackingField: Human
+  <causeOfDeath>k__BackingField: Illness
   <biography>k__BackingField: 
   <souvenirData>k__BackingField: {fileID: 0}
   <newspaperText>k__BackingField: 

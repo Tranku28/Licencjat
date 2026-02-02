@@ -3,10 +3,12 @@ using UI.MainMenu;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using FMOD.Studio;
+using FMODUnity;
 
 namespace GameMechanics.UI.MainMenu
 {
-    public class SettingsPanelController : UIElement, IPointerClickHandler
+    public class SettingsPanelController : UIElement, IPointerDownHandler, IPointerUpHandler, IPointerMoveHandler
     {
         public float offset;
         [SerializeField] private Button goBackButton;
@@ -16,6 +18,14 @@ namespace GameMechanics.UI.MainMenu
         [SerializeField] private RectTransform sfxArrow;
         [SerializeField] private Image musicFill, sfxFill;
 
+        private VCA _musicVCA, _sfxVCA;
+        private bool _clicked;
+
+        void Awake()
+        {
+            RuntimeManager.StudioSystem.getVCA("vca:/Music", out _musicVCA);
+            RuntimeManager.StudioSystem.getVCA("vca:/SFX", out _sfxVCA);
+        }
 
         private void OnEnable()
         {
@@ -32,17 +42,21 @@ namespace GameMechanics.UI.MainMenu
             gameObject.SetActive(false);
         }
         
-        public void OnPointerClick(PointerEventData eventData)
+        public void OnPointerDown(PointerEventData eventData) => _clicked = true;
+
+        public void OnPointerUp(PointerEventData eventData) => _clicked = false;
+
+        public void OnPointerMove(PointerEventData eventData)
         {
+            if (!_clicked) return;
+
             if (eventData.pointerCurrentRaycast.gameObject.GetComponent<Image>() == musicFill)
             {
-                Debug.Log("Raycast on music");
                 RotateArrowTowardCursor(musicArrow, eventData);
             }
 
             if (eventData.pointerCurrentRaycast.gameObject.GetComponent<Image>() == sfxFill)
             {
-                Debug.Log("Raycast on sfx");
                 RotateArrowTowardCursor(sfxArrow, eventData);
             }
         }
@@ -65,25 +79,27 @@ namespace GameMechanics.UI.MainMenu
             {
                 float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 90f;
                 arrow.localRotation = Quaternion.Euler(0f, 0f, angle);
-                UpdateFill(musicFill, eventData.position);
+                UpdateFill(out float audioLevel, musicFill, eventData.position);
+                SetAudioLevel(_musicVCA, audioLevel);
             }
 
             if (arrow == sfxArrow)
             {
                 float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 90;
                 arrow.localRotation = Quaternion.Euler(0f, 0f, angle);
-                UpdateFill(sfxFill, eventData.position);
-                UpdateAudioLevel();
+                UpdateFill(out float audioLevel, sfxFill, eventData.position);
+                SetAudioLevel(_sfxVCA, audioLevel);
             }
         }
 
 
-        public bool UpdateFill(Image image, Vector2 screenPosition, Camera uiCamera = null)
+        public bool UpdateFill(out float value, Image image, Vector2 screenPosition, Camera uiCamera = null)
         {
             RectTransform rt = image.rectTransform;
 
             if (!RectTransformUtility.ScreenPointToLocalPointInRectangle(rt, screenPosition, uiCamera, out Vector2 localPoint))
             {
+                value = 1;
                 return false;
             }
 
@@ -103,13 +119,14 @@ namespace GameMechanics.UI.MainMenu
                 localPoint.x >= rect.xMin && localPoint.x <= rect.xMax &&
                 localPoint.y >= rect.yMin && localPoint.y <= rect.yMax;
 
+            value = image.fillAmount;
             return isInside;
         }
 
 
-        private void UpdateAudioLevel()
+        private void SetAudioLevel(VCA vca, float value)
         {
-            //TODO: Update audio
+            vca.setVolume(value);
         }
     }
 }

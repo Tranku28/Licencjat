@@ -26,6 +26,7 @@ I cannot go there now.
 === a_right_to_continue ===
 You do not yet grasp the gravity of your mistake.
 Generations will remember this decision.
+~ ticketRejected = true
     -> END
 
 
@@ -67,6 +68,7 @@ Yet I condemned the town to death.
 Perhaps you are right.
 Still, I hoped I might atone for my mistake.
 If only I had more time…
+~ ticketRejected = true
     -> END
 
 === hopelessness ===
@@ -102,6 +104,7 @@ But the answer came too late.
 …
 Rules are like diagnoses.
 Not always fair, but always unavoidable.
+~ ticketRejected = true
     -> END
 
 
@@ -131,11 +134,13 @@ I always knew that not every mistake can be undone.
 Yet every choice remains with us forever…
 Look after the Harmony.
 But never forget. It, too, can be wrong.
+~ ticketRejected = true
     -> END
 
 
 === train_will_wait ===
 ~ speakerIndex = 1
+~ canScan = true
 Then perhaps someone else will not repeat my mistake.
 Thank you.
     -> END
