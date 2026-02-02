@@ -55,6 +55,7 @@ namespace GameMechanics.UI
         private int _rejectedCount, _scannedCount;
 
         private Awaitable _dialogueAwaitable;
+        private TextPrinter textPrinter;
 
         private void Awake()
         {
@@ -68,6 +69,8 @@ namespace GameMechanics.UI
             }
 
             (this as ISaveElement).Register(this);
+
+            textPrinter = new TextPrinter();
         }
 
         private void OnEnable()
@@ -118,8 +121,8 @@ namespace GameMechanics.UI
         private void StartStory(PassengerData data)
         {
             _story = new Story(data.inkJSON.text);
-            string text = _story.Continue().Trim();
-            displayedText.text = text;
+            displayedText.enabled = true;
+            StoryHop();
             
             _story.ObserveVariable("speakerIndex", (string varName, object newValue) => {
                 UpdateNameDisplays((int)newValue);
@@ -145,11 +148,17 @@ namespace GameMechanics.UI
             
             if (_story.canContinue)
             {
-                string text = _story.Continue().Trim();
-                displayedText.text = text;
+                if (textPrinter.IsPrinting)
+                {
+                    textPrinter.ForcePrintEnd(displayedText);
+                    return;
+                }
+
+                textPrinter.Print(displayedText, _story.Continue());
                 displayedText.enabled = true;
                 
                 HideChoices();
+                return;
             }
             
             if (_story.currentChoices.Count > 0)
