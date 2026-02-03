@@ -14,8 +14,8 @@ namespace GameMechanics.UI
 {
     public class DialogueManager : UIElement, IPointerClickHandler, ISaveElement
     {
-        [SerializeField] TMP_Text displayedText;
-        [SerializeField] GameObject choiceContainer;
+        [SerializeField] private TMP_Text displayedText;
+        [SerializeField] private GameObject choiceContainer;
         [SerializeField] private float timeBetweenChars;
         [SerializeField] private BlinkPanelUI blinkPanelUI;
         
@@ -121,7 +121,7 @@ namespace GameMechanics.UI
         private void StartStory(PassengerData data)
         {
             _story = new Story(data.inkJSON.text);
-            displayedText.enabled = true;
+            StoryHop();
             
             _story.ObserveVariable("speakerIndex", (string varName, object newValue) => {
                 UpdateNameDisplays((int)newValue);
@@ -148,7 +148,6 @@ namespace GameMechanics.UI
             if (textPrinter.IsPrinting)
             {
                 textPrinter.ForcePrintEnd(displayedText);
-                Debug.Log("Forced");
                 return;
             }
 
@@ -160,8 +159,7 @@ namespace GameMechanics.UI
                     return;
                 }
 
-                textPrinter.Print(displayedText, _story.Continue());
-                displayedText.enabled = true;
+                textPrinter.Print(displayedText, _story.Continue().Trim());
                 
                 HideChoices();
                 return;
