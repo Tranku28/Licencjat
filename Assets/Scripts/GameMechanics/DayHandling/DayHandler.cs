@@ -13,7 +13,6 @@ namespace GameMechanics.DayHandling
         [SerializeField] private BlinkPanelUI blinkPanelUI;
         [SerializeField] private CinemachineCamera playerCamera, playerCamera2, dayEndCamera;
         public static Action<string> OnDiaryAddContent;
-        public static Action<string> OnNewspaperLoadNews;
         private CinemachineBrain _cinemachineBrain;
         private float _cinemachineBlendDuration;
 

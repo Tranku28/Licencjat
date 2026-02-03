@@ -28,7 +28,9 @@ namespace GameMechanics.UI.MainMenu
         public event Action OnGameplayEntered;
         private Animator _animator;
         private Collider _collider;
-        private bool _entered, _tutorialShown;
+        private bool _entered;
+
+        private SaveSystem _saveSystem;
 
         private void Awake()
         {
@@ -42,6 +44,9 @@ namespace GameMechanics.UI.MainMenu
             goBackButton.onClick.AddListener(GoBackButtonClicked);
             
             cameraAnimatorHandler.GameStarted += OnStartGame;
+
+            _saveSystem = DependencyResolver.Instance.GetType<SaveSystem>();
+            _saveSystem.OnSaveDeleted += LoadSaves;
         }
         
         private void OnDisable()
@@ -50,6 +55,8 @@ namespace GameMechanics.UI.MainMenu
             goBackButton.onClick.RemoveListener(GoBackButtonClicked);
             
             cameraAnimatorHandler.GameStarted -= OnStartGame;
+
+            _saveSystem.OnSaveDeleted -= LoadSaves;
         }
 
         public void OnPointerClick(PointerEventData eventData)
@@ -87,12 +94,18 @@ namespace GameMechanics.UI.MainMenu
         //TODO: move it to SaveDisplayer
         private void LoadSaves()
         {
+            foreach(SaveDisplayerUI displayer in saveDisplayers)
+            {
+                displayer.gameObject.SetActive(false);
+            }
+
             GameSaveData[] saves = DependencyResolver.Instance.GetType<SaveSystem>().GetSaves;
             Debug.Log(saves.Length);
             if (saves.Length == 0) return;
 
             for (int i=0; i < saves.Length; i++)
             {
+                saveDisplayers[i].Index = saves[i].SaveIndex;
                 saveDisplayers[i].saveName.text = $"Save {i+1}";
                 saveDisplayers[i].dateSaved.text = $"{saves[i].DateSaved}";
                 saveDisplayers[i].inGameDay.text = $"Day {saves[i].CurrentDay}";

@@ -14,16 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tutorialEntries:
   - id: 0
-    tutorialEntryText: As a conductor, your job is to ensure passenger comfort and
-      check their tickets. Passengers with invalid tickets should leave the train.
+    tutorialEntryText: As a carrier, your task is to carry the souls of the dead
+      to the afterlife and ensure if their ticket and personal data are valid.
   - id: 1
-    tutorialEntryText: To proceed to the next day you have to talk to at least one
-      passenger and reject or validate their ticket.
+    tutorialEntryText: Passengers with invalid tickets or incorrect information are
+      not allowed to travel to the afterlife.
   - id: 2
-    tutorialEntryText: Once you enter a dialogue with a passenger, you cannot leave
-      until you validate or reject the ticket. You can reject the ticket at any time
-      by clicking proper dialogue option. Accepting the ticket is only possible after
-      a properly conducted dialogue.
+    tutorialEntryText: Any violation of the rules will be reported to the Afterlife
+      Legal Department and may result in consequences.
   - id: 3
     tutorialEntryText: By interacting with Diary on your desk you can read short
       recap about what happened earlier. Any thoughts that come to your mind about

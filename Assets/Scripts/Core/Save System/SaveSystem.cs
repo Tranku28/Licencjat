@@ -11,11 +11,13 @@ namespace Core.Save_System
     {
         private const string SAVE_FOLDER = "EnchantedExpress";
         private const string SAVE_FILE_BASE_FORMAT = "EnchantedExpress_";
-        private const int SAVES_COUNT = 5;
+        private const int MAX_SAVES_SLOTS = 5;
         private int _loadedSaveIndex = 0;
         private static string _savePath;
         private List<GameSaveData> _saves = new ();
         private List<ISaveElement> _saveElements = new();
+
+        public event Action OnSaveDeleted;
 
         public int RuntimeSaveIndex => _loadedSaveIndex;
 
@@ -30,11 +32,13 @@ namespace Core.Save_System
 
         public void SaveGame(bool isNewGame = false)
         {
-            if (_loadedSaveIndex > SAVES_COUNT) return;
+            if (_loadedSaveIndex > MAX_SAVES_SLOTS) return;
             
             if (isNewGame) 
             {
-                _saves.Add(new GameSaveData());
+                GameSaveData newGameSaveData = new GameSaveData();
+                newGameSaveData.SaveIndex = _saves.Count;
+                _saves.Add(newGameSaveData);
                 _loadedSaveIndex = _saves.Count-1;
             }
 
@@ -89,15 +93,33 @@ namespace Core.Save_System
             }
         }
 
-        //TODO: Save slots removing
-        public void RemoveSaveSlot()
+        public void DeleteSave(int index)
         {
+            string savePath = Path.Combine(_savePath, $"{SAVE_FILE_BASE_FORMAT}{index}");
             
+            try
+            {
+                File.Delete(savePath);
+            }
+            catch (Exception e)
+            {
+                Debug.LogError($"Failed to delete save: {e}");
+            }
+
+            ReloadSaveData();
+        }
+
+        private void ReloadSaveData()
+        {
+            ReadAllSaveData();
+            OnSaveDeleted?.Invoke();
         }
 
         private void ReadAllSaveData()
         {
-            for(int i=0; i < SAVES_COUNT; i++)
+            _saves.Clear();
+
+            for(int i=0; i < MAX_SAVES_SLOTS; i++)
             {
                 string currentSavePath = Path.Combine(_savePath, $"{SAVE_FILE_BASE_FORMAT}{i}");
 

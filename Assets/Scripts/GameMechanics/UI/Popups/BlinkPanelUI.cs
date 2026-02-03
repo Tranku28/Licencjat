@@ -8,7 +8,7 @@ public class BlinkPanelUI : MonoBehaviour
 {
     [SerializeField] private float effectDuration = 0.4f;
     [SerializeField] private Image panelImage;
-    [SerializeField] private GameObject newspaperPanel;
+    [SerializeField] private GameObject summaryPanel;
     
     private Awaitable _current;
 
@@ -23,7 +23,7 @@ public class BlinkPanelUI : MonoBehaviour
 
     public void OnNextDayButtonClick()
     {
-        newspaperPanel.SetActive(false);
+        summaryPanel.SetActive(false);
         showNewspaper = false;
         OnNextDayButtonClicked?.Invoke();
     }
@@ -60,7 +60,7 @@ public class BlinkPanelUI : MonoBehaviour
         }
         
         if (showNewspaper)
-            newspaperPanel.SetActive(true);
+            summaryPanel.SetActive(true);
         
         panelImage.color = new Color(0f, 0f, 0f, 1f);
         _current = null;
