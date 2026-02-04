@@ -42,13 +42,13 @@ namespace UI.MainMenu
         }
         
         
-        private void StartGame()
+        private void StartGame(bool isNewGame)
         {
             DisableMenu();
             
             GameStateMachine gameStateMachine = DependencyResolver.Instance.GetType<GameStateMachine>();
             
-            gameStateMachine.StartGame();
+            gameStateMachine.StartGame(isNewGame);
         }
 
 

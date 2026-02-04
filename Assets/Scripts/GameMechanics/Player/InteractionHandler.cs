@@ -81,6 +81,7 @@ namespace Player
             }
         }
 
+        // TODO: Refactor it
         public void OnGameStarted()
         {
             GameStarted?.Invoke();

@@ -25,10 +25,11 @@ namespace GameMechanics.UI.MainMenu
         [SerializeField] private InteractionHandler cameraAnimatorHandler;
         [SerializeField] private Animator cameraAnimator;
         
-        public event Action OnGameplayEntered;
+        public event Action<bool> OnGameplayEntered;
         private Animator _animator;
         private Collider _collider;
         private bool _entered;
+        private bool _newGame = false;
 
         private SaveSystem _saveSystem;
 
@@ -128,6 +129,7 @@ namespace GameMechanics.UI.MainMenu
 
         private void OnStartButtonClicked()
         {
+            // TODO: Fix game start is controlled inside animation invoke method in Interactionhandler
             cameraAnimator.SetBool(GameStarted, true);
             _animator.SetBool(ZoomIn, false);
             _animator.SetBool(Hover, false);
@@ -136,13 +138,16 @@ namespace GameMechanics.UI.MainMenu
 
         private void OnStartGame()
         {
-            OnGameplayEntered?.Invoke();
+            OnGameplayEntered?.Invoke(_newGame);
             cameraAnimator.enabled = false;
             _animator.enabled = false;
+            _newGame = false;
         }
 
         private void OnNewGame()
         {
+            _newGame = true;
+
             SaveSystem saveSystem = DependencyResolver.Instance.GetType<SaveSystem>();
             GameSaveData[] saves = saveSystem.GetSaves;
 
