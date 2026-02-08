@@ -8,11 +8,15 @@ namespace GameMechanics.Interactions
     {
         [SerializeField] private TutorialData diaryTutorial;
         public static Action OnDiaryInteracted;
-        private bool _tutorialShown;
     
         public void Interact()
         {
             OnDiaryInteracted?.Invoke();
+        }
+
+        public string GetName()
+        {
+            return "Diary";
         }
     }
 }

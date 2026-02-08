@@ -14,17 +14,144 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tutorialEntries:
   - id: 0
-    tutorialEntryText: As a conductor, your job is to ensure passenger comfort and
-      check their tickets. Passengers with invalid tickets should leave the train.
+    tutorialEntryText: 'Conductor,
+
+      
+
+      If you are reading this document,
+      it means you have been assigned to duty aboard an Interworld Train.
+
+      So
+      not ask why it is you.
+
+      Do not ask where this train is truly headed.
+
+      
+
+      Your
+      role has been clearly defined..'
   - id: 1
-    tutorialEntryText: To proceed to the next day you have to talk to at least one
-      passenger and reject or validate their ticket.
+    tutorialEntryText: 'Guard the Harmony.
+
+      Maintain order.
+
+      Ensure
+      that every soul reaches where it is meant to go.
+
+      
+
+      The train
+      under your care is a Bridge.
+
+      It connects the world of the viking with
+      what lies beyond.
+
+      Not all passengers are aware that their journey has
+      already ended.'
   - id: 2
-    tutorialEntryText: Once you enter a dialogue with a passenger, you cannot leave
-      until you validate or reject the ticket. You can reject the ticket at any time
-      by clicking proper dialogue option. Accepting the ticket is only possible after
-      a properly conducted dialogue.
+    tutorialEntryText: 'Guard the Harmony.
+
+      Maintain order.
+
+      Ensure
+      that every soul reaches where it is meant to go.
+
+      
+
+      The train
+      under your care is a Bridge.
+
+      It connects the world of the viking with
+      what lies beyond.
+
+      Not all passengers are aware that their journey has
+      already ended.'
   - id: 3
-    tutorialEntryText: By interacting with Diary on your desk you can read short
-      recap about what happened earlier. Any thoughts that come to your mind about
-      the passengers you spoke with will be recorded here.
+    tutorialEntryText: 'You are the Conductor.
+
+      
+
+      Not a judge.
+
+      Not
+      a savior.
+
+      Not an executioner.
+
+      
+
+      Your task is not to
+      pass judgement upon the deeds of the passengers, but to enforce the rules of
+      passage.
+
+      Yet remember - every decision you make affects the delicate
+      balance of the Train and yourself.'
+  - id: 4
+    tutorialEntryText: 'Keep in mind -
+
+      Rules exist so that the Train may
+      continue its journey.
+
+
+      During each shift you will:
+
+      walk between
+      the carriages of the Train,
+
+      speak with travelers,
+
+      inspect their
+      tickets and Life Cards,'
+  - id: 5
+    tutorialEntryText: 'Each passenger must be verified for:
+
+      ticket validity,
+
+      consistency
+      of name and personal data,
+
+      date of passage,
+
+      and any other detected
+      anomalies.'
+  - id: 6
+    tutorialEntryText: 'Remember! Some tickets are issued incorrectly. Others may
+      have long expired. There are also passengers who should never have boarded
+      the Train at all. All anomalies should be reported to your superiors. '
+  - id: 7
+    tutorialEntryText: 'The Train operates through Harmony.  Every decision you make
+      influences the level of Harmony. And the level of Harmony determines the condition
+      of the Train. When Harmony weakens: lights may begin to flicker, music may
+      fade or distort, your own memories may begin to blur. '
+  - id: 8
+    tutorialEntryText: "Every shift leaves a mark.  To occupy your thoughts, our
+      Dear Employee, we have provided you with a Conductor\u2019s Journal. You may
+      record your thoughts, reflections, and memories within it. Use it freely, it
+      is yours alone. It will not be reviewed.. "
+  - id: 9
+    tutorialEntryText: 'Final note,
+
+      
+
+      Not every story deserves to
+      continue.
+
+      Not every soul is ready to reach its destination.
+
+      
+
+      Your
+      task is not to mend the world.
+
+      Your task is to keep the Train moving.
+
+      
+
+      Guard
+      the Harmony.
+
+      And do not ask too many questions.
+
+      
+
+      *signature*'

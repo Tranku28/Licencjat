@@ -14,8 +14,8 @@ namespace GameMechanics.UI
 {
     public class DialogueManager : UIElement, IPointerClickHandler, ISaveElement
     {
-        [SerializeField] TMP_Text displayedText;
-        [SerializeField] GameObject choiceContainer;
+        [SerializeField] private TMP_Text displayedText;
+        [SerializeField] private GameObject choiceContainer;
         [SerializeField] private float timeBetweenChars;
         [SerializeField] private BlinkPanelUI blinkPanelUI;
         
@@ -55,6 +55,7 @@ namespace GameMechanics.UI
         private int _rejectedCount, _scannedCount;
 
         private Awaitable _dialogueAwaitable;
+        private TextPrinter textPrinter;
 
         private void Awake()
         {
@@ -68,6 +69,8 @@ namespace GameMechanics.UI
             }
 
             (this as ISaveElement).Register(this);
+
+            textPrinter = new TextPrinter();
         }
 
         private void OnEnable()
@@ -118,8 +121,7 @@ namespace GameMechanics.UI
         private void StartStory(PassengerData data)
         {
             _story = new Story(data.inkJSON.text);
-            string text = _story.Continue().Trim();
-            displayedText.text = text;
+            StoryHop();
             
             _story.ObserveVariable("speakerIndex", (string varName, object newValue) => {
                 UpdateNameDisplays((int)newValue);
@@ -143,23 +145,28 @@ namespace GameMechanics.UI
         {
             if (_story == null) return;
             
+            if (textPrinter.IsPrinting)
+            {
+                textPrinter.ForcePrintEnd(displayedText);
+                return;
+            }
+
             if (_story.canContinue)
             {
-                string text = _story.Continue().Trim();
-                displayedText.text = text;
-                displayedText.enabled = true;
+                if (textPrinter.IsPrinting)
+                {
+                    textPrinter.ForcePrintEnd(displayedText);
+                    return;
+                }
+
+                textPrinter.Print(displayedText, _story.Continue().Trim());
                 
                 HideChoices();
+                return;
             }
             
             if (_story.currentChoices.Count > 0)
             {
-                if (!_clickedBeforeChoices)
-                {
-                    _clickedBeforeChoices = true;
-                    return;
-                }
-                
                 ShowChoices();
             }
         }

@@ -16,12 +16,19 @@ namespace Core
         }
 
         public static Action<GameState> OnGameStateChanged;
-        public static Action OnGameStarted;
+        public static Action<bool> OnGameStarted;
 
-        public void StartGame()
+        public void StartGame(bool isNewGame)
         {
+            if (isNewGame)
+            {
+                ChangeGameState(GameState.UIOpened);
+                OnGameStarted?.Invoke(true);
+                return;
+            }
+
             ChangeGameState(GameState.Gameplay);
-            OnGameStarted?.Invoke();
+            OnGameStarted?.Invoke(false);
         }
         
         public GameState GetGameState() => _gameState;

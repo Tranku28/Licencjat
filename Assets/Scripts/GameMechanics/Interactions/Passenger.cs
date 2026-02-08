@@ -12,6 +12,11 @@ namespace Interactions
         
         public static event EventHandler<PassengerInteractedEventArgs> OnPassengerInteracted;
 
+        public string GetName()
+        {
+            return passengerData.passengerName;
+        }
+
         public void Interact()
         {
             OnPassengerInteracted?.Invoke(this, new PassengerInteractedEventArgs(passengerData));

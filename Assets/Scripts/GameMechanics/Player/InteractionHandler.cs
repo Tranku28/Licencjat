@@ -14,6 +14,7 @@ namespace Player
         [SerializeField] private float tickDuration;
 
         [SerializeField] private GameObject interactionUI;
+        [SerializeField] private TMP_Text interactionObjectName;
         private IInteractable _currentInteractable;
         
         [Range(0.5f, 3f)]
@@ -74,6 +75,8 @@ namespace Player
                     if (!hit.collider || !hit.collider.TryGetComponent(out IInteractable interactable)) continue;
                     
                     _currentInteractable = interactable;
+                    interactionObjectName.text = interactable.GetName();
+
                     break;
                 }
 
@@ -81,6 +84,7 @@ namespace Player
             }
         }
 
+        // TODO: Refactor it
         public void OnGameStarted()
         {
             GameStarted?.Invoke();

@@ -9,6 +9,11 @@ public class Souvenir : MonoBehaviour, IInteractable
 
     public static event Action<PassengerData> OnSouvenirInteracted;
 
+    public string GetName()
+    {
+        return souvenirData.souvenirName;
+    }
+
     public void Interact()
     {
         OnSouvenirInteracted?.Invoke(souvenirData);
