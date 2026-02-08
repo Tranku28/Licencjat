@@ -109,7 +109,7 @@ namespace GameMechanics.UI
             _currentPassenger = sender as Passenger;
             
             _currentPassengerData = passengerArgs.PassengerData;
-            ticketMinigame.UpdateTicketUI(passengerArgs.PassengerData);
+            ticketMinigame.SetupTicketUI(passengerArgs.PassengerData);
             npcNameText.text = passengerArgs.PassengerData.passengerName;
             _ticketScanned = false;
             _ticketRejected = false;
@@ -257,7 +257,11 @@ namespace GameMechanics.UI
             personalId.gameObject.SetActive(!personalId.gameObject.activeSelf);
         }
 
-        public void HideTicketDisplay() => ticketMinigame.HideUI();
+        public void HideTicketDisplay()
+        {
+            ticketMinigame.HideUI();
+            personalId.gameObject.SetActive(false);
+        }
 
         public void OnDialogueQuit()
         {
