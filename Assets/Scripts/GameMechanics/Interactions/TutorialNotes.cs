@@ -31,4 +31,9 @@ public class TutorialNotes : MonoBehaviour, IInteractable
             OnTutorialNotesInteracted?.Invoke();
         }
     }
+
+    public string GetName()
+    {
+        return "Notes";
+    }
 }

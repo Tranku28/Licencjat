@@ -30,7 +30,7 @@ MonoBehaviour:
   <species>k__BackingField: Human
   <causeOfDeath>k__BackingField: Illness
   <biography>k__BackingField: 
-  <souvenirData>k__BackingField: {fileID: 0}
+  <souvenirData>k__BackingField: {fileID: 11400000, guid: a3a373d80c4248241a9e0d5376bb21ff, type: 2}
   <newspaperText>k__BackingField: 
   <souvenirNote>k__BackingField: 
   <diaryContent>k__BackingField: 

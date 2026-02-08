@@ -80,5 +80,10 @@ namespace GameMechanics.DayHandling
 
             blinkPanelUI.OpenPlayerEyes();
         }
+
+        public string GetName()
+        {
+            return "Proceed to the next day";
+        }
     }
 }

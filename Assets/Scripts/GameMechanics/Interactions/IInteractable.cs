@@ -7,5 +7,6 @@ namespace GameMechanics.Interactions
         public static Action<IInteractable> OnHover;
         public static Action OnHoverExit;
         public void Interact();
+        public string GetName();
     }
 }
