@@ -3,6 +3,7 @@ using GameMechanics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+//TODO: fix orientation
 public class PuncherMover : MonoBehaviour
 {
     [SerializeField] private new Camera camera;
@@ -42,7 +43,7 @@ public class PuncherMover : MonoBehaviour
             _ => 0f
         };
         
-        transform.rotation = _initialRotation * Quaternion.Euler(0f, targetY, 0f);
+        transform.localRotation = _initialRotation * Quaternion.Euler(0f, targetY, 0f);
 
         _orientation = e.Orientation;
     }

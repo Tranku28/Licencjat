@@ -1,7 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Core;
-using Core.Save_System;
 using Core.Scriptable_Objects;
 using Ink.Runtime;
 using Interactions;
@@ -12,6 +10,23 @@ using UnityEngine.UI;
 
 namespace GameMechanics.UI
 {
+    //TODO: Break down class into smaller manageable pieces
+    public class DialogueEndEventArgs : EventArgs
+    {
+        public string PassengerAction;
+        public string Decision;
+        public string HarmonyValue;
+        public string RuleBroken;
+
+        public DialogueEndEventArgs(string passengerAction, string decision, string harmonyValue, string ruleBroken = null)
+        {
+            PassengerAction = passengerAction;
+            Decision = decision;
+            HarmonyValue = harmonyValue;
+            RuleBroken = ruleBroken;
+        }
+    }
+
     public class DialogueManager : UIElement, IPointerClickHandler, ISaveElement
     {
         [SerializeField] private TMP_Text displayedText;
@@ -33,6 +48,7 @@ namespace GameMechanics.UI
 
         //TODO: Replace with EventHandler
         public static Action<int> OnHarmonyDecreased;
+        public static EventHandler<DialogueEndEventArgs> OnDialogueQuitEvent;
 
         private Passenger _currentPassenger;
 
@@ -52,10 +68,13 @@ namespace GameMechanics.UI
         public bool ticketRejected => _ticketRejected;
 
         //TODO: To refactor
-        private int _rejectedCount, _scannedCount;
+        private int _rejectedCount, _scannedCount, _harmonyValue;
+        private RuleBreak _ruleBroken = RuleBreak.CorrectTicket;
 
         private Awaitable _dialogueAwaitable;
-        private TextPrinter textPrinter;
+        private TextPrinter _textPrinter;
+
+        private RulesValidator _rulesValidator;
 
         private void Awake()
         {
@@ -70,7 +89,8 @@ namespace GameMechanics.UI
 
             (this as ISaveElement).Register(this);
 
-            textPrinter = new TextPrinter();
+            _textPrinter = new TextPrinter();
+            _rulesValidator = new RulesValidator();
         }
 
         private void OnEnable()
@@ -137,6 +157,7 @@ namespace GameMechanics.UI
             _story.ObserveVariable("ticketRejected", (string varName, object newValue) =>
             {
                 _ticketRejected = (bool)newValue;
+                _harmonyValue = -25;
                 OnHarmonyDecreased?.Invoke(-25);
             });
         }
@@ -145,21 +166,21 @@ namespace GameMechanics.UI
         {
             if (_story == null) return;
             
-            if (textPrinter.IsPrinting)
+            if (_textPrinter.IsPrinting)
             {
-                textPrinter.ForcePrintEnd(displayedText);
+                _textPrinter.ForcePrintEnd(displayedText);
                 return;
             }
 
             if (_story.canContinue)
             {
-                if (textPrinter.IsPrinting)
+                if (_textPrinter.IsPrinting)
                 {
-                    textPrinter.ForcePrintEnd(displayedText);
+                    _textPrinter.ForcePrintEnd(displayedText);
                     return;
                 }
 
-                textPrinter.Print(displayedText, _story.Continue().Trim());
+                _textPrinter.Print(displayedText, _story.Continue().Trim());
                 
                 HideChoices();
                 return;
@@ -265,6 +286,19 @@ namespace GameMechanics.UI
 
         public void OnDialogueQuit()
         {
+            Debug.Log(_currentPassenger);
+            Debug.Log(_harmonyValue);
+            Debug.Log(_rulesValidator);
+
+            OnDialogueQuitEvent?.Invoke(
+                this,
+                new DialogueEndEventArgs(
+                    _currentPassenger.PassengerData.passengerAction,
+                    "approved",
+                    _harmonyValue.ToString(),
+                    _rulesValidator.GetBrokenRule(_ruleBroken)
+                    ));
+
             _dialogueAwaitable = AwaitableDialogueQuit();
         }
         

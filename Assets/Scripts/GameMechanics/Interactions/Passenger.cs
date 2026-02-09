@@ -9,6 +9,7 @@ namespace Interactions
     {
         [SerializeField] private PassengerData passengerData;
         private bool _tutorialShown;
+        public PassengerData PassengerData => passengerData;
         
         public static event EventHandler<PassengerInteractedEventArgs> OnPassengerInteracted;
 

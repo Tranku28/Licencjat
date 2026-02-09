@@ -1,6 +1,8 @@
 
 using System;
 using Core;
+using Core.Save_System;
+using GameMechanics.UI;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,9 +14,10 @@ public class BlinkPanelUI : MonoBehaviour
     
     private Awaitable _current;
 
-    public bool showNewspaper { get; set; }
+    public bool showDaySummary { get; set; }
 
     public event Action OnNextDayButtonClicked;
+    public static Action OnSummaryDisplay;
     
     private void OnDestroy()
     {
@@ -24,7 +27,7 @@ public class BlinkPanelUI : MonoBehaviour
     public void OnNextDayButtonClick()
     {
         summaryPanel.SetActive(false);
-        showNewspaper = false;
+        showDaySummary = false;
         OnNextDayButtonClicked?.Invoke();
     }
     
@@ -59,8 +62,17 @@ public class BlinkPanelUI : MonoBehaviour
             panelImage.color = new Color(0f, 0f, 0f, Mathf.Clamp01(currentAlpha));
         }
         
-        if (showNewspaper)
+        if (showDaySummary)
+        {
             summaryPanel.SetActive(true);
+            OnSummaryDisplay?.Invoke();
+            
+            SaveSystem saveSystem = DependencyResolver.Instance.GetType<SaveSystem>();
+            saveSystem.SaveGame();
+            int saveIndex = saveSystem.RuntimeSaveIndex;
+            saveSystem.LoadSave(saveIndex);
+        }
+
         
         panelImage.color = new Color(0f, 0f, 0f, 1f);
         _current = null;

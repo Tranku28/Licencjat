@@ -3,6 +3,8 @@ using System.Collections;
 using Core;
 using Core.Save_System;
 using GameMechanics.Interactions;
+using GameMechanics.UI;
+using Interactions;
 using Unity.Cinemachine;
 using UnityEngine;
 
@@ -15,6 +17,7 @@ namespace GameMechanics.DayHandling
         public static Action<string> OnDiaryAddContent;
         private CinemachineBrain _cinemachineBrain;
         private float _cinemachineBlendDuration;
+        private bool _canNextDay;
 
         void Awake()
         {
@@ -25,21 +28,29 @@ namespace GameMechanics.DayHandling
         private void Start()
         {
             blinkPanelUI.OnNextDayButtonClicked += OpenPlayerEyes;
+            Passenger.OnPassengerInteracted += AllowNextDay;
+        }
+
+        private void AllowNextDay(object sender, PassengerInteractedEventArgs e)
+        {
+            _canNextDay = true;
         }
 
         private void OnDestroy()
         {
             blinkPanelUI.OnNextDayButtonClicked -= OpenPlayerEyes;
-        }
-        
-        private void DiaryAddContent(string entry)
-        {
-            OnDiaryAddContent?.Invoke(entry);
+            Passenger.OnPassengerInteracted -= AllowNextDay;
         }
 
         //TODO: Prevent player from ending day without talking to passengers
         public void Interact()
         {
+            if (!_canNextDay)
+            {
+                return;
+            }
+
+            _canNextDay = false;
             StartCoroutine(SitDownAndProceedToNextDay());
         }
 
@@ -55,13 +66,8 @@ namespace GameMechanics.DayHandling
             dayEndCamera.Prioritize();
             yield return new WaitForSeconds(_cinemachineBlendDuration);
 
-            blinkPanelUI.showNewspaper = true;
+            blinkPanelUI.showDaySummary = true;
             blinkPanelUI.ClosePlayerEyes();
-
-            SaveSystem saveSystem = DependencyResolver.Instance.GetType<SaveSystem>();
-            saveSystem.SaveGame();
-            int saveIndex = saveSystem.RuntimeSaveIndex;
-            saveSystem.LoadSave(saveIndex);
         }
         
         private void OpenPlayerEyes()

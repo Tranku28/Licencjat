@@ -12,6 +12,7 @@ namespace GameMechanics.Player
         [SerializeField] private bool canSprint;
         [SerializeField] private float sprintMultiplier;
         [SerializeField] private float stepSoundCooldown = 0.5f;
+        [SerializeField] private float stepDistance;
         
         private float _currentTime = 0;
         private Camera _playerCamera;
@@ -26,6 +27,9 @@ namespace GameMechanics.Player
         private bool _canMove = false;
         
         private GameStateMachine _gameStateMachine;
+        private Vector2 _moveInputVector;
+        private Vector3 _previousDistance;
+        private bool _stepDone;
 
         private void Awake()
         {
@@ -67,18 +71,21 @@ namespace GameMechanics.Player
             }
             
             _canMove = true;
+            _previousDistance = transform.position;
         }
         
         private void Move()
         {
-            var input = _moveInput.ReadValue<Vector2>();
+            _moveInputVector = _moveInput.ReadValue<Vector2>();
         
-            if (input == Vector2.zero) return;
+            if (_moveInputVector == Vector2.zero) return;
             
             _currentTime += Time.deltaTime;
+            _stepDone = Vector3.Distance(transform.position, _previousDistance) > stepDistance;
 
-            if (_currentTime > stepSoundCooldown)
+            if (_stepDone && _currentTime > stepSoundCooldown)
             {
+                _previousDistance = transform.position;
                 _currentTime = 0;
                 AudioManager.Instance.PlayOneShot(FMODEvents.Instance.stepSound, transform.position);
             }
@@ -87,14 +94,14 @@ namespace GameMechanics.Player
             {
                 float sprint = sprintMultiplier = canSprint ? sprintMultiplier : 1;
             
-                var move = new Vector3(input.x * moveSpeed * sprint, 0f, input.y * moveSpeed * sprint);
+                var move = new Vector3(_moveInputVector.x * moveSpeed * sprint, 0f, _moveInputVector.y * moveSpeed * sprint);
                 var moveDirection = transform.TransformDirection(move);
         
                 _characterController.SimpleMove(moveDirection);
             }
             else
             {
-                var move = new Vector3(input.x * moveSpeed, 0f, input.y * moveSpeed);
+                var move = new Vector3(_moveInputVector.x * moveSpeed, 0f, _moveInputVector.y * moveSpeed);
                 var moveDirection = transform.TransformDirection(move);
         
                 _characterController.SimpleMove(moveDirection);

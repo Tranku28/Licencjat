@@ -74,9 +74,10 @@ namespace GameMechanics
 
             foreach (Image hole in holesList)
             {
-                Destroy(hole);
-                holesList.Remove(hole);
+                Destroy(hole.gameObject);
             }
+
+            holesList.Clear();
         }
 
         public void ShowUI() => visual.SetActive(!visual.activeSelf);

@@ -25,7 +25,7 @@ Aye. It was purchased long ago. Back when I still believed in a brighter morrow.
 ~ speakerIndex = 1
         -> a_brighter_morrow
         
-* [Forgive me, milady, but with an expired ticket, I cannot allow you to proceed with your journey.]
+* [Forgive me, milady, but with an expired ticket, I cannot allow you to proceed with your journey (refuse)]
     ~ speakerIndex = 1
     …Time is but a fragile notion.
     I possess too much of it.
@@ -43,7 +43,7 @@ Back then, my dreams had yet to be buried beneath dust and silence.
 * [Your dreams, milady? Could you be more specific?]
     -> regret
 
-* [Forgive me, milady, but with an expired ticket, I cannot allow you to proceed with your journey.]
+* [Forgive me, milady, but with an expired ticket, I cannot allow you to proceed with your journey (refuse)]
     ~ speakerIndex = 1
     … Perhaps they were right after all.
     One cannot live upon dreams alone.
@@ -69,7 +69,7 @@ And now I bear the weight of that regret…
 * [Why such remorse?]
     -> remorse
 
-* [Forgive me, but regardless of your reason - with an expired ticket, I cannot let you pass.]
+* [Forgive me, but regardless of your reason - with an expired ticket, I cannot let you pass (refuse)]
     ~ speakerIndex = 1
     … And yet nothing has changed…
     Men still despise and fear the dreams and wishes of other beings.
@@ -88,7 +88,7 @@ I regret that I lacked the courage. The courage to defy the elders. The courage 
     -> beloved_man
 * [Olivier?]
     -> is_dying
-* [Forgive me, but regardless of your reason - with an expired ticket, I cannot let you pass.]
+* [Forgive me, but regardless of your reason - with an expired ticket, I cannot let you pass (refuse)]
     ~ speakerIndex = 1
     … And yet nothing has changed…
     Men still despise and fear the dreams and wishes of other beings.
@@ -112,7 +112,7 @@ I lacked the voice to speak his name aloud - to tell the world how deeply I love
     -> beloved_man
 * [Olivier?]
     -> olivier
-* [Forgive me, but regardless of your reason - with an expired ticket, I cannot let you pass.]
+* [Forgive me, but regardless of your reason - with an expired ticket, I cannot let you pass (refuse)]
     ~ speakerIndex = 1
     …I should have done it long ago.
     When there was still time.
@@ -146,7 +146,7 @@ Tell me, how could such a thing be?
     My beloved is dying. A mortal man, his time nearly spent - while I have far too much of mine.
     Young man, please… have mercy. Allow me to see him, if only this once. Now that I have finally learned what truly matters.
     -> final_decision
-* [I wish I knew the answer to your question, madam. Still… your ticket has expired. You must alight at the next station.]
+* [I wish I knew the answer to your question, madam. Still… your ticket has expired. You must alight at the next station (refuse)]
     ~ speakerIndex = 1
     …And yet, I was wrong.
     We were never meant for one another. For had we been, fate would have guided us together…
@@ -178,7 +178,7 @@ Tell me, how could such a thing be?
     My beloved is dying. A mortal man, his time nearly spent - while I have far too much of mine.
     Young man, please… have mercy. Allow me to see him, if only this once. Now that I have finally learned what truly matters.
     -> final_decision
-* [I wish I knew the answer to your question, madam. Still… your ticket has expired. You must alight at the next station.]
+* [I wish I knew the answer to your question, madam. Still… your ticket has expired. You must alight at the next station (refuse)]
     ~ speakerIndex = 1
     …And yet, I was wrong.
     We were never meant for one another. For had we been, fate would have guided us together…
@@ -189,7 +189,7 @@ Tell me, how could such a thing be?
 
 === final_decision ===
 ~ speakerIndex = 0
-* [… Very well. Upon mine own responsibility, you may proceed to your destination.]
+* [… Very well. Upon mine own responsibility, you may proceed to your destination (accept)]
     ~ speakerIndex = 1
     ~ canScan = true
     Thank you, young man. You have my eternal gratitude.
@@ -197,7 +197,7 @@ Tell me, how could such a thing be?
     It alone knows the way.
     -> END
 
-* [I cannot do that, madam. I must obey the rules.]
+* [I cannot do that, madam. I must obey the rules (refuse)]
     ~ speakerIndex = 1
     … Rules…
     We all have them.

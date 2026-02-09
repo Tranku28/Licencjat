@@ -35,7 +35,7 @@ public class PassengerSpawner : MonoBehaviour, ISaveElement
         //TODO: Refactor save logic
         currentPassengers.ForEach(p =>
         {
-            Destroy(p);
+            Destroy(p.gameObject);
         });
 
         currentPassengers.Clear();
