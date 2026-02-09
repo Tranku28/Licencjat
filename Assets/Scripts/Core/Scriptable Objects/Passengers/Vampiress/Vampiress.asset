@@ -12,12 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acecc751a12ea0244b7bd035b07eda1f, type: 3}
   m_Name: Vampiress
   m_EditorClassIdentifier: 
+  passengerVariants: []
   <passengerPortrait>k__BackingField: {fileID: 21300000, guid: c09be1b55c20f48499febe3cc31f4b64, type: 3}
   <prefab>k__BackingField: {fileID: 876877347200367612, guid: 1d1933194e0ea6a4b9fdba81506d17f4, type: 3}
-  <inkJSON>k__BackingField: {fileID: 4900000, guid: baea55cc2673a5245af9dd08b662e70a, type: 3}
   <passengerName>k__BackingField: Charlotte
   <passengerSurname>k__BackingField: Bloodrose
   <dayAppears>k__BackingField: 1
+  <dialogueVariants>k__BackingField:
+  - {fileID: 4900000, guid: 8c5748690d846344ca3cb338dc0c2bec, type: 3}
+  - {fileID: 4900000, guid: 662755d7c9130dd40a206b7d58e4f254, type: 3}
+  - {fileID: 4900000, guid: 28ff599536384ca4fb8bae099407c89f, type: 3}
   <car>k__BackingField: 1
   <seat>k__BackingField: 17
   <destination>k__BackingField: Maplewood
@@ -33,7 +37,6 @@ MonoBehaviour:
     her father\u2019s death, she took over the family business. However, she never
     married, and the Bloodrose line ended with her."
   <souvenirData>k__BackingField: {fileID: 11400000, guid: 9445aa4f19727c1499a6df95d5250517, type: 2}
-  <newspaperText>k__BackingField: A body of a dead woman was found
   <souvenirNote>k__BackingField: "\u201CYou once said the night would never end.\r\nBut
     you were wrong - \r\nIt ends the moment someone dares to light a candle.\r\n\r\nYou
     were my light.\u201D\r\n\r\nThere is also short note on the back:\r\n\r\n\u201CLove

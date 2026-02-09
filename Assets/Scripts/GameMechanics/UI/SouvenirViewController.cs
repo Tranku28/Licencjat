@@ -12,9 +12,11 @@ public class SouvenirViewController : UIElement
     [SerializeField] private Transform souvenirContainer;
     [SerializeField] private float souvenirContainerRotationSpeed;
 
+    private Souvenir _lastSouvenir;
+
     private Quaternion souvenirPrefabContainerInitialRotation;
 
-    private int rotationDir = 0;
+    private int _rotationDir = 0;
 
     private void Awake()
     {
@@ -31,9 +33,9 @@ public class SouvenirViewController : UIElement
 
     void Update()
     {
-        if (rotationDir == 0) return;
+        if (_rotationDir == 0) return;
 
-        souvenirContainer.rotation *= Quaternion.Euler(0, rotationDir * souvenirContainerRotationSpeed, 0);
+        souvenirContainer.rotation *= Quaternion.Euler(0, _rotationDir * souvenirContainerRotationSpeed, 0);
     }
 
     private void OnDestroy()
@@ -46,31 +48,36 @@ public class SouvenirViewController : UIElement
 
     private void ShowNextSouvenirData()
     {
-        if (rotationDir == -1) 
+        if (_rotationDir == -1) 
         {
-            rotationDir = 0;
+            _rotationDir = 0;
             return;
         }
 
-        rotationDir = 1;
+        _rotationDir = 1;
     }
 
     private void ShowPreviousSouvenirData()
     {
-        if (rotationDir == 1) 
+        if (_rotationDir == 1) 
         {
-            rotationDir = 0;
+            _rotationDir = 0;
             return;
         }
 
-        rotationDir = -1;
+        _rotationDir = -1;
     }
     
+    //TODO: disable items instead of Destroy
     private void LoadSouvenirWindow(PassengerData obj)
     {
+        _rotationDir = 0;
+
+        if (_lastSouvenir != null) Destroy(_lastSouvenir.gameObject);
+
         souvenirName.text = obj.souvenirName;
         souvenirDescription.text = obj.souvenirNote;
         receivedFrom.text = $"Received from: {obj.passengerName} {obj.passengerSurname}";
-        Instantiate(obj.souvenirData.souvenirPrefab, souvenirContainer);
+        _lastSouvenir = Instantiate(obj.souvenirData.souvenirPrefab, souvenirContainer).GetComponent<Souvenir>();
     }
 }

@@ -22,7 +22,7 @@ namespace UI.MainMenu
         [SerializeField] private QuitGameCandleHandler candleQuit;
         
         [Header("Menu Panels")]
-        [SerializeField] private GameObject settingsPanel;
+        [SerializeField] private SettingsPanelController settingsPanel;
         [SerializeField] private GameObject creditsPanel;
         
         private Camera _playerCamera;
@@ -54,7 +54,7 @@ namespace UI.MainMenu
 
         private void GoToSettings()
         {
-            settingsPanel.SetActive(true);
+            settingsPanel.SetVisualVisibility(true);
         }
 
         private void GoToCredits()

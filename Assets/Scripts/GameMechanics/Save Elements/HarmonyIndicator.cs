@@ -1,9 +1,10 @@
 using System;
+using GameMechanics.Interactions;
 using GameMechanics.UI;
 using TMPro;
 using UnityEngine;
 
-public class HarmonyIndicator : MonoBehaviour, ISaveElement
+public class HarmonyIndicator : MonoBehaviour, ISaveElement, IInteractable
 {
     //TODO: deserialize
     [SerializeField] private int _harmonyStatus = 100;
@@ -50,5 +51,15 @@ public class HarmonyIndicator : MonoBehaviour, ISaveElement
     public void SaveData(GameSaveData gameSaveData)
     {
         gameSaveData.HarmonyStatus = _harmonyStatus;
+    }
+
+    public void Interact()
+    {
+        //TODO: Future interact mechanics
+    }
+
+    public string GetName()
+    {
+        return $"Harmony: {_harmonyStatus}%";
     }
 }

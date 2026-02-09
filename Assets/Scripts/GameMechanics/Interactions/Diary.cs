@@ -6,7 +6,6 @@ namespace GameMechanics.Interactions
 {
     public class Diary : MonoBehaviour, IInteractable
     {
-        [SerializeField] private TutorialData diaryTutorial;
         public static Action OnDiaryInteracted;
     
         public void Interact()

@@ -7,26 +7,24 @@ using UnityEngine.UI;
 
 namespace GameMechanics.UI
 {
-    // TODO: String content on diary pages loading
-    public class DiaryController : UIElement
+    public class DiaryController : UIElement, ISaveElement
     {
         [SerializeField] private Button nextPageButton;
         [SerializeField] private Button prevPageButton;
+        [SerializeField] private TMP_Text leftEntryField, rightEntryField;
+
+        private int _pageIndex;
         
-        [SerializeField] private TMP_Text leftPageText, rightPageText;
-        
-        private int _diaryPageIndex;
-        
-        private List<string> _diaryContents = new();
+        private List<PassengerEntry> _passengerEntries = new();
 
         private void Start()
         {
-            DayHandler.OnDiaryAddContent += AddDiaryContent;
+            DialogueManager.OnDialogueQuitEvent += AddEntry;
         }
 
         private void OnDestroy()
         {
-            DayHandler.OnDiaryAddContent -= AddDiaryContent;
+            DialogueManager.OnDialogueQuitEvent += AddEntry;
         }
 
         private void OnEnable()
@@ -41,20 +39,61 @@ namespace GameMechanics.UI
             prevPageButton.onClick.RemoveListener(TurnPreviousPage);
         }
 
-        private void AddDiaryContent(string content)
+        public void SetDefaultDiaryState()
         {
-            _diaryContents.Add(content);
-            leftPageText.text = _diaryContents[0];
+            _pageIndex = 0;
+            DisplayEntry(_pageIndex);
+            prevPageButton.gameObject.SetActive(false);
         }
         
         private void TurnNextPage()
         {
-            Debug.Log("TurnNextPage");
+            _pageIndex++;
+            if (_pageIndex >= _passengerEntries.Count)
+            {
+                nextPageButton.gameObject.SetActive(false);
+            }
+
+            prevPageButton.gameObject.SetActive(true);
         }
         
         private void TurnPreviousPage()
         {
-            Debug.Log("TurnPreviousPage");
+            _pageIndex--;
+            if (_pageIndex <= 0)
+            {
+                prevPageButton.gameObject.SetActive(false);
+            }
+
+            DisplayEntry(_pageIndex);
+            nextPageButton.gameObject.SetActive(true);
+        }
+
+        private void DisplayEntry(int index)
+        {
+            if (_passengerEntries.Count == 0) return;
+            leftEntryField.text = _passengerEntries[index].GeneralEntry;
+            rightEntryField.text = _passengerEntries[index].EncounterEntry;
+        }
+
+        private void AddEntry(object sender, DialogueEndEventArgs e)
+        {
+            _passengerEntries.Add(new PassengerEntry(e.GeneralEntry, e.EncounterEntry));
+        }
+
+        public void SaveData(GameSaveData gameSaveData)
+        {
+            gameSaveData.PassengerEntries.Clear();
+            gameSaveData.PassengerEntries.AddRange(_passengerEntries);
+
+            _passengerEntries.Clear();
+        }
+
+        public void LoadSave(GameSaveData gameSaveData)
+        {
+            _passengerEntries.Clear();
+
+            _passengerEntries.AddRange(gameSaveData.PassengerEntries);
         }
     }
 }

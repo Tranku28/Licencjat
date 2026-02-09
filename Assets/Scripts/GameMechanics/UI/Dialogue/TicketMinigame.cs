@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Core;
 using Core.Scriptable_Objects;
 using GameMechanics.UI;
@@ -23,6 +24,8 @@ namespace GameMechanics
         [SerializeField] private TMP_Text passengerSeatNumber;
         [SerializeField] private TMP_Text ticketNumberText;
         [SerializeField] private Image passengerPortrait;
+
+        private List<Image> holesList = new();
 
         public event Action OnTicketScanned;
         
@@ -55,15 +58,26 @@ namespace GameMechanics
             _camera = Camera.main;
         }
 
-        public void UpdateTicketUI(PassengerData data)
+        public void SetupTicketUI(PassengerData data)
         {
             passengerFullNameText.text = $"{data.passengerName} {data.passengerSurname}";
             passengerCarNumber.text = data.car.ToString();
             passengerSeatNumber.text = data.seat.ToString();
-            ticketNumberText.text = $"No. {data.ticketNumber.ToString()}";
+            ticketNumberText.text = $"No. {data.ticketNumber}";
             passengerDestinationText.text = data.destination;
             passengerExpireDateText.text = data.GetDate();
             passengerPortrait.sprite = data.passengerPortrait;
+
+            _canScan = false;
+
+            if (holesList.Count == 0) return;
+
+            foreach (Image hole in holesList)
+            {
+                Destroy(hole.gameObject);
+            }
+
+            holesList.Clear();
         }
 
         public void ShowUI() => visual.SetActive(!visual.activeSelf);
@@ -125,7 +139,8 @@ namespace GameMechanics
                     Camera.main,
                     out Vector2 localPoint))
             {
-                var hole = Instantiate(holeImage, visual.transform);
+                Image hole = Instantiate(holeImage, visual.transform);
+                holesList.Add(hole);
                 
                 hole.rectTransform.anchoredPosition = localPoint;
                 hole.rectTransform.localRotation = Quaternion.identity;

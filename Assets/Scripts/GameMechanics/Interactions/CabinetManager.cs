@@ -41,6 +41,7 @@ namespace GameMechanics.Interactions
                 if (souvenirAtlas.GetSouvenirDataFromIndex(i, out SouvenirData saveData))
                 {
                     Souvenir newSouvenir = Instantiate(saveData.souvenirPrefab, souvenirPositions[i]).GetComponent<Souvenir>();
+                    _souvenirs.Add(newSouvenir);
                 }
             }
         }
