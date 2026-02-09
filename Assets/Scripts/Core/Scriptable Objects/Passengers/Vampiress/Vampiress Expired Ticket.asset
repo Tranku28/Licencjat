@@ -14,24 +14,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <passengerPortrait>k__BackingField: {fileID: 21300000, guid: c09be1b55c20f48499febe3cc31f4b64, type: 3}
   <prefab>k__BackingField: {fileID: 876877347200367612, guid: 1d1933194e0ea6a4b9fdba81506d17f4, type: 3}
-  <inkJSON>k__BackingField: {fileID: 0}
-  <passengerName>k__BackingField: 
-  <passengerAction>k__BackingField: 
-  <passengerSurname>k__BackingField: 
+  <inkJSON>k__BackingField: {fileID: 4900000, guid: 662755d7c9130dd40a206b7d58e4f254, type: 3}
+  <passengerName>k__BackingField: Charlotte
+  <passengerActions>k__BackingField: []
+  <passengerSurname>k__BackingField: Bloodrose
   <dayAppears>k__BackingField: 0
-  <car>k__BackingField: 0
-  <seat>k__BackingField: 0
-  <destination>k__BackingField: 
+  <car>k__BackingField: 1
+  <seat>k__BackingField: 17
+  <destination>k__BackingField: Maplewood
   <validUntil>k__BackingField:
-    <Day>k__BackingField: 0
-    <Month>k__BackingField: 0
-    <Year>k__BackingField: 0
-    <Hour>k__BackingField: 0
-    <Minute>k__BackingField: 0
-  <species>k__BackingField: 
-  <causeOfDeath>k__BackingField: 
-  <biography>k__BackingField: 
-  <souvenirData>k__BackingField: {fileID: 0}
-  <souvenirNote>k__BackingField: 
+    <Day>k__BackingField: 12
+    <Month>k__BackingField: 4
+    <Year>k__BackingField: 1203
+    <Hour>k__BackingField: 11
+    <Minute>k__BackingField: 30
+  <species>k__BackingField: Vampire
+  <causeOfDeath>k__BackingField: Sunlight
+  <biography>k__BackingField: "The firstborn daughter of the Bloodrose family. After
+    her father\u2019s death, she took over the family business. However, she never
+    married, and the Bloodrose line ended with her."
+  <souvenirData>k__BackingField: {fileID: 11400000, guid: 9445aa4f19727c1499a6df95d5250517, type: 2}
+  <souvenirNote>k__BackingField: "\u201CYou once said the night would never end.\nBut
+    you were wrong - \nIt ends the moment someone dares to light a candle.\n\nYou
+    were my light.\u201D\n\nThere is also short note on the back:\n\n\u201CLove ~\nEven
+    when the world forbiddeth it.\nFor love alone is the law worth breaking.\u201D\n"
   <diaryContent>k__BackingField: 
-  <souvenirName>k__BackingField: 
+  <souvenirName>k__BackingField: The Old Necklace
