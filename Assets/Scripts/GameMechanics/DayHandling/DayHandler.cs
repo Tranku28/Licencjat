@@ -14,7 +14,6 @@ namespace GameMechanics.DayHandling
     {
         [SerializeField] private BlinkPanelUI blinkPanelUI;
         [SerializeField] private CinemachineCamera playerCamera, playerCamera2, dayEndCamera;
-        public static Action<string> OnDiaryAddContent;
         private CinemachineBrain _cinemachineBrain;
         private float _cinemachineBlendDuration;
         private bool _canNextDay;

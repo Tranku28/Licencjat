@@ -7,6 +7,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 namespace GameMechanics.UI
 {
@@ -15,14 +16,18 @@ namespace GameMechanics.UI
     {
         public string PassengerAction;
         public string Decision;
-        public string HarmonyValue;
+        public int HarmonyValue;
         public string RuleBroken;
+        public string GeneralEntry;
+        public string EncounterEntry;
 
-        public DialogueEndEventArgs(string passengerAction, string decision, string harmonyValue, string ruleBroken = null)
+        public DialogueEndEventArgs(string passengerAction, string decision, int harmonyValue, string generalEntry, string encounterEntry, string ruleBroken = null)
         {
             PassengerAction = passengerAction;
             Decision = decision;
             HarmonyValue = harmonyValue;
+            GeneralEntry = generalEntry;
+            EncounterEntry = encounterEntry;
             RuleBroken = ruleBroken;
         }
     }
@@ -69,12 +74,15 @@ namespace GameMechanics.UI
 
         //TODO: To refactor
         private int _rejectedCount, _scannedCount, _harmonyValue;
-        private RuleBreak _ruleBroken = RuleBreak.CorrectTicket;
+        private string _brokenRule;
 
         private Awaitable _dialogueAwaitable;
         private TextPrinter _textPrinter;
 
         private RulesValidator _rulesValidator;
+        private string _passengerAction;
+        private string _generalEntry;
+        private string _encounterEntry;
 
         private void Awake()
         {
@@ -133,6 +141,7 @@ namespace GameMechanics.UI
             npcNameText.text = passengerArgs.PassengerData.passengerName;
             _ticketScanned = false;
             _ticketRejected = false;
+            _passengerAction = "";
             
             StartStory(passengerArgs.PassengerData);
         }
@@ -140,7 +149,8 @@ namespace GameMechanics.UI
         //TODO: Observe variable for counting rejected/scanned tickets
         private void StartStory(PassengerData data)
         {
-            _story = new Story(data.inkJSON.text);
+            int randomDialogueIndex = Random.Range(0, data.dialogueVariants.Count-1);
+            _story = new Story(data.dialogueVariants[randomDialogueIndex].ToString());
             StoryHop();
             
             _story.ObserveVariable("speakerIndex", (string varName, object newValue) => {
@@ -160,6 +170,32 @@ namespace GameMechanics.UI
                 _ticketRejected = (bool)newValue;
                 _harmonyValue = -25;
                 OnHarmonyDecreased?.Invoke(-25);
+            });
+
+            _story.ObserveVariable("passengerAction", (string varName, object newValue) =>
+            {
+                _passengerAction = newValue.ToString();
+            });
+
+            _story.ObserveVariable("harmony", (string varName, object newValue) =>
+            {
+                _harmonyValue = (int)newValue;
+            }
+            );
+
+            _story.ObserveVariable("brokenRule", (string varName, object newValue) =>
+            {
+                _brokenRule = newValue.ToString();
+            });
+
+            _story.ObserveVariable("generalEntry", (string varName, object newValue) =>
+            {
+                _generalEntry = newValue.ToString();
+            });
+
+            _story.ObserveVariable("encounterEntry", (string varName, object newValue) =>
+            {
+                _encounterEntry = newValue.ToString();
             });
         }
 
@@ -294,10 +330,12 @@ namespace GameMechanics.UI
             OnDialogueQuitEvent?.Invoke(
                 this,
                 new DialogueEndEventArgs(
-                    _currentPassenger.PassengerData.passengerAction,
+                    _passengerAction,
                     "approved",
-                    _harmonyValue.ToString(),
-                    _rulesValidator.GetBrokenRule(_ruleBroken)
+                    _harmonyValue,
+                    _generalEntry,
+                    _encounterEntry,
+                    _brokenRule
                     ));
 
             _dialogueAwaitable = AwaitableDialogueQuit();

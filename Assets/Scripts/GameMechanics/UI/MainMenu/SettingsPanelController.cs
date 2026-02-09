@@ -5,6 +5,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using FMOD.Studio;
 using FMODUnity;
+using System;
 
 namespace GameMechanics.UI.MainMenu
 {
@@ -20,6 +21,8 @@ namespace GameMechanics.UI.MainMenu
 
         private VCA _musicVCA, _sfxVCA;
         private bool _clicked;
+
+        public static Action OnSettingsQuit;
 
         void Awake()
         {
@@ -39,7 +42,7 @@ namespace GameMechanics.UI.MainMenu
 
         private void BackToMainMenu()
         {
-            gameObject.SetActive(false);
+            SetVisualVisibility(false);
         }
         
         public void OnPointerDown(PointerEventData eventData) => _clicked = true;

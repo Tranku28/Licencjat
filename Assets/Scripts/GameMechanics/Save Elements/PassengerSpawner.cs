@@ -11,6 +11,7 @@ public class PassengerSpawner : MonoBehaviour, ISaveElement
     private void Awake()
     {
         (this as ISaveElement).Register(this);
+        currentPassengers.Clear();
     }
 
     void OnDestroy()

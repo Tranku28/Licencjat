@@ -10,14 +10,15 @@ namespace GameMechanics.UI
         private CachedSummary _summary;
         private struct CachedSummary
         {
-            public string PassengerAction, Decision, HarmonyValue, RuleBreak;
+            public string PassengerAction, Decision, RuleBroken;
+            public int HarmonyValue;
 
-            public CachedSummary(string passengerAction, string decision, string harmony, string ruleBreak = null)
+            public CachedSummary(string passengerAction, string decision, int harmony, string ruleBreak)
             {
                 PassengerAction = passengerAction;
                 Decision = decision;
                 HarmonyValue = harmony;
-                RuleBreak = ruleBreak;
+                RuleBroken = ruleBreak;
             }
         }
 
@@ -42,17 +43,20 @@ namespace GameMechanics.UI
 
         public void DisplaySummary()
         {
-            if (string.IsNullOrEmpty(_summary.RuleBreak))
+            string harmonyFormat = _summary.HarmonyValue > 0 ? $"+{_summary.HarmonyValue}" : $"{_summary.HarmonyValue}";
+            if (string.IsNullOrEmpty(_summary.RuleBroken))
                 ruleBreak.enabled = false;
             else
                 ruleBreak.enabled = true;
+
+            Debug.Log(_summary.RuleBroken);
 
             _textPrinter
                 .BeginChain()
                 .ThenPrint(passengerAction, _summary.PassengerAction)
                 .ThenPrint(decision, $"Decision: {_summary.Decision}")
-                .ThenPrint(harmonyValue, $"Harmony Status: (+{_summary.HarmonyValue})")
-                .ThenPrint(ruleBreak, string.IsNullOrEmpty(_summary.RuleBreak) ? "" : _summary.RuleBreak)
+                .ThenPrint(harmonyValue, $"Harmony Status: {harmonyFormat}")
+                .ThenPrint(ruleBreak, string.IsNullOrEmpty(_summary.RuleBroken) ? "" : _summary.RuleBroken)
                 .OnChainComplete(() =>
                 {
                     Debug.Log("Summary Finished");

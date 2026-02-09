@@ -1,1 +1,227 @@
-﻿
+VAR speakerIndex = -1
+VAR canScan = false
+VAR ticketRejected = false
+VAR harmony = 0
+VAR passengerAction = ""
+VAR decision = ""
+VAR brokenRule = ""
+VAR generalEntry = ""
+VAR encounterEntry = ""
+
+~ generalEntry = "Tonight, a woman boarded the train. Young, at first glance, yet her eyes held something... ancient. Her ticket had a different name. When I told her, she smiled - as though time itself had long since lost meaning. And she started to talk about her life before all this. She should not have been here. And yet, I felt that this train had been waiting for her all along. This train carries more than passengers."
+~ speakerIndex = 0
+Good evening, madam. Your ticket, please.
+
+~ speakerIndex = 1
+Charlotte Bloodrose.
+
+~ speakerIndex = 0
+Good evening, Miss Bloodrose. Your ticket, please.
+
+~ speakerIndex = 1
+Here it is. Station Maplewood, one-way ticket. No return.
+
+~ speakerIndex = 0
+Understood. And may I ask the purpose of you journey?
+
+~ speakerIndex = 1
+I am bound for a meeting… though, in truth, it comes many years too late.
+
+~ speakerIndex = 0
+Madam, your name doesn’t match with the one on the ticket....
+
+~ speakerIndex = 1
+Aye. It is the nickname my beloved called me once… Till this day it feels like an unfulfilled dream.
+
+* [Unfulfilled dream?] -> unfunfilled_dream
+* [Forgive me, milady, but with an incorrect ticket, I cannot allow you to proceed with your journey (refuse)] -> cannot_allow_1
+
+=== cannot_allow_1 ===
+~ speakerIndex = 1
+…Time is but a fragile notion.
+I possess too much of it.
+Others, far too little.
+I shall alight at the next station…
+~ harmony = -25
+~ ticketRejected = true
+~ decision = "Disapproved"
+~ passengerAction = "Charlotte didn’t reach the designated destination"
+~ encounterEntry = "I did not let her continue. I said, those are the rules. She did not protest. She merely bowed her head and vanished before the next station. I cannot stop thinking about her. That perhaps she only wished to say goodbye. That what I saw as breach of order, was, for her, a final chance. Perhaps that is why I am here, to decide who arrives in time, and who remains behind."
+~ passengerAction = "Charlotte personal data was incorrect and you didn’t let her pass."
+    -> END
+
+=== unfunfilled_dream ===
+~ speakerIndex = 1
+Ah, yes…
+Something that you want to chase so dearly… Yet none of your dreams did come true…
+
+* [Your dreams, milady? Could you be more specific?] -> dreams
+* [Forgive me, milady, but with an incorrect ticket, I cannot allow you to proceed with your journey (refuse)] -> cannot_allow_2
+
+=== cannot_allow_2 ===
+~ speakerIndex = 1
+… Perhaps they were right after all.
+One cannot live upon dreams alone.
+Thank you for reminding me of that truth, just as I began to doubt it.
+~ ticketRejected = true
+~ harmony = -25
+~ decision = "Disapproved"
+~ passengerAction = "Charlotte didn’t reach the designated destination"
+~ encounterEntry = "I did not let her continue. I said, those are the rules. She did not protest. She merely bowed her head and vanished before the next station. I cannot stop thinking about her. That perhaps she only wished to say goodbye. That what I saw as breach of order, was, for her, a final chance. Perhaps that is why I am here, to decide who arrives in time, and who remains behind."
+~ passengerAction = "Charlotte personal data was incorrect and you didn’t let her pass."
+    -> END
+
+
+=== dreams ===
+~ speakerIndex = 1
+You see, young man, not every dream is meant to come true.
+Especially those that are….
+Forbidden.
+Improper.
+When one’s dreams offend others, there is no escape…
+Unless one possesses the courage to defy them.
+I….
+I lacked that courage…
+And now I bear the weight of that regret…
+
+* [What is it that you regret, madam?] -> regret
+* [Why such remorse?] -> why_such_remorse
+* [Forgive me, but regardless of your reason - with an incorrect ticket, I cannot let you pass (refuse)] -> cannot_allow_3
+
+=== cannot_allow_3 ===
+… And yet nothing has changed…
+Men still despise and fear the dreams and wishes of other beings.
+~ ticketRejected = true
+~ harmony = -25
+~ decision = "Disapproved"
+~ passengerAction = "Charlotte didn’t reach the designated destination"
+~ encounterEntry = "I did not let her continue. I said, those are the rules. She did not protest. She merely bowed her head and vanished before the next station. I cannot stop thinking about her. That perhaps she only wished to say goodbye. That what I saw as breach of order, was, for her, a final chance. Perhaps that is why I am here, to decide who arrives in time, and who remains behind."
+~ passengerAction = "Charlotte personal data was incorrect and you didn’t let her pass."
+    -> END
+
+=== regret ===
+~ speakerIndex = 1
+Love.
+Or rather, my failure to follow it. 
+Not chasing after it.
+Not daring to reach for it.
+I regret that I lacked the courage. The courage to defy the elders. The courage to say “no”.
+I lacked the voice to speak his name aloud - to tell the world how deeply I loved my Olivier.
+
+* [Your husband?] -> husband
+* [Olivier] -> olivier
+* [Forgive me, but regardless of your reason - with an incorrect ticket, I cannot let you pass (refuse)] -> cannot_allow_4
+
+=== cannot_allow_4 ===
+~ speakerIndex = 1
+…I should have done it long ago.
+When there was still time.
+But now…
+… Forget it.
+~ ticketRejected = true
+~ harmony = -25
+~ decision = "Disapproved"
+~ passengerAction = "Charlotte didn’t reach the designated destination"
+~ encounterEntry = "I did not let her continue. I said, those are the rules. She did not protest. She merely bowed her head and vanished before the next station. I cannot stop thinking about her. That perhaps she only wished to say goodbye. That what I saw as breach of order, was, for her, a final chance. Perhaps that is why I am here, to decide who arrives in time, and who remains behind."
+~ passengerAction = "Charlotte personal data was incorrect and you didn’t let her pass."
+    -> END
+
+
+=== why_such_remorse ===
+Had I but possessed courage… had I only dared… 
+My life might have taken another course.
+And yet… I…
+I lacked the voice to speak his name aloud - to tell the world how deeply I loved my Olivier.
+
+* [Your husband?] -> husband
+* [Olivier] -> olivier
+* [Forgive me, but regardless of your reason - with an incorrect ticket, I cannot let you pass (refuse)] -> cannot_allow_4
+
+
+
+=== husband ===
+~ speakerIndex = 1
+My beloved.
+Husband he never was - my mistakes forbade it.
+We met in our youth. I, a fledgling vampire, struggling to master my instincts. He, a tender-hearted human boy.
+The son of a hunter… And I, a noble’s daughter.
+Our kinds were never meant to meet. And yet…
+And yet, with him, my hunger stilled and my power obeyed. He taught me restraint, I taught him composure.
+Though born of two opposing worlds, we fit together like pieces of the same design.
+Tell me, how could such a thing be?
+
+* [I wish I knew the answer to your question, madam. But I do know this, love chooses none of us.] -> love_chooses
+* [I wish I had the answers for your questions, milady…] -> it_matters_not
+* [I wish I knew the answer to your question, madam. Still… your ticket is incorrect. You must alight at the next station (refuse)] -> cannot_allow_5
+
+
+=== olivier ===
+Olivier… My dearest heart.
+We met in our youth. I, a fledgling vampire, struggling to master my instincts. He, a tender-hearted human boy.
+The son of a hunter… And I, a noble’s daughter.
+Our kinds were never meant to meet. And yet…
+And yet, with him, my hunger stilled and my power obeyed. He taught me restraint, I taught him composure.
+Though born of two opposing worlds, we fit together like pieces of the same design.
+Tell me, how could such a thing be?
+
+* [I wish I knew the answer to your question, madam. But I do know this, love chooses none of us.] -> love_chooses
+* [I wish I had the answers for your questions, milady…] -> it_matters_not
+* [I wish I knew the answer to your question, madam. Still… your ticket is incorrect. You must alight at the next station (refuse)] -> cannot_allow_5
+
+=== cannot_allow_5 ===
+…And yet, I was wrong.
+We were never meant for one another. For had we been, fate would have guided us together…
+Would it not..?
+~ ticketRejected = true
+~ harmony = -25
+~ decision = "Disapproved"
+~ passengerAction = "Charlotte didn’t reach the designated destination"
+~ encounterEntry = "I did not let her continue. I said, those are the rules. She did not protest. She merely bowed her head and vanished before the next station. I cannot stop thinking about her. That perhaps she only wished to say goodbye. That what I saw as breach of order, was, for her, a final chance. Perhaps that is why I am here, to decide who arrives in time, and who remains behind."
+~ passengerAction = "Charlotte personal data was incorrect and you didn’t let her pass."
+    -> END
+
+=== love_chooses ===
+… It chooses none of us…
+Love is cruel.
+Or perhaps… it is we who are cruel?
+
+* [… Very well. Upon mine own responsibility, you may proceed to your destination (accept)] -> accept
+* [I cannot do that, madam. I must obey the rules (refuse)] -> cannot_allow_6
+
+=== it_matters_not ===
+.. It matters not, young man. Some questions are best left unanswered.
+Or wait until we find the courage to face them ourselves.
+My beloved is dying. A mortal man, his time nearly spent - while I have far too much of mine.
+Young man, please… have mercy. Allow me to see him, if only this once. Now that I have finally learned what truly matters.
+
+* [… Very well. Upon mine own responsibility, you may proceed to your destination (accept)] -> accept
+* [I cannot do that, madam. I must obey the rules (refuse)] -> cannot_allow_6
+
+=== cannot_allow_6 ===
+… Rules…
+We all have them.
+We all chase unseen purposes.
+But remember, young man.
+~ ticketRejected = true
+~ harmony = -25
+~ decision = "Disapproved"
+~ passengerAction = "Charlotte didn’t reach the designated destination"
+~ encounterEntry = "I did not let her continue. I said, those are the rules. She did not protest. She merely bowed her head and vanished before the next station. I cannot stop thinking about her. That perhaps she only wished to say goodbye. That what I saw as breach of order, was, for her, a final chance. Perhaps that is why I am here, to decide who arrives in time, and who remains behind."
+~ passengerAction = "Charlotte personal data was incorrect and you didn’t let her pass."
+    -> END
+
+=== accept ===
+Thank you, young man. You have my eternal gratitude.
+But remember, never ignore your heart.
+It alone knows the way.
+~ canScan = true
+~ harmony = 25
+~ decision = "Approved"
+~ passengerAction = "Charlotte reached the designated destination"
+~ encounterEntry = "I let her pass. I do not know why. Perhaps because in her eyes I saw something I have long forgotten - hope. She said she was going to see her beloved, one last time. A mortal man, dying. They should never have existed in the same world and yet, there was more life in her voice than in many hearts I’ve met along this endless route. Little did she know that she's already dead herself."
+~ passengerAction = "Charlotte personal data was incorrect, but you let her pass"
+~ brokenRule = "Invalid Personal Data."
+    -> END
+
+
+

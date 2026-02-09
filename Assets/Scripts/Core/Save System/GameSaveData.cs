@@ -9,6 +9,6 @@ public class GameSaveData
         public int TicketsAccepted;
         public int TicketsRejected;
         public List<int> CollectedSouvenirIdList = new();
-        public List<string> DiaryEntries = new();
+        public List<PassengerEntry> PassengerEntries = new();
         public List<string> TutorialNotes = new();
     }

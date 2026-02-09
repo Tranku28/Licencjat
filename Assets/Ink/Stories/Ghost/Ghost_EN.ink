@@ -1,6 +1,14 @@
 VAR speakerIndex = -1
 VAR canScan = false
 VAR ticketRejected = false
+VAR harmony = 0
+VAR passengerAction = ""
+VAR decision = ""
+VAR brokenRule = ""
+VAR generalEntry = ""
+VAR encounterEntry = ""
+
+~ generalEntry = "Today I met a doctor, who was late for his own solution. He said that the time wasn’t the one who let him down."
 
 ~ speakerIndex = 0
 Your ticket, please.
@@ -27,6 +35,10 @@ I cannot go there now.
 You do not yet grasp the gravity of your mistake.
 Generations will remember this decision.
 ~ ticketRejected = true
+~ encounterEntry = "I reported him. He broke the rules. He should have known better. He wanted to fix the world. And I wanted to keep everything in order."
+~ passengerAction = "The Ghost reached the designated destination."
+~ decision = "Approved"
+~ harmony = -25
     -> END
 
 
@@ -69,6 +81,10 @@ Perhaps you are right.
 Still, I hoped I might atone for my mistake.
 If only I had more time…
 ~ ticketRejected = true
+~ encounterEntry = "I reported him. He broke the rules. He should have known better. He wanted to fix the world. And I wanted to keep everything in order."
+~ passengerAction = "The Ghost reached the designated destination."
+~ decision = "Approved"
+~ harmony = -25
     -> END
 
 === hopelessness ===
@@ -104,7 +120,11 @@ But the answer came too late.
 …
 Rules are like diagnoses.
 Not always fair, but always unavoidable.
+~ encounterEntry = "I reported him. He broke the rules. He should have known better. He wanted to fix the world. And I wanted to keep everything in order."
 ~ ticketRejected = true
+~ passengerAction = "The Ghost reached the designated destination."
+~ decision = "Approved"
+~ harmony = -25
     -> END
 
 
@@ -135,12 +155,21 @@ Yet every choice remains with us forever…
 Look after the Harmony.
 But never forget. It, too, can be wrong.
 ~ ticketRejected = true
+~ encounterEntry = "I reported him. He broke the rules. He should have known better. He wanted to fix the world. And I wanted to keep everything in order."
+~ passengerAction = "The Ghost reached the designated destination."
+~ decision = "Approved"
+~ harmony = -25
     -> END
 
 
 === train_will_wait ===
 ~ speakerIndex = 1
 ~ canScan = true
+~ encounterEntry = "I broke the rules. I should have reported this incident. But I didn't. Why? Was it for him? Because I pity him? Or was it because I hoped that him breaking the rules would bring peace to others who are still alive?"
+~ passengerAction = "The Ghost didn’t reached the designated destination, despite having a valid ticket"
+~ brokenRule = "Unjustified Refusal"
+~ decision = "Let passenger stay"
+~ harmony = 25
 Then perhaps someone else will not repeat my mistake.
 Thank you.
     -> END

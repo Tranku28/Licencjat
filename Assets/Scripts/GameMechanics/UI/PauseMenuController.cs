@@ -20,6 +20,7 @@ namespace GameMechanics
         private PauseOptions _currentOption;
 
         public static Action OnResume;
+        public static Action OnSettingsOpened;
 
         private void Awake()
         {
@@ -63,6 +64,7 @@ namespace GameMechanics
                 
                 case PauseOptions.Settings:
                     pauseSettingsPanel.SetActive(true);
+                    OnSettingsOpened?.Invoke();
                     break;
                 
                 case PauseOptions.Resume:
