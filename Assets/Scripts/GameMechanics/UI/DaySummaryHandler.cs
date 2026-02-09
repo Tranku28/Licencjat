@@ -1,5 +1,3 @@
-using System;
-using Ink.Parsed;
 using TMPro;
 using UnityEngine;
 
