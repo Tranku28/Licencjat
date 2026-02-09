@@ -152,6 +152,7 @@ namespace GameMechanics.UI
                 SetScannable((bool)newValue);
                 //TODO: Rework souvenir give mechanic
                 _souvenirsReceived.Add(data.souvenirData.souvenirID);
+                _harmonyValue = 25;
             });
             
             _story.ObserveVariable("ticketRejected", (string varName, object newValue) =>
