@@ -1,22 +1,20 @@
 using System;
-using System.Collections.Generic;
 using Core.Scriptable_Objects.Souvenirs;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace Core.Scriptable_Objects
 {
-    [CreateAssetMenu(fileName = "PassengerData", menuName = "Scriptable Objects/PassengerData")]
-    public class PassengerData : ScriptableObject
+    [CreateAssetMenu(fileName = "PassengerVariant", menuName = "Scriptable Objects/PassengerVariant")]
+    public class PassengerVariant : ScriptableObject
     {
-        [field: SerializeField] public List<PassengerVariant> passengerVariants = new();
         [field: SerializeField] public Sprite passengerPortrait {get; private set;}
         
         [field: SerializeField] public GameObject prefab {get; private set;}
         [field: SerializeField] public TextAsset inkJSON {get; private set;}
         
         [field: SerializeField] public string passengerName {get; private set;}
-        [field: SerializeField] public string passengerAction {get; private set;}
+        [field: SerializeField] public string[] passengerActions {get; private set;}
         [field: SerializeField] public string passengerSurname {get; private set;}
         [field: SerializeField] public int dayAppears {get; private set;}
 
@@ -45,5 +43,16 @@ namespace Core.Scriptable_Objects
         public string GetFullName() => $"{passengerName} {passengerSurname}";
 
         public int ticketNumber => Random.Range(000000000, 999999999);
+    }
+
+    [Serializable]
+    public struct ValidUntil
+    {
+        [field: SerializeField] public int Day {get; private set;}
+        [field: SerializeField] public int Month {get; private set;}
+        [field: SerializeField] public int Year {get; private set;}
+
+        [field: SerializeField] public int Hour {get; private set;}
+        [field: SerializeField] public int Minute {get; private set;}
     }
 }

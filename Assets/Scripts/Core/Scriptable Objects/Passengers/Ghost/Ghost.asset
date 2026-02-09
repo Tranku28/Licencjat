@@ -12,15 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acecc751a12ea0244b7bd035b07eda1f, type: 3}
   m_Name: Ghost
   m_EditorClassIdentifier: 
+  passengerVariants: []
   <passengerPortrait>k__BackingField: {fileID: 21300000, guid: 050ab3ae83640384f9aaf3f77f94ae7f, type: 3}
   <prefab>k__BackingField: {fileID: 5868356381961298923, guid: 1add31478c045774d8bca698bb614ebe, type: 3}
   <inkJSON>k__BackingField: {fileID: 4900000, guid: 666cb6abf0cb5ee4bbf6a9f99771e152, type: 3}
   <passengerName>k__BackingField: Eliah
-  <passengerSurname>k__BackingField: 
+  <passengerAction>k__BackingField: 
+  <passengerSurname>k__BackingField: Mistborne
   <dayAppears>k__BackingField: 2
   <car>k__BackingField: 1
   <seat>k__BackingField: 9
-  <destination>k__BackingField: 
+  <destination>k__BackingField: Crystgate
   <validUntil>k__BackingField:
     <Day>k__BackingField: 13
     <Month>k__BackingField: 4
@@ -29,9 +31,19 @@ MonoBehaviour:
     <Minute>k__BackingField: 6
   <species>k__BackingField: Human
   <causeOfDeath>k__BackingField: Illness
-  <biography>k__BackingField: 
+  <biography>k__BackingField: 'A respected doctor from Crystgate, he graduated from
+    medical school with the
+
+    highest honors, earning trust of both the village
+    and its surrounding settlements. During a
+
+    devastating epidemic his chosen
+    methods of treatment led to hundreds of deaths, ultimately
+
+    resulting in
+    the complete extinction of the village.'
   <souvenirData>k__BackingField: {fileID: 11400000, guid: a3a373d80c4248241a9e0d5376bb21ff, type: 2}
-  <newspaperText>k__BackingField: 
-  <souvenirNote>k__BackingField: 
+  <souvenirNote>k__BackingField: "\u201CA watch that stopped keeping time the moment
+    the solution was already known.\u201D"
   <diaryContent>k__BackingField: 
-  <souvenirName>k__BackingField: 
+  <souvenirName>k__BackingField: Old Watch
