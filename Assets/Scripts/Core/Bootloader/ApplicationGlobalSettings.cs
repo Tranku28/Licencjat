@@ -1,9 +1,13 @@
 using UnityEngine;
 
-public class ApplicationGlobalSettings : MonoBehaviour
+namespace Core
 {
-    private void Awake()
+    [InitializeSystem("App Global Settings")]
+    public class ApplicationGlobalSettings : MonoBehaviour
     {
-        Application.targetFrameRate = 60;
-    }
+        private void Awake()
+        {
+            Application.targetFrameRate = 60;
+        }
+    }   
 }
