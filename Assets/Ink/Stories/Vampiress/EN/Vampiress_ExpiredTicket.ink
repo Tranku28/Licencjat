@@ -8,9 +8,9 @@ VAR brokenRule = ""
 VAR generalEntry = ""
 VAR encounterEntry = ""
 
-~ generalEntry = "Tonight, a woman boarded the train. Young, at first glance, yet her eyes held something... ancient. Her ticket had expired seventy years ago. When I told her, she merely smiled - as though time itself had long since lost meaning. She should not have been here. And yet, I felt that this train had been waiting for her all along. This train carries more than passengers."
 ~ speakerIndex = 0
 Good evening, madam. Your ticket, please.
+~ generalEntry = "Tonight, a woman boarded the train. Young, at first glance, yet her eyes held something... ancient. Her ticket had expired seventy years ago. When I told her, she merely smiled - as though time itself had long since lost meaning. She should not have been here. And yet, I felt that this train had been waiting for her all along. This train carries more than passengers."
 
 ~ speakerIndex = 1
 Here it is. Station Maplewood, one-way ticket. No return.

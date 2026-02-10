@@ -8,10 +8,9 @@ VAR brokenRule = ""
 VAR generalEntry = ""
 VAR encounterEntry = ""
 
-~ generalEntry = "Today I met a doctor, who was late for his own solution. He said that the time wasn’t the one who let him down."
-
 ~ speakerIndex = 0
 Your ticket, please.
+~ generalEntry = "Today I met a doctor, who was late for his own solution. He said that the time wasn’t the one who let him down."
 
 ~ speakerIndex = 1
 Of course.
@@ -159,16 +158,17 @@ But never forget. It, too, can be wrong.
 ~ passengerAction = "The Ghost reached the designated destination."
 ~ decision = "Approved"
 ~ harmony = -25
+~ canScan = true
     -> END
 
 
 === train_will_wait ===
 ~ speakerIndex = 1
-~ canScan = true
+~ canScan = false
 ~ encounterEntry = "I broke the rules. I should have reported this incident. But I didn't. Why? Was it for him? Because I pity him? Or was it because I hoped that him breaking the rules would bring peace to others who are still alive?"
 ~ passengerAction = "The Ghost didn’t reached the designated destination, despite having a valid ticket"
 ~ brokenRule = "Unjustified Refusal"
-~ decision = "Let passenger stay"
+~ decision = "You let the passenger to stay"
 ~ harmony = 25
 Then perhaps someone else will not repeat my mistake.
 Thank you.

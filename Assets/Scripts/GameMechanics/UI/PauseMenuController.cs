@@ -53,7 +53,6 @@ namespace GameMechanics
         {
             var gameStateMachine = DependencyResolver.Instance.GetType<GameStateMachine>();
             
-            if (pauseSettingsPanel.activeSelf) return;
             
             switch (_currentOption)
             {

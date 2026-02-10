@@ -49,8 +49,6 @@ namespace GameMechanics.UI
             else
                 ruleBreak.enabled = true;
 
-            Debug.Log(_summary.RuleBroken);
-
             _textPrinter
                 .BeginChain()
                 .ThenPrint(passengerAction, _summary.PassengerAction)

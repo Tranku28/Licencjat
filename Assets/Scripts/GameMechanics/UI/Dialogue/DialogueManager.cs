@@ -142,6 +142,9 @@ namespace GameMechanics.UI
             _ticketScanned = false;
             _ticketRejected = false;
             _passengerAction = "";
+            _brokenRule = "";
+            _generalEntry = "";
+            _encounterEntry = "";
             
             StartStory(passengerArgs.PassengerData);
         }
@@ -191,11 +194,13 @@ namespace GameMechanics.UI
             _story.ObserveVariable("generalEntry", (string varName, object newValue) =>
             {
                 _generalEntry = newValue.ToString();
+                Debug.Log($"GE: {_generalEntry}");
             });
 
             _story.ObserveVariable("encounterEntry", (string varName, object newValue) =>
             {
                 _encounterEntry = newValue.ToString();
+                Debug.Log($"EE: {_encounterEntry}");
             });
         }
 
@@ -323,10 +328,6 @@ namespace GameMechanics.UI
 
         public void OnDialogueQuit()
         {
-            Debug.Log(_currentPassenger);
-            Debug.Log(_harmonyValue);
-            Debug.Log(_rulesValidator);
-
             OnDialogueQuitEvent?.Invoke(
                 this,
                 new DialogueEndEventArgs(

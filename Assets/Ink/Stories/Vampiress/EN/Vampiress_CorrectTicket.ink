@@ -9,8 +9,8 @@ VAR generalEntry = ""
 VAR encounterEntry = ""
 
 ~ speakerIndex = 0
-~ generalEntry = "Tonight, a woman boarded the train. Young, at first glance, yet her eyes held something... ancient. I felt that this train had been waiting for her all along This train carries more than passengers."
 Good evening, madam… Your ticket, please.
+~ generalEntry = "Tonight, a woman boarded the train. Young, at first glance, yet her eyes held something... ancient. I felt that this train had been waiting for her all along This train carries more than passengers."
 
 ~ speakerIndex = 1
 Charlotte Bloodrose.
@@ -43,12 +43,12 @@ Thank you, kind man. I hope everything goes well for you.
 W-what? Why not?
 
 ~ speakerIndex = 0
-The protocols. Please leave at the nearest station.
-    ~ harmony = -25
+~ harmony = -25
     ~ decision = "Disapproved"
     ~ passengerAction = "Charlotte didn’t reached the designated destination, despite having a valid ticket"
     ~ ticketRejected = true
     ~ brokenRule = "Unjustified refusal"
     ~ encounterEntry = "I did not let her continue. Perhaps that is why I am here, to decide who arrives in time, and who remains behind."
     ~ passengerAction = "Charlotte didn’t reached the designated destination, despite having a valid ticket."
+The protocols. Please leave at the nearest station.
     -> END
