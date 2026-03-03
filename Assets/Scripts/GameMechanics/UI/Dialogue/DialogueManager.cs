@@ -135,6 +135,7 @@ namespace GameMechanics.UI
             personalId.UpdatePassenderID(passengerArgs.PassengerData);
 
             _currentPassenger = sender as Passenger;
+            _currentPassenger.GetComponent<Collider>().enabled = false;
             
             _currentPassengerData = passengerArgs.PassengerData;
             ticketMinigame.SetupTicketUI(passengerArgs.PassengerData);
@@ -162,10 +163,14 @@ namespace GameMechanics.UI
             
             _story.ObserveVariable("canScan", (string varName, object newValue) =>
             {
-                SetScannable((bool)newValue);
+                bool canScan = (bool)newValue;
+                SetScannable(canScan);
                 //TODO: Rework souvenir give mechanic
-                _souvenirsReceived.Add(data.souvenirData.souvenirID);
-                _harmonyValue = 25;
+                if (canScan)
+                {
+                    _souvenirsReceived.Add(data.souvenirData.souvenirID);
+                    _harmonyValue = 25;
+                }
             });
             
             _story.ObserveVariable("ticketRejected", (string varName, object newValue) =>

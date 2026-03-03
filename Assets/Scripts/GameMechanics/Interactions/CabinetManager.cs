@@ -28,7 +28,7 @@ namespace GameMechanics.Interactions
         {
             foreach(Souvenir souvenir in _souvenirs)
             {
-                Destroy(souvenir);
+                Destroy(souvenir.gameObject);
             }
 
             _souvenirs.Clear();
