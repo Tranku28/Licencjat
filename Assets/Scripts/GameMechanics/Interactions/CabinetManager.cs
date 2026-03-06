@@ -3,6 +3,7 @@ using Core.Save_System;
 using Core.Scriptable_Objects.Souvenirs;
 using UnityEngine;
 using GameMechanics.DayHandling;
+using SouvenirSystem;
 
 namespace GameMechanics.Interactions
 {
@@ -10,12 +11,14 @@ namespace GameMechanics.Interactions
     {
         [SerializeField] private List<Transform> souvenirPositions = new();
         [SerializeField] private SouvenirAtlas souvenirAtlas;
+        private SouvenirEffectResolver _souvenirEffectResolver;
 
         private List<Souvenir> _souvenirs = new();
 
         private void Awake()
         {
             (this as ISaveElement).Register(this);
+            _souvenirEffectResolver = new();
         }
 
         public void LoadSave(GameSaveData gameSaveData)
@@ -41,6 +44,7 @@ namespace GameMechanics.Interactions
                 if (souvenirAtlas.GetSouvenirDataFromIndex(i, out SouvenirData saveData))
                 {
                     Souvenir newSouvenir = Instantiate(saveData.souvenirPrefab, souvenirPositions[i]).GetComponent<Souvenir>();
+                    newSouvenir.Init(_souvenirEffectResolver);
                     _souvenirs.Add(newSouvenir);
                 }
             }

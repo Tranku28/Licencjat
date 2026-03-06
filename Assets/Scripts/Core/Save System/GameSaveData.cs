@@ -10,4 +10,6 @@ public class GameSaveData
         public int TicketsRejected;
         public List<int> CollectedSouvenirIdList = new();
         public List<PassengerEntry> PassengerEntries = new();
+
+        public GameSaveData LastDayData = null;
     }
