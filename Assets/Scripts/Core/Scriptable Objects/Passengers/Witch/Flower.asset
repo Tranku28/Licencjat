@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20242c5bf305c8146ad6e0628db2d7fd, type: 3}
   m_Name: Flower
   m_EditorClassIdentifier: 
-  souvenirID: 0
+  souvenirID: 2
   souvenirPrefab: {fileID: 0}
