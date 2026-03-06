@@ -21,11 +21,13 @@ namespace GameMechanics.UI.MainMenu
 
         public void OnPointerEnter(PointerEventData eventData)
         {
+            AudioManager.Instance.PlayOneShot(FMODEvents.Instance.candleBlow, transform.position);
             animator.SetBool("Hovered", true);
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
+            AudioManager.Instance.PlayOneShot(FMODEvents.Instance.candleBlow, transform.position);
             animator.SetBool("Hovered", false);
         }
 
