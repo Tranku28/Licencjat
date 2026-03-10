@@ -68,6 +68,8 @@ namespace GameMechanics.UI
         private bool _clickedBeforeChoices = false;
 
         private bool _ticketScanned, _ticketRejected;
+    
+        private List<string> _currentTags = new();
 
         public bool ticketScanned => _ticketScanned;
         public bool ticketRejected => _ticketRejected;
@@ -155,7 +157,6 @@ namespace GameMechanics.UI
         {
             int randomDialogueIndex = Random.Range(0, data.dialogueVariants.Count-1);
             _story = new Story(data.dialogueVariants[randomDialogueIndex].ToString());
-            StoryHop();
             
             _story.ObserveVariable("speakerIndex", (string varName, object newValue) => {
                 UpdateNameDisplays((int)newValue);
@@ -207,6 +208,27 @@ namespace GameMechanics.UI
                 _encounterEntry = newValue.ToString();
                 Debug.Log($"EE: {_encounterEntry}");
             });
+            
+            TrySyncSpeakerDisplayFromStoryState();
+            StoryHop();
+        }
+        
+        private void TrySyncSpeakerDisplayFromStoryState()
+        {
+            if (_story == null) return;
+
+            try
+            {
+                object speakerValue = _story.variablesState["speakerIndex"];
+                if (speakerValue is int speakerIndex)
+                {
+                    UpdateNameDisplays(speakerIndex);
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.LogWarning($"Cannot sync speakerIndex on start: {ex.Message}");
+            }
         }
 
         private void StoryHop()

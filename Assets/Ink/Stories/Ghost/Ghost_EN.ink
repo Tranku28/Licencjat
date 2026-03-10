@@ -25,12 +25,17 @@ Anywhere but the Afterlife.
 At least not yet.
 I cannot go there now.
 
-~ speakerIndex = 0
-* [Why do you refuse to cross over?] -> unfinished_matters
+
+* [Why do you refuse to cross over?]
+    ~ speakerIndex = 0
+    Why do you refuse to cross over?
+    -> unfinished_matters
 * [Your ticket is valid. You have the right to continue] -> a_right_to_continue
 
 
 === a_right_to_continue ===
+
+~ speakerIndex = 1
 You do not yet grasp the gravity of your mistake.
 Generations will remember this decision.
 ~ ticketRejected = true

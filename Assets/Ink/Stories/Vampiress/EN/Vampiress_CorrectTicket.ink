@@ -27,10 +27,17 @@ Understood. And may I ask the purpose of your journey?
 ~ speakerIndex = 1
 I am bound for a meeting… though, in truth, it comes many years too late.
 
-* [Very well, Miss Bloodrose. Have a safe trip (stamp the ticket)] -> accept
-* [I'm sorry Miss, I cannot let you pass (refuse)] -> refuse
+* [Very well, Miss Bloodrose. Have a safe trip (stamp the ticket)]
+    ~ speakerIndex = 0
+    Very well, Miss Bloodrose. Have a safe trip (stamp the ticket)
+    -> accept
+* [I'm sorry Miss, I cannot let you pass (refuse)]
+    ~ speakerIndex = 0
+    I'm sorry Miss, I cannot let you pass
+    -> refuse
 
 === accept ===
+~ speakerIndex = 1
 Thank you, kind man. I hope everything goes well for you.
     ~ harmony = 25
     ~ decision = "Approved"
@@ -40,6 +47,7 @@ Thank you, kind man. I hope everything goes well for you.
     -> END
 
 === refuse ===
+~ speakerIndex = 1
 W-what? Why not?
 
 ~ speakerIndex = 0

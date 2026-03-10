@@ -27,12 +27,14 @@ Madam, your ticket expired… seventy years ago.
 ~ speakerIndex = 1
 Aye. It was purchased long ago. Back when I still believed in a brighter morrow.
 
-~ speakerIndex = 0
 * [A ‘brighter morrow’?]
-~ speakerIndex = 1
-        -> a_brighter_morrow
+    ~ speakerIndex = 0
+    A ‘brighter morrow’?
+    -> a_brighter_morrow
         
 * [Forgive me, milady, but with an expired ticket, I cannot allow you to proceed with your journey (refuse)]
+    ~ speakerIndex = 0
+    Forgive me, milady, but with an expired ticket, I cannot allow you to proceed with your journey
     ~ speakerIndex = 1
     …Time is but a fragile notion.
     I possess too much of it.
@@ -50,11 +52,14 @@ Aye. It was purchased long ago. Back when I still believed in a brighter morrow.
 That ticket was bought when these very rails were still being forged, young man.
 Back then, my dreams had yet to be buried beneath dust and silence.
 
-~ speakerIndex = 0
 * [Your dreams, milady? Could you be more specific?]
+    ~ speakerIndex = 0
+    Your dreams, milady? Could you be more specific?
     -> regret
 
 * [Forgive me, milady, but with an expired ticket, I cannot allow you to proceed with your journey (refuse)]
+    ~ speakerIndex = 0
+    Forgive me, milady, but with an expired ticket, I cannot allow you to proceed with your journey
     ~ speakerIndex = 1
     … Perhaps they were right after all.
     One cannot live upon dreams alone.
@@ -78,13 +83,18 @@ I….
 I lacked that courage…
 And now I bear the weight of that regret…
 
-~ speakerIndex = 0
 * [What is it that you regret, madam?]
+    ~ speakerIndex = 0
+    What is it that you regret, madam?
     -> love
 * [Why such remorse?]
+    ~ speakerIndex = 0
+    Why such remorse?
     -> remorse
 
 * [Forgive me, but regardless of your reason - with an expired ticket, I cannot let you pass (refuse)]
+    ~ speakerIndex = 0
+    Forgive me, but regardless of your reason - with an expired ticket, I cannot let you pass
     ~ speakerIndex = 1
     … And yet nothing has changed…
     Men still despise and fear the dreams and wishes of other beings.
@@ -102,12 +112,19 @@ Or rather, my failure to follow it.
 Not chasing after it.
 Not daring to reach for it.
 I regret that I lacked the courage. The courage to defy the elders. The courage to say “no”.
-~ speakerIndex = 0
 * [Your husband?]
+    ~ speakerIndex = 0
+    Your husband?
     -> beloved_man
+    
 * [Olivier?]
+    ~ speakerIndex = 0
+    Olivier?
     -> is_dying
+    
 * [Forgive me, but regardless of your reason - with an expired ticket, I cannot let you pass (refuse)]
+    ~ speakerIndex = 0
+    Forgive me, but regardless of your reason - with an expired ticket, I cannot let you pass
     ~ speakerIndex = 1
     … And yet nothing has changed…
     Men still despise and fear the dreams and wishes of other beings.
@@ -119,6 +136,7 @@ I regret that I lacked the courage. The courage to defy the elders. The courage 
     -> END
     
 === is_dying ===
+~ speakerIndex = 1
 My beloved is dying. A mortal man, his time nearly spent - while I have far too much of mine.
 Young man, please… have mercy. Allow me to see him, if only this once. Now that I have finally learned what truly matters.
     -> final_decision
@@ -130,12 +148,18 @@ Had I but possessed courage… had I only dared…
 My life might have taken another course.
 And yet… I…
 I lacked the voice to speak his name aloud - to tell the world how deeply I loved my Olivier.
-~ speakerIndex = 0
+
 * [Your husband?]
+    ~ speakerIndex = 0
+    Your husband?
     -> beloved_man
 * [Olivier?]
+    ~ speakerIndex = 0
+    Olivier?
     -> olivier
 * [Forgive me, but regardless of your reason - with an expired ticket, I cannot let you pass (refuse)]
+    ~ speakerIndex = 0
+    Forgive me, but regardless of your reason - with an expired ticket, I cannot let you pass
     ~ speakerIndex = 1
     …I should have done it long ago.
     When there was still time.
@@ -160,13 +184,16 @@ And yet, with him, my hunger stilled and my power obeyed. He taught me restraint
 Though born of two opposing worlds, we fit together like pieces of the same design.
 Tell me, how could such a thing be?
 
-~ speakerIndex = 0
 * [I wish I knew the answer to your question, madam. But I do know this, love chooses none of us.]
+    ~ speakerIndex = 0
+    I wish I knew the answer to your question, madam. But I do know this, love chooses none of us.
     … It chooses none of us…
     Love is cruel.
     -> final_decision
 
 * [I wish I had the answers for your questions, milady…]
+    ~ speakerIndex = 0
+    I wish I had the answers for your questions, milady…
     ~ speakerIndex = 1
      .. It matters not, young man. Some questions are best left unanswered.
     Or wait until we find the courage to face them ourselves.
@@ -174,6 +201,8 @@ Tell me, how could such a thing be?
     Young man, please… have mercy. Allow me to see him, if only this once. Now that I have finally learned what truly matters.
     -> final_decision
 * [I wish I knew the answer to your question, madam. Still… your ticket has expired. You must alight at the next station (refuse)]
+    ~ speakerIndex = 0
+    I wish I knew the answer to your question, madam. Still… your ticket has expired. You must alight at the next station
     ~ speakerIndex = 1
     …And yet, I was wrong.
     We were never meant for one another. For had we been, fate would have guided us together…
@@ -196,13 +225,17 @@ And yet, with him, my hunger stilled and my power obeyed. He taught me restraint
 Though born of two opposing worlds, we fit together like pieces of the same design.
 Tell me, how could such a thing be?
 
-~ speakerIndex = 0
 * [I wish I knew the answer to your question, madam. But I do know this, love chooses none of us.]
+    ~ speakerIndex = 0
+    I wish I knew the answer to your question, madam. But I do know this, love chooses none of us.
+    ~ speakerIndex = 1
     … It chooses none of us…
     Love is cruel.
     -> final_decision
 
 * [I wish I had the answers for your questions, milady…]
+    ~ speakerIndex = 0
+    I wish I had the answers for your questions, milady…
     ~ speakerIndex = 1
      .. It matters not, young man. Some questions are best left unanswered.
     Or wait until we find the courage to face them ourselves.
@@ -210,6 +243,8 @@ Tell me, how could such a thing be?
     Young man, please… have mercy. Allow me to see him, if only this once. Now that I have finally learned what truly matters.
     -> final_decision
 * [I wish I knew the answer to your question, madam. Still… your ticket has expired. You must alight at the next station (refuse)]
+    ~ speakerIndex = 0
+    I wish I knew the answer to your question, madam. Still… your ticket has expired. You must alight at the next station
     ~ speakerIndex = 1
     …And yet, I was wrong.
     We were never meant for one another. For had we been, fate would have guided us together…
@@ -223,8 +258,9 @@ Tell me, how could such a thing be?
 
 
 === final_decision ===
-~ speakerIndex = 0
 * [… Very well. Upon mine own responsibility, you may proceed to your destination (accept)]
+    ~ speakerIndex = 0
+    … Very well. Upon mine own responsibility, you may proceed to your destination
     ~ speakerIndex = 1
     ~ canScan = true
     Thank you, young man. You have my eternal gratitude.
@@ -238,6 +274,8 @@ Tell me, how could such a thing be?
     -> END
 
 * [I cannot do that, madam. I must obey the rules (refuse)]
+    ~ speakerIndex = 0
+    I cannot do that, madam. I must obey the rules
     ~ speakerIndex = 1
     … Rules…
     We all have them.
