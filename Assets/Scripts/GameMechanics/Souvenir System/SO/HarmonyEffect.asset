@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2399cbc7eef835409a02a67257e20a9, type: 3}
   m_Name: HarmonyEffect
   m_EditorClassIdentifier: 
-  oneTimeUsable: 0
-  harmonyValueUpdate: 0
+  singleUse: 1
+  harmonyValueUpdate: 25
