@@ -65,7 +65,7 @@ namespace GameMechanics.UI
         
         private Story _story;
 
-        private bool _clickedBeforeChoices = false;
+        private bool _clickedBeforeChoices;
 
         private bool _ticketScanned, _ticketRejected;
     
