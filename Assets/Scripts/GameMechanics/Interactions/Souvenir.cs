@@ -21,21 +21,11 @@ public class Souvenir : MonoBehaviour, IInteractable
         _effectResolver = new();
     }
 
-    private void Start()
-    {
-        
-    }
-
     public void Init(SouvenirEffectResolver resolver, Button useButton)
     {
         _useButton = useButton;
         _useButton.onClick.AddListener(ApplyEffects);
         _effectResolver = resolver;
-    }
-
-    private void OnDestroy()
-    {
-        
     }
 
     public string GetName()

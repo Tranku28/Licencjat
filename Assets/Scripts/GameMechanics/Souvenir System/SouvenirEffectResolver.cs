@@ -17,7 +17,6 @@ namespace SouvenirSystem
 
         public void ApplyHarmony(int value)
         {
-            Debug.Log("Harmony Applied");
             OnHarmonyValueUpdate?.Invoke(value);
         }
 
