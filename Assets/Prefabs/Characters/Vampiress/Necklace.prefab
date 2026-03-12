@@ -47,6 +47,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   souvenirData: {fileID: 11400000, guid: f59162cd698ea344ba9103086900d09b, type: 2}
+  effects:
+  - {fileID: 11400000, guid: d24c14d66f6d11f4baf25bb05f5aca04, type: 2}
 --- !u!65 &8705367058595173683
 BoxCollider:
   m_ObjectHideFlags: 0

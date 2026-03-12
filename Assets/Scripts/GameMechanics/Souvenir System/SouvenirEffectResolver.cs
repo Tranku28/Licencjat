@@ -1,3 +1,4 @@
+using System;
 using Core;
 using Core.Save_System;
 using UnityEngine;
@@ -7,6 +8,7 @@ namespace SouvenirSystem
     public class SouvenirEffectResolver
     {
         private SaveSystem _saveSystem;
+        public static Action<int> OnHarmonyValueUpdate;
 
         public SouvenirEffectResolver()
         {
@@ -15,9 +17,8 @@ namespace SouvenirSystem
 
         public void ApplyHarmony(int value)
         {
-            GameSaveData gameSaveData = _saveSystem.GetCurrentSave();
-
-            gameSaveData.HarmonyStatus += value;
+            Debug.Log("Harmony Applied");
+            OnHarmonyValueUpdate?.Invoke(value);
         }
 
         public void RevertDay()

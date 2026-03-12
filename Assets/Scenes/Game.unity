@@ -1124,7 +1124,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 60137472}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0.008024162, z: 0, w: 0.9999679}
+  m_LocalRotation: {x: 0.12416606, y: 0.30571094, z: -0.040247597, w: 0.94313514}
   m_LocalPosition: {x: 6.6036034, y: 1.5899999, z: 0.8452367}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1347,6 +1347,7 @@ MonoBehaviour:
   - {fileID: 955305483}
   - {fileID: 513678485}
   souvenirAtlas: {fileID: 11400000, guid: 3654e0231c1d1134f8e0d73f403278a6, type: 2}
+  souvenirView: {fileID: 7114046782353240595}
 --- !u!1001 &87112639
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13228,7 +13229,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1615815050}
-  - component: {fileID: 1615815054}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -13251,19 +13251,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1913948974}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1615815054
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1615815048}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fee54200c238ce843b2465f00b5c06f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  globalControls: {fileID: 11400000, guid: d87094643eca8d24c9d86c70d8555f33, type: 2}
 --- !u!1 &1616677613
 GameObject:
   m_ObjectHideFlags: 0
@@ -21752,7 +21739,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4491067928763754748
 RectTransform:
   m_ObjectHideFlags: 0
@@ -23926,6 +23913,7 @@ MonoBehaviour:
   UIVisual: {fileID: 4483276249509655255}
   nextButton: {fileID: 3355016659097928535}
   previousButton: {fileID: 503615663938101164}
+  useButton: {fileID: 8161362149936269364}
   souvenirName: {fileID: 4291198229871255750}
   souvenirDescription: {fileID: 3115336426321098943}
   receivedFrom: {fileID: 6607617435772408751}

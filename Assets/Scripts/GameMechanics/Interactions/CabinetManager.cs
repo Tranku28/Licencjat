@@ -4,6 +4,7 @@ using Core.Scriptable_Objects.Souvenirs;
 using UnityEngine;
 using GameMechanics.DayHandling;
 using SouvenirSystem;
+using UnityEngine.UI;
 
 namespace GameMechanics.Interactions
 {
@@ -11,6 +12,7 @@ namespace GameMechanics.Interactions
     {
         [SerializeField] private List<Transform> souvenirPositions = new();
         [SerializeField] private SouvenirAtlas souvenirAtlas;
+        [SerializeField] private SouvenirViewController souvenirView;
         private SouvenirEffectResolver _souvenirEffectResolver;
 
         private List<Souvenir> _souvenirs = new();
@@ -43,8 +45,10 @@ namespace GameMechanics.Interactions
             {
                 if (souvenirAtlas.GetSouvenirDataFromIndex(i, out SouvenirData saveData))
                 {
+                    Debug.Log(_souvenirEffectResolver);
+                    Debug.Log(souvenirView.UseButton);
                     Souvenir newSouvenir = Instantiate(saveData.souvenirPrefab, souvenirPositions[i]).GetComponent<Souvenir>();
-                    newSouvenir.Init(_souvenirEffectResolver);
+                    newSouvenir.Init(_souvenirEffectResolver, souvenirView.UseButton);
                     _souvenirs.Add(newSouvenir);
                 }
             }

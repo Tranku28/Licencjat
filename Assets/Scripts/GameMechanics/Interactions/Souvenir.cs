@@ -1,15 +1,18 @@
 using System;
 using System.Collections.Generic;
+using Core;
 using Core.Scriptable_Objects;
 using GameMechanics.Interactions;
 using SouvenirSystem;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Souvenir : MonoBehaviour, IInteractable
 {
     [SerializeField] private PassengerData souvenirData;
     [SerializeField] private List<SouvenirEffect> effects;
     private SouvenirEffectResolver _effectResolver;
+    private Button _useButton;
 
     public static event Action<PassengerData> OnSouvenirInteracted;
 
@@ -20,17 +23,19 @@ public class Souvenir : MonoBehaviour, IInteractable
 
     private void Start()
     {
-        BlinkPanelUI.OnSummaryDisplay += ApplyPassiveEffects;
+        
     }
 
-    public void Init(SouvenirEffectResolver resolver)
+    public void Init(SouvenirEffectResolver resolver, Button useButton)
     {
+        _useButton = useButton;
+        _useButton.onClick.AddListener(ApplyEffects);
         _effectResolver = resolver;
     }
 
     private void OnDestroy()
     {
-        BlinkPanelUI.OnSummaryDisplay -= ApplyPassiveEffects;
+        
     }
 
     public string GetName()
@@ -43,19 +48,26 @@ public class Souvenir : MonoBehaviour, IInteractable
         OnSouvenirInteracted?.Invoke(souvenirData);
     }
 
-    private void ApplyPassiveEffects()
+    private void ApplyEffects()
     {
+        bool destroy = false;
+
         foreach (SouvenirEffect effect in effects)
         {
-            if (!effect.singleUse)
-            {
-                effect.Resolve(_effectResolver);
-            }
-        }
-    }
+            effect.Resolve(_effectResolver);
 
-    private void UseSouvenir()
-    {
-        //TODO: save file souvenir array needs to be updated by 
+            if (effect.singleUse) 
+                destroy = true;
+        }
+
+        if (destroy)
+        {
+            PlayerControls playerControls = DependencyResolver.Instance.GetType<PlayerControls>();
+            playerControls.ForceOnEscapePressed();
+
+            Destroy(gameObject);
+        }
+
+        _useButton.onClick.RemoveListener(ApplyEffects);
     }
 }
