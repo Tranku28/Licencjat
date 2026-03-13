@@ -1,3 +1,6 @@
+using System;
+
+[Serializable]
 public struct PassengerEntry
 {
     public string GeneralEntry;

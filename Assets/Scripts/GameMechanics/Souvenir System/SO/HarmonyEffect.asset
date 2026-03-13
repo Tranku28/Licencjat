@@ -9,7 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76c746ba09a501c46bced023fef1560c, type: 3}
-  m_Name: PlayerControls
+  m_Script: {fileID: 11500000, guid: c2399cbc7eef835409a02a67257e20a9, type: 3}
+  m_Name: HarmonyEffect
   m_EditorClassIdentifier: 
-  playerInputAsset: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  singleUse: 1
+  harmonyValueUpdate: 25

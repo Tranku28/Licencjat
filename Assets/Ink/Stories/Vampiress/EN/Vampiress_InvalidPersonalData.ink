@@ -33,8 +33,14 @@ Madam, your name doesn’t match with the one on the ticket....
 ~ speakerIndex = 1
 Aye. It is the nickname my beloved called me once… Till this day it feels like an unfulfilled dream.
 
-* [Unfulfilled dream?] -> unfunfilled_dream
-* [Forgive me, milady, but with an incorrect ticket, I cannot allow you to proceed with your journey (refuse)] -> cannot_allow_1
+* [Unfulfilled dream?]
+    ~ speakerIndex = 0
+    Unfulfilled dream?
+    -> unfunfilled_dream
+* [Forgive me, milady, but with an incorrect ticket, I cannot allow you to proceed with your journey (refuse)]
+    ~ speakerIndex = 0
+    Forgive me, milady, but with an incorrect ticket, I cannot allow you to proceed with your journey
+    -> cannot_allow_1
 
 === cannot_allow_1 ===
 ~ speakerIndex = 1
@@ -55,8 +61,14 @@ I shall alight at the next station…
 Ah, yes…
 Something that you want to chase so dearly… Yet none of your dreams did come true…
 
-* [Your dreams, milady? Could you be more specific?] -> dreams
-* [Forgive me, milady, but with an incorrect ticket, I cannot allow you to proceed with your journey (refuse)] -> cannot_allow_2
+* [Your dreams, milady? Could you be more specific?]
+    ~ speakerIndex = 0
+    Your dreams, milady? Could you be more specific?
+    -> dreams
+* [Forgive me, milady, but with an incorrect ticket, I cannot allow you to proceed with your journey (refuse)]
+    ~ speakerIndex = 0
+    Forgive me, milady, but with an incorrect ticket, I cannot allow you to proceed with your journey
+    -> cannot_allow_2
 
 === cannot_allow_2 ===
 ~ speakerIndex = 1
@@ -84,9 +96,18 @@ I….
 I lacked that courage…
 And now I bear the weight of that regret…
 
-* [What is it that you regret, madam?] -> regret
-* [Why such remorse?] -> why_such_remorse
-* [Forgive me, but regardless of your reason - with an incorrect ticket, I cannot let you pass (refuse)] -> cannot_allow_3
+* [What is it that you regret, madam?]
+    ~ speakerIndex = 0
+    What is it that you regret, madam?
+    -> regret
+* [Why such remorse?]
+    ~ speakerIndex = 0
+    Why such remorse?
+    -> why_such_remorse
+* [Forgive me, but regardless of your reason - with an incorrect ticket, I cannot let you pass (refuse)]
+    ~ speakerIndex = 0
+    Forgive me, but regardless of your reason - with an incorrect ticket, I cannot let you pass
+    -> cannot_allow_3
 
 === cannot_allow_3 ===
 … And yet nothing has changed…
@@ -108,9 +129,18 @@ Not daring to reach for it.
 I regret that I lacked the courage. The courage to defy the elders. The courage to say “no”.
 I lacked the voice to speak his name aloud - to tell the world how deeply I loved my Olivier.
 
-* [Your husband?] -> husband
-* [Olivier] -> olivier
-* [Forgive me, but regardless of your reason - with an incorrect ticket, I cannot let you pass (refuse)] -> cannot_allow_4
+* [Your husband?]
+    ~ speakerIndex = 0
+    Your husband?
+    -> husband
+* [Olivier]
+    ~ speakerIndex = 0
+    Olivier
+    -> olivier
+* [Forgive me, but regardless of your reason - with an incorrect ticket, I cannot let you pass (refuse)]
+    ~ speakerIndex = 0
+    Forgive me, but regardless of your reason - with an incorrect ticket, I cannot let you pass
+    -> cannot_allow_4
 
 === cannot_allow_4 ===
 ~ speakerIndex = 1
@@ -128,14 +158,24 @@ But now…
 
 
 === why_such_remorse ===
+~ speakerIndex = 1
 Had I but possessed courage… had I only dared… 
 My life might have taken another course.
 And yet… I…
 I lacked the voice to speak his name aloud - to tell the world how deeply I loved my Olivier.
 
-* [Your husband?] -> husband
-* [Olivier] -> olivier
-* [Forgive me, but regardless of your reason - with an incorrect ticket, I cannot let you pass (refuse)] -> cannot_allow_4
+* [Your husband?]
+    ~ speakerIndex = 0
+    Your husband?
+    -> husband
+* [Olivier]
+    ~ speakerIndex = 0
+    Olivier
+    -> olivier
+* [Forgive me, but regardless of your reason - with an incorrect ticket, I cannot let you pass (refuse)]
+    ~ speakerIndex = 0
+    Forgive me, but regardless of your reason - with an incorrect ticket, I cannot let you pass
+    -> cannot_allow_4
 
 
 
@@ -150,12 +190,22 @@ And yet, with him, my hunger stilled and my power obeyed. He taught me restraint
 Though born of two opposing worlds, we fit together like pieces of the same design.
 Tell me, how could such a thing be?
 
-* [I wish I knew the answer to your question, madam. But I do know this, love chooses none of us.] -> love_chooses
-* [I wish I had the answers for your questions, milady…] -> it_matters_not
-* [I wish I knew the answer to your question, madam. Still… your ticket is incorrect. You must alight at the next station (refuse)] -> cannot_allow_5
+* [I wish I knew the answer to your question, madam. But I do know this, love chooses none of us.]
+    ~ speakerIndex = 0
+    I wish I knew the answer to your question, madam. But I do know this, love chooses none of us.
+    -> love_chooses
+* [I wish I had the answers for your questions, milady…]
+    ~ speakerIndex = 0
+    I wish I had the answers for your questions, milady…
+    -> it_matters_not
+* [I wish I knew the answer to your question, madam. Still… your ticket is incorrect. You must alight at the next station (refuse)]
+    ~ speakerIndex = 0
+    I wish I knew the answer to your question, madam. Still… your ticket is incorrect. You must alight at the next station
+    -> cannot_allow_5
 
 
 === olivier ===
+~ speakerIndex = 1
 Olivier… My dearest heart.
 We met in our youth. I, a fledgling vampire, struggling to master my instincts. He, a tender-hearted human boy.
 The son of a hunter… And I, a noble’s daughter.
@@ -164,11 +214,21 @@ And yet, with him, my hunger stilled and my power obeyed. He taught me restraint
 Though born of two opposing worlds, we fit together like pieces of the same design.
 Tell me, how could such a thing be?
 
-* [I wish I knew the answer to your question, madam. But I do know this, love chooses none of us.] -> love_chooses
-* [I wish I had the answers for your questions, milady…] -> it_matters_not
-* [I wish I knew the answer to your question, madam. Still… your ticket is incorrect. You must alight at the next station (refuse)] -> cannot_allow_5
+* [I wish I knew the answer to your question, madam. But I do know this, love chooses none of us.]
+    ~ speakerIndex = 0
+    I wish I knew the answer to your question, madam. But I do know this, love chooses none of us.
+    -> love_chooses
+* [I wish I had the answers for your questions, milady…]
+    ~ speakerIndex = 0
+    I wish I had the answers for your questions, milady…
+    -> it_matters_not
+* [I wish I knew the answer to your question, madam. Still… your ticket is incorrect. You must alight at the next station (refuse)]
+    ~ speakerIndex = 0
+    I wish I knew the answer to your question, madam. Still… your ticket is incorrect. You must alight at the next station
+    -> cannot_allow_5
 
 === cannot_allow_5 ===
+~ speakerIndex = 1
 …And yet, I was wrong.
 We were never meant for one another. For had we been, fate would have guided us together…
 Would it not..?
@@ -185,17 +245,30 @@ Would it not..?
 Love is cruel.
 Or perhaps… it is we who are cruel?
 
-* [… Very well. Upon mine own responsibility, you may proceed to your destination (accept)] -> accept
-* [I cannot do that, madam. I must obey the rules (refuse)] -> cannot_allow_6
+* [… Very well. Upon mine own responsibility, you may proceed to your destination (accept)]
+    ~ speakerIndex = 0
+    … Very well. Upon mine own responsibility, you may proceed to your destination
+    -> accept
+* [I cannot do that, madam. I must obey the rules (refuse)]
+    ~ speakerIndex = 0
+    I cannot do that, madam. I must obey the rules
+    -> cannot_allow_6
 
 === it_matters_not ===
+    ~ speakerIndex = 1
 .. It matters not, young man. Some questions are best left unanswered.
 Or wait until we find the courage to face them ourselves.
 My beloved is dying. A mortal man, his time nearly spent - while I have far too much of mine.
 Young man, please… have mercy. Allow me to see him, if only this once. Now that I have finally learned what truly matters.
 
-* [… Very well. Upon mine own responsibility, you may proceed to your destination (accept)] -> accept
-* [I cannot do that, madam. I must obey the rules (refuse)] -> cannot_allow_6
+* [… Very well. Upon mine own responsibility, you may proceed to your destination (accept)]
+    ~ speakerIndex = 0
+    … Very well. Upon mine own responsibility, you may proceed to your destination
+    -> accept
+* [I cannot do that, madam. I must obey the rules (refuse)]
+    ~ speakerIndex = 0
+    I cannot do that, madam. I must obey the rules
+    -> cannot_allow_6
 
 === cannot_allow_6 ===
 … Rules…

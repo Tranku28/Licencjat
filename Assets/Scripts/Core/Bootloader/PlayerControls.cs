@@ -2,12 +2,13 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
-namespace Core.Scriptable_Objects
+namespace Core
 {
-    [CreateAssetMenu(fileName = "PlayerControls", menuName = "Scriptable Objects/PlayerControls")]
-    public class PlayerControls : ScriptableObject
+    //TODO: make it invoke non-static events
+    [InitializeSystem("Player Input System")]
+    public class PlayerControls : BaseSystem
     {
-        [SerializeField] private InputActionAsset playerInputAsset;
+        private InputActionAsset playerInputAsset;
 
         private InputAction _quitAction;
         private InputAction _interactAction;
@@ -22,6 +23,13 @@ namespace Core.Scriptable_Objects
 
         private void OnEnable()
         {
+            playerInputAsset = Resources.Load<InputActionAsset>("PlayerInput");
+
+            if (playerInputAsset is null)
+            {
+                Debug.LogError("Player Input Asset not found");
+            }
+
             _quitAction = playerInputAsset.FindAction("Quit");
             _interactAction = playerInputAsset.FindAction("Interact");
             _clickAction = playerInputAsset.FindAction("Click");
@@ -76,6 +84,11 @@ namespace Core.Scriptable_Objects
         private void OnInteract(InputAction.CallbackContext context)
         {
             if (context.performed) OnInteractEvent?.Invoke();
+        }
+
+        public void ForceOnEscapePressed()
+        {
+            OnEscapePressedEvent?.Invoke();
         }
 
         private void OnEscapePressed(InputAction.CallbackContext context)

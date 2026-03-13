@@ -1,4 +1,4 @@
-﻿using Core.Scriptable_Objects;
+﻿using Core;
 using UnityEngine;
 
 namespace Ink.Demos.Basic_Demo.Scripts

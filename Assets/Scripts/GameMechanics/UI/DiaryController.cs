@@ -14,7 +14,12 @@ namespace GameMechanics.UI
         [SerializeField] private TMP_Text leftEntryField, rightEntryField;
 
         private int _pageIndex;
-        
+
+        private void Awake()
+        {
+            (this as ISaveElement).Register(this);
+        }
+
         private List<PassengerEntry> _passengerEntries = new();
 
         private void Start()
@@ -44,25 +49,35 @@ namespace GameMechanics.UI
             _pageIndex = 0;
             DisplayEntry(_pageIndex);
             prevPageButton.gameObject.SetActive(false);
+            nextPageButton.gameObject.SetActive(false);
+
+            if (_passengerEntries.Count > 1)
+            {
+                nextPageButton.gameObject.SetActive(true);
+            }
         }
         
-        private void TurnNextPage()
+        public void TurnNextPage()
         {
             _pageIndex++;
-            if (_pageIndex >= _passengerEntries.Count)
+            if (_pageIndex >= _passengerEntries.Count-1)
             {
                 nextPageButton.gameObject.SetActive(false);
+                _pageIndex = _passengerEntries.Count-1;
             }
 
+            DisplayEntry(_pageIndex);
             prevPageButton.gameObject.SetActive(true);
         }
         
-        private void TurnPreviousPage()
+        public void TurnPreviousPage()
         {
             _pageIndex--;
-            if (_pageIndex <= 0)
+            if (_pageIndex <= -1)
             {
                 prevPageButton.gameObject.SetActive(false);
+                _pageIndex = 0;
+                return;
             }
 
             DisplayEntry(_pageIndex);
@@ -83,7 +98,6 @@ namespace GameMechanics.UI
 
         public void SaveData(GameSaveData gameSaveData)
         {
-            gameSaveData.PassengerEntries.Clear();
             gameSaveData.PassengerEntries.AddRange(_passengerEntries);
 
             _passengerEntries.Clear();
@@ -91,9 +105,9 @@ namespace GameMechanics.UI
 
         public void LoadSave(GameSaveData gameSaveData)
         {
-            _passengerEntries.Clear();
-
             _passengerEntries.AddRange(gameSaveData.PassengerEntries);
+
+            gameSaveData.PassengerEntries.Clear();
         }
     }
 }

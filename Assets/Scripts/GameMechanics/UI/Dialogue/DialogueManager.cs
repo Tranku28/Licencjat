@@ -65,9 +65,11 @@ namespace GameMechanics.UI
         
         private Story _story;
 
-        private bool _clickedBeforeChoices = false;
+        private bool _clickedBeforeChoices;
 
         private bool _ticketScanned, _ticketRejected;
+    
+        private List<string> _currentTags = new();
 
         public bool ticketScanned => _ticketScanned;
         public bool ticketRejected => _ticketRejected;
@@ -135,6 +137,7 @@ namespace GameMechanics.UI
             personalId.UpdatePassenderID(passengerArgs.PassengerData);
 
             _currentPassenger = sender as Passenger;
+            _currentPassenger.GetComponent<Collider>().enabled = false;
             
             _currentPassengerData = passengerArgs.PassengerData;
             ticketMinigame.SetupTicketUI(passengerArgs.PassengerData);
@@ -142,6 +145,9 @@ namespace GameMechanics.UI
             _ticketScanned = false;
             _ticketRejected = false;
             _passengerAction = "";
+            _brokenRule = "";
+            _generalEntry = "";
+            _encounterEntry = "";
             
             StartStory(passengerArgs.PassengerData);
         }
@@ -151,7 +157,6 @@ namespace GameMechanics.UI
         {
             int randomDialogueIndex = Random.Range(0, data.dialogueVariants.Count-1);
             _story = new Story(data.dialogueVariants[randomDialogueIndex].ToString());
-            StoryHop();
             
             _story.ObserveVariable("speakerIndex", (string varName, object newValue) => {
                 UpdateNameDisplays((int)newValue);
@@ -159,10 +164,14 @@ namespace GameMechanics.UI
             
             _story.ObserveVariable("canScan", (string varName, object newValue) =>
             {
-                SetScannable((bool)newValue);
+                bool canScan = (bool)newValue;
+                SetScannable(canScan);
                 //TODO: Rework souvenir give mechanic
-                _souvenirsReceived.Add(data.souvenirData.souvenirID);
-                _harmonyValue = 25;
+                if (canScan)
+                {
+                    _souvenirsReceived.Add(data.souvenirData.souvenirID);
+                    _harmonyValue = 25;
+                }
             });
             
             _story.ObserveVariable("ticketRejected", (string varName, object newValue) =>
@@ -191,12 +200,35 @@ namespace GameMechanics.UI
             _story.ObserveVariable("generalEntry", (string varName, object newValue) =>
             {
                 _generalEntry = newValue.ToString();
+                Debug.Log($"GE: {_generalEntry}");
             });
 
             _story.ObserveVariable("encounterEntry", (string varName, object newValue) =>
             {
                 _encounterEntry = newValue.ToString();
+                Debug.Log($"EE: {_encounterEntry}");
             });
+            
+            TrySyncSpeakerDisplayFromStoryState();
+            StoryHop();
+        }
+        
+        private void TrySyncSpeakerDisplayFromStoryState()
+        {
+            if (_story == null) return;
+
+            try
+            {
+                object speakerValue = _story.variablesState["speakerIndex"];
+                if (speakerValue is int speakerIndex)
+                {
+                    UpdateNameDisplays(speakerIndex);
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.LogWarning($"Cannot sync speakerIndex on start: {ex.Message}");
+            }
         }
 
         private void StoryHop()
@@ -323,10 +355,6 @@ namespace GameMechanics.UI
 
         public void OnDialogueQuit()
         {
-            Debug.Log(_currentPassenger);
-            Debug.Log(_harmonyValue);
-            Debug.Log(_rulesValidator);
-
             OnDialogueQuitEvent?.Invoke(
                 this,
                 new DialogueEndEventArgs(

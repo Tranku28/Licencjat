@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31072001b8c6620479e702dfc24127a0, type: 3}
-  m_Name: PrefabContainer
+  m_Script: {fileID: 11500000, guid: 20242c5bf305c8146ad6e0628db2d7fd, type: 3}
+  m_Name: Flower
   m_EditorClassIdentifier: 
-  prefabs:
-  - {fileID: 6866522053268860029, guid: 94ed663a8f157aa4baa718043f3f4bcb, type: 3}
+  souvenirID: 2
+  souvenirPrefab: {fileID: 0}

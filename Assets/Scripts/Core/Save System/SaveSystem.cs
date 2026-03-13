@@ -19,6 +19,7 @@ namespace Core.Save_System
         public event Action OnSaveDeleted;
 
         public int RuntimeSaveIndex => _loadedSaveIndex;
+        public GameSaveData GetCurrentSave() => _saves[_loadedSaveIndex];
 
         protected override void Awake()
         {
@@ -35,8 +36,11 @@ namespace Core.Save_System
             
             if (isNewGame) 
             {
-                GameSaveData newGameSaveData = new GameSaveData();
-                newGameSaveData.SaveIndex = _saves.Count;
+                GameSaveData newGameSaveData = new GameSaveData
+                {
+                    SaveIndex = _saves.Count
+                };
+
                 _saves.Add(newGameSaveData);
                 _loadedSaveIndex = _saves.Count-1;
             }
@@ -44,6 +48,8 @@ namespace Core.Save_System
             try
             {
                 Directory.CreateDirectory(_savePath);
+
+                PreviousDaySave(_saves[_loadedSaveIndex]);
 
                 foreach(ISaveElement saveElement in _saveElements)
                 {
@@ -57,18 +63,25 @@ namespace Core.Save_System
 
                 string fullPath = Path.Combine(_savePath, $"{SAVE_FILE_BASE_FORMAT}{_loadedSaveIndex}");
 
-                using (FileStream fileStream = new FileStream(fullPath, FileMode.Create))
-                {
-                    using (StreamWriter streamWriter = new StreamWriter(fileStream))
-                    {
-                        streamWriter.Write(saveData);
-                    }
-                }
+                using FileStream fileStream = new FileStream(fullPath, FileMode.Create);
+                using StreamWriter streamWriter = new StreamWriter(fileStream);
+                streamWriter.Write(saveData);
             }
             catch (Exception e)
             {
                 Debug.LogError($"Exception while saving game: {e}");
             }
+        }
+
+        /// <summary>
+        /// Must be used before any other ISaveElement performs save
+        /// </summary>
+        /// <param name="saveData"></param>
+        private void PreviousDaySave(GameSaveData saveData)
+        {
+            saveData.LastDayData = saveData;
+
+            Debug.Log(saveData.LastDayData.HarmonyStatus);
         }
 
         //TODO: set this private later
@@ -81,6 +94,16 @@ namespace Core.Save_System
             foreach (ISaveElement saveElement in _saveElements)
             {
                 saveElement.LoadSave(_saves[saveIndex]);
+            }
+        }
+
+        public void LoadSave(GameSaveData gameSaveData)
+        {
+            if (_saves.Count == 0) return;
+
+            foreach (ISaveElement saveElement in _saveElements)
+            {
+                saveElement.LoadSave(_saves[gameSaveData.SaveIndex]);
             }
         }
 

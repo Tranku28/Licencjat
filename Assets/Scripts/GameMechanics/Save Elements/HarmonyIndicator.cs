@@ -1,6 +1,7 @@
 using System;
 using GameMechanics.Interactions;
 using GameMechanics.UI;
+using SouvenirSystem;
 using TMPro;
 using UnityEngine;
 
@@ -22,11 +23,13 @@ public class HarmonyIndicator : MonoBehaviour, ISaveElement, IInteractable
     private void Start()
     {
         DialogueManager.OnHarmonyDecreased += UpdateHarmonyStatus;
+        SouvenirEffectResolver.OnHarmonyValueUpdate += UpdateHarmonyStatus;
     }
 
     void OnDestroy()
     {
         DialogueManager.OnHarmonyDecreased -= UpdateHarmonyStatus;
+        SouvenirEffectResolver.OnHarmonyValueUpdate -= UpdateHarmonyStatus;
     }
 
     private void UpdateHarmonyStatus(int value)

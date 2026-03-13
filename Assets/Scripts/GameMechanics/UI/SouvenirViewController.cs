@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class SouvenirViewController : UIElement
 {
-    [SerializeField] private Button nextButton, previousButton;
+    [SerializeField] private Button nextButton, previousButton, useButton;
     [SerializeField] private TMP_Text souvenirName, souvenirDescription, receivedFrom;
     [SerializeField] private Transform souvenirContainer;
     [SerializeField] private float souvenirContainerRotationSpeed;
@@ -18,12 +18,15 @@ public class SouvenirViewController : UIElement
 
     private int _rotationDir = 0;
 
+    public Button UseButton => useButton;
+
     private void Awake()
     {
         nextButton.onClick.AddListener(ShowNextSouvenirData);
         previousButton.onClick.AddListener(ShowPreviousSouvenirData);
 
         souvenirPrefabContainerInitialRotation = souvenirContainer.transform.rotation;
+        Debug.Log(UseButton);
     }
 
     private void Start()
