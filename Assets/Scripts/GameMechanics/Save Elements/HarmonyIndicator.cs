@@ -1,4 +1,5 @@
 using System;
+using Core.Scriptable_Objects.Souvenirs;
 using GameMechanics.Interactions;
 using GameMechanics.UI;
 using SouvenirSystem;

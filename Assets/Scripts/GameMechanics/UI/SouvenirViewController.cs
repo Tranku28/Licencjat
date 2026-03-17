@@ -78,8 +78,8 @@ public class SouvenirViewController : UIElement
 
         if (_lastSouvenir != null) Destroy(_lastSouvenir.gameObject);
 
-        souvenirName.text = obj.souvenirName;
-        souvenirDescription.text = obj.souvenirNote;
+        souvenirName.text = obj.souvenirData.name;
+        souvenirDescription.text = obj.souvenirData.souvenirDescription;
         receivedFrom.text = $"Received from: {obj.passengerName} {obj.passengerSurname}";
         _lastSouvenir = Instantiate(obj.souvenirData.souvenirPrefab, souvenirContainer).GetComponent<Souvenir>();
     }

@@ -1,3 +1,4 @@
+using Core.Scriptable_Objects.Souvenirs;
 using UnityEngine;
 
 namespace SouvenirSystem 

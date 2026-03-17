@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace SouvenirSystem
+namespace Core.Scriptable_Objects.Souvenirs
 {    
     public abstract class SouvenirEffect : ScriptableObject
     {

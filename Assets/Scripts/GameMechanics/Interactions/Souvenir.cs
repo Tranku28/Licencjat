@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Core;
 using Core.Scriptable_Objects;
+using Core.Scriptable_Objects.Souvenirs;
 using GameMechanics.Interactions;
 using SouvenirSystem;
 using UnityEngine;
@@ -30,7 +31,7 @@ public class Souvenir : MonoBehaviour, IInteractable
 
     public string GetName()
     {
-        return souvenirData.souvenirName;
+        return souvenirData.souvenirData.name;
     }
 
     public void Interact()

@@ -32,9 +32,6 @@ namespace Core.Scriptable_Objects
 
         [Header("Consequences")]
         [field: SerializeField] public SouvenirData souvenirData {get; private set;}
-        [field: SerializeField, TextArea(3, 5)] public string souvenirNote {get; private set;}
-        [field: SerializeField, TextArea(3, 5)] public string diaryContent {get; private set;}
-        [field: SerializeField] public string souvenirName {get; private set;}
 
         public string GetDate()
         {
