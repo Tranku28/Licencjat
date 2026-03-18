@@ -48,7 +48,7 @@ namespace GameMechanics.Interactions
                     Debug.Log(_souvenirEffectResolver);
                     Debug.Log(souvenirView.UseButton);
                     Souvenir newSouvenir = Instantiate(saveData.souvenirPrefab, souvenirPositions[i]).GetComponent<Souvenir>();
-                    newSouvenir.Init(_souvenirEffectResolver, souvenirView.UseButton);
+                    newSouvenir.Init(_souvenirEffectResolver, souvenirView.UseButton, saveData.souvenirEffects);
                     _souvenirs.Add(newSouvenir);
                 }
             }

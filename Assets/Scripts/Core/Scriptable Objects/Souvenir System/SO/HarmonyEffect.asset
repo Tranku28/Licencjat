@@ -13,4 +13,11 @@ MonoBehaviour:
   m_Name: HarmonyEffect
   m_EditorClassIdentifier: 
   singleUse: 1
-  harmonyValueUpdate: 25
+  useSound:
+    Guid:
+      Data1: -1612662806
+      Data2: 1316720019
+      Data3: -24688216
+      Data4: -209171374
+    Path: event:/UI/CreditsOpen
+  harmonyValueUpdate: -25

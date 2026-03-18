@@ -65,8 +65,6 @@ namespace GameMechanics.UI
         
         private Story _story;
 
-        private bool _clickedBeforeChoices;
-
         private bool _ticketScanned, _ticketRejected;
     
         private List<string> _currentTags = new();
@@ -80,8 +78,6 @@ namespace GameMechanics.UI
 
         private Awaitable _dialogueAwaitable;
         private TextPrinter _textPrinter;
-
-        private RulesValidator _rulesValidator;
         private string _passengerAction;
         private string _generalEntry;
         private string _encounterEntry;
@@ -100,7 +96,6 @@ namespace GameMechanics.UI
             (this as ISaveElement).Register(this);
 
             _textPrinter = new TextPrinter();
-            _rulesValidator = new RulesValidator();
         }
 
         private void OnEnable()
@@ -284,7 +279,6 @@ namespace GameMechanics.UI
         
         private void ShowChoices()
         {
-            _clickedBeforeChoices = false;
             displayedText.enabled = false;
             
             choiceContainer.SetActive(true);

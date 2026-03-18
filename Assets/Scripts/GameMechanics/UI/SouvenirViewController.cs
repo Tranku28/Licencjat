@@ -1,5 +1,6 @@
 using System;
 using Core.Scriptable_Objects;
+using Core.Scriptable_Objects.Souvenirs;
 using GameMechanics.UI;
 using TMPro;
 using UnityEngine;
@@ -72,15 +73,15 @@ public class SouvenirViewController : UIElement
     }
     
     //TODO: disable items instead of Destroy
-    private void LoadSouvenirWindow(PassengerData obj)
+    private void LoadSouvenirWindow(SouvenirData obj)
     {
         _rotationDir = 0;
 
         if (_lastSouvenir != null) Destroy(_lastSouvenir.gameObject);
 
-        souvenirName.text = obj.souvenirData.name;
-        souvenirDescription.text = obj.souvenirData.souvenirDescription;
-        receivedFrom.text = $"Received from: {obj.passengerName} {obj.passengerSurname}";
-        _lastSouvenir = Instantiate(obj.souvenirData.souvenirPrefab, souvenirContainer).GetComponent<Souvenir>();
+        souvenirName.text = obj.name;
+        souvenirDescription.text = obj.souvenirDescription;
+        receivedFrom.text = $"Received from: {obj.receivedFrom}";
+        _lastSouvenir = Instantiate(obj.souvenirPrefab, souvenirContainer).GetComponent<Souvenir>();
     }
 }

@@ -1,6 +1,7 @@
 using System;
 using Core;
 using Core.Scriptable_Objects;
+using Core.Scriptable_Objects.Souvenirs;
 using GameMechanics.Interactions;
 using GameMechanics.UI;
 using GameMechanics.UI.MainMenu;
@@ -67,7 +68,7 @@ namespace GameMechanics
             TutorialNotes.OnTutorialNotesInteracted -= OnTutorialNotesInteracted;
         }
         
-        private void OnSouvenirInteracted(PassengerData obj)
+        private void OnSouvenirInteracted(SouvenirData obj)
         {
             if (_gameStateMachine.GetGameState() == GameState.Paused) return;
             
