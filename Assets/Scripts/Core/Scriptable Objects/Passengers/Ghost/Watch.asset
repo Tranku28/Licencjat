@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Watch
   m_EditorClassIdentifier: 
   souvenirID: 1
-  name: 
-  receivedFrom: 
+  name: Old Watch
+  receivedFrom: Eliah Mistborne
   souvenirPrefab: {fileID: 428697447370338001, guid: dfcfdb414a253314a8b9adcaf8c8c1e0, type: 3}
   souvenirEffects: []
   souvenirDescription: 'A worn watch whose hands stopped the moment the answer was

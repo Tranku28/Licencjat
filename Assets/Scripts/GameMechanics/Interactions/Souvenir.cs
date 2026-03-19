@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Core;
+using Core.Save_System;
 using Core.Scriptable_Objects;
 using Core.Scriptable_Objects.Souvenirs;
 using GameMechanics.Interactions;
@@ -14,6 +15,8 @@ public class Souvenir : MonoBehaviour, IInteractable
     private List<SouvenirEffect> _effects;
     private SouvenirEffectResolver _effectResolver;
     private Button _useButton;
+
+    public event Action<Souvenir> OnSouvenirused;
 
     public static event Action<SouvenirData> OnSouvenirInteracted;
 
@@ -60,6 +63,9 @@ public class Souvenir : MonoBehaviour, IInteractable
             PlayerControls playerControls = DependencyResolver.Instance.GetType<PlayerControls>();
             playerControls.ForceOnEscapePressed();
 
+            DependencyResolver.Instance.GetType<SaveSystem>().ForceDeleteSaveSouvenirData(souvenirData.souvenirID);
+
+            OnSouvenirused?.Invoke(this);
             Destroy(gameObject);
         }
 

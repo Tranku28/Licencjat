@@ -171,6 +171,17 @@ namespace Core.Save_System
             Debug.Log($"Saves count: {_saves.Count}");
         }
 
+        public void ForceDeleteSaveSouvenirData(int id)
+        {
+            GameSaveData runtimeSave = GetCurrentSave();
+
+            int index = runtimeSave.CollectedSouvenirIdList.IndexOf(id);
+            Debug.Log($"{index} : {id}");
+            Debug.Log(runtimeSave.CollectedSouvenirIdList.Count);
+            runtimeSave.CollectedSouvenirIdList.RemoveAt(index);
+            Debug.Log(runtimeSave.CollectedSouvenirIdList.Count);
+        }
+
         public void RegisterToSaveSystem(ISaveElement saveElement)
         {
             if (_saveElements.Contains(saveElement)) return;
