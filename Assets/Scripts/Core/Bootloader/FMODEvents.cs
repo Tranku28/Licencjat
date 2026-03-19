@@ -33,6 +33,10 @@ public class FMODEvents : MonoBehaviour
     [field: SerializeField] public EventReference candleHover { get; set; }
     [field: Header("Candle Put Down")]
     [field: SerializeField] public EventReference candlePutDown { get; set; }
+    [field: Header("Door Open")]
+    [field: SerializeField] public EventReference doorOpen { get; set; }
+    [field: Header("Door Close")]
+    [field: SerializeField] public EventReference doorClose { get; set; }
 
 
     public static FMODEvents Instance;

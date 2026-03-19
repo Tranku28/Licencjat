@@ -1124,8 +1124,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 60137472}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.12416606, y: 0.30571094, z: -0.040247597, w: 0.94313514}
-  m_LocalPosition: {x: 6.6036034, y: 1.5899999, z: 0.8452367}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 6.5, y: 1.2, z: -1.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2853,91 +2853,105 @@ MonoBehaviour:
       Data2: 1316673444
       Data3: -913412990
       Data4: 1870069249
-    Path: event:/UI/TicketMarked
+    Path: event:/SFX/UI/TicketMarked
   <stepSound>k__BackingField:
     Guid:
       Data1: 902014471
       Data2: 1089949934
       Data3: 2071658652
       Data4: 1861620852
-    Path: event:/Steps
+    Path: event:/SFX/Steps
   <diaryOpenSound>k__BackingField:
     Guid:
       Data1: 1834526991
       Data2: 1323239871
       Data3: -228532325
       Data4: 98970911
-    Path: event:/UI/DiaryOpen
+    Path: event:/SFX/UI/DiaryOpen
   <diaryCloseSound>k__BackingField:
     Guid:
       Data1: 2134807353
       Data2: 1307833851
       Data3: -153789811
       Data4: 314079329
-    Path: event:/UI/DiaryClose
+    Path: event:/SFX/UI/DiaryClose
   <saveBoardHover>k__BackingField:
     Guid:
       Data1: -434450154
       Data2: 1245925558
       Data3: -667565402
       Data4: 1411379151
-    Path: event:/UI/BoardHover
+    Path: event:/SFX/UI/BoardHover
   <saveBoardOpen>k__BackingField:
     Guid:
       Data1: -1899244506
       Data2: 1143278907
       Data3: 82060171
       Data4: -969756730
-    Path: event:/UI/BoardOpen
+    Path: event:/SFX/UI/BoardOpen
   <watchHover>k__BackingField:
     Guid:
       Data1: -465688803
       Data2: 1123498219
       Data3: 93183367
       Data4: 732616956
-    Path: event:/UI/WatchHover
+    Path: event:/SFX/UI/WatchHover
   <watchOpen>k__BackingField:
     Guid:
       Data1: -1490065099
       Data2: 1079915352
       Data3: 519483053
       Data4: 1138374718
-    Path: event:/UI/WatchOpen
+    Path: event:/SFX/UI/WatchOpen
   <creditsHover>k__BackingField:
     Guid:
       Data1: -87853555
       Data2: 1200553832
       Data3: 402451354
       Data4: -699808726
-    Path: event:/UI/CreditsHover
+    Path: event:/SFX/UI/CreditsHover
   <creditsOpen>k__BackingField:
     Guid:
       Data1: -1612662806
       Data2: 1316720019
       Data3: -24688216
       Data4: -209171374
-    Path: event:/UI/CreditsOpen
+    Path: event:/SFX/UI/CreditsOpen
   <candleBlow>k__BackingField:
     Guid:
       Data1: 34846935
       Data2: 1153455150
       Data3: -855845229
       Data4: 522365880
-    Path: event:/UI/CandleBlow
+    Path: event:/SFX/UI/CandleBlow
   <candleHover>k__BackingField:
     Guid:
       Data1: 1437542160
       Data2: 1233313999
       Data3: 603250305
       Data4: -1533759287
-    Path: event:/UI/CandleHover
+    Path: event:/SFX/UI/CandleHover
   <candlePutDown>k__BackingField:
     Guid:
       Data1: 1053917225
       Data2: 1334812577
       Data3: -2025428582
       Data4: 871581406
-    Path: event:/UI/CandlePutDown
+    Path: event:/SFX/UI/CandlePutDown
+  <doorOpen>k__BackingField:
+    Guid:
+      Data1: -1899998651
+      Data2: 1300653746
+      Data3: 640871100
+      Data4: 1694119080
+    Path: event:/SFX/DoorOpen
+  <doorClose>k__BackingField:
+    Guid:
+      Data1: 1078789250
+      Data2: 1262418781
+      Data3: 40509580
+      Data4: 144493572
+    Path: event:/SFX/DoorClose
 --- !u!4 &260445358
 Transform:
   m_ObjectHideFlags: 0
@@ -13037,7 +13051,7 @@ MonoBehaviour:
       Data2: 1184312999
       Data3: -1702075991
       Data4: 813172815
-    Path: event:/Train Ambient
+    Path: event:/Music & Ambient/Train Ambient
   Event: 
   EventPlayTrigger: 1
   EventStopTrigger: 2

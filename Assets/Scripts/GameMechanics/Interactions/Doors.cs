@@ -73,7 +73,7 @@ namespace GameMechanics
 
             seq.AppendCallback(() =>
             {
-                var sound = open ? FMODEvents.Instance.saveBoardOpen : FMODEvents.Instance.saveBoardHover;
+                var sound = open ? FMODEvents.Instance.doorOpen : FMODEvents.Instance.doorClose;
                 AudioManager.Instance.PlayOneShot(sound, transform.position);
 
                 _triggerCollider.enabled = true;
