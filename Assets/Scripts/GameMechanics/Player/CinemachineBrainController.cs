@@ -3,10 +3,11 @@ using UnityEngine;
 
 public class CinemachineBrainController : MonoBehaviour
 {
-    [SerializeField] private CinemachineBrain cinemachineBrain;
+    private CinemachineBrain _cinemachineBrain;
     [SerializeField] private CinemachineCamera playerCamera;
 
     public CinemachineCamera PlayerCamera { get => playerCamera;}
+    public CinemachineBrain Brain => _cinemachineBrain;
 
     public static CinemachineBrainController Instance;
 
@@ -18,6 +19,8 @@ public class CinemachineBrainController : MonoBehaviour
         }
 
         Instance = this;
+
+        _cinemachineBrain = GetComponent<CinemachineBrain>();
 
         playerCamera.Prioritize();
     }

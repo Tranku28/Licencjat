@@ -5,6 +5,7 @@ using Core;
 using Core.Save_System;
 using Player;
 using TMPro;
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -22,8 +23,11 @@ namespace GameMechanics.UI.MainMenu
         [SerializeField] private List<SaveDisplayerUI> saveDisplayers = new();
 
         [Header("External Dependencies")]
-        [SerializeField] private InteractionHandler cameraAnimatorHandler;
-        [SerializeField] private Animator cameraAnimator;
+        [SerializeField] private CinemachineCamera saveSelectorCamera;
+        [SerializeField] private CinemachineCamera playerHeadCamera;
+        [SerializeField] private CinemachineCamera mainMenuZoomOutCamera;
+
+        private CinemachineBrain _cinemachineBrain;
         
         public event Action<bool> OnGameplayEntered;
         private Animator _animator;
@@ -39,12 +43,16 @@ namespace GameMechanics.UI.MainMenu
             _collider = GetComponent<Collider>();
         }
 
+        private void Start()
+        {
+            _cinemachineBrain = CinemachineBrainController.Instance.Brain;
+            mainMenuZoomOutCamera.Prioritize();
+        }
+
         private void OnEnable()
         {
             startJourneyButton.onClick.AddListener(OnNewGame);
             goBackButton.onClick.AddListener(GoBackButtonClicked);
-            
-            cameraAnimatorHandler.GameStarted += OnStartGame;
 
             _saveSystem = DependencyResolver.Instance.GetType<SaveSystem>();
             _saveSystem.OnSaveDeleted += LoadSaves;
@@ -56,8 +64,6 @@ namespace GameMechanics.UI.MainMenu
         {
             startJourneyButton.onClick.RemoveListener(OnNewGame);
             goBackButton.onClick.RemoveListener(GoBackButtonClicked);
-            
-            cameraAnimatorHandler.GameStarted -= OnStartGame;
 
             _saveSystem.OnSaveDeleted -= LoadSaves;
 
@@ -67,7 +73,7 @@ namespace GameMechanics.UI.MainMenu
         public void OnPointerClick(PointerEventData eventData)
         {
             _animator.SetBool(ZoomIn, true);
-            cameraAnimator.SetBool(ZoomIn, true);
+            saveSelectorCamera.Prioritize();
             AudioManager.Instance.PlayOneShot(FMODEvents.Instance.saveBoardOpen, transform.position);
             _entered = true;
         }
@@ -122,35 +128,43 @@ namespace GameMechanics.UI.MainMenu
         private void GoBackButtonClicked()
         {
             _animator.SetBool(ZoomIn, false);
-            cameraAnimator.SetBool(ZoomIn, false);
             
             startJourneyButton.interactable = false;
             goBackButton.interactable = false;
             
             _collider.enabled = true;
             _entered = false;
+
+            mainMenuZoomOutCamera.Prioritize();
         }
 
         private void OnStartButtonClicked()
         {
             // TODO: Fix game start is controlled inside animation invoke method in Interactionhandler
-            cameraAnimator.SetBool(GameStarted, true);
             _animator.SetBool(ZoomIn, false);
             _animator.SetBool(Hover, false);
             _collider.enabled = false;
+            playerHeadCamera.Prioritize();
+
+            StartCoroutine(OnStartGame());
         }
 
-        private void OnStartGame()
+        private IEnumerator OnStartGame()
         {
+            while (_cinemachineBrain.IsBlending)
+            {
+                yield return new WaitForEndOfFrame();
+            }
+
+            Debug.Log("Gameplay entered");
+
             OnGameplayEntered?.Invoke(_newGame);
-            cameraAnimator.enabled = false;
             _newGame = false;
         }
 
         private void MenuReturned()
         {
             _animator.SetBool(ZoomIn, false);
-            cameraAnimator.SetBool(ZoomIn, false);
             
             startJourneyButton.interactable = false;
             goBackButton.interactable = false;
@@ -158,7 +172,6 @@ namespace GameMechanics.UI.MainMenu
             _collider.enabled = true;
             _entered = false;
 
-            cameraAnimator.SetBool(ZoomIn, false);
             _collider.enabled = true;
         }
 

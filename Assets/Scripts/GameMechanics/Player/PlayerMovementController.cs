@@ -1,5 +1,6 @@
 using System;
 using Core;
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -14,8 +15,8 @@ namespace GameMechanics.Player
         [SerializeField] private float stepSoundCooldown = 0.5f;
         [SerializeField] private float stepDistance;
         
+        private CinemachineCamera playerHeadCamera;
         private float _currentTime = 0;
-        private Camera _playerCamera;
         private InputAction _lookInput;
         private InputAction _moveInput;
         private InputAction _sprintInput;
@@ -31,7 +32,7 @@ namespace GameMechanics.Player
 
         private void Awake()
         {
-            _playerCamera = GetComponentInChildren<Camera>();
+            playerHeadCamera = GetComponentInChildren<CinemachineCamera>();
             _characterController = GetComponent<CharacterController>();
 
             _gameStateMachine = DependencyResolver.Instance.GetType<GameStateMachine>();
@@ -120,7 +121,7 @@ namespace GameMechanics.Player
             _cameraPitch -= mouseY;
             _cameraPitch = Mathf.Clamp(_cameraPitch, -55f, 55f);
         
-            _playerCamera.transform.localEulerAngles = new Vector3(_cameraPitch, 0f, 0f);
+            playerHeadCamera.transform.localEulerAngles = new Vector3(_cameraPitch, 0f, 0f);
         
             transform.Rotate(0f, mouseX, 0f);
         }

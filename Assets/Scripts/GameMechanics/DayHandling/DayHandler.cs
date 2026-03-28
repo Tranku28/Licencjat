@@ -13,7 +13,7 @@ namespace GameMechanics.DayHandling
     public class DayHandler : MonoBehaviour, IInteractable
     {
         [SerializeField] private BlinkPanelUI blinkPanelUI;
-        [SerializeField] private CinemachineCamera playerCamera, playerCamera2, dayEndCamera;
+        [SerializeField] private CinemachineCamera playerCamera2, dayEndCamera;
         private CinemachineBrain _cinemachineBrain;
         private float _cinemachineBlendDuration;
         private bool _canNextDay;
