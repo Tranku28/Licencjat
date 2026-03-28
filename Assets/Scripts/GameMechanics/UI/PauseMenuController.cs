@@ -57,8 +57,8 @@ namespace GameMechanics
             switch (_currentOption)
             {
                 case PauseOptions.MainMenu:
-                    gameStateMachine.ChangeGameState(GameState.MainMenu);
-                    SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                    gameStateMachine.OnMainMenuReturn();
+                    pauseMenuVisual.SetActive(false);
                     break;
                 
                 case PauseOptions.Settings:

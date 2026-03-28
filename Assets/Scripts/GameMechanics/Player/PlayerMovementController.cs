@@ -20,13 +20,11 @@ namespace GameMechanics.Player
         private InputAction _moveInput;
         private InputAction _sprintInput;
         private CharacterController _characterController;
+        private GameStateMachine _gameStateMachine;
     
-        private float _yMoveOffset, _xMoveOffset;
         private float _cameraPitch;
         
         private bool _canMove = false;
-        
-        private GameStateMachine _gameStateMachine;
         private Vector2 _moveInputVector;
         private Vector3 _previousDistance;
         private bool _stepDone;
@@ -35,6 +33,8 @@ namespace GameMechanics.Player
         {
             _playerCamera = GetComponentInChildren<Camera>();
             _characterController = GetComponent<CharacterController>();
+
+            _gameStateMachine = DependencyResolver.Instance.GetType<GameStateMachine>();
         
             _lookInput = InputSystem.actions.FindAction("Look");
             _moveInput = InputSystem.actions.FindAction("Move");

@@ -32,6 +32,8 @@ namespace UI.MainMenu
             creditsScroll.ScrollClicked += GoToCredits;
             settingsWatch.WatchClicked += GoToSettings;
             startBoard.OnGameplayEntered += StartGame;
+
+            GameStateMachine.OnMenuReturned += EnableMenu;
         }
 
         private void OnDestroy()
@@ -39,6 +41,8 @@ namespace UI.MainMenu
             creditsScroll.ScrollClicked -= GoToCredits;
             settingsWatch.WatchClicked -= GoToSettings;
             startBoard.OnGameplayEntered -= StartGame;
+
+            GameStateMachine.OnMenuReturned -= EnableMenu;
         }
         
         
@@ -68,6 +72,14 @@ namespace UI.MainMenu
             candleQuit.enabled = false;
             creditsScroll.enabled = false;
             startBoard.enabled = false;
+        }
+
+        private void EnableMenu()
+        {
+            settingsWatch.enabled = true;
+            candleQuit.enabled = true;
+            creditsScroll.enabled = true;
+            startBoard.enabled = true;
         }
     }
 }

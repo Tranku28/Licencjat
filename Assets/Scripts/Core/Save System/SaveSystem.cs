@@ -49,7 +49,7 @@ namespace Core.Save_System
             {
                 Directory.CreateDirectory(_savePath);
 
-                PreviousDaySave(_saves[_loadedSaveIndex]);
+                //PreviousDaySave(_saves[_loadedSaveIndex]);
 
                 foreach(ISaveElement saveElement in _saveElements)
                 {
@@ -80,8 +80,6 @@ namespace Core.Save_System
         private void PreviousDaySave(GameSaveData saveData)
         {
             saveData.LastDayData = saveData;
-
-            Debug.Log(saveData.LastDayData.HarmonyStatus);
         }
 
         //TODO: set this private later

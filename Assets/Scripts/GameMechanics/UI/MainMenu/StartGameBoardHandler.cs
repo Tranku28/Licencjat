@@ -48,6 +48,8 @@ namespace GameMechanics.UI.MainMenu
 
             _saveSystem = DependencyResolver.Instance.GetType<SaveSystem>();
             _saveSystem.OnSaveDeleted += LoadSaves;
+
+            GameStateMachine.OnMenuReturned += MenuReturned;
         }
         
         private void OnDisable()
@@ -58,6 +60,8 @@ namespace GameMechanics.UI.MainMenu
             cameraAnimatorHandler.GameStarted -= OnStartGame;
 
             _saveSystem.OnSaveDeleted -= LoadSaves;
+
+            GameStateMachine.OnMenuReturned -= MenuReturned;
         }
 
         public void OnPointerClick(PointerEventData eventData)
@@ -140,8 +144,22 @@ namespace GameMechanics.UI.MainMenu
         {
             OnGameplayEntered?.Invoke(_newGame);
             cameraAnimator.enabled = false;
-            _animator.enabled = false;
             _newGame = false;
+        }
+
+        private void MenuReturned()
+        {
+            _animator.SetBool(ZoomIn, false);
+            cameraAnimator.SetBool(ZoomIn, false);
+            
+            startJourneyButton.interactable = false;
+            goBackButton.interactable = false;
+            
+            _collider.enabled = true;
+            _entered = false;
+
+            cameraAnimator.SetBool(ZoomIn, false);
+            _collider.enabled = true;
         }
 
         private void OnNewGame()
