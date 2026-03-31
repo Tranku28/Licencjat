@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   passengerVariants: []
   <passengerPortrait>k__BackingField: {fileID: 0}
-  <prefab>k__BackingField: {fileID: 0}
+  <prefab>k__BackingField: {fileID: 8805663281766965500, guid: d1eba4fabd461e24eadc9307a3fb67d6, type: 3}
   <passengerName>k__BackingField: 
   <passengerSurname>k__BackingField: 
-  <dayAppears>k__BackingField: 0
+  <dayAppears>k__BackingField: 3
   <dialogueVariants>k__BackingField: []
   <car>k__BackingField: 0
   <seat>k__BackingField: 0
@@ -31,7 +31,4 @@ MonoBehaviour:
   <species>k__BackingField: 
   <causeOfDeath>k__BackingField: 
   <biography>k__BackingField: 
-  <souvenirData>k__BackingField: {fileID: 0}
-  <souvenirNote>k__BackingField: 
-  <diaryContent>k__BackingField: 
-  <souvenirName>k__BackingField: 
+  <souvenirData>k__BackingField: {fileID: 11400000, guid: 4e3dcf2b1d65f0f48991098dad3a2ec8, type: 2}

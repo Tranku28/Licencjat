@@ -40,6 +40,7 @@ namespace GameMechanics
 
             PauseMenuController.OnResume += OnResume;
             PauseMenuController.OnSettingsOpened += OpenSettings;
+            PauseMenuController.OnMenuReturned += ResetCurrentElement;
 
             SettingsPanelController.OnSettingsQuit += QuitPauseSettings;
             
@@ -57,6 +58,7 @@ namespace GameMechanics
             
             PauseMenuController.OnResume -= OnResume;
             PauseMenuController.OnSettingsOpened -= OpenSettings;
+            PauseMenuController.OnMenuReturned -= ResetCurrentElement;
 
             SettingsPanelController.OnSettingsQuit -= QuitPauseSettings;
 
@@ -115,6 +117,8 @@ namespace GameMechanics
             settingsTab.SetVisualVisibility(true);
             pauseMenu.SetVisualVisibility(false);
         }
+
+        private void ResetCurrentElement() => _currentElement = null;
 
         private void QuitPauseSettings()
         {

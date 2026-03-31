@@ -80,6 +80,8 @@ namespace UI.MainMenu
             candleQuit.enabled = true;
             creditsScroll.enabled = true;
             startBoard.enabled = true;
+            //TODO: Prettify it
+            startBoard.MenuReturned();
         }
     }
 }

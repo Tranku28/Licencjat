@@ -19,6 +19,7 @@ public class DayCounterBoard : MonoBehaviour, ISaveElement
 
     public void SaveData(GameSaveData gameSaveData)
     {
+        //TODO: Update it in saveSystem to have single source of truth
         _currentDay++;
         gameSaveData.CurrentDay = _currentDay;
         dayDisplay.text = _currentDay.ToString();

@@ -43,6 +43,7 @@ namespace Core.Save_System
 
                 _saves.Add(newGameSaveData);
                 _loadedSaveIndex = _saves.Count-1;
+                Debug.Log(_loadedSaveIndex);
             }
 
             try

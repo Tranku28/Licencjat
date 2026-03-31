@@ -21,6 +21,7 @@ namespace GameMechanics
 
         public static Action OnResume;
         public static Action OnSettingsOpened;
+        public static Action OnMenuReturned;
 
         private void Awake()
         {
@@ -59,6 +60,7 @@ namespace GameMechanics
                 case PauseOptions.MainMenu:
                     gameStateMachine.OnMainMenuReturn();
                     pauseMenuVisual.SetActive(false);
+                    OnMenuReturned?.Invoke();
                     break;
                 
                 case PauseOptions.Settings:

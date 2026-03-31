@@ -18,14 +18,10 @@ namespace GameMechanics.DayHandling
         private float _cinemachineBlendDuration;
         private bool _canNextDay;
 
-        void Awake()
+        private void Start()
         {
             _cinemachineBrain = CinemachineBrainController.Instance.GetComponent<CinemachineBrain>();
             _cinemachineBlendDuration = _cinemachineBrain.DefaultBlend.BlendTime;
-        }
-
-        private void Start()
-        {
             blinkPanelUI.OnNextDayButtonClicked += OpenPlayerEyes;
             Passenger.OnPassengerInteracted += AllowNextDay;
         }
