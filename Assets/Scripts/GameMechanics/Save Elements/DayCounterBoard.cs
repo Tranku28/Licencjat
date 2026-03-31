@@ -1,3 +1,5 @@
+using System;
+using Core;
 using TMPro;
 using UnityEngine;
 
@@ -9,6 +11,7 @@ public class DayCounterBoard : MonoBehaviour, ISaveElement
     private void Awake()
     {
         (this as ISaveElement).Register(this);
+        GameStateMachine.OnMenuReturned += EraseDayCounter;
     }
 
     public void LoadSave(GameSaveData gameSaveData)
@@ -19,9 +22,16 @@ public class DayCounterBoard : MonoBehaviour, ISaveElement
 
     public void SaveData(GameSaveData gameSaveData)
     {
-        //TODO: Update it in saveSystem to have single source of truth
-        _currentDay++;
-        gameSaveData.CurrentDay = _currentDay;
-        dayDisplay.text = _currentDay.ToString();
+        
+    }
+
+    private void OnDestroy()
+    {
+        GameStateMachine.OnMenuReturned -= EraseDayCounter;
+    }
+
+    private void EraseDayCounter()
+    {
+        dayDisplay.text = string.Empty;
     }
 }

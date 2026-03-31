@@ -27,6 +27,8 @@ namespace GameMechanics
 
         public string GetName()
         {
+            if (_doorsOpened) return "Close the door";
+            
             return "Open the door";
         }
 

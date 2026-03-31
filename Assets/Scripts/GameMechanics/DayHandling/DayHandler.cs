@@ -37,7 +37,6 @@ namespace GameMechanics.DayHandling
             Passenger.OnPassengerInteracted -= AllowNextDay;
         }
 
-        //TODO: Prevent player from ending day without talking to passengers
         public void Interact()
         {
             if (!_canNextDay)

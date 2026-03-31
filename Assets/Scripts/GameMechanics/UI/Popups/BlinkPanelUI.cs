@@ -43,9 +43,6 @@ public class BlinkPanelUI : MonoBehaviour
     
     public Awaitable OpenPlayerEyes()
     {
-        GameStateMachine gameStateMachine = DependencyResolver.Instance.GetType<GameStateMachine>();
-        gameStateMachine.ChangeGameState(GameState.Gameplay);
-
         _current = FadeOut();
         return _current;
     }
@@ -92,5 +89,8 @@ public class BlinkPanelUI : MonoBehaviour
 
         panelImage.color = new Color(0f, 0f, 0f, 0f);
         _current = null;
+
+        GameStateMachine gameStateMachine = DependencyResolver.Instance.GetType<GameStateMachine>();
+        gameStateMachine.ChangeGameState(GameState.Gameplay);
     }
 }

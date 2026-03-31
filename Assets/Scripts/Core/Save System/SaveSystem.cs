@@ -43,14 +43,20 @@ namespace Core.Save_System
 
                 _saves.Add(newGameSaveData);
                 _loadedSaveIndex = _saves.Count-1;
-                Debug.Log(_loadedSaveIndex);
             }
 
             try
             {
                 Directory.CreateDirectory(_savePath);
 
-                //PreviousDaySave(_saves[_loadedSaveIndex]);
+                PreviousDaySave(_saves[_loadedSaveIndex]);
+
+                if (isNewGame)
+                {
+                    _saves[_loadedSaveIndex].CurrentDay = 0;
+                }
+
+                _saves[_loadedSaveIndex].CurrentDay++;
 
                 foreach(ISaveElement saveElement in _saveElements)
                 {

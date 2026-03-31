@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Core;
 using Core.Scriptable_Objects;
 using Interactions;
 using UnityEngine;
@@ -11,12 +12,6 @@ public class PassengerSpawner : MonoBehaviour, ISaveElement
     private void Awake()
     {
         (this as ISaveElement).Register(this);
-        currentPassengers.Clear();
-    }
-
-    void OnDestroy()
-    {
-        currentPassengers.Clear();
     }
 
     public void LoadSave(GameSaveData gameSaveData)

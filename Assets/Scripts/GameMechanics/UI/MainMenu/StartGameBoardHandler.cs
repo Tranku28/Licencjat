@@ -57,14 +57,26 @@ namespace GameMechanics.UI.MainMenu
 
             _saveSystem = DependencyResolver.Instance.GetType<SaveSystem>();
             _saveSystem.OnSaveDeleted += LoadSaves;
+
+            GameStateMachine.OnMenuReturned += HideSaves;
         }
-        
+
         private void OnDisable()
         {
             startJourneyButton.onClick.RemoveListener(OnNewGame);
             goBackButton.onClick.RemoveListener(GoBackButtonClicked);
 
             _saveSystem.OnSaveDeleted -= LoadSaves;
+
+            GameStateMachine.OnMenuReturned -= HideSaves;
+        }
+
+        private void HideSaves()
+        {
+            foreach (SaveDisplayerUI saveDisplayer in saveDisplayers)
+            {
+                saveDisplayer.gameObject.SetActive(false);
+            }
         }
 
         public void OnPointerClick(PointerEventData eventData)
@@ -151,7 +163,6 @@ namespace GameMechanics.UI.MainMenu
             StartCoroutine(OnStartGame(_cinemachineBrainController.Brain.DefaultBlend.Time));
         }
 
-        //TODO: change behaviour
         private IEnumerator OnStartGame(float time)
         {
             yield return new WaitForSeconds(time);

@@ -34,6 +34,6 @@ public class TutorialNotes : MonoBehaviour, IInteractable
 
     public string GetName()
     {
-        return "Notes";
+        return "A Conductor's duty";
     }
 }

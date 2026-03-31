@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Core;
 using Core.Scriptable_Objects;
 using GameMechanics.UI;
-using Interactions;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -24,22 +23,25 @@ namespace GameMechanics
         [SerializeField] private TMP_Text passengerSeatNumber;
         [SerializeField] private TMP_Text ticketNumberText;
         [SerializeField] private Image passengerPortrait;
+        [SerializeField] private PuncherMover puncher;
 
         private List<Image> holesList = new();
 
         public event Action OnTicketScanned;
         
-        public class OnTicketClickedEventArgs : EventArgs
+        public class OnTicketPointerMovedEventArgs : EventArgs
         {
             public PuncherOrientation Orientation;
+            public Quaternion Rotation;
 
-            public OnTicketClickedEventArgs(PuncherOrientation orientation)
+            public OnTicketPointerMovedEventArgs(PuncherOrientation orientation, Quaternion ticketRotation)
             {
                 Orientation = orientation;
+                Rotation = ticketRotation;
             }
         }
 
-        public event EventHandler<OnTicketClickedEventArgs> OnTicketMoved;
+        public event EventHandler<OnTicketPointerMovedEventArgs> OnTicketMoved;
         private Camera _camera;
 
         private bool _canScan;
@@ -49,8 +51,6 @@ namespace GameMechanics
             get => _canScan;
             set => _canScan = value;
         }
-
-        private GameStateMachine _gameManager;
 
         private void Awake()
         {
@@ -90,6 +90,14 @@ namespace GameMechanics
 
         public void OnPointerMove(PointerEventData eventData)
         {
+            if (eventData.pointerCurrentRaycast.gameObject != visual)
+            {
+                puncher.gameObject.SetActive(false);
+                return;
+            }
+
+            puncher.gameObject.SetActive(true);
+
             RectTransform rectTransform = visual.GetComponent<RectTransform>();
 
             RectTransformUtility.ScreenPointToLocalPointInRectangle(
@@ -108,19 +116,19 @@ namespace GameMechanics
             
             if (distLeft <= distRight && distLeft <= distTop && distLeft <= distBottom)
             {
-                OnTicketMoved?.Invoke(this, new OnTicketClickedEventArgs(PuncherOrientation.Left));
+                OnTicketMoved?.Invoke(this, new OnTicketPointerMovedEventArgs(PuncherOrientation.Left, visual.transform.rotation));
             }
             else if (distRight <= distLeft && distRight <= distTop && distRight <= distBottom)
             {
-                OnTicketMoved?.Invoke(this, new OnTicketClickedEventArgs(PuncherOrientation.Right));
+                OnTicketMoved?.Invoke(this, new OnTicketPointerMovedEventArgs(PuncherOrientation.Right, visual.transform.rotation));
             }
             else if (distTop <= distLeft && distTop <= distRight && distTop <= distBottom)
             {
-                OnTicketMoved?.Invoke(this, new OnTicketClickedEventArgs(PuncherOrientation.Bottom));
+                OnTicketMoved?.Invoke(this, new OnTicketPointerMovedEventArgs(PuncherOrientation.Bottom, visual.transform.rotation));
             }
             else
             {
-                OnTicketMoved?.Invoke(this, new OnTicketClickedEventArgs(PuncherOrientation.Top));
+                OnTicketMoved?.Invoke(this, new OnTicketPointerMovedEventArgs(PuncherOrientation.Top, visual.transform.rotation));
             }
         }
 

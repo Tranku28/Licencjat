@@ -77,14 +77,14 @@ namespace GameMechanics
                     break;
                 case PauseOptions.None:
                 default:
-                    Debug.Log("Unrecognized pause option");
                     break;
             }
         }
 
         private void Update()
         {
-            // TODO: make sure to disable Update of pause menu when it is not Used
+            if (!pauseMenuVisual.activeSelf) return;
+
             var mousePos = Mouse.current.position.ReadValue();
 
             var localPoint = GetCursorPosition(mousePos);
