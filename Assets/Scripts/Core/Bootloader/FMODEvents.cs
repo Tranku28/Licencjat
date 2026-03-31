@@ -38,6 +38,9 @@ public class FMODEvents : MonoBehaviour
     [field: Header("Door Close")]
     [field: SerializeField] public EventReference doorClose { get; set; }
 
+    [Header("====== Non SFX ======")]
+    [field: SerializeField] public EventReference ambient {get; set;}
+
 
     public static FMODEvents Instance;
 
