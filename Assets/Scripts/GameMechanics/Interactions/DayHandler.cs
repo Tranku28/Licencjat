@@ -13,7 +13,7 @@ namespace GameMechanics.DayHandling
     public class DayHandler : MonoBehaviour, IInteractable
     {
         [SerializeField] private BlinkPanelUI blinkPanelUI;
-        [SerializeField] private CinemachineCamera playerCamera2, dayEndCamera;
+        [SerializeField] private CinemachineCamera dayEndCamera;
         private CinemachineBrain _cinemachineBrain;
         private float _cinemachineBlendDuration;
         private bool _canNextDay;
@@ -53,9 +53,6 @@ namespace GameMechanics.DayHandling
             GameStateMachine stateMachine = DependencyResolver.Instance.GetType<GameStateMachine>();
 
             stateMachine.ChangeGameState(GameState.UIOpened);
-
-            playerCamera2.Prioritize();
-            yield return new WaitForSeconds(_cinemachineBlendDuration);
 
             dayEndCamera.Prioritize();
             yield return new WaitForSeconds(_cinemachineBlendDuration);

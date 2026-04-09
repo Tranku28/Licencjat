@@ -14,21 +14,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   passengerVariants: []
   <passengerPortrait>k__BackingField: {fileID: 0}
-  <prefab>k__BackingField: {fileID: 8805663281766965500, guid: d1eba4fabd461e24eadc9307a3fb67d6, type: 3}
-  <passengerName>k__BackingField: 
+  <prefab>k__BackingField: {fileID: 4960581393684030824, guid: d1eba4fabd461e24eadc9307a3fb67d6, type: 3}
+  <passengerName>k__BackingField: Deliah
   <passengerSurname>k__BackingField: 
   <dayAppears>k__BackingField: 3
   <dialogueVariants>k__BackingField: []
-  <car>k__BackingField: 0
-  <seat>k__BackingField: 0
-  <destination>k__BackingField: 
+  <car>k__BackingField: 1
+  <seat>k__BackingField: 1
+  <destination>k__BackingField: Unknown
   <validUntil>k__BackingField:
-    <Day>k__BackingField: 0
-    <Month>k__BackingField: 0
-    <Year>k__BackingField: 0
-    <Hour>k__BackingField: 0
-    <Minute>k__BackingField: 0
-  <species>k__BackingField: 
-  <causeOfDeath>k__BackingField: 
-  <biography>k__BackingField: 
+    <Day>k__BackingField: 4
+    <Month>k__BackingField: 5
+    <Year>k__BackingField: 1273
+    <Hour>k__BackingField: 13
+    <Minute>k__BackingField: 45
+  <species>k__BackingField: Human
+  <causeOfDeath>k__BackingField: Eaten by wild animals
+  <biography>k__BackingField: "A witch from a distant village who deceived its people
+    with false promises of\r\nhelp. Though she possessed genuine magical abilities,
+    she chose to use them selfishly, merely pretending to aid those in need. When
+    her lies were finally exposed, she was cast out of the village. Before her exile,
+    however, she committed a cruel act, poisoning the village\u2019s only source
+    of water. After leaving, she soon met an unavoidable fate, as she was unable
+    to defend herself against wild beasts."
   <souvenirData>k__BackingField: {fileID: 11400000, guid: 4e3dcf2b1d65f0f48991098dad3a2ec8, type: 2}

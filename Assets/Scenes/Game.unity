@@ -8174,7 +8174,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blinkPanelUI: {fileID: 1865156132}
-  playerCamera2: {fileID: 4691289347391378271}
   dayEndCamera: {fileID: 1547786770}
 --- !u!65 &958433183
 BoxCollider:
@@ -19875,8 +19874,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3995788535959266696}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.14881198, y: 0.30455256, z: -0.0482364, w: 0.9395616}
-  m_LocalPosition: {x: 6.6244035, y: 1.5899999, z: 0.89490926}
+  m_LocalRotation: {x: 0, y: 0.008024162, z: 0, w: 0.9999679}
+  m_LocalPosition: {x: 6.3024073, y: 1.7, z: 0.1499807}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -22655,7 +22654,7 @@ Camera:
     height: 1
   near clip plane: 0.1
   far clip plane: 5000
-  field of view: 60.000004
+  field of view: 60
   orthographic: 0
   orthographic size: 10
   m_Depth: -1

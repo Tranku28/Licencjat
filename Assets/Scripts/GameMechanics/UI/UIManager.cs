@@ -49,7 +49,7 @@ namespace GameMechanics
 
             Souvenir.OnSouvenirInteracted += OnSouvenirInteracted;
 
-            TutorialNotes.OnTutorialNotesInteracted += OnTutorialNotesInteracted;
+            ConductorGuidelines.OnTutorialNotesInteracted += OnTutorialNotesInteracted;
         }
 
         private void OnDisable()
@@ -67,7 +67,7 @@ namespace GameMechanics
 
             Souvenir.OnSouvenirInteracted -= OnSouvenirInteracted;
 
-            TutorialNotes.OnTutorialNotesInteracted -= OnTutorialNotesInteracted;
+            ConductorGuidelines.OnTutorialNotesInteracted -= OnTutorialNotesInteracted;
         }
         
         private void OnSouvenirInteracted(SouvenirData obj)

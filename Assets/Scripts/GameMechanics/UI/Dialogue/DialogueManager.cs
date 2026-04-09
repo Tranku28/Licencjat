@@ -48,7 +48,8 @@ namespace GameMechanics.UI
         [SerializeField] private PassengerPersonalDataLoader personalId;
 
 
-        private int _ticketsAccepted, _ticketsRejected;
+        private int _ticketsAccepted; 
+        private int _ticketsRejected;
         private List<int> _souvenirsReceived = new();
 
         //TODO: Replace with EventHandler
@@ -65,7 +66,8 @@ namespace GameMechanics.UI
         
         private Story _story;
 
-        private bool _ticketScanned, _ticketRejected;
+        private bool _ticketScanned;
+        private bool _ticketRejected;
     
         private List<string> _currentTags = new();
 
@@ -349,6 +351,9 @@ namespace GameMechanics.UI
 
         public void OnDialogueQuit()
         {
+            if (_brokenRule == string.Empty)
+                _brokenRule = "No rules broken";
+
             OnDialogueQuitEvent?.Invoke(
                 this,
                 new DialogueEndEventArgs(
@@ -366,6 +371,8 @@ namespace GameMechanics.UI
         private async Awaitable AwaitableDialogueQuit()
         {
             //TODO: refine save system logic
+
+            if (!_ticketRejected) return; 
 
             await blinkPanelUI.ClosePlayerEyes();
             Destroy(_currentPassenger.gameObject);
