@@ -22,7 +22,8 @@ namespace Core.Scriptable_Objects.Souvenirs
 
         public void RevertDay()
         {
-            _saveSystem.LoadSave(_saveSystem.GetCurrentSave().LastDayData);
+            Debug.Log("Revert day");
+            _saveSystem.LoadPreviousDay(_saveSystem.GetCurrentSave().LastDayData);
         }
     }
 }

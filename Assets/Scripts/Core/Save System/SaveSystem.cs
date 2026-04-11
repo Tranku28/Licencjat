@@ -49,6 +49,9 @@ namespace Core.Save_System
             {
                 Directory.CreateDirectory(_savePath);
 
+                string dateOfSave = DateTime.Now.ToString("dd/MM/yyyy HH:mm");
+                _saves[_loadedSaveIndex].DateSaved = dateOfSave;
+
                 PreviousDaySave(_saves[_loadedSaveIndex]);
 
                 if (isNewGame)
@@ -62,9 +65,6 @@ namespace Core.Save_System
                 {
                     saveElement.SaveData(_saves[_loadedSaveIndex]);
                 }
-
-                string dateOfSave = DateTime.Now.ToString("dd/MM/yyyy HH:mm");
-                _saves[_loadedSaveIndex].DateSaved = dateOfSave;
 
                 string saveData = JsonUtility.ToJson(_saves[_loadedSaveIndex], true);
 
@@ -86,7 +86,19 @@ namespace Core.Save_System
         /// <param name="saveData"></param>
         private void PreviousDaySave(GameSaveData saveData)
         {
-            saveData.LastDayData = saveData;
+            PreviousDaySnapshot previousDayData = new PreviousDaySnapshot
+            {
+                SaveIndex = saveData.SaveIndex,
+                DateSaved = saveData.DateSaved,
+                CurrentDay = saveData.CurrentDay,
+                HarmonyStatus = saveData.HarmonyStatus,
+                TicketsAccepted = saveData.TicketsAccepted,
+                TicketsRejected = saveData.TicketsRejected,
+                CollectedSouvenirIdList = saveData.CollectedSouvenirIdList,
+                PassengerEntries = saveData.PassengerEntries,
+            };
+            
+            saveData.LastDayData = previousDayData;
         }
 
         //TODO: set this private later
@@ -102,14 +114,18 @@ namespace Core.Save_System
             }
         }
 
-        public void LoadSave(GameSaveData gameSaveData)
+        public void LoadPreviousDay(PreviousDaySnapshot snapshotSaveData)
         {
+            Debug.Log("Save Index: " + snapshotSaveData.SaveIndex);
+
             if (_saves.Count == 0) return;
 
             foreach (ISaveElement saveElement in _saveElements)
             {
-                saveElement.LoadSave(_saves[gameSaveData.SaveIndex]);
+                saveElement.LoadSave(_saves[snapshotSaveData.SaveIndex]);
             }
+
+            Debug.Log($"Current Day: {snapshotSaveData.CurrentDay}");
         }
 
         public void ReloadSaveOnNewJourney()
@@ -181,10 +197,7 @@ namespace Core.Save_System
             GameSaveData runtimeSave = GetCurrentSave();
 
             int index = runtimeSave.CollectedSouvenirIdList.IndexOf(id);
-            Debug.Log($"{index} : {id}");
-            Debug.Log(runtimeSave.CollectedSouvenirIdList.Count);
             runtimeSave.CollectedSouvenirIdList.RemoveAt(index);
-            Debug.Log(runtimeSave.CollectedSouvenirIdList.Count);
         }
 
         public void RegisterToSaveSystem(ISaveElement saveElement)

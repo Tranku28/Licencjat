@@ -9,7 +9,7 @@ namespace SouvenirSystem
     {
         public override void Resolve(SouvenirEffectResolver resolver)
         {
-            resolver.RevertDay();   
+            resolver.RevertDay();
         }
     }
 }
