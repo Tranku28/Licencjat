@@ -1,6 +1,7 @@
 VAR speakerIndex = -1
 VAR canScan = false
 VAR ticketRejected = false
+VAR forceScan = false
 VAR harmony = 0
 VAR passengerAction = ""
 VAR decision = ""
@@ -169,6 +170,7 @@ But never forget. It, too, can be wrong.
 
 === train_will_wait ===
 ~ speakerIndex = 1
+~ forceScan = true
 ~ canScan = false
 ~ encounterEntry = "I broke the rules. I should have reported this incident. But I didn't. Why? Was it for him? Because I pity him? Or was it because I hoped that him breaking the rules would bring peace to others who are still alive?"
 ~ passengerAction = "The Ghost didn’t reached the designated destination, despite having a valid ticket"

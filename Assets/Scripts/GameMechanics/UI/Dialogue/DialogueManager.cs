@@ -178,6 +178,11 @@ namespace GameMechanics.UI
                 OnHarmonyDecreased?.Invoke(-25);
             });
 
+            _story.ObserveVariable("forceScan", (string varName, object newValue) =>
+            {
+                _ticketScanned = (bool)newValue;
+            });
+
             _story.ObserveVariable("passengerAction", (string varName, object newValue) =>
             {
                 _passengerAction = newValue.ToString();

@@ -1,6 +1,7 @@
 VAR speakerIndex = -1
 VAR canScan = false
 VAR ticketRejected = false
+VAR forceScan = false
 VAR harmony = 0
 VAR passengerAction = ""
 VAR decision = ""
