@@ -15,8 +15,8 @@ MonoBehaviour:
   singleUse: 1
   useSound:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
+      Data1: 902014471
+      Data2: 1089949934
+      Data3: 2071658652
+      Data4: 1861620852
+    Path: event:/SFX/Steps

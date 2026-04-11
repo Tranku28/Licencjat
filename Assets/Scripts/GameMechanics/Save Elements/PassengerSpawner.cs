@@ -7,6 +7,7 @@ using UnityEngine;
 public class PassengerSpawner : MonoBehaviour, ISaveElement
 {
     [SerializeField] private List<PassengerData> passengerDataList = new();
+    private List<int> spawnedDays = new();
     private List<Passenger> currentPassengers = new();
 
     private void Awake()
@@ -18,22 +19,32 @@ public class PassengerSpawner : MonoBehaviour, ISaveElement
     {
         foreach(PassengerData passengerData in passengerDataList)
         {
+            if (spawnedDays.Contains(passengerData.dayAppears)) continue;
+
             if (passengerData.dayAppears == gameSaveData.CurrentDay)
             {
                 Passenger passenger = Instantiate(passengerData.prefab).GetComponent<Passenger>();
                 currentPassengers.Add(passenger);
+                spawnedDays.Add(passengerData.dayAppears);
             }
+        }
+
+        foreach (Passenger passenger in currentPassengers)
+        {
+            Debug.Log(passenger);
+            if (passenger.PassengerData.dayAppears != gameSaveData.CurrentDay)
+            {
+                passenger.gameObject.SetActive(false);
+                continue;
+            }
+
+            passenger.ResetInteractable();
+            passenger.gameObject.SetActive(true);
         }
     }
 
     public void SaveData(GameSaveData gameSaveData)
     {
-        //TODO: Refactor save logic
-        currentPassengers.ForEach(p =>
-        {
-            Destroy(p.gameObject);
-        });
-
-        currentPassengers.Clear();
+        
     }
 }

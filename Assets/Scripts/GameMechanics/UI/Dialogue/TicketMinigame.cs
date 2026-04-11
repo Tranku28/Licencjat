@@ -61,6 +61,12 @@ namespace GameMechanics
         public void SetupTicketUI(PassengerData data)
         {
             passengerFullNameText.text = $"{data.passengerName} {data.passengerSurname}";
+
+            if (data is InvalidPassengerData)
+            {
+                passengerFullNameText.text = $"{(data as InvalidPassengerData).invalidName} {(data as InvalidPassengerData).invalidSurname}";
+            }
+
             passengerCarNumber.text = data.car.ToString();
             passengerSeatNumber.text = data.seat.ToString();
             ticketNumberText.text = $"No. {data.ticketNumber}";

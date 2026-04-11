@@ -2,6 +2,7 @@ VAR speakerIndex = -1
 VAR canScan = false
 VAR ticketRejected = false
 VAR forceScan = false
+VAR willQuit = false
 VAR harmony = 0
 VAR passengerAction = ""
 VAR decision = ""
@@ -44,6 +45,7 @@ Generations will remember this decision.
 ~ passengerAction = "The Ghost reached the designated destination."
 ~ decision = "Approved"
 ~ harmony = -25
+~ willQuit = true
     -> END
 
 
@@ -90,6 +92,7 @@ If only I had more time…
 ~ passengerAction = "The Ghost reached the designated destination."
 ~ decision = "Approved"
 ~ harmony = -25
+~ willQuit = true
     -> END
 
 === hopelessness ===
@@ -130,6 +133,7 @@ Not always fair, but always unavoidable.
 ~ passengerAction = "The Ghost reached the designated destination."
 ~ decision = "Approved"
 ~ harmony = -25
+~ willQuit = true
     -> END
 
 
@@ -165,6 +169,7 @@ But never forget. It, too, can be wrong.
 ~ decision = "Approved"
 ~ harmony = -25
 ~ canScan = true
+~ willQuit = true
     -> END
 
 

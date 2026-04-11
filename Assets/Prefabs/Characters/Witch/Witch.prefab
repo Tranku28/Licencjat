@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1b50840e92044842b64bcde1e688bec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  passengerData: {fileID: 11400000, guid: dcd39165b2ff56b4eb8f70e0167fb6d8, type: 2}
+  passengerData: {fileID: 11400000, guid: 631b8904e9b6aee499e017c915d70feb, type: 2}
 --- !u!136 &2896703705878255754
 CapsuleCollider:
   m_ObjectHideFlags: 0

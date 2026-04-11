@@ -23,6 +23,8 @@ namespace GameMechanics
             _initialLeftRotation = leftDoor.rotation;
             _initialRightRotation = rightDoor.rotation;
             _triggerCollider = GetComponent<Collider>();
+
+            GameStateMachine.OnMenuReturned += ForceCloseDoors;
         }
 
         public string GetName()
@@ -80,6 +82,17 @@ namespace GameMechanics
 
                 _triggerCollider.enabled = true;
             });
+        }
+
+        private void ForceCloseDoors()
+        {
+            leftDoor.rotation = _initialLeftRotation;
+            rightDoor.rotation = _initialRightRotation;
+        }
+
+        private void OnDestroy()
+        {
+            GameStateMachine.OnMenuReturned -= ForceCloseDoors;
         }
     }
 }

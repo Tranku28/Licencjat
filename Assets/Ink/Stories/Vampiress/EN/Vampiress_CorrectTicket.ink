@@ -2,6 +2,7 @@ VAR speakerIndex = -1
 VAR canScan = false
 VAR ticketRejected = false
 VAR forceScan = false
+VAR willQuit = false
 VAR harmony = 0
 VAR passengerAction = ""
 VAR decision = ""
@@ -30,7 +31,7 @@ I am bound for a meeting… though, in truth, it comes many years too late.
 
 * [Very well, Miss Bloodrose. Have a safe trip (stamp the ticket)]
     ~ speakerIndex = 0
-    Very well, Miss Bloodrose. Have a safe trip (stamp the ticket)
+    Very well, Miss Bloodrose. Have a safe trip
     -> accept
 * [I'm sorry Miss, I cannot let you pass (refuse)]
     ~ speakerIndex = 0
@@ -59,5 +60,6 @@ W-what? Why not?
     ~ brokenRule = "Unjustified refusal"
     ~ encounterEntry = "I did not let her continue. Perhaps that is why I am here, to decide who arrives in time, and who remains behind."
     ~ passengerAction = "Charlotte didn’t reached the designated destination, despite having a valid ticket."
+    ~ willQuit = true
 The protocols. Please leave at the nearest station.
     -> END

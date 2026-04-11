@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Core.Scriptable_Objects;
+using GameMechanics.Player;
 using Ink.Runtime;
 using Interactions;
 using TMPro;
@@ -46,6 +47,7 @@ namespace GameMechanics.UI
         [Header("External")]
         [SerializeField] private TicketMinigame ticketMinigame;
         [SerializeField] private PassengerPersonalDataLoader personalId;
+        [SerializeField] private PlayerMovementController playerMovementController;
 
 
         private int _ticketsAccepted; 
@@ -68,6 +70,7 @@ namespace GameMechanics.UI
 
         private bool _ticketScanned;
         private bool _ticketRejected;
+        private bool _passengerWillQuit;
     
         private List<string> _currentTags = new();
 
@@ -141,6 +144,7 @@ namespace GameMechanics.UI
             npcNameText.text = passengerArgs.PassengerData.passengerName;
             _ticketScanned = false;
             _ticketRejected = false;
+            _passengerWillQuit = false;
             _passengerAction = "";
             _brokenRule = "";
             _generalEntry = "";
@@ -169,6 +173,11 @@ namespace GameMechanics.UI
                     _souvenirsReceived.Add(data.souvenirData.souvenirID);
                     _harmonyValue = 25;
                 }
+            });
+
+            _story.ObserveVariable("willQuit", (string varName, object newValue) =>
+            {
+                _passengerWillQuit = (bool)newValue;
             });
             
             _story.ObserveVariable("ticketRejected", (string varName, object newValue) =>
@@ -356,6 +365,8 @@ namespace GameMechanics.UI
 
         public void OnDialogueQuit()
         {
+            _currentPassenger.GetComponent<Collider>().enabled = true;
+
             if (_brokenRule == string.Empty)
                 _brokenRule = "No rules broken";
 
@@ -377,10 +388,10 @@ namespace GameMechanics.UI
         {
             //TODO: refine save system logic
 
-            if (!_ticketRejected) return; 
+            if (!_passengerWillQuit) return;
 
             await blinkPanelUI.ClosePlayerEyes();
-            Destroy(_currentPassenger.gameObject);
+            _currentPassenger.gameObject.SetActive(false);
             await Awaitable.WaitForSecondsAsync(1);
             await blinkPanelUI.OpenPlayerEyes();
 

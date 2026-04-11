@@ -4,12 +4,13 @@ using Core.Scriptable_Objects.Souvenirs;
 using GameMechanics.UI;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class SouvenirViewController : UIElement
+public class SouvenirViewController : UIElement, IPointerDownHandler, IPointerUpHandler
 {
     [SerializeField] private Button nextButton, previousButton, useButton;
-    [SerializeField] private TMP_Text souvenirName, souvenirDescription, receivedFrom;
+    [SerializeField] private TMP_Text souvenirName, souvenirDescription, effectDescription, receivedFrom;
     [SerializeField] private Transform souvenirContainer;
     [SerializeField] private float souvenirContainerRotationSpeed;
 
@@ -18,16 +19,16 @@ public class SouvenirViewController : UIElement
     private Quaternion souvenirPrefabContainerInitialRotation;
 
     private int _rotationDir = 0;
+    private bool _isRotatingObject;
 
     public Button UseButton => useButton;
 
     private void Awake()
     {
-        nextButton.onClick.AddListener(ShowNextSouvenirData);
-        previousButton.onClick.AddListener(ShowPreviousSouvenirData);
+        nextButton.GetComponent<HoldButton>().OnHoldStateChanged += RotateRight;
+        previousButton.GetComponent<HoldButton>().OnHoldStateChanged += RotateLeft;
 
-        souvenirPrefabContainerInitialRotation = souvenirContainer.transform.rotation;
-        Debug.Log(UseButton);
+        souvenirPrefabContainerInitialRotation = souvenirContainer.rotation;
     }
 
     private void Start()
@@ -37,39 +38,30 @@ public class SouvenirViewController : UIElement
 
     void Update()
     {
-        if (_rotationDir == 0) return;
-
-        souvenirContainer.rotation *= Quaternion.Euler(0, _rotationDir * souvenirContainerRotationSpeed, 0);
+        if (_isRotatingObject)
+        {
+            souvenirContainer.rotation *= Quaternion.Euler(0, _rotationDir * souvenirContainerRotationSpeed, 0);
+        }
     }
 
     private void OnDestroy()
     {
-        nextButton.onClick.RemoveListener(ShowNextSouvenirData);
-        previousButton.onClick.RemoveListener(ShowPreviousSouvenirData);
-        
+        nextButton.GetComponent<HoldButton>().OnHoldStateChanged -= RotateRight;
+        previousButton.GetComponent<HoldButton>().OnHoldStateChanged -= RotateLeft;
+
         Souvenir.OnSouvenirInteracted -= LoadSouvenirWindow;
     }
 
-    private void ShowNextSouvenirData()
+    private void RotateLeft(bool direction)
     {
-        if (_rotationDir == -1) 
-        {
-            _rotationDir = 0;
-            return;
-        }
-
-        _rotationDir = 1;
+        _rotationDir = direction ? -1 : 0;
+        _isRotatingObject = direction;
     }
 
-    private void ShowPreviousSouvenirData()
+    private void RotateRight(bool direction)
     {
-        if (_rotationDir == 1) 
-        {
-            _rotationDir = 0;
-            return;
-        }
-
-        _rotationDir = -1;
+        _rotationDir = direction ? -1 : 0;
+        _isRotatingObject = direction;
     }
     
     //TODO: disable items instead of Destroy
@@ -81,7 +73,25 @@ public class SouvenirViewController : UIElement
 
         souvenirName.text = obj.name;
         souvenirDescription.text = obj.souvenirDescription;
+        effectDescription.text = obj.souvenirEffectDescription;
         receivedFrom.text = $"Received from: {obj.receivedFrom}";
         _lastSouvenir = Instantiate(obj.souvenirPrefab, souvenirContainer).GetComponent<Souvenir>();
+    }
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        GameObject raycastedObject = eventData.pointerPressRaycast.gameObject;
+        Debug.Log(raycastedObject);
+
+        if (raycastedObject == previousButton || raycastedObject == nextButton)
+        {
+            _isRotatingObject = true;
+        }
+
+    }
+
+    public void OnPointerUp(PointerEventData eventData)
+    {
+        _isRotatingObject = false;
     }
 }

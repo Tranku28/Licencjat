@@ -2,6 +2,7 @@ VAR speakerIndex = -1
 VAR canScan = false
 VAR ticketRejected = false
 VAR forceScan = false
+VAR willQuit = false
 VAR harmony = 0
 VAR passengerAction = ""
 VAR decision = ""
@@ -50,6 +51,7 @@ I possess too much of it.
 Others, far too little.
 I shall alight at the next station…
 ~ harmony = -25
+~ willQuit = true
 ~ ticketRejected = true
 ~ decision = "Disapproved"
 ~ passengerAction = "Charlotte didn’t reach the designated destination"
@@ -78,6 +80,7 @@ One cannot live upon dreams alone.
 Thank you for reminding me of that truth, just as I began to doubt it.
 ~ ticketRejected = true
 ~ harmony = -25
+~ willQuit = true
 ~ decision = "Disapproved"
 ~ passengerAction = "Charlotte didn’t reach the designated destination"
 ~ encounterEntry = "I did not let her continue. I said, those are the rules. She did not protest. She merely bowed her head and vanished before the next station. I cannot stop thinking about her. That perhaps she only wished to say goodbye. That what I saw as breach of order, was, for her, a final chance. Perhaps that is why I am here, to decide who arrives in time, and who remains behind."
@@ -115,6 +118,7 @@ And now I bear the weight of that regret…
 Men still despise and fear the dreams and wishes of other beings.
 ~ ticketRejected = true
 ~ harmony = -25
+~ willQuit = true
 ~ decision = "Disapproved"
 ~ passengerAction = "Charlotte didn’t reach the designated destination"
 ~ encounterEntry = "I did not let her continue. I said, those are the rules. She did not protest. She merely bowed her head and vanished before the next station. I cannot stop thinking about her. That perhaps she only wished to say goodbye. That what I saw as breach of order, was, for her, a final chance. Perhaps that is why I am here, to decide who arrives in time, and who remains behind."
@@ -151,6 +155,7 @@ But now…
 … Forget it.
 ~ ticketRejected = true
 ~ harmony = -25
+~ willQuit = true
 ~ decision = "Disapproved"
 ~ passengerAction = "Charlotte didn’t reach the designated destination"
 ~ encounterEntry = "I did not let her continue. I said, those are the rules. She did not protest. She merely bowed her head and vanished before the next station. I cannot stop thinking about her. That perhaps she only wished to say goodbye. That what I saw as breach of order, was, for her, a final chance. Perhaps that is why I am here, to decide who arrives in time, and who remains behind."
@@ -235,6 +240,7 @@ We were never meant for one another. For had we been, fate would have guided us 
 Would it not..?
 ~ ticketRejected = true
 ~ harmony = -25
+~ willQuit = true
 ~ decision = "Disapproved"
 ~ passengerAction = "Charlotte didn’t reach the designated destination"
 ~ encounterEntry = "I did not let her continue. I said, those are the rules. She did not protest. She merely bowed her head and vanished before the next station. I cannot stop thinking about her. That perhaps she only wished to say goodbye. That what I saw as breach of order, was, for her, a final chance. Perhaps that is why I am here, to decide who arrives in time, and who remains behind."
@@ -282,6 +288,7 @@ But remember, young man.
 ~ passengerAction = "Charlotte didn’t reach the designated destination"
 ~ encounterEntry = "I did not let her continue. I said, those are the rules. She did not protest. She merely bowed her head and vanished before the next station. I cannot stop thinking about her. That perhaps she only wished to say goodbye. That what I saw as breach of order, was, for her, a final chance. Perhaps that is why I am here, to decide who arrives in time, and who remains behind."
 ~ passengerAction = "Charlotte personal data was incorrect and you didn’t let her pass."
+~ willQuit = true
     -> END
 
 === accept ===

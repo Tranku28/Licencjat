@@ -19,5 +19,5 @@ MonoBehaviour:
       Data2: 1316720019
       Data3: -24688216
       Data4: -209171374
-    Path: event:/UI/CreditsOpen
-  harmonyValueUpdate: -25
+    Path: event:/SFX/UI/CreditsOpen
+  harmonyValueUpdate: 25

@@ -21,12 +21,10 @@ MonoBehaviour:
     already known.
 
 
-
-    Some decisions reveal their weight only after time has
-    passed.
-
-
-
-    The watch will break once its purpose is fulfilled.'
-  souvenirEffectDescription: Holding this watch allows you to step back into a previous
+    Some decisions reveal their weight only after time has passed.'
+  souvenirEffectDescription: 'Holding this watch allows you to step back into a previous
     day and reconsider the choices you made.
+
+
+    The watch will break once its
+    purpose is fulfilled.'
