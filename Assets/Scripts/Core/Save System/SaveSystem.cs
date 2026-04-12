@@ -168,8 +168,6 @@ namespace Core.Save_System
 
                 if (!File.Exists(currentSavePath)) continue;
 
-                Debug.Log($"File {i} found");
-
                 try
                 {
                     string saveJson = "";
@@ -188,8 +186,6 @@ namespace Core.Save_System
                     Debug.LogError($"Error during game load on file {i}: {e}");
                 }
             }
-
-            Debug.Log($"Saves count: {_saves.Count}");
         }
 
         public void ForceDeleteSaveSouvenirData(int id)

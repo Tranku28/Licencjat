@@ -46,7 +46,6 @@ public class HarmonyIndicator : MonoBehaviour, ISaveElement, IInteractable
     private void UpdateHarmonyPointerPosition(int value)
     {
         float yPos = _bottomYPosition + _distanceStep * value;
-        Debug.Log(_pointerTransform);
         _pointerTransform.transform.position = new Vector3(_pointerTransform.position.x, yPos, _pointerTransform.position.z);
     }
 

@@ -16,11 +16,6 @@ namespace Core
             _gameState = GameState.MainMenu;
         }
 
-        private void Update()
-        {
-            Debug.Log(_gameState);
-        }
-
         public static Action<GameState> OnGameStateChanged;
         public static Action<bool> OnGameStarted;
 

@@ -19,6 +19,7 @@ public class Souvenir : MonoBehaviour, IInteractable
     public event Action<Souvenir> OnSouvenirused;
 
     public static event Action<SouvenirData> OnSouvenirInteracted;
+    public static event Action OnSouvenirUiQuit;
 
     private void Awake()
     {
@@ -60,11 +61,9 @@ public class Souvenir : MonoBehaviour, IInteractable
 
         if (destroy)
         {
-            PlayerControls playerControls = DependencyResolver.Instance.GetType<PlayerControls>();
-            playerControls.ForceOnEscapePressed();
-
             DependencyResolver.Instance.GetType<SaveSystem>().ForceDeleteSaveSouvenirData(souvenirData.souvenirID);
 
+            OnSouvenirUiQuit?.Invoke();
             OnSouvenirused?.Invoke(this);
             Destroy(gameObject);
         }

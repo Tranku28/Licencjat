@@ -45,8 +45,6 @@ namespace GameMechanics.Interactions
             {
                 if (souvenirAtlas.GetSouvenirDataFromIndex(i, out SouvenirData saveData))
                 {
-                    Debug.Log(_souvenirEffectResolver);
-                    Debug.Log(souvenirView.UseButton);
                     Souvenir newSouvenir = Instantiate(saveData.souvenirPrefab, souvenirPositions[i]).GetComponent<Souvenir>();
                     newSouvenir.OnSouvenirused += OnUseDeleteSouvenir;
                     newSouvenir.Init(_souvenirEffectResolver, souvenirView.UseButton, saveData.souvenirEffects);

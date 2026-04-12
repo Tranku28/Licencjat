@@ -227,7 +227,6 @@ namespace GameMechanics.UI.MainMenu
             SaveSystem saveSystem = DependencyResolver.Instance.GetType<SaveSystem>();
             saveSystem.LoadSave(saveIndex);
 
-            Debug.Log($"Save Index: {saveIndex}");
             OnStartButtonClicked();
         }
     }

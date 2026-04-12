@@ -48,9 +48,11 @@ namespace GameMechanics
             Diary.OnDiaryInteracted += OnDiaryInteracted;
 
             Souvenir.OnSouvenirInteracted += OnSouvenirInteracted;
+            Souvenir.OnSouvenirUiQuit += OnSouvenirUIQuit;
 
             ConductorGuidelines.OnTutorialNotesInteracted += OnTutorialNotesInteracted;
         }
+
 
         private void OnDisable()
         {
@@ -66,6 +68,7 @@ namespace GameMechanics
             Diary.OnDiaryInteracted -= OnDiaryInteracted;
 
             Souvenir.OnSouvenirInteracted -= OnSouvenirInteracted;
+            Souvenir.OnSouvenirUiQuit -= OnSouvenirUIQuit;
 
             ConductorGuidelines.OnTutorialNotesInteracted -= OnTutorialNotesInteracted;
         }
@@ -199,6 +202,13 @@ namespace GameMechanics
             _currentElement.SetVisualVisibility(false);
             _currentElement = null;
             
+            _gameStateMachine.ChangeGameState(GameState.Gameplay);
+        }
+
+        private void OnSouvenirUIQuit()
+        {
+            souvenirTab.SetVisualVisibility(false);
+            _currentElement = null;
             _gameStateMachine.ChangeGameState(GameState.Gameplay);
         }
     }
