@@ -194,10 +194,14 @@ namespace Core.Save_System
 
         public void ForceDeleteSaveSouvenirData(int id)
         {
-            GameSaveData runtimeSave = GetCurrentSave();
-
-            int index = runtimeSave.CollectedSouvenirIdList.IndexOf(id);
-            runtimeSave.CollectedSouvenirIdList.RemoveAt(index);
+            try
+            {
+                GameSaveData runtimeSave = GetCurrentSave();
+                runtimeSave.CollectedSouvenirIdList.Remove(id);
+            } catch (Exception e)
+            {
+                Debug.Log($"Błąd usunięcia itemu z zapisu: {e}");
+            }
         }
 
         public void RegisterToSaveSystem(ISaveElement saveElement)

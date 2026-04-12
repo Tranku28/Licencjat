@@ -1,5 +1,3 @@
-using System;
-using Core.Scriptable_Objects;
 using Core.Scriptable_Objects.Souvenirs;
 using GameMechanics.UI;
 using TMPro;
