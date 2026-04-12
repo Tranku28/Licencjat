@@ -92,7 +92,6 @@ namespace GameMechanics.UI.MainMenu
 
         public void OnPointerEnter(PointerEventData eventData)
         {
-            Debug.Log($"Hovered {_entered}");
             if (_entered) return;
             _boardAnimator.SetBool(Hover, true);
             AudioManager.Instance.PlayOneShot(FMODEvents.Instance.saveBoardHover, transform.position);
@@ -173,8 +172,6 @@ namespace GameMechanics.UI.MainMenu
 
         public void MenuReturned()
         {
-            Debug.Log("Menu Returned");
-
             SetCinemachineBrainCutBlend();
             _boardAnimator.SetBool(ZoomIn, false);
             
