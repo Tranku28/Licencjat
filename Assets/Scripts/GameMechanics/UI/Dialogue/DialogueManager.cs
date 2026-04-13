@@ -18,14 +18,16 @@ namespace GameMechanics.UI
         public string Decision;
         public int HarmonyValue;
         public string RuleBroken;
+        public int EntryId;
         public string GeneralEntry;
         public string EncounterEntry;
 
-        public DialogueEndEventArgs(string passengerAction, string decision, int harmonyValue, string generalEntry, string encounterEntry, string ruleBroken = null)
+        public DialogueEndEventArgs(string passengerAction, string decision, int harmonyValue, int entryId, string generalEntry, string encounterEntry, string ruleBroken = null)
         {
             PassengerAction = passengerAction;
             Decision = decision;
             HarmonyValue = harmonyValue;
+            EntryId = entryId;
             GeneralEntry = generalEntry;
             EncounterEntry = encounterEntry;
             RuleBroken = ruleBroken;
@@ -378,6 +380,7 @@ namespace GameMechanics.UI
                     _passengerAction,
                     "approved",
                     _harmonyChange,
+                    _currentPassenger.PassengerData.souvenirData.souvenirID,
                     _generalEntry,
                     _encounterEntry,
                     _brokenRule

@@ -13,4 +13,9 @@ MonoBehaviour:
   m_Name: Flower
   m_EditorClassIdentifier: 
   souvenirID: 2
-  souvenirPrefab: {fileID: 0}
+  name: 
+  receivedFrom: 
+  souvenirPrefab: {fileID: 3923819191764239479, guid: 77b5e666ce472604aaa02b658cc2926b, type: 3}
+  souvenirEffects: []
+  souvenirDescription: 
+  souvenirEffectDescription: 
