@@ -131,7 +131,8 @@ The difference is that liars are better prepared.
 ~ harmony = 25
 ~ dissapear = true
 ~ decision = "Disapproved"
-~ passengerAction = "Deliah was ordered to leave the train"
+~ passengerAction = "Deliah was ordered to leave the train due to invalid ticket"
+~ allowQuitDialogue = true
     -> END
     
 
@@ -166,7 +167,8 @@ You are just choosing which cracks you prefer not to see.
 ~ harmony = 25
 ~ dissapear = true
 ~ decision = "Disapproved"
-~ passengerAction = "Deliah was ordered to leave the train"
+~ passengerAction = "Deliah was ordered to leave the train due to invalid ticket"
+~ allowQuitDialogue = true
     -> END
     
     
@@ -195,7 +197,8 @@ They just stop bothering you.
 ~ harmony = 25
 ~ dissapear = true
 ~ decision = "Disapproved"
-~ passengerAction = "Deliah was ordered to leave the train"
+~ passengerAction = "Deliah was ordered to leave the train due to invalid ticket"
+~ allowQuitDialogue = true
     -> END
     
 === option4_1 ===

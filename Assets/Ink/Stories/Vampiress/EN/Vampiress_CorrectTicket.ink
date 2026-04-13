@@ -46,6 +46,7 @@ Thank you, kind man. I hope everything goes well for you.
     ~ passengerAction = "Charlotte reached the designated destination"
     ~ canScan = true
     ~ passengerAction = "Charlotte reached the designated destination"
+    ~ gift = true
     -> END
 
 === refuse ===
@@ -53,6 +54,7 @@ Thank you, kind man. I hope everything goes well for you.
 W-what? Why not?
 
 ~ speakerIndex = 0
+The protocols. Please leave at the nearest station.
 ~ harmony = -25
     ~ decision = "Disapproved"
     ~ passengerAction = "Charlotte didn’t reached the designated destination, despite having a valid ticket"
@@ -60,7 +62,5 @@ W-what? Why not?
     ~ encounterEntry = "I did not let her continue. Perhaps that is why I am here, to decide who arrives in time, and who remains behind."
     ~ passengerAction = "Charlotte didn’t reached the designated destination, despite having a valid ticket."
     ~ dissapear = true
-    ~ gift = true
     ~ allowQuitDialogue = true
-The protocols. Please leave at the nearest station.
     -> END

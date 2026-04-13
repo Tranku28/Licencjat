@@ -15,6 +15,7 @@ public class Souvenir : MonoBehaviour, IInteractable
     private List<SouvenirEffect> _effects;
     private SouvenirEffectResolver _effectResolver;
     private Button _useButton;
+    public int ID { get; private set; }
 
     public event Action<Souvenir> OnSouvenirused;
 
@@ -26,12 +27,13 @@ public class Souvenir : MonoBehaviour, IInteractable
         _effectResolver = new();
     }
 
-    public void Init(SouvenirEffectResolver resolver, Button useButton, List<SouvenirEffect> effects)
+    public void Init(SouvenirEffectResolver resolver, Button useButton, List<SouvenirEffect> effects, int id)
     {
         _useButton = useButton;
         _useButton.onClick.AddListener(ApplyEffects);
         _effectResolver = resolver;
         _effects = effects;
+        ID = id;
     }
 
     public string GetName()

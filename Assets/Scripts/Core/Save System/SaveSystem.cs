@@ -116,16 +116,12 @@ namespace Core.Save_System
 
         public void LoadPreviousDay(PreviousDaySnapshot snapshotSaveData)
         {
-            Debug.Log("Save Index: " + snapshotSaveData.SaveIndex);
-
             if (_saves.Count == 0) return;
 
             foreach (ISaveElement saveElement in _saveElements)
             {
                 saveElement.LoadSave(_saves[snapshotSaveData.SaveIndex]);
             }
-
-            Debug.Log($"Current Day: {snapshotSaveData.CurrentDay}");
         }
 
         public void ReloadSaveOnNewJourney()

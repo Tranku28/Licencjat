@@ -56,6 +56,7 @@ I shall alight at the next station…
 ~ passengerAction = "Charlotte didn’t reach the designated destination"
 ~ encounterEntry = "I did not let her continue. I said, those are the rules. She did not protest. She merely bowed her head and vanished before the next station. I cannot stop thinking about her. That perhaps she only wished to say goodbye. That what I saw as breach of order, was, for her, a final chance. Perhaps that is why I am here, to decide who arrives in time, and who remains behind."
 ~ passengerAction = "Charlotte personal data was incorrect and you didn’t let her pass."
+~ allowQuitDialogue = true
     -> END
 
 === unfunfilled_dream ===
@@ -83,6 +84,7 @@ Thank you for reminding me of that truth, just as I began to doubt it.
 ~ passengerAction = "Charlotte didn’t reach the designated destination"
 ~ encounterEntry = "I did not let her continue. I said, those are the rules. She did not protest. She merely bowed her head and vanished before the next station. I cannot stop thinking about her. That perhaps she only wished to say goodbye. That what I saw as breach of order, was, for her, a final chance. Perhaps that is why I am here, to decide who arrives in time, and who remains behind."
 ~ passengerAction = "Charlotte personal data was incorrect and you didn’t let her pass."
+~ allowQuitDialogue = true
     -> END
 
 
@@ -120,6 +122,7 @@ Men still despise and fear the dreams and wishes of other beings.
 ~ passengerAction = "Charlotte didn’t reach the designated destination"
 ~ encounterEntry = "I did not let her continue. I said, those are the rules. She did not protest. She merely bowed her head and vanished before the next station. I cannot stop thinking about her. That perhaps she only wished to say goodbye. That what I saw as breach of order, was, for her, a final chance. Perhaps that is why I am here, to decide who arrives in time, and who remains behind."
 ~ passengerAction = "Charlotte personal data was incorrect and you didn’t let her pass."
+~ allowQuitDialogue = true
     -> END
 
 === regret ===
@@ -156,6 +159,7 @@ But now…
 ~ passengerAction = "Charlotte didn’t reach the designated destination"
 ~ encounterEntry = "I did not let her continue. I said, those are the rules. She did not protest. She merely bowed her head and vanished before the next station. I cannot stop thinking about her. That perhaps she only wished to say goodbye. That what I saw as breach of order, was, for her, a final chance. Perhaps that is why I am here, to decide who arrives in time, and who remains behind."
 ~ passengerAction = "Charlotte personal data was incorrect and you didn’t let her pass."
+~ allowQuitDialogue = true
     -> END
 
 
@@ -240,6 +244,7 @@ Would it not..?
 ~ passengerAction = "Charlotte didn’t reach the designated destination"
 ~ encounterEntry = "I did not let her continue. I said, those are the rules. She did not protest. She merely bowed her head and vanished before the next station. I cannot stop thinking about her. That perhaps she only wished to say goodbye. That what I saw as breach of order, was, for her, a final chance. Perhaps that is why I am here, to decide who arrives in time, and who remains behind."
 ~ passengerAction = "Charlotte personal data was incorrect and you didn’t let her pass."
+~ allowQuitDialogue = true
     -> END
 
 === love_chooses ===
@@ -283,6 +288,7 @@ But remember, young man.
 ~ encounterEntry = "I did not let her continue. I said, those are the rules. She did not protest. She merely bowed her head and vanished before the next station. I cannot stop thinking about her. That perhaps she only wished to say goodbye. That what I saw as breach of order, was, for her, a final chance. Perhaps that is why I am here, to decide who arrives in time, and who remains behind."
 ~ passengerAction = "Charlotte personal data was incorrect and you didn’t let her pass."
 ~ dissapear = true
+~ allowQuitDialogue = true
     -> END
 
 === accept ===

@@ -42,9 +42,9 @@ You do not yet grasp the gravity of your mistake.
 Generations will remember this decision.
 ~ encounterEntry = "I reported him. He broke the rules. He should have known better. He wanted to fix the world. And I wanted to keep everything in order."
 ~ passengerAction = "The Ghost reached the designated destination."
-~ decision = "Approved"
+~ decision = "Disapproved"
 ~ harmony = -25
-~ dissapear = true
+~ canScan = true
     -> END
 
 
@@ -88,9 +88,9 @@ Still, I hoped I might atone for my mistake.
 If only I had more time…
 ~ encounterEntry = "I reported him. He broke the rules. He should have known better. He wanted to fix the world. And I wanted to keep everything in order."
 ~ passengerAction = "The Ghost reached the designated destination."
-~ decision = "Approved"
+~ decision = "Disapproved"
 ~ harmony = -25
-~ dissapear = true
+~ canScan = true
     -> END
 
 === hopelessness ===
@@ -130,7 +130,7 @@ Not always fair, but always unavoidable.
 ~ passengerAction = "The Ghost reached the designated destination."
 ~ decision = "Approved"
 ~ harmony = -25
-~ dissapear = true
+~ canScan = true
     -> END
 
 
@@ -165,7 +165,6 @@ But never forget. It, too, can be wrong.
 ~ decision = "Approved"
 ~ harmony = -25
 ~ canScan = true
-~ dissapear = true
     -> END
 
 

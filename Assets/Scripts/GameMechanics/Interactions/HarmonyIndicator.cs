@@ -12,6 +12,7 @@ public class HarmonyIndicator : MonoBehaviour, ISaveElement, IInteractable
     private const int TOTAL_STEPS = 100;
     private float _bottomYPosition;
     private float _distanceStep;
+    private int _cachedHarmony;
     private const int MAX_HARMONY = 100;
     private const int MIN_HARMONY = 0;
 
@@ -25,23 +26,17 @@ public class HarmonyIndicator : MonoBehaviour, ISaveElement, IInteractable
 
     private void Start()
     {
-        DialogueManager.OnHarmonyDecreased += UpdateHarmonyStatus;
-        SouvenirEffectResolver.OnHarmonyValueUpdate += UpdateHarmonyStatus;
+        DialogueManager.OnHarmonyDecreased += CacheHarmonyStatus;
+        SouvenirEffectResolver.OnHarmonyValueUpdate += CacheHarmonyStatus;
     }
 
     void OnDestroy()
     {
-        DialogueManager.OnHarmonyDecreased -= UpdateHarmonyStatus;
-        SouvenirEffectResolver.OnHarmonyValueUpdate -= UpdateHarmonyStatus;
+        DialogueManager.OnHarmonyDecreased -= CacheHarmonyStatus;
+        SouvenirEffectResolver.OnHarmonyValueUpdate -= CacheHarmonyStatus;
     }
 
-    private void UpdateHarmonyStatus(int value)
-    {
-        _harmonyStatus += value;
-        _harmonyStatus = Mathf.Clamp(_harmonyStatus, MIN_HARMONY, MAX_HARMONY);
-
-        UpdateHarmonyPointerPosition(_harmonyStatus);
-    }
+    private void CacheHarmonyStatus(int value) => _cachedHarmony += value;
 
     private void UpdateHarmonyPointerPosition(int value)
     {
@@ -52,13 +47,14 @@ public class HarmonyIndicator : MonoBehaviour, ISaveElement, IInteractable
     public void LoadSave(GameSaveData gameSaveData)
     {
         _harmonyStatus = gameSaveData.HarmonyStatus;
+        _cachedHarmony = 0;
 
         UpdateHarmonyPointerPosition(_harmonyStatus);
     }
 
     public void SaveData(GameSaveData gameSaveData)
     {
-        gameSaveData.HarmonyStatus = _harmonyStatus;
+        gameSaveData.HarmonyStatus = Mathf.Clamp(_harmonyStatus + _cachedHarmony, MIN_HARMONY, MAX_HARMONY);
         Debug.Log($"Save Harmony: {gameSaveData.HarmonyStatus}");
     }
 

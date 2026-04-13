@@ -10,13 +10,12 @@ public class TextPrinter
     public bool IsPrinting { get; private set; }
 
     private int _charCount;
-    private Tween _printTween;   // do pojedynczego Print
-    private Sequence _sequence;  // do łańcucha
+    private Tween _printTween;
+    private Sequence _sequence;
 
     public event Action OnSinglePrintFinished;
     public event Action OnChainFinished;
 
-    // --- POJEDYNCZY PRINT (jak dotychczas), ale z wywołaniem eventu ---
     public void Print(TMP_Text displayTarget, string text)
     {
         _printTween?.Kill();
@@ -34,7 +33,7 @@ public class TextPrinter
             displayTarget.maxVisibleCharacters = int.MaxValue;
             IsPrinting = false;
             _charCount = 0;
-            OnSinglePrintFinished?.Invoke(); // <-- ważne
+            OnSinglePrintFinished?.Invoke();
             return;
         }
 
@@ -57,7 +56,7 @@ public class TextPrinter
             {
                 IsPrinting = false;
                 _charCount = 0;
-                OnSinglePrintFinished?.Invoke(); // <-- ważne
+                OnSinglePrintFinished?.Invoke();
             });
     }
 
@@ -69,9 +68,6 @@ public class TextPrinter
         _charCount = 0;
     }
 
-    // --- FLUENT CHAIN ---
-
-    /// <summary>Rozpoczyna nowy łańcuch wydruków.</summary>
     public TextPrinter BeginChain()
     {
         _sequence?.Kill();
@@ -80,24 +76,21 @@ public class TextPrinter
         return this;
     }
 
-    /// <summary>Dodaje kolejny element do łańcucha.</summary>
     public TextPrinter ThenPrint(TMP_Text target, string text)
     {
         if (_sequence == null)
             _sequence = DOTween.Sequence().SetAutoKill(true);
 
-        // Przygotowanie od razu (bez migania – tekst i tak będzie ukryty)
         target.enabled = true;
         target.SetText(text);
         target.ForceMeshUpdate(ignoreActiveState: true, forceTextReparsing: true);
 
         int charCount = target.textInfo.characterCount;
-        target.maxVisibleCharacters = 0;  // ukryj od razu
+        target.maxVisibleCharacters = 0;
         int visible = 0;
 
         float duration = Mathf.Max(CHAR_PRINT_INTERVAL * Mathf.Max(charCount, 0), 0.0001f);
 
-        // Dodajemy tween do sekwencji
         _sequence.Append(
             DOTween.To(
                     () => visible,
@@ -118,7 +111,6 @@ public class TextPrinter
         return this;
     }
 
-    /// <summary>Callback po zakończeniu całego łańcucha.</summary>
     public TextPrinter OnChainComplete(Action action)
     {
         if (_sequence == null)
@@ -133,7 +125,6 @@ public class TextPrinter
         return this;
     }
 
-    /// <summary>Startuje łańcuch.</summary>
     public Tween PlayChain()
     {
         return _sequence?.Play();

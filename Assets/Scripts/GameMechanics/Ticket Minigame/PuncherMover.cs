@@ -1,4 +1,3 @@
-using System;
 using GameMechanics;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -27,8 +26,6 @@ public class PuncherMover : MonoBehaviour
         {
             return;
         }
-        
-        Debug.Log(e.Orientation);
 
         float targetY = e.Orientation switch
         {

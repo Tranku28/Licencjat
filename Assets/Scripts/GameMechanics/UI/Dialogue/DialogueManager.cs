@@ -51,6 +51,7 @@ namespace GameMechanics.UI
 
         //TODO: Replace with EventHandler
         public static Action<int> OnHarmonyDecreased;
+        public static Action<int> OnSouvenirReceived;
         public static EventHandler<DialogueEndEventArgs> OnDialogueQuitEvent;
 
         private Passenger _currentPassenger;
@@ -179,6 +180,7 @@ namespace GameMechanics.UI
             _story.ObserveVariable("harmony", (string varName, object newValue) =>
             {
                 _harmonyChange = (int)newValue;
+                OnHarmonyDecreased?.Invoke(_harmonyChange);
             });
 
             _story.ObserveVariable("passengerAction", (string varName, object newValue) =>
@@ -211,6 +213,13 @@ namespace GameMechanics.UI
             _story.ObserveVariable("gift", (string varName, object newValue) =>
             {
                 _gift = (bool)newValue;
+
+                Debug.Log("Gift is " + _gift);
+
+                if (_gift)
+                {
+                    OnSouvenirReceived?.Invoke(data.souvenirData.souvenirID);
+                }
             });
 
             TrySyncSpeakerDisplayFromStoryState();
