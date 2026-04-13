@@ -1,14 +1,14 @@
 VAR speakerIndex = -1
 VAR canScan = false
-VAR ticketRejected = false
-VAR forceScan = false
-VAR willQuit = false
+VAR allowQuitDialogue = false
+VAR dissapear = false
 VAR harmony = 0
 VAR passengerAction = ""
 VAR decision = ""
 VAR brokenRule = ""
 VAR generalEntry = ""
 VAR encounterEntry = ""
+VAR gift = false
 
 ~ speakerIndex = 0
 Your ticket, please.
@@ -40,12 +40,11 @@ I cannot go there now.
 ~ speakerIndex = 1
 You do not yet grasp the gravity of your mistake.
 Generations will remember this decision.
-~ ticketRejected = true
 ~ encounterEntry = "I reported him. He broke the rules. He should have known better. He wanted to fix the world. And I wanted to keep everything in order."
 ~ passengerAction = "The Ghost reached the designated destination."
 ~ decision = "Approved"
 ~ harmony = -25
-~ willQuit = true
+~ dissapear = true
     -> END
 
 
@@ -87,12 +86,11 @@ Yet I condemned the town to death.
 Perhaps you are right.
 Still, I hoped I might atone for my mistake.
 If only I had more time…
-~ ticketRejected = true
 ~ encounterEntry = "I reported him. He broke the rules. He should have known better. He wanted to fix the world. And I wanted to keep everything in order."
 ~ passengerAction = "The Ghost reached the designated destination."
 ~ decision = "Approved"
 ~ harmony = -25
-~ willQuit = true
+~ dissapear = true
     -> END
 
 === hopelessness ===
@@ -129,11 +127,10 @@ But the answer came too late.
 Rules are like diagnoses.
 Not always fair, but always unavoidable.
 ~ encounterEntry = "I reported him. He broke the rules. He should have known better. He wanted to fix the world. And I wanted to keep everything in order."
-~ ticketRejected = true
 ~ passengerAction = "The Ghost reached the designated destination."
 ~ decision = "Approved"
 ~ harmony = -25
-~ willQuit = true
+~ dissapear = true
     -> END
 
 
@@ -163,25 +160,25 @@ I always knew that not every mistake can be undone.
 Yet every choice remains with us forever…
 Look after the Harmony.
 But never forget. It, too, can be wrong.
-~ ticketRejected = true
 ~ encounterEntry = "I reported him. He broke the rules. He should have known better. He wanted to fix the world. And I wanted to keep everything in order."
 ~ passengerAction = "The Ghost reached the designated destination."
 ~ decision = "Approved"
 ~ harmony = -25
 ~ canScan = true
-~ willQuit = true
+~ dissapear = true
     -> END
 
 
 === train_will_wait ===
 ~ speakerIndex = 1
-~ forceScan = true
+~ allowQuitDialogue = true
 ~ canScan = false
 ~ encounterEntry = "I broke the rules. I should have reported this incident. But I didn't. Why? Was it for him? Because I pity him? Or was it because I hoped that him breaking the rules would bring peace to others who are still alive?"
 ~ passengerAction = "The Ghost didn’t reached the designated destination, despite having a valid ticket"
 ~ brokenRule = "Unjustified Refusal"
 ~ decision = "You let the passenger to stay"
 ~ harmony = 25
+~ gift = true
 Then perhaps someone else will not repeat my mistake.
 Thank you.
     -> END

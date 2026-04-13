@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using Core.Scriptable_Objects;
-using GameMechanics.Player;
 using Ink.Runtime;
 using Interactions;
 using TMPro;
@@ -47,11 +46,7 @@ namespace GameMechanics.UI
         [Header("External")]
         [SerializeField] private TicketMinigame ticketMinigame;
         [SerializeField] private PassengerPersonalDataLoader personalId;
-        [SerializeField] private PlayerMovementController playerMovementController;
 
-
-        private int _ticketsAccepted; 
-        private int _ticketsRejected;
         private List<int> _souvenirsReceived = new();
 
         //TODO: Replace with EventHandler
@@ -62,23 +57,16 @@ namespace GameMechanics.UI
 
         private PassengerData _currentPassengerData;
         
-        private int _currentSpeakerIndex;
-        
         private readonly Dictionary<Button, TMP_Text> _choicesToDisplay = new();
         
         private Story _story;
 
         private bool _ticketScanned;
-        private bool _ticketRejected;
-        private bool _passengerWillQuit;
-    
-        private List<string> _currentTags = new();
-
-        public bool ticketScanned => _ticketScanned;
-        public bool ticketRejected => _ticketRejected;
+        private bool _passengerDissapear;
+        public bool CanCloseDialogueWindow => _ticketScanned || _canQuitDialogue;
 
         //TODO: To refactor
-        private int _rejectedCount, _scannedCount, _harmonyValue;
+        private int _harmonyChange;
         private string _brokenRule;
 
         private Awaitable _dialogueAwaitable;
@@ -86,6 +74,9 @@ namespace GameMechanics.UI
         private string _passengerAction;
         private string _generalEntry;
         private string _encounterEntry;
+        private bool _canQuitDialogue;
+        private string _decision;
+        private bool _gift;
 
         private void Awake()
         {
@@ -138,22 +129,29 @@ namespace GameMechanics.UI
 
             _currentPassenger = sender as Passenger;
             _currentPassenger.GetComponent<Collider>().enabled = false;
-            
+
             _currentPassengerData = passengerArgs.PassengerData;
             ticketMinigame.SetupTicketUI(passengerArgs.PassengerData);
             npcNameText.text = passengerArgs.PassengerData.passengerName;
-            _ticketScanned = false;
-            _ticketRejected = false;
-            _passengerWillQuit = false;
-            _passengerAction = "";
-            _brokenRule = "";
-            _generalEntry = "";
-            _encounterEntry = "";
-            
+
+            ResetDialogueVariables();
+
             StartStory(passengerArgs.PassengerData);
         }
-        
-        //TODO: Observe variable for counting rejected/scanned tickets
+
+        private void ResetDialogueVariables()
+        {
+            _ticketScanned = false;
+            _canQuitDialogue = false;
+            _passengerDissapear = false;
+            _harmonyChange = 0;
+            _passengerAction = "";
+            _brokenRule = "";
+            _decision = "";
+            _generalEntry = "";
+            _encounterEntry = "";
+        }
+
         private void StartStory(PassengerData data)
         {
             int randomDialogueIndex = Random.Range(0, data.dialogueVariants.Count-1);
@@ -165,47 +163,37 @@ namespace GameMechanics.UI
             
             _story.ObserveVariable("canScan", (string varName, object newValue) =>
             {
-                bool canScan = (bool)newValue;
-                SetScannable(canScan);
-                //TODO: Rework souvenir give mechanic
-                if (canScan)
-                {
-                    _souvenirsReceived.Add(data.souvenirData.souvenirID);
-                    _harmonyValue = 25;
-                }
+                SetScannable((bool)newValue);
             });
 
-            _story.ObserveVariable("willQuit", (string varName, object newValue) =>
+            _story.ObserveVariable("allowQuitDialogue", (string varName, object canPlayerQuitDialogue) =>
             {
-                _passengerWillQuit = (bool)newValue;
-            });
-            
-            _story.ObserveVariable("ticketRejected", (string varName, object newValue) =>
-            {
-                _ticketRejected = (bool)newValue;
-                _harmonyValue = -25;
-                OnHarmonyDecreased?.Invoke(-25);
+                _canQuitDialogue = (bool)canPlayerQuitDialogue;
             });
 
-            _story.ObserveVariable("forceScan", (string varName, object newValue) =>
+            _story.ObserveVariable("dissapear", (string varName, object newValue) =>
             {
-                _ticketScanned = (bool)newValue;
-            });
-
-            _story.ObserveVariable("passengerAction", (string varName, object newValue) =>
-            {
-                _passengerAction = newValue.ToString();
+                _passengerDissapear = (bool)newValue;
             });
 
             _story.ObserveVariable("harmony", (string varName, object newValue) =>
             {
-                _harmonyValue = (int)newValue;
-            }
-            );
+                _harmonyChange = (int)newValue;
+            });
+
+            _story.ObserveVariable("passengerAction", (string varName, object newValue) =>
+            {
+                _passengerAction = (string)newValue;
+            });
+
+            _story.ObserveVariable("decision", (string varName, object newValue) =>
+            {
+                _decision = (string)newValue;
+            });
 
             _story.ObserveVariable("brokenRule", (string varName, object newValue) =>
             {
-                _brokenRule = newValue.ToString();
+                _brokenRule = (string)newValue;
             });
 
             _story.ObserveVariable("generalEntry", (string varName, object newValue) =>
@@ -220,6 +208,11 @@ namespace GameMechanics.UI
                 Debug.Log($"EE: {_encounterEntry}");
             });
             
+            _story.ObserveVariable("gift", (string varName, object newValue) =>
+            {
+                _gift = (bool)newValue;
+            });
+
             TrySyncSpeakerDisplayFromStoryState();
             StoryHop();
         }
@@ -375,7 +368,7 @@ namespace GameMechanics.UI
                 new DialogueEndEventArgs(
                     _passengerAction,
                     "approved",
-                    _harmonyValue,
+                    _harmonyChange,
                     _generalEntry,
                     _encounterEntry,
                     _brokenRule
@@ -388,7 +381,7 @@ namespace GameMechanics.UI
         {
             //TODO: refine save system logic
 
-            if (!_passengerWillQuit) return;
+            if (!_passengerDissapear) return;
 
             await blinkPanelUI.ClosePlayerEyes();
             _currentPassenger.gameObject.SetActive(false);
@@ -406,15 +399,12 @@ namespace GameMechanics.UI
 
         public void SaveData(GameSaveData gameSaveData)
         {
-            gameSaveData.TicketsAccepted = _ticketsAccepted;
-            gameSaveData.TicketsRejected = _ticketsRejected;
             gameSaveData.CollectedSouvenirIdList.AddRange(_souvenirsReceived);
         }
 
         public void LoadSave(GameSaveData gameSaveData)
         {
-            _ticketsAccepted = gameSaveData.TicketsAccepted;
-            _ticketsRejected = gameSaveData.TicketsRejected;
+            
         }
     }
 }

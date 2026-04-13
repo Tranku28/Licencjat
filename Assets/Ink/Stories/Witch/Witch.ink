@@ -1,14 +1,14 @@
 VAR speakerIndex = -1
 VAR canScan = false
-VAR ticketRejected = false
-VAR forceScan = false
-VAR willQuit = false
+VAR allowQuitDialogue = false
+VAR dissapear = false
 VAR harmony = 0
 VAR passengerAction = ""
 VAR decision = ""
 VAR brokenRule = ""
 VAR generalEntry = ""
 VAR encounterEntry = ""
+VAR gift = false
 
 ~ speakerIndex = 0
 Ticket, please.
@@ -129,7 +129,7 @@ Remember this, Conductor.
 The righteous die just as easily as liars.
 The difference is that liars are better prepared.
 ~ harmony = 25
-~ willQuit = true
+~ dissapear = true
 ~ decision = "Disapproved"
 ~ passengerAction = "Deliah was ordered to leave the train"
     -> END
@@ -164,7 +164,7 @@ You think sending me away restores balance?
 Balance is already broken.
 You are just choosing which cracks you prefer not to see.
 ~ harmony = 25
-~ willQuit = true
+~ dissapear = true
 ~ decision = "Disapproved"
 ~ passengerAction = "Deliah was ordered to leave the train"
     -> END
@@ -193,7 +193,7 @@ So let me pass, and I will help you keep everything neat here.
 Journeys don't end when you say they do.
 They just stop bothering you.
 ~ harmony = 25
-~ willQuit = true
+~ dissapear = true
 ~ decision = "Disapproved"
 ~ passengerAction = "Deliah was ordered to leave the train"
     -> END
@@ -210,4 +210,5 @@ A little charm, for you, to bend more rules.
 ~ brokenRule = "Passenger data does not match with the ticket"
 ~ decision = "Approved"
 ~ passengerAction = "Deliah continued her journey despite an invalid ticket"
+~ gift = true
     -> END

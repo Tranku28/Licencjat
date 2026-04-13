@@ -60,6 +60,11 @@ namespace GameMechanics.Player
             Move();
         }
 
+        public void MoveSwitch(bool value)
+        {
+            _canMove = value;
+        }
+
         private void MovementEnabler(GameState obj)
         {
             if (obj == GameState.Paused

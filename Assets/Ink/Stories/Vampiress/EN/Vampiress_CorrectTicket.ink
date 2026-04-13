@@ -1,14 +1,14 @@
 VAR speakerIndex = -1
 VAR canScan = false
-VAR ticketRejected = false
-VAR forceScan = false
-VAR willQuit = false
+VAR allowQuitDialogue = false
+VAR dissapear = false
 VAR harmony = 0
 VAR passengerAction = ""
 VAR decision = ""
 VAR brokenRule = ""
 VAR generalEntry = ""
 VAR encounterEntry = ""
+VAR gift = false
 
 ~ speakerIndex = 0
 Good evening, madam… Your ticket, please.
@@ -56,10 +56,11 @@ W-what? Why not?
 ~ harmony = -25
     ~ decision = "Disapproved"
     ~ passengerAction = "Charlotte didn’t reached the designated destination, despite having a valid ticket"
-    ~ ticketRejected = true
     ~ brokenRule = "Unjustified refusal"
     ~ encounterEntry = "I did not let her continue. Perhaps that is why I am here, to decide who arrives in time, and who remains behind."
     ~ passengerAction = "Charlotte didn’t reached the designated destination, despite having a valid ticket."
-    ~ willQuit = true
+    ~ dissapear = true
+    ~ gift = true
+    ~ allowQuitDialogue = true
 The protocols. Please leave at the nearest station.
     -> END

@@ -160,6 +160,9 @@ namespace GameMechanics
                 hole.rectTransform.localRotation = Quaternion.identity;
                 hole.rectTransform.localScale = Vector3.one;
             }
+
+            //TODO: Consider if scan should be made once
+            _canScan = false;
         }
     }
 

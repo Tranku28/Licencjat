@@ -174,7 +174,7 @@ namespace GameMechanics
 
             if (_currentElement == dialogueManager)
             {
-                if (dialogueManager.ticketScanned || dialogueManager.ticketRejected)
+                if (dialogueManager.CanCloseDialogueWindow)
                 {
                     dialogueManager.SetVisualVisibility(false);
                     dialogueManager.HideTicketDisplay();
