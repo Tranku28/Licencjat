@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="AudioFile" id="{73b255cf-8374-4a30-abf7-539d009a8e02}">
+		<property name="assetPath">
+			<value>SFX/Main Manu/CandlePutDown.ogg</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>0.43229024943310657</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{2f081b59-10bf-4977-8143-0aa2085f5bd8}</destination>
+		</relationship>
+	</object>
+</objects>

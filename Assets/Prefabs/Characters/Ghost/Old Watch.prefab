@@ -67,7 +67,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8abbc355676c64c44b2bc04f43be96f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  souvenirData: {fileID: 11400000, guid: 675c7f75b9429614091434b0957f2c11, type: 2}
+  souvenirData: {fileID: 11400000, guid: a3a373d80c4248241a9e0d5376bb21ff, type: 2}
 --- !u!1001 &9152760180950821140
 PrefabInstance:
   m_ObjectHideFlags: 0

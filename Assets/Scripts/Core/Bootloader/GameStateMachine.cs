@@ -7,6 +7,7 @@ namespace Core
     public class GameStateMachine : BaseSystem
     {
         GameState _gameState;
+        public static Action OnMenuReturned;
 
         protected override void Awake()
         {
@@ -17,6 +18,8 @@ namespace Core
 
         public static Action<GameState> OnGameStateChanged;
         public static Action<bool> OnGameStarted;
+
+        public GameState GetCurrentState() => _gameState;
 
         public void StartGame(bool isNewGame)
         {
@@ -31,6 +34,12 @@ namespace Core
             OnGameStarted?.Invoke(false);
         }
         
+        public void OnMainMenuReturn()
+        {
+            OnMenuReturned?.Invoke();
+            ChangeGameState(GameState.MainMenu);
+        }
+
         public GameState GetGameState() => _gameState;
         
         public void ChangeGameState(GameState gameState)

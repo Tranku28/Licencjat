@@ -1,6 +1,7 @@
 using System;
 using Core;
 using Core.Scriptable_Objects;
+using Core.Scriptable_Objects.Souvenirs;
 using GameMechanics.Interactions;
 using GameMechanics.UI;
 using GameMechanics.UI.MainMenu;
@@ -32,13 +33,13 @@ namespace GameMechanics
             _gameStateMachine = DependencyResolver.Instance.GetType<GameStateMachine>();
         }
 
-        //TODO: make actions non static
         private void OnEnable()
         {
             PlayerControls.OnEscapePressedEvent += OnEscapePressed;
 
             PauseMenuController.OnResume += OnResume;
             PauseMenuController.OnSettingsOpened += OpenSettings;
+            PauseMenuController.OnMenuReturned += ResetCurrentElement;
 
             SettingsPanelController.OnSettingsQuit += QuitPauseSettings;
             
@@ -46,9 +47,11 @@ namespace GameMechanics
             Diary.OnDiaryInteracted += OnDiaryInteracted;
 
             Souvenir.OnSouvenirInteracted += OnSouvenirInteracted;
+            Souvenir.OnSouvenirUiQuit += OnSouvenirUIQuit;
 
-            TutorialNotes.OnTutorialNotesInteracted += OnTutorialNotesInteracted;
+            ConductorGuidelines.OnTutorialNotesInteracted += OnTutorialNotesInteracted;
         }
+
 
         private void OnDisable()
         {
@@ -56,6 +59,7 @@ namespace GameMechanics
             
             PauseMenuController.OnResume -= OnResume;
             PauseMenuController.OnSettingsOpened -= OpenSettings;
+            PauseMenuController.OnMenuReturned -= ResetCurrentElement;
 
             SettingsPanelController.OnSettingsQuit -= QuitPauseSettings;
 
@@ -63,11 +67,12 @@ namespace GameMechanics
             Diary.OnDiaryInteracted -= OnDiaryInteracted;
 
             Souvenir.OnSouvenirInteracted -= OnSouvenirInteracted;
+            Souvenir.OnSouvenirUiQuit -= OnSouvenirUIQuit;
 
-            TutorialNotes.OnTutorialNotesInteracted -= OnTutorialNotesInteracted;
+            ConductorGuidelines.OnTutorialNotesInteracted -= OnTutorialNotesInteracted;
         }
         
-        private void OnSouvenirInteracted(PassengerData obj)
+        private void OnSouvenirInteracted(SouvenirData obj)
         {
             if (_gameStateMachine.GetGameState() == GameState.Paused) return;
             
@@ -114,6 +119,8 @@ namespace GameMechanics
             settingsTab.SetVisualVisibility(true);
             pauseMenu.SetVisualVisibility(false);
         }
+
+        private void ResetCurrentElement() => _currentElement = null;
 
         private void QuitPauseSettings()
         {
@@ -166,7 +173,7 @@ namespace GameMechanics
 
             if (_currentElement == dialogueManager)
             {
-                if (dialogueManager.ticketScanned || dialogueManager.ticketRejected)
+                if (dialogueManager.CanCloseDialogueWindow)
                 {
                     dialogueManager.SetVisualVisibility(false);
                     dialogueManager.HideTicketDisplay();
@@ -194,6 +201,13 @@ namespace GameMechanics
             _currentElement.SetVisualVisibility(false);
             _currentElement = null;
             
+            _gameStateMachine.ChangeGameState(GameState.Gameplay);
+        }
+
+        private void OnSouvenirUIQuit()
+        {
+            souvenirTab.SetVisualVisibility(false);
+            _currentElement = null;
             _gameStateMachine.ChangeGameState(GameState.Gameplay);
         }
     }

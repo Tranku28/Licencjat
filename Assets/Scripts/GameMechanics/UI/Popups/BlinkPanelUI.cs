@@ -33,9 +33,6 @@ public class BlinkPanelUI : MonoBehaviour
     
     public Awaitable ClosePlayerEyes()
     {
-        GameStateMachine gameStateMachine = DependencyResolver.Instance.GetType<GameStateMachine>();
-        gameStateMachine.ChangeGameState(GameState.Paused);
-
         _current = FadeIn();
         
         return _current;
@@ -43,15 +40,16 @@ public class BlinkPanelUI : MonoBehaviour
     
     public Awaitable OpenPlayerEyes()
     {
-        GameStateMachine gameStateMachine = DependencyResolver.Instance.GetType<GameStateMachine>();
-        gameStateMachine.ChangeGameState(GameState.Gameplay);
-
         _current = FadeOut();
         return _current;
     }
 
     private async Awaitable FadeIn()
     {
+        Debug.Log("Fade In");
+        GameStateMachine gameStateMachine = DependencyResolver.Instance.GetType<GameStateMachine>();
+        gameStateMachine.ChangeGameState(GameState.Paused);
+
         float currentAlpha = 0f;
         float hop = Mathf.Max(0.01f, effectDuration / 10f);
 
@@ -69,8 +67,7 @@ public class BlinkPanelUI : MonoBehaviour
             
             SaveSystem saveSystem = DependencyResolver.Instance.GetType<SaveSystem>();
             saveSystem.SaveGame();
-            int saveIndex = saveSystem.RuntimeSaveIndex;
-            saveSystem.LoadSave(saveIndex);
+            saveSystem.LoadSave(saveSystem.GetCurrentSave());
         }
 
         
@@ -80,6 +77,7 @@ public class BlinkPanelUI : MonoBehaviour
 
     private async Awaitable FadeOut()
     {
+        Debug.Log("Fade Out");
         float currentAlpha = 1f;
         float hop = Mathf.Max(0.01f, effectDuration / 10f);
 
@@ -92,5 +90,9 @@ public class BlinkPanelUI : MonoBehaviour
 
         panelImage.color = new Color(0f, 0f, 0f, 0f);
         _current = null;
+
+        Debug.Log("Fade Out");
+        GameStateMachine gameStateMachine = DependencyResolver.Instance.GetType<GameStateMachine>();
+        gameStateMachine.ChangeGameState(GameState.Gameplay);
     }
 }

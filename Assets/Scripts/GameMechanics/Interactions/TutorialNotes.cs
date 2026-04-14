@@ -4,7 +4,7 @@ using GameMechanics.Interactions;
 using GameMechanics.UI.MainMenu;
 using UnityEngine;
 
-public class TutorialNotes : MonoBehaviour, IInteractable
+public class ConductorGuidelines : MonoBehaviour, IInteractable
 {
     [SerializeField] private StartGameBoardHandler startGameBoardHandler;
     public static event Action OnTutorialNotesInteracted;
@@ -34,6 +34,6 @@ public class TutorialNotes : MonoBehaviour, IInteractable
 
     public string GetName()
     {
-        return "Notes";
+        return "A Conductor's guidelines";
     }
 }

@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccd1c7da984c9774cb7ba1617050987c, type: 3}
+  m_Name: RevertDayEffect
+  m_EditorClassIdentifier: 
+  singleUse: 1
+  useSound:
+    Guid:
+      Data1: 902014471
+      Data2: 1089949934
+      Data3: 2071658652
+      Data4: 1861620852
+    Path: event:/SFX/Steps

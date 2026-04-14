@@ -13,4 +13,19 @@ MonoBehaviour:
   m_Name: Watch
   m_EditorClassIdentifier: 
   souvenirID: 1
+  name: Old Watch
+  receivedFrom: Eliah Mistborne
   souvenirPrefab: {fileID: 428697447370338001, guid: dfcfdb414a253314a8b9adcaf8c8c1e0, type: 3}
+  souvenirEffects:
+  - {fileID: 11400000, guid: 923962c8c58ec0e4dbd494386b619863, type: 2}
+  souvenirDescription: 'A worn watch whose hands stopped the moment the answer was
+    already known.
+
+
+    Some decisions reveal their weight only after time has passed.'
+  souvenirEffectDescription: 'Holding this watch allows you to step back into a previous
+    day and reconsider the choices you made.
+
+
+    The watch will break once its
+    purpose is fulfilled.'

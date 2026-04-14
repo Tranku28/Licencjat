@@ -29,7 +29,7 @@ namespace GameMechanics.UI
 
         private void OnDestroy()
         {
-            DialogueManager.OnDialogueQuitEvent += AddEntry;
+            DialogueManager.OnDialogueQuitEvent -= AddEntry;
         }
 
         private void OnEnable()
@@ -46,6 +46,8 @@ namespace GameMechanics.UI
 
         public void SetDefaultDiaryState()
         {
+            Debug.Log("Setting default diary state, entries: " + _passengerEntries.Count);
+
             _pageIndex = 0;
             DisplayEntry(_pageIndex);
             prevPageButton.gameObject.SetActive(false);
@@ -86,28 +88,38 @@ namespace GameMechanics.UI
 
         private void DisplayEntry(int index)
         {
-            if (_passengerEntries.Count == 0) return;
+            if (_passengerEntries.Count == 0 || 
+                index < 0 || 
+                index >= _passengerEntries.Count)
+            {
+                leftEntryField.text = "";
+                rightEntryField.text = "";
+                return;
+            }
+
             leftEntryField.text = _passengerEntries[index].GeneralEntry;
             rightEntryField.text = _passengerEntries[index].EncounterEntry;
         }
 
         private void AddEntry(object sender, DialogueEndEventArgs e)
         {
-            _passengerEntries.Add(new PassengerEntry(e.GeneralEntry, e.EncounterEntry));
+            _passengerEntries.Add(new PassengerEntry(e.GeneralEntry, e.EncounterEntry, e.EntryId));
         }
 
         public void SaveData(GameSaveData gameSaveData)
         {
-            gameSaveData.PassengerEntries.AddRange(_passengerEntries);
-
-            _passengerEntries.Clear();
+            gameSaveData.PassengerEntries.Clear();
+            List<PassengerEntry> passengerEntries = new();
+            passengerEntries.AddRange(_passengerEntries);
+            gameSaveData.PassengerEntries.AddRange(passengerEntries);
         }
 
         public void LoadSave(GameSaveData gameSaveData)
         {
+            _passengerEntries.Clear();
             _passengerEntries.AddRange(gameSaveData.PassengerEntries);
 
-            gameSaveData.PassengerEntries.Clear();
+            SetDefaultDiaryState();
         }
     }
 }

@@ -39,6 +39,9 @@ namespace GameMechanics.UI
         private void CacheSummaryData(object sender, DialogueEndEventArgs e)
         {
             _summary = new CachedSummary(e.PassengerAction, e.Decision, e.HarmonyValue, e.RuleBroken);
+            Debug.Log(
+                $"Harmony: {e.HarmonyValue}"
+                );
         }
 
         public void DisplaySummary()

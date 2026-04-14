@@ -1,12 +1,14 @@
 VAR speakerIndex = -1
 VAR canScan = false
-VAR ticketRejected = false
+VAR allowQuitDialogue = false
+VAR dissapear = false
 VAR harmony = 0
 VAR passengerAction = ""
 VAR decision = ""
 VAR brokenRule = ""
 VAR generalEntry = ""
 VAR encounterEntry = ""
+VAR gift = false
 
 ~ generalEntry = "Tonight, a woman boarded the train. Young, at first glance, yet her eyes held something... ancient. Her ticket had a different name. When I told her, she smiled - as though time itself had long since lost meaning. And she started to talk about her life before all this. She should not have been here. And yet, I felt that this train had been waiting for her all along. This train carries more than passengers."
 ~ speakerIndex = 0
@@ -49,11 +51,12 @@ I possess too much of it.
 Others, far too little.
 I shall alight at the next station…
 ~ harmony = -25
-~ ticketRejected = true
+~ dissapear = true
 ~ decision = "Disapproved"
 ~ passengerAction = "Charlotte didn’t reach the designated destination"
 ~ encounterEntry = "I did not let her continue. I said, those are the rules. She did not protest. She merely bowed her head and vanished before the next station. I cannot stop thinking about her. That perhaps she only wished to say goodbye. That what I saw as breach of order, was, for her, a final chance. Perhaps that is why I am here, to decide who arrives in time, and who remains behind."
 ~ passengerAction = "Charlotte personal data was incorrect and you didn’t let her pass."
+~ allowQuitDialogue = true
     -> END
 
 === unfunfilled_dream ===
@@ -75,12 +78,13 @@ Something that you want to chase so dearly… Yet none of your dreams did come t
 … Perhaps they were right after all.
 One cannot live upon dreams alone.
 Thank you for reminding me of that truth, just as I began to doubt it.
-~ ticketRejected = true
 ~ harmony = -25
+~ dissapear = true
 ~ decision = "Disapproved"
 ~ passengerAction = "Charlotte didn’t reach the designated destination"
 ~ encounterEntry = "I did not let her continue. I said, those are the rules. She did not protest. She merely bowed her head and vanished before the next station. I cannot stop thinking about her. That perhaps she only wished to say goodbye. That what I saw as breach of order, was, for her, a final chance. Perhaps that is why I am here, to decide who arrives in time, and who remains behind."
 ~ passengerAction = "Charlotte personal data was incorrect and you didn’t let her pass."
+~ allowQuitDialogue = true
     -> END
 
 
@@ -112,12 +116,13 @@ And now I bear the weight of that regret…
 === cannot_allow_3 ===
 … And yet nothing has changed…
 Men still despise and fear the dreams and wishes of other beings.
-~ ticketRejected = true
 ~ harmony = -25
+~ dissapear = true
 ~ decision = "Disapproved"
 ~ passengerAction = "Charlotte didn’t reach the designated destination"
 ~ encounterEntry = "I did not let her continue. I said, those are the rules. She did not protest. She merely bowed her head and vanished before the next station. I cannot stop thinking about her. That perhaps she only wished to say goodbye. That what I saw as breach of order, was, for her, a final chance. Perhaps that is why I am here, to decide who arrives in time, and who remains behind."
 ~ passengerAction = "Charlotte personal data was incorrect and you didn’t let her pass."
+~ allowQuitDialogue = true
     -> END
 
 === regret ===
@@ -148,12 +153,13 @@ I lacked the voice to speak his name aloud - to tell the world how deeply I love
 When there was still time.
 But now…
 … Forget it.
-~ ticketRejected = true
 ~ harmony = -25
+~ dissapear = true
 ~ decision = "Disapproved"
 ~ passengerAction = "Charlotte didn’t reach the designated destination"
 ~ encounterEntry = "I did not let her continue. I said, those are the rules. She did not protest. She merely bowed her head and vanished before the next station. I cannot stop thinking about her. That perhaps she only wished to say goodbye. That what I saw as breach of order, was, for her, a final chance. Perhaps that is why I am here, to decide who arrives in time, and who remains behind."
 ~ passengerAction = "Charlotte personal data was incorrect and you didn’t let her pass."
+~ allowQuitDialogue = true
     -> END
 
 
@@ -232,12 +238,13 @@ Tell me, how could such a thing be?
 …And yet, I was wrong.
 We were never meant for one another. For had we been, fate would have guided us together…
 Would it not..?
-~ ticketRejected = true
 ~ harmony = -25
+~ dissapear = true
 ~ decision = "Disapproved"
 ~ passengerAction = "Charlotte didn’t reach the designated destination"
 ~ encounterEntry = "I did not let her continue. I said, those are the rules. She did not protest. She merely bowed her head and vanished before the next station. I cannot stop thinking about her. That perhaps she only wished to say goodbye. That what I saw as breach of order, was, for her, a final chance. Perhaps that is why I am here, to decide who arrives in time, and who remains behind."
 ~ passengerAction = "Charlotte personal data was incorrect and you didn’t let her pass."
+~ allowQuitDialogue = true
     -> END
 
 === love_chooses ===
@@ -275,12 +282,13 @@ Young man, please… have mercy. Allow me to see him, if only this once. Now tha
 We all have them.
 We all chase unseen purposes.
 But remember, young man.
-~ ticketRejected = true
 ~ harmony = -25
 ~ decision = "Disapproved"
 ~ passengerAction = "Charlotte didn’t reach the designated destination"
 ~ encounterEntry = "I did not let her continue. I said, those are the rules. She did not protest. She merely bowed her head and vanished before the next station. I cannot stop thinking about her. That perhaps she only wished to say goodbye. That what I saw as breach of order, was, for her, a final chance. Perhaps that is why I am here, to decide who arrives in time, and who remains behind."
 ~ passengerAction = "Charlotte personal data was incorrect and you didn’t let her pass."
+~ dissapear = true
+~ allowQuitDialogue = true
     -> END
 
 === accept ===
@@ -294,6 +302,7 @@ It alone knows the way.
 ~ encounterEntry = "I let her pass. I do not know why. Perhaps because in her eyes I saw something I have long forgotten - hope. She said she was going to see her beloved, one last time. A mortal man, dying. They should never have existed in the same world and yet, there was more life in her voice than in many hearts I’ve met along this endless route. Little did she know that she's already dead herself."
 ~ passengerAction = "Charlotte personal data was incorrect, but you let her pass"
 ~ brokenRule = "Invalid Personal Data."
+~ gift = true
     -> END
 
 

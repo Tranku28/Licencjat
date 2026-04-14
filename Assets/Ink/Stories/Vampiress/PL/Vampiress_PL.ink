@@ -1,6 +1,14 @@
 VAR speakerIndex = -1
 VAR canScan = false
 VAR ticketRejected = false
+VAR forceScan = false
+VAR willQuit = false
+VAR harmony = 0
+VAR passengerAction = ""
+VAR decision = ""
+VAR brokenRule = ""
+VAR generalEntry = ""
+VAR encounterEntry = ""
 
 ~ speakerIndex = 0
 Dobry wieczór, Pani. Poproszę bilet do kontroli.

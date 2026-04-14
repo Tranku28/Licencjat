@@ -1,9 +1,7 @@
-using System;
 using GameMechanics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-//TODO: fix orientation
 public class PuncherMover : MonoBehaviour
 {
     [SerializeField] private new Camera camera;
@@ -11,12 +9,6 @@ public class PuncherMover : MonoBehaviour
     [SerializeField] private TicketMinigame ticketMinigame;
     
     private PuncherOrientation _orientation;
-    private Quaternion _initialRotation;
-
-    private void Awake()
-    {
-        _initialRotation = transform.rotation;
-    }
 
     private void Start()
     {
@@ -27,23 +19,25 @@ public class PuncherMover : MonoBehaviour
 
     private void OnDestroy() => ticketMinigame.OnTicketMoved -= RepositionPuncher;
 
-    private void RepositionPuncher(object sender, TicketMinigame.OnTicketClickedEventArgs e)
+    private void RepositionPuncher(object sender, TicketMinigame.OnTicketPointerMovedEventArgs e)
     {
         if (e.Orientation == _orientation)
         {
             return;
         }
-        
+
         float targetY = e.Orientation switch
         {
-            PuncherOrientation.Left => -90f,
-            PuncherOrientation.Right => 90f,
-            PuncherOrientation.Top => 180f,
-            PuncherOrientation.Bottom => 0f,
+            PuncherOrientation.Left => 180f,
+            PuncherOrientation.Top => 90f,
+            PuncherOrientation.Right => 0f,
+            PuncherOrientation.Bottom => -90f,
             _ => 0f
         };
         
-        transform.localRotation = _initialRotation * Quaternion.Euler(0f, targetY, 0f);
+        Quaternion puncherWorldRotation = e.Rotation * Quaternion.Euler(-90f, 0f, 0f);
+
+        transform.rotation = puncherWorldRotation * Quaternion.Euler(0f, targetY, 0f);
 
         _orientation = e.Orientation;
     }

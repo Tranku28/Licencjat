@@ -1,12 +1,14 @@
 VAR speakerIndex = -1
 VAR canScan = false
-VAR ticketRejected = false
+VAR allowQuitDialogue = false
+VAR dissapear = false
 VAR harmony = 0
 VAR passengerAction = ""
 VAR decision = ""
 VAR brokenRule = ""
 VAR generalEntry = ""
 VAR encounterEntry = ""
+VAR gift = false
 
 ~ speakerIndex = 0
 Good evening, madam… Your ticket, please.
@@ -29,7 +31,7 @@ I am bound for a meeting… though, in truth, it comes many years too late.
 
 * [Very well, Miss Bloodrose. Have a safe trip (stamp the ticket)]
     ~ speakerIndex = 0
-    Very well, Miss Bloodrose. Have a safe trip (stamp the ticket)
+    Very well, Miss Bloodrose. Have a safe trip
     -> accept
 * [I'm sorry Miss, I cannot let you pass (refuse)]
     ~ speakerIndex = 0
@@ -44,6 +46,7 @@ Thank you, kind man. I hope everything goes well for you.
     ~ passengerAction = "Charlotte reached the designated destination"
     ~ canScan = true
     ~ passengerAction = "Charlotte reached the designated destination"
+    ~ gift = true
     -> END
 
 === refuse ===
@@ -51,12 +54,13 @@ Thank you, kind man. I hope everything goes well for you.
 W-what? Why not?
 
 ~ speakerIndex = 0
+The protocols. Please leave at the nearest station.
 ~ harmony = -25
     ~ decision = "Disapproved"
     ~ passengerAction = "Charlotte didn’t reached the designated destination, despite having a valid ticket"
-    ~ ticketRejected = true
     ~ brokenRule = "Unjustified refusal"
     ~ encounterEntry = "I did not let her continue. Perhaps that is why I am here, to decide who arrives in time, and who remains behind."
     ~ passengerAction = "Charlotte didn’t reached the designated destination, despite having a valid ticket."
-The protocols. Please leave at the nearest station.
+    ~ dissapear = true
+    ~ allowQuitDialogue = true
     -> END

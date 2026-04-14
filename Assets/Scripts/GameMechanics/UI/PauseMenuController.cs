@@ -21,6 +21,7 @@ namespace GameMechanics
 
         public static Action OnResume;
         public static Action OnSettingsOpened;
+        public static Action OnMenuReturned;
 
         private void Awake()
         {
@@ -57,8 +58,9 @@ namespace GameMechanics
             switch (_currentOption)
             {
                 case PauseOptions.MainMenu:
-                    gameStateMachine.ChangeGameState(GameState.MainMenu);
-                    SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                    gameStateMachine.OnMainMenuReturn();
+                    pauseMenuVisual.SetActive(false);
+                    OnMenuReturned?.Invoke();
                     break;
                 
                 case PauseOptions.Settings:
@@ -75,14 +77,14 @@ namespace GameMechanics
                     break;
                 case PauseOptions.None:
                 default:
-                    Debug.Log("Unrecognized pause option");
                     break;
             }
         }
 
         private void Update()
         {
-            // TODO: make sure to disable Update of pause menu when it is not Used
+            if (!pauseMenuVisual.activeSelf) return;
+
             var mousePos = Mouse.current.position.ReadValue();
 
             var localPoint = GetCursorPosition(mousePos);

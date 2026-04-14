@@ -13,4 +13,10 @@ MonoBehaviour:
   m_Name: Old Necklace
   m_EditorClassIdentifier: 
   souvenirID: 0
+  name: Old Necklace
+  receivedFrom: Charlotte Bloodrose
   souvenirPrefab: {fileID: 3923819191764239479, guid: 77b5e666ce472604aaa02b658cc2926b, type: 3}
+  souvenirEffects:
+  - {fileID: 11400000, guid: d24c14d66f6d11f4baf25bb05f5aca04, type: 2}
+  souvenirDescription: bla bla
+  souvenirEffectDescription: dasd

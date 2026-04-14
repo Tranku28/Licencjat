@@ -5,6 +5,7 @@ using Core;
 using Core.Save_System;
 using Player;
 using TMPro;
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -20,13 +21,17 @@ namespace GameMechanics.UI.MainMenu
         [SerializeField] private Button startJourneyButton, goBackButton;
         [SerializeField] private TMP_Text noSaveSlotsText;
         [SerializeField] private List<SaveDisplayerUI> saveDisplayers = new();
+        [SerializeField] private CinemachineBlendDefinition zoomInBlendSettings;
 
         [Header("External Dependencies")]
-        [SerializeField] private InteractionHandler cameraAnimatorHandler;
-        [SerializeField] private Animator cameraAnimator;
+        [SerializeField] private CinemachineCamera saveSelectorCamera;
+        [SerializeField] private CinemachineCamera playerHeadCamera;
+        [SerializeField] private CinemachineCamera mainMenuZoomOutCamera;
+
+        private CinemachineBrainController _cinemachineBrainController;
         
         public event Action<bool> OnGameplayEntered;
-        private Animator _animator;
+        private Animator _boardAnimator;
         private Collider _collider;
         private bool _entered;
         private bool _newGame = false;
@@ -35,55 +40,74 @@ namespace GameMechanics.UI.MainMenu
 
         private void Awake()
         {
-            _animator = GetComponent<Animator>();
+            _boardAnimator = GetComponent<Animator>();
             _collider = GetComponent<Collider>();
+        }
+
+        private void Start()
+        {
+            _cinemachineBrainController = CinemachineBrainController.Instance;
+            SetCinemachineBrainCutBlend();
         }
 
         private void OnEnable()
         {
             startJourneyButton.onClick.AddListener(OnNewGame);
             goBackButton.onClick.AddListener(GoBackButtonClicked);
-            
-            cameraAnimatorHandler.GameStarted += OnStartGame;
 
             _saveSystem = DependencyResolver.Instance.GetType<SaveSystem>();
             _saveSystem.OnSaveDeleted += LoadSaves;
+
+            GameStateMachine.OnMenuReturned += HideSaves;
         }
-        
+
         private void OnDisable()
         {
             startJourneyButton.onClick.RemoveListener(OnNewGame);
             goBackButton.onClick.RemoveListener(GoBackButtonClicked);
-            
-            cameraAnimatorHandler.GameStarted -= OnStartGame;
 
             _saveSystem.OnSaveDeleted -= LoadSaves;
+
+            GameStateMachine.OnMenuReturned -= HideSaves;
+        }
+
+        private void HideSaves()
+        {
+            foreach (SaveDisplayerUI saveDisplayer in saveDisplayers)
+            {
+                saveDisplayer.gameObject.SetActive(false);
+            }
         }
 
         public void OnPointerClick(PointerEventData eventData)
         {
-            _animator.SetBool(ZoomIn, true);
-            cameraAnimator.SetBool(ZoomIn, true);
+            _boardAnimator.SetBool(ZoomIn, true);
+            _cinemachineBrainController.BlendCustom(zoomInBlendSettings);
+            saveSelectorCamera.Prioritize();
             AudioManager.Instance.PlayOneShot(FMODEvents.Instance.saveBoardOpen, transform.position);
             _entered = true;
+
+            StartCoroutine(ZoomInFinished(_cinemachineBrainController.Brain.DefaultBlend.BlendTime));
         }
 
         public void OnPointerEnter(PointerEventData eventData)
         {
             if (_entered) return;
-            _animator.SetBool(Hover, true);
+            _boardAnimator.SetBool(Hover, true);
             AudioManager.Instance.PlayOneShot(FMODEvents.Instance.saveBoardHover, transform.position);
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
             if (_entered) return;
-            _animator.SetBool(Hover, false);
+            _boardAnimator.SetBool(Hover, false);
             AudioManager.Instance.PlayOneShot(FMODEvents.Instance.saveBoardHover, transform.position);
         }
 
-        public void ZoomInFinished()
+        public IEnumerator ZoomInFinished(float seconds)
         {
+            yield return new WaitForSeconds(seconds);
+
             LoadSaves();
 
             startJourneyButton.interactable = true;
@@ -106,7 +130,7 @@ namespace GameMechanics.UI.MainMenu
 
             for (int i=0; i < saves.Length; i++)
             {
-                saveDisplayers[i].Index = saves[i].SaveIndex;
+                saveDisplayers[i].Index = i;
                 saveDisplayers[i].saveName.text = $"Save {i+1}";
                 saveDisplayers[i].dateSaved.text = $"{saves[i].DateSaved}";
                 saveDisplayers[i].inGameDay.text = $"Day {saves[i].CurrentDay}";
@@ -117,8 +141,39 @@ namespace GameMechanics.UI.MainMenu
 
         private void GoBackButtonClicked()
         {
-            _animator.SetBool(ZoomIn, false);
-            cameraAnimator.SetBool(ZoomIn, false);
+            _boardAnimator.SetBool(ZoomIn, false);
+            
+            startJourneyButton.interactable = false;
+            goBackButton.interactable = false;
+            
+            _collider.enabled = true;
+            _entered = false;
+
+            mainMenuZoomOutCamera.Prioritize();
+        }
+
+        private void OnStartButtonClicked()
+        {
+            _boardAnimator.SetBool(ZoomIn, false);
+            _boardAnimator.SetBool(Hover, false);
+            _collider.enabled = false;
+            playerHeadCamera.Prioritize();
+
+            StartCoroutine(OnStartGame(_cinemachineBrainController.Brain.DefaultBlend.Time));
+        }
+
+        private IEnumerator OnStartGame(float time)
+        {
+            yield return new WaitForSeconds(time);
+
+            OnGameplayEntered?.Invoke(_newGame);
+            _newGame = false;
+        }
+
+        public void MenuReturned()
+        {
+            SetCinemachineBrainCutBlend();
+            _boardAnimator.SetBool(ZoomIn, false);
             
             startJourneyButton.interactable = false;
             goBackButton.interactable = false;
@@ -127,21 +182,10 @@ namespace GameMechanics.UI.MainMenu
             _entered = false;
         }
 
-        private void OnStartButtonClicked()
+        private void SetCinemachineBrainCutBlend()
         {
-            // TODO: Fix game start is controlled inside animation invoke method in Interactionhandler
-            cameraAnimator.SetBool(GameStarted, true);
-            _animator.SetBool(ZoomIn, false);
-            _animator.SetBool(Hover, false);
-            _collider.enabled = false;
-        }
-
-        private void OnStartGame()
-        {
-            OnGameplayEntered?.Invoke(_newGame);
-            cameraAnimator.enabled = false;
-            _animator.enabled = false;
-            _newGame = false;
+            _cinemachineBrainController.BlendSetCut();
+            mainMenuZoomOutCamera.Prioritize();
         }
 
         private void OnNewGame()
@@ -178,9 +222,8 @@ namespace GameMechanics.UI.MainMenu
         public void OnSaveFieldClicked(int saveIndex)
         {
             SaveSystem saveSystem = DependencyResolver.Instance.GetType<SaveSystem>();
-            saveSystem.LoadSave(saveIndex);
+            saveSystem.LoadSave(saveSystem.GetSaves[saveIndex]);
 
-            Debug.Log("OnStartButtonClicked SaveField");
             OnStartButtonClicked();
         }
     }

@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2399cbc7eef835409a02a67257e20a9, type: 3}
+  m_Name: HarmonyEffect
+  m_EditorClassIdentifier: 
+  singleUse: 1
+  useSound:
+    Guid:
+      Data1: -1612662806
+      Data2: 1316720019
+      Data3: -24688216
+      Data4: -209171374
+    Path: event:/SFX/UI/CreditsOpen
+  harmonyValueUpdate: 25

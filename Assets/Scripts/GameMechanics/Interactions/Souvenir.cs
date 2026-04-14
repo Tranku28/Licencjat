@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using Core;
+using Core.Save_System;
 using Core.Scriptable_Objects;
+using Core.Scriptable_Objects.Souvenirs;
 using GameMechanics.Interactions;
 using SouvenirSystem;
 using UnityEngine;
@@ -9,28 +11,33 @@ using UnityEngine.UI;
 
 public class Souvenir : MonoBehaviour, IInteractable
 {
-    [SerializeField] private PassengerData souvenirData;
-    [SerializeField] private List<SouvenirEffect> effects;
+    [SerializeField] private SouvenirData souvenirData;
+    private List<SouvenirEffect> _effects;
     private SouvenirEffectResolver _effectResolver;
+    public List<SouvenirEffect> Effects => _effects; 
     private Button _useButton;
+    public int ID { get; private set; }
 
-    public static event Action<PassengerData> OnSouvenirInteracted;
+    public event Action<Souvenir> OnSouvenirused;
+
+    public static event Action<SouvenirData> OnSouvenirInteracted;
+    public static event Action OnSouvenirUiQuit;
 
     private void Awake()
     {
         _effectResolver = new();
     }
 
-    public void Init(SouvenirEffectResolver resolver, Button useButton)
+    public void Init(SouvenirEffectResolver resolver, List<SouvenirEffect> effects, int id)
     {
-        _useButton = useButton;
-        _useButton.onClick.AddListener(ApplyEffects);
         _effectResolver = resolver;
+        _effects = effects;
+        ID = id;
     }
 
     public string GetName()
     {
-        return souvenirData.souvenirName;
+        return souvenirData.name;
     }
 
     public void Interact()
@@ -38,26 +45,29 @@ public class Souvenir : MonoBehaviour, IInteractable
         OnSouvenirInteracted?.Invoke(souvenirData);
     }
 
-    private void ApplyEffects()
+    public void ApplyEffects()
     {
         bool destroy = false;
 
-        foreach (SouvenirEffect effect in effects)
+        foreach (SouvenirEffect effect in _effects)
         {
             effect.Resolve(_effectResolver);
 
-            if (effect.singleUse) 
+            if (effect.singleUse)
+            {
+                Debug.Log("Resolving: " + effect);
                 destroy = true;
+                AudioManager.Instance.PlayOneShot(effect.useSound, transform.position);
+            }
         }
 
         if (destroy)
         {
-            PlayerControls playerControls = DependencyResolver.Instance.GetType<PlayerControls>();
-            playerControls.ForceOnEscapePressed();
+            DependencyResolver.Instance.GetType<SaveSystem>().ForceDeleteSaveSouvenirData(souvenirData.souvenirID);
 
+            OnSouvenirUiQuit?.Invoke();
+            OnSouvenirused?.Invoke(this);
             Destroy(gameObject);
         }
-
-        _useButton.onClick.RemoveListener(ApplyEffects);
     }
 }

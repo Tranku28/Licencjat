@@ -46,9 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8abbc355676c64c44b2bc04f43be96f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  souvenirData: {fileID: 11400000, guid: f59162cd698ea344ba9103086900d09b, type: 2}
-  effects:
-  - {fileID: 11400000, guid: d24c14d66f6d11f4baf25bb05f5aca04, type: 2}
+  souvenirData: {fileID: 11400000, guid: 9445aa4f19727c1499a6df95d5250517, type: 2}
 --- !u!65 &8705367058595173683
 BoxCollider:
   m_ObjectHideFlags: 0
