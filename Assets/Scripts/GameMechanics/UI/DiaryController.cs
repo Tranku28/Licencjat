@@ -108,8 +108,6 @@ namespace GameMechanics.UI
 
         public void SaveData(GameSaveData gameSaveData)
         {
-            Debug.Log(gameSaveData.SaveIndex);
-
             gameSaveData.PassengerEntries.Clear();
             List<PassengerEntry> passengerEntries = new();
             passengerEntries.AddRange(_passengerEntries);
@@ -118,8 +116,6 @@ namespace GameMechanics.UI
 
         public void LoadSave(GameSaveData gameSaveData)
         {
-            Debug.Log(gameSaveData.SaveIndex);
-
             _passengerEntries.Clear();
             _passengerEntries.AddRange(gameSaveData.PassengerEntries);
 

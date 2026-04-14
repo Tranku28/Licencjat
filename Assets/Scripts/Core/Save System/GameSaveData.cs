@@ -1,10 +1,11 @@
 using System;
 using System.Collections.Generic;
+using FMOD;
 
 [Serializable]
 public class GameSaveData
 {
-    public int SaveIndex;
+    public string SaveID;
     public string DateSaved;
     public int CurrentDay = 1;
     public int HarmonyStatus = 100;

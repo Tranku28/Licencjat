@@ -16,7 +16,7 @@ public class SaveDisplayerUI : MonoBehaviour
 
     public static Action<SaveDisplayerUI> OnDeleteSaveClicked;
 
-    public int Index {get; set;}
+    public int Index;
 
     private void Awake()
     {

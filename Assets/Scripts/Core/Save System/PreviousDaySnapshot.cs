@@ -4,7 +4,6 @@ using System.Collections.Generic;
 [Serializable]
 public class PreviousDaySnapshot
 {
-    public int SaveIndex;
     public string DateSaved;
     public int CurrentDay;
     public int HarmonyStatus;

@@ -32,13 +32,12 @@ public class SaveDeleteUIHandler : MonoBehaviour
     {
         visuals.SetActive(true);
         _selectedSaveIndex = saveDisplayerUI.Index;
-        Debug.Log(_selectedSaveIndex);
     }
 
     private void DeleteSave()
     {
         SaveSystem saveSystem = DependencyResolver.Instance.GetType<SaveSystem>();
-        saveSystem.DeleteSave(_selectedSaveIndex);
+        saveSystem.DeleteSave(saveSystem.GetSaves[_selectedSaveIndex]);
         visuals.SetActive(false);
     }
 

@@ -130,7 +130,7 @@ namespace GameMechanics.UI.MainMenu
 
             for (int i=0; i < saves.Length; i++)
             {
-                saveDisplayers[i].Index = saves[i].SaveIndex;
+                saveDisplayers[i].Index = i;
                 saveDisplayers[i].saveName.text = $"Save {i+1}";
                 saveDisplayers[i].dateSaved.text = $"{saves[i].DateSaved}";
                 saveDisplayers[i].inGameDay.text = $"Day {saves[i].CurrentDay}";
@@ -222,7 +222,7 @@ namespace GameMechanics.UI.MainMenu
         public void OnSaveFieldClicked(int saveIndex)
         {
             SaveSystem saveSystem = DependencyResolver.Instance.GetType<SaveSystem>();
-            saveSystem.LoadSave(saveIndex);
+            saveSystem.LoadSave(saveSystem.GetSaves[saveIndex]);
 
             OnStartButtonClicked();
         }

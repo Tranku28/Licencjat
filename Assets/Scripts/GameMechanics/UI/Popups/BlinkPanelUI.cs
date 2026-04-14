@@ -67,8 +67,7 @@ public class BlinkPanelUI : MonoBehaviour
             
             SaveSystem saveSystem = DependencyResolver.Instance.GetType<SaveSystem>();
             saveSystem.SaveGame();
-            int saveIndex = saveSystem.RuntimeSaveIndex;
-            saveSystem.LoadSave(saveIndex);
+            saveSystem.LoadSave(saveSystem.GetCurrentSave());
         }
 
         
