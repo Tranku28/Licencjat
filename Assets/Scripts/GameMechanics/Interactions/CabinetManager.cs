@@ -3,6 +3,9 @@ using Core.Save_System;
 using Core.Scriptable_Objects.Souvenirs;
 using UnityEngine;
 using GameMechanics.UI;
+using System;
+using UnityEngine.UI;
+using System.Linq;
 
 namespace GameMechanics.Interactions
 {
@@ -11,6 +14,7 @@ namespace GameMechanics.Interactions
         [SerializeField] private List<Transform> souvenirPositions = new();
         [SerializeField] private SouvenirAtlas souvenirAtlas;
         [SerializeField] private SouvenirViewController souvenirView;
+        [SerializeField] private Button useButton;
         private SouvenirEffectResolver _souvenirEffectResolver;
         private List<int> souvenirIdList = new();
         private int _cachedSouvenir;
@@ -23,13 +27,33 @@ namespace GameMechanics.Interactions
             _souvenirEffectResolver = new();
 
             DialogueManager.OnSouvenirReceived += CacheSouvenirId;
+            Souvenir.OnSouvenirInteracted += CacheSouvenir;
 
             SpawnSouvenirs();
+            SetupButton();
+        }
+
+        private void SetupButton()
+        {
+            useButton.onClick.AddListener(UseSouvenir);
         }
 
         private void OnDestroy()
         {
             DialogueManager.OnSouvenirReceived -= CacheSouvenirId;
+            Souvenir.OnSouvenirInteracted -= CacheSouvenir;
+            useButton.onClick.RemoveListener(UseSouvenir);
+        }
+
+        private void UseSouvenir()
+        {
+            Souvenir selectedSouvenir = _souvenirs.First(x => x.ID == _cachedSouvenir);
+            selectedSouvenir.ApplyEffects();
+        }
+
+        private void CacheSouvenir(SouvenirData data)
+        {
+            _cachedSouvenir = data.souvenirID;
         }
 
         private void CacheSouvenirId(int id)
@@ -48,6 +72,26 @@ namespace GameMechanics.Interactions
             souvenirIdList.AddRange(gameSaveData.CollectedSouvenirIdList);
 
             EnableSouvenirs(souvenirIdList);
+
+            //TODO: Rework later if needed
+            ApplySouvenirPassiveEffects();
+        }
+
+        //TODO: Rework later if needed
+        private void ApplySouvenirPassiveEffects()
+        {
+            foreach (Souvenir souvenir in _souvenirs)
+            {
+                if (!souvenir.gameObject.activeSelf) continue;
+
+                foreach (SouvenirEffect effect in souvenir.Effects)
+                {
+                    if (effect.passive)
+                    {
+                        effect.Resolve(_souvenirEffectResolver);
+                    }
+                }
+            }
         }
 
         public void SaveData(GameSaveData gameSaveData)
@@ -63,7 +107,7 @@ namespace GameMechanics.Interactions
             {
                 Souvenir newSouvenir = Instantiate(souvenirData.souvenirPrefab, souvenirPositions[position]).GetComponent<Souvenir>();
                 newSouvenir.OnSouvenirused += OnUseDeleteSouvenir;
-                newSouvenir.Init(_souvenirEffectResolver, souvenirView.UseButton, souvenirData.souvenirEffects, souvenirData.souvenirID);
+                newSouvenir.Init(_souvenirEffectResolver, souvenirData.souvenirEffects, souvenirData.souvenirID);
                 _souvenirs.Add(newSouvenir);
 
                 newSouvenir.gameObject.SetActive(false);
@@ -78,6 +122,7 @@ namespace GameMechanics.Interactions
             {
                 if (IDs.Contains(souvenir.ID))
                 {
+                    Debug.Log(souvenir.name);
                     souvenir.gameObject.SetActive(true);
                     continue;
                 }

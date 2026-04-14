@@ -776,7 +776,6 @@ MonoBehaviour:
   showTicketButton: {fileID: 841495931}
   ticketMinigame: {fileID: 312043027249759511}
   personalId: {fileID: 980705442}
-  playerMovementController: {fileID: 7022378398480366494}
 --- !u!1 &37904584
 GameObject:
   m_ObjectHideFlags: 0
@@ -1205,6 +1204,7 @@ MonoBehaviour:
   - {fileID: 513678485}
   souvenirAtlas: {fileID: 11400000, guid: 3654e0231c1d1134f8e0d73f403278a6, type: 2}
   souvenirView: {fileID: 7114046782353240595}
+  useButton: {fileID: 8161362149936269364}
 --- !u!1001 &87112639
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4402,10 +4402,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 073d123295377564da7e48db2a679a82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _harmonyStatus: 100
-  _topEndpoint: {fileID: 576351785}
-  _bottomEndpoint: {fileID: 460142450}
-  _pointerTransform: {fileID: 1791668056538848126}
+  topEndpoint: {fileID: 576351785}
+  bottomEndpoint: {fileID: 460142450}
+  pointerTransform: {fileID: 1791668056538848126}
 --- !u!65 &458509605
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -20148,8 +20147,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3995788535959266696}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0.008024162, z: 0, w: 0.9999679}
-  m_LocalPosition: {x: 6.3024073, y: 1.7, z: 0.1499807}
+  m_LocalRotation: {x: 0.14881198, y: 0.30455256, z: -0.0482364, w: 0.9395616}
+  m_LocalPosition: {x: 6.6244035, y: 1.5899999, z: 0.89490926}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -20551,10 +20550,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 16
-  m_fontSizeBase: 16
+  m_fontSize: 32
+  m_fontSizeBase: 32
   m_fontWeight: 400
-  m_enableAutoSizing: 1
+  m_enableAutoSizing: 0
   m_fontSizeMin: 16
   m_fontSizeMax: 72
   m_fontStyle: 1
@@ -20957,10 +20956,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 16
-  m_fontSizeBase: 16
+  m_fontSize: 32
+  m_fontSizeBase: 32
   m_fontWeight: 400
-  m_enableAutoSizing: 1
+  m_enableAutoSizing: 0
   m_fontSizeMin: 16
   m_fontSizeMax: 72
   m_fontStyle: 1
@@ -22811,7 +22810,7 @@ Camera:
     height: 1
   near clip plane: 0.1
   far clip plane: 5000
-  field of view: 60
+  field of view: 60.000004
   orthographic: 0
   orthographic size: 10
   m_Depth: -1

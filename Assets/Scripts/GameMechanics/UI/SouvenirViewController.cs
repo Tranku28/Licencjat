@@ -62,7 +62,6 @@ public class SouvenirViewController : UIElement, IPointerDownHandler, IPointerUp
         _isRotatingObject = direction;
     }
     
-    //TODO: disable items instead of Destroy
     private void LoadSouvenirWindow(SouvenirData obj)
     {
         _rotationDir = 0;

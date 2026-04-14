@@ -33,7 +33,6 @@ namespace GameMechanics
             _gameStateMachine = DependencyResolver.Instance.GetType<GameStateMachine>();
         }
 
-        //TODO: make actions non static
         private void OnEnable()
         {
             PlayerControls.OnEscapePressedEvent += OnEscapePressed;

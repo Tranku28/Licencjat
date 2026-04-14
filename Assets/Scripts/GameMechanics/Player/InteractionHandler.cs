@@ -83,12 +83,6 @@ namespace Player
                 interactionUI.SetActive(_currentInteractable != null);
             }
         }
-
-        // TODO: Refactor it
-        public void OnGameStarted()
-        {
-            GameStarted?.Invoke();
-        }
         
         private void OnDisable()
         {

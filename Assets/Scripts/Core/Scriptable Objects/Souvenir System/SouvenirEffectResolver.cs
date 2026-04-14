@@ -1,7 +1,5 @@
 using System;
-using Core;
 using Core.Save_System;
-using UnityEngine;
 
 namespace Core.Scriptable_Objects.Souvenirs
 {

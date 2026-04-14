@@ -14,6 +14,7 @@ public class Souvenir : MonoBehaviour, IInteractable
     [SerializeField] private SouvenirData souvenirData;
     private List<SouvenirEffect> _effects;
     private SouvenirEffectResolver _effectResolver;
+    public List<SouvenirEffect> Effects => _effects; 
     private Button _useButton;
     public int ID { get; private set; }
 
@@ -27,10 +28,8 @@ public class Souvenir : MonoBehaviour, IInteractable
         _effectResolver = new();
     }
 
-    public void Init(SouvenirEffectResolver resolver, Button useButton, List<SouvenirEffect> effects, int id)
+    public void Init(SouvenirEffectResolver resolver, List<SouvenirEffect> effects, int id)
     {
-        _useButton = useButton;
-        _useButton.onClick.AddListener(ApplyEffects);
         _effectResolver = resolver;
         _effects = effects;
         ID = id;
@@ -46,7 +45,7 @@ public class Souvenir : MonoBehaviour, IInteractable
         OnSouvenirInteracted?.Invoke(souvenirData);
     }
 
-    private void ApplyEffects()
+    public void ApplyEffects()
     {
         bool destroy = false;
 
@@ -56,6 +55,7 @@ public class Souvenir : MonoBehaviour, IInteractable
 
             if (effect.singleUse)
             {
+                Debug.Log("Resolving: " + effect);
                 destroy = true;
                 AudioManager.Instance.PlayOneShot(effect.useSound, transform.position);
             }
@@ -69,7 +69,5 @@ public class Souvenir : MonoBehaviour, IInteractable
             OnSouvenirused?.Invoke(this);
             Destroy(gameObject);
         }
-
-        _useButton.onClick.RemoveListener(ApplyEffects);
     }
 }

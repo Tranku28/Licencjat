@@ -5,10 +5,9 @@ using UnityEngine;
 
 public class HarmonyIndicator : MonoBehaviour, ISaveElement, IInteractable
 {
-    //TODO: deserialize
-    [SerializeField] private int _harmonyStatus = 100;
-    [SerializeField] private Transform _topEndpoint, _bottomEndpoint;
-    [SerializeField] private Transform _pointerTransform;
+    private int _harmonyStatus = 100;
+    [SerializeField] private Transform topEndpoint, bottomEndpoint;
+    [SerializeField] private Transform pointerTransform;
     private const int TOTAL_STEPS = 100;
     private float _bottomYPosition;
     private float _distanceStep;
@@ -20,8 +19,8 @@ public class HarmonyIndicator : MonoBehaviour, ISaveElement, IInteractable
     {
         (this as ISaveElement).Register(this);
 
-        _distanceStep = Vector3.Distance(_topEndpoint.position, _bottomEndpoint.position) / TOTAL_STEPS;
-        _bottomYPosition = _bottomEndpoint.position.y;
+        _distanceStep = Vector3.Distance(topEndpoint.position, bottomEndpoint.position) / TOTAL_STEPS;
+        _bottomYPosition = bottomEndpoint.position.y;
     }
 
     private void Start()
@@ -41,7 +40,7 @@ public class HarmonyIndicator : MonoBehaviour, ISaveElement, IInteractable
     private void UpdateHarmonyPointerPosition(int value)
     {
         float yPos = _bottomYPosition + _distanceStep * value;
-        _pointerTransform.transform.position = new Vector3(_pointerTransform.position.x, yPos, _pointerTransform.position.z);
+        pointerTransform.transform.position = new Vector3(pointerTransform.position.x, yPos, pointerTransform.position.z);
     }
 
     public void LoadSave(GameSaveData gameSaveData)
@@ -60,7 +59,7 @@ public class HarmonyIndicator : MonoBehaviour, ISaveElement, IInteractable
 
     public void Interact()
     {
-        //TODO: Future interact mechanics
+        
     }
 
     public string GetName()

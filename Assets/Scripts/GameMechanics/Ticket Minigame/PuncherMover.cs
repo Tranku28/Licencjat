@@ -2,7 +2,6 @@ using GameMechanics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-//TODO: fix orientation
 public class PuncherMover : MonoBehaviour
 {
     [SerializeField] private new Camera camera;

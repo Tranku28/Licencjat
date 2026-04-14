@@ -51,7 +51,6 @@ namespace GameMechanics.UI
 
         private List<int> _souvenirsReceived = new();
 
-        //TODO: Replace with EventHandler
         public static Action<int> OnHarmonyDecreased;
         public static Action<int> OnSouvenirReceived;
         public static EventHandler<DialogueEndEventArgs> OnDialogueQuitEvent;
@@ -68,7 +67,6 @@ namespace GameMechanics.UI
         private bool _passengerDissapear;
         public bool CanCloseDialogueWindow => _ticketScanned || _canQuitDialogue;
 
-        //TODO: To refactor
         private int _harmonyChange;
         private string _brokenRule;
 
@@ -391,8 +389,6 @@ namespace GameMechanics.UI
         
         private async Awaitable AwaitableDialogueQuit()
         {
-            //TODO: refine save system logic
-
             if (!_passengerDissapear) return;
 
             await blinkPanelUI.ClosePlayerEyes();
