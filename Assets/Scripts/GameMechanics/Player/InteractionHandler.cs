@@ -26,8 +26,6 @@ namespace Player
         private Awaitable _checkForInteractable;
         
         private GameStateMachine _gameManager;
-        
-        public event Action GameStarted;
 
         private void Awake()
         {

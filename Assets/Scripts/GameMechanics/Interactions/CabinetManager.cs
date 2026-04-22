@@ -6,6 +6,7 @@ using GameMechanics.UI;
 using System;
 using UnityEngine.UI;
 using System.Linq;
+using Core;
 
 namespace GameMechanics.Interactions
 {
@@ -28,6 +29,7 @@ namespace GameMechanics.Interactions
 
             DialogueManager.OnSouvenirReceived += CacheSouvenirId;
             Souvenir.OnSouvenirInteracted += CacheSouvenir;
+            GameStateMachine.OnMenuReturned += DisableSouvenirs;
 
             SpawnSouvenirs();
             SetupButton();
@@ -43,6 +45,19 @@ namespace GameMechanics.Interactions
             DialogueManager.OnSouvenirReceived -= CacheSouvenirId;
             Souvenir.OnSouvenirInteracted -= CacheSouvenir;
             useButton.onClick.RemoveListener(UseSouvenir);
+
+            foreach(Souvenir souvenir in _souvenirs)
+                souvenir.OnSouvenirUsed -= OnUseDeleteSouvenir;
+        }
+
+        private void DisableSouvenirs()
+        {
+            if (_souvenirs.Count == 0) return;
+
+            foreach(Souvenir souvenir in _souvenirs)
+            {
+                souvenir.gameObject.SetActive(false);
+            }
         }
 
         private void UseSouvenir()
@@ -58,12 +73,8 @@ namespace GameMechanics.Interactions
 
         private void CacheSouvenirId(int id)
         {
-            Debug.Log("Caching souvenir Id...");
             if (!souvenirIdList.Contains(id))
-            {
-                Debug.Log("Souvenir Added");
                 souvenirIdList.Add(id);
-            }
         }
 
         public void LoadSave(GameSaveData gameSaveData)
@@ -73,11 +84,9 @@ namespace GameMechanics.Interactions
 
             EnableSouvenirs(souvenirIdList);
 
-            //TODO: Rework later if needed
             ApplySouvenirPassiveEffects();
         }
 
-        //TODO: Rework later if needed
         private void ApplySouvenirPassiveEffects()
         {
             foreach (Souvenir souvenir in _souvenirs)
@@ -87,18 +96,14 @@ namespace GameMechanics.Interactions
                 foreach (SouvenirEffect effect in souvenir.Effects)
                 {
                     if (effect.passive)
-                    {
                         effect.Resolve(_souvenirEffectResolver);
-                    }
                 }
             }
         }
 
         public void SaveData(GameSaveData gameSaveData)
         {
-            gameSaveData.CollectedSouvenirIdList = souvenirIdList;
-
-            EnableSouvenirs(souvenirIdList);
+            gameSaveData.CollectedSouvenirIdList = new List<int>(souvenirIdList);
         }
         private void SpawnSouvenirs()
         {
@@ -106,7 +111,7 @@ namespace GameMechanics.Interactions
             foreach (SouvenirData souvenirData in souvenirAtlas.souvenirs)
             {
                 Souvenir newSouvenir = Instantiate(souvenirData.souvenirPrefab, souvenirPositions[position]).GetComponent<Souvenir>();
-                newSouvenir.OnSouvenirused += OnUseDeleteSouvenir;
+                newSouvenir.OnSouvenirUsed += OnUseDeleteSouvenir;
                 newSouvenir.Init(_souvenirEffectResolver, souvenirData.souvenirEffects, souvenirData.souvenirID);
                 _souvenirs.Add(newSouvenir);
 
@@ -122,7 +127,6 @@ namespace GameMechanics.Interactions
             {
                 if (IDs.Contains(souvenir.ID))
                 {
-                    Debug.Log(souvenir.name);
                     souvenir.gameObject.SetActive(true);
                     continue;
                 }
@@ -133,8 +137,10 @@ namespace GameMechanics.Interactions
 
         private void OnUseDeleteSouvenir(Souvenir souvenir)
         {
-            souvenir.OnSouvenirused -= OnUseDeleteSouvenir;
+            souvenir.OnSouvenirUsed -= OnUseDeleteSouvenir;
+        
             _souvenirs.Remove(souvenir);
+            souvenirIdList.Remove(souvenir.ID);
         }
     }
 }
