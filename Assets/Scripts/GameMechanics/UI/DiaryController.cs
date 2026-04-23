@@ -12,6 +12,7 @@ namespace GameMechanics.UI
         [SerializeField] private Button nextPageButton;
         [SerializeField] private Button prevPageButton;
         [SerializeField] private TMP_Text leftEntryField, rightEntryField;
+        [SerializeField] private TMP_Text leftPassengerName, rightPassengerName;
 
         private int _pageIndex;
 
@@ -98,12 +99,14 @@ namespace GameMechanics.UI
             }
 
             leftEntryField.text = _passengerEntries[index].GeneralEntry;
+            leftPassengerName.text = _passengerEntries[index].PassengerName;
             rightEntryField.text = _passengerEntries[index].EncounterEntry;
+            rightPassengerName.text = _passengerEntries[index].PassengerName;
         }
 
         private void AddEntry(object sender, DialogueEndEventArgs e)
         {
-            _passengerEntries.Add(new PassengerEntry(e.GeneralEntry, e.EncounterEntry, e.EntryId));
+            _passengerEntries.Add(new PassengerEntry(e.PassengerName, e.GeneralEntry, e.EncounterEntry, e.EntryId));
         }
 
         public void SaveData(GameSaveData gameSaveData)

@@ -14,6 +14,7 @@ namespace GameMechanics.UI
     //TODO: Break down class into smaller manageable pieces
     public class DialogueEndEventArgs : EventArgs
     {
+        public string PassengerName;
         public string PassengerAction;
         public string Decision;
         public int HarmonyValue;
@@ -22,8 +23,9 @@ namespace GameMechanics.UI
         public string GeneralEntry;
         public string EncounterEntry;
 
-        public DialogueEndEventArgs(string passengerAction, string decision, int harmonyValue, int entryId, string generalEntry, string encounterEntry, string ruleBroken = null)
+        public DialogueEndEventArgs(string passengerName, string passengerAction, string decision, int harmonyValue, int entryId, string generalEntry, string encounterEntry, string ruleBroken = null)
         {
+            PassengerName = passengerName;
             PassengerAction = passengerAction;
             Decision = decision;
             HarmonyValue = harmonyValue;
@@ -375,6 +377,7 @@ namespace GameMechanics.UI
             OnDialogueQuitEvent?.Invoke(
                 this,
                 new DialogueEndEventArgs(
+                    _currentPassenger.PassengerData.GetFullName(),
                     _passengerAction,
                     "approved",
                     _harmonyChange,

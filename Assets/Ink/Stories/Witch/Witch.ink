@@ -128,7 +128,7 @@ So everyone still believes in purity...
 Remember this, Conductor.
 The righteous die just as easily as liars.
 The difference is that liars are better prepared.
-~ harmony = 25
+~ harmony = -25
 ~ dissapear = true
 ~ decision = "Disapproved"
 ~ passengerAction = "Deliah was ordered to leave the train due to invalid ticket"
@@ -164,7 +164,7 @@ If I couldn’t have what I wanted, why would they get anything?
 You think sending me away restores balance?
 Balance is already broken.
 You are just choosing which cracks you prefer not to see.
-~ harmony = 25
+~ harmony = -25
 ~ dissapear = true
 ~ decision = "Disapproved"
 ~ passengerAction = "Deliah was ordered to leave the train due to invalid ticket"
@@ -194,7 +194,7 @@ So let me pass, and I will help you keep everything neat here.
 ~ speakerIndex = 0
 Journeys don't end when you say they do.
 They just stop bothering you.
-~ harmony = 25
+~ harmony = -25
 ~ dissapear = true
 ~ decision = "Disapproved"
 ~ passengerAction = "Deliah was ordered to leave the train due to invalid ticket"
@@ -208,7 +208,7 @@ I know my ways. I always knew them.
 That’s why, expect a gift from me.
 A little charm, for you, to bend more rules.
 ~ canScan = true
-~ harmony = -25
+~ harmony = 25
 ~ encounterEntry = "I let her stay. She spoke of knowledge as if it were something owned, not earned. Her hands knew poisons as well as cures, yet she called both wisdom. She believed herself clever until the very end. Perhaps that belief is what kept her standing when everyone else fell. The Train feels heavier tonight."
 ~ brokenRule = "Passenger data does not match with the ticket"
 ~ decision = "Approved"
