@@ -9,11 +9,17 @@ namespace HarmonyHandling
         [SerializeField] private float tweenTime = 0.15f;
         [SerializeField] private float pauseAtMin = 0.05f;
         [SerializeField] private float pauseAtMax = 0.3f;
-        [SerializeField] private Renderer lightbulbMaterial;
-        [SerializeField] private Color activeEmissionColor;
-        [SerializeField] private Color inactiveEmissionColor;
-        [SerializeField] private float activeEmissionIntensity;
-        [SerializeField] private float inactiveEmissionIntensity;
+
+        [SerializeField] private Renderer lightbulbRenderer;
+
+        [ColorUsage(true, true)]
+        [SerializeField] private Color activeEmissionColor = Color.yellow;
+
+        [ColorUsage(true, true)]
+        [SerializeField] private Color inactiveEmissionColor = new Color(1f, 0.5f, 0.1f);
+
+        [SerializeField] private float activeEmissionIntensity = 15f;
+        [SerializeField] private float inactiveEmissionIntensity = 0.5f;
 
         private Light _light;
         private Sequence _sequence;
@@ -21,36 +27,35 @@ namespace HarmonyHandling
         private float _initialIntensity;
         private float _lowestIntensity;
 
+        private MaterialPropertyBlock _mpb;
+
         private static readonly int EmissiveColorID = Shader.PropertyToID("_EmissiveColor");
-        private static readonly int EmissiveIntensityID = Shader.PropertyToID("_EmissiveIntensity");
 
         private const float LOWEST_INTENSITY_MODIFIER = 0.1f;
-
-        private MaterialPropertyBlock _mpb;
 
         private void Awake()
         {
             _light = GetComponent<Light>();
 
             _mpb = new MaterialPropertyBlock();
-            lightbulbMaterial.GetPropertyBlock(_mpb);
-
             _initialIntensity = _light.intensity;
             _lowestIntensity = _initialIntensity * LOWEST_INTENSITY_MODIFIER;
-        }
 
+            ApplyEmission(activeEmissionColor, activeEmissionIntensity);
+        }
 
         public Sequence PlaySingleFlicker()
         {
             _sequence?.Kill();
-        
+
             _sequence = DOTween.Sequence();
-        
+
             _sequence.Append(
                 DOTween.Sequence()
                     .Join(_light.DOIntensity(_lowestIntensity, tweenTime))
-                    .Join(DOEmissionColor(activeEmissionColor, inactiveEmissionColor, tweenTime))
-                    .Join(DOEmissionIntensity(activeEmissionIntensity, inactiveEmissionIntensity, tweenTime))
+                    .Join(DOEmission(activeEmissionColor, activeEmissionIntensity,
+                                     inactiveEmissionColor, inactiveEmissionIntensity,
+                                     tweenTime))
             );
 
             _sequence.AppendInterval(pauseAtMin);
@@ -58,58 +63,53 @@ namespace HarmonyHandling
             _sequence.Append(
                 DOTween.Sequence()
                     .Join(_light.DOIntensity(_initialIntensity, tweenTime))
-                    .Join(DOEmissionColor(inactiveEmissionColor, activeEmissionColor, tweenTime))
-                    .Join(DOEmissionIntensity(inactiveEmissionIntensity, activeEmissionIntensity, tweenTime))
+                    .Join(DOEmission(inactiveEmissionColor, inactiveEmissionIntensity,
+                                     activeEmissionColor, activeEmissionIntensity,
+                                     tweenTime))
             );
-        
+
             _sequence.AppendInterval(pauseAtMax);
-        
+
             return _sequence;
         }
 
-        private Tween DOEmissionColor(Color from, Color to, float duration)
+        private Tween DOEmission(Color fromColor, float fromIntensity, Color toColor, float toIntensity, float duration)
         {
-            Color c = from;
+            float t = 0f;
 
-            return DOTween.To(
-                () => c,
-                v =>
-                {
-                    c = v;
-                    _mpb.SetColor(EmissiveColorID, c);
-                    lightbulbMaterial.SetPropertyBlock(_mpb);
-                },
-                to,
-                duration
-            );
+            return DOTween.To(() => t, value =>
+            {
+                t = value;
+
+                Color color = Color.Lerp(fromColor, toColor, t);
+                float intensity = Mathf.Lerp(fromIntensity, toIntensity, t);
+
+                ApplyEmission(color, intensity);
+
+            }, 1f, duration);
         }
 
-        private Tween DOEmissionIntensity(float from, float to, float duration)
+        private void ApplyEmission(Color baseColor, float intensity)
         {
-            float i = from;
+            Color finalEmission = baseColor * intensity;
 
-            return DOTween.To(
-                () => i,
-                v =>
-                {
-                    i = v;
-                    _mpb.SetFloat(EmissiveIntensityID, i);
-                    lightbulbMaterial.SetPropertyBlock(_mpb);
-                },
-                to,
-                duration
-            );
+            lightbulbRenderer.GetPropertyBlock(_mpb);
+            _mpb.SetColor(EmissiveColorID, finalEmission);
+            lightbulbRenderer.SetPropertyBlock(_mpb);
         }
 
         public void StopFlicker()
         {
             _sequence?.Kill();
             _light.intensity = _initialIntensity;
+            ApplyEmission(activeEmissionColor, activeEmissionIntensity);
         }
 
         private void OnDisable()
         {
             _sequence?.Kill();
+            _light.intensity = _initialIntensity;
+            ApplyEmission(activeEmissionColor, activeEmissionIntensity);
         }
     }
 }

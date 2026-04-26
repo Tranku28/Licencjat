@@ -256,10 +256,10 @@ MonoBehaviour:
   tweenTime: 0.75
   pauseAtMin: 0.25
   pauseAtMax: 0.3
-  lightbulbMaterial: {fileID: 3689889251975640510}
+  lightbulbRenderer: {fileID: 3689889251975640510}
   activeEmissionColor: {r: 1, g: 0.79607844, b: 0, a: 1}
   inactiveEmissionColor: {r: 0.19215687, g: 0.15294118, b: 0.011764706, a: 1}
-  activeEmissionIntensity: 15
+  activeEmissionIntensity: 4
   inactiveEmissionIntensity: 0.5
 --- !u!1 &2293897660680742912
 GameObject:
