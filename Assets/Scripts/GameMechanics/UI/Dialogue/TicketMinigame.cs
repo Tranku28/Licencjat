@@ -13,7 +13,9 @@ namespace GameMechanics
 {
     public class TicketMinigame : UIElement, IPointerClickHandler, IPointerMoveHandler
     {
-        [SerializeField] private Image holeImage;
+        [SerializeField] private Image ticketBackgroundImage;
+        [SerializeField] private Material holeMaterial;
+        private Material _defaultMaterial;
         [SerializeField] private GameObject visual;
 
         [SerializeField] private TMP_Text passengerFullNameText;
@@ -24,8 +26,6 @@ namespace GameMechanics
         [SerializeField] private TMP_Text ticketNumberText;
         [SerializeField] private Image passengerPortrait;
         [SerializeField] private PuncherMover puncher;
-
-        private List<Image> holesList = new();
 
         public event Action OnTicketScanned;
         
@@ -56,6 +56,9 @@ namespace GameMechanics
         {
             if (Camera.main == null) throw new Exception("Camera not found");
             _camera = Camera.main;
+
+            _defaultMaterial = new Material(ticketBackgroundImage.material);
+            ticketBackgroundImage.material = _defaultMaterial;
         }
 
         public void SetupTicketUI(PassengerData data)
@@ -76,14 +79,7 @@ namespace GameMechanics
 
             _canScan = false;
 
-            if (holesList.Count == 0) return;
-
-            foreach (Image hole in holesList)
-            {
-                Destroy(hole.gameObject);
-            }
-
-            holesList.Clear();
+            ticketBackgroundImage.material = _defaultMaterial;
         }
 
         public void ShowUI() => visual.SetActive(!visual.activeSelf);
@@ -142,26 +138,36 @@ namespace GameMechanics
         private void MakeHole()
         {
             OnTicketScanned?.Invoke();
-            
+
             AudioManager.Instance.PlayOneShot(FMODEvents.Instance.puncherSound, transform.position);
-            
+
             Vector2 cursorPos = Mouse.current.position.ReadValue();
-            
+
+            RectTransform rectTransform = visual.transform as RectTransform;
+
             if (RectTransformUtility.ScreenPointToLocalPointInRectangle(
-                    visual.transform as RectTransform,
+                    rectTransform,
                     cursorPos,
                     Camera.main,
                     out Vector2 localPoint))
             {
-                Image hole = Instantiate(holeImage, visual.transform);
-                holesList.Add(hole);
+                Rect rect = rectTransform.rect;
+                Vector2 pivot = rectTransform.pivot;
                 
-                hole.rectTransform.anchoredPosition = localPoint;
-                hole.rectTransform.localRotation = Quaternion.identity;
-                hole.rectTransform.localScale = Vector3.one;
+                float normalizedX = (localPoint.x + rect.width * pivot.x) / rect.width;
+                float normalizedY = (localPoint.y + rect.height * pivot.y) / rect.height;
+
+                Vector2 holeUV = new(normalizedX, normalizedY);
+
+                Debug.Log($"Local: {localPoint} | UV: {holeUV}");
+
+                holeUV.x = Mathf.Clamp01(holeUV.x);
+                holeUV.y = Mathf.Clamp01(holeUV.y);
+
+                ticketBackgroundImage.material = holeMaterial;
+                ticketBackgroundImage.material.SetVector("_HoleCenter", holeUV);
             }
 
-            //TODO: Consider if scan should be made once
             _canScan = false;
         }
     }

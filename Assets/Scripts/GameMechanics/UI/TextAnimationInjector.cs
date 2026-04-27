@@ -1,9 +1,11 @@
 using System;
+using UnityEngine;
+using Random = System.Random;
 using System.Text;
 
 public static class TextAnimationInjector
 {
-    public static string InjectAnimatedLinks(
+    public static string InjectAnimatedTexts(
         string text,
         string linkTag,
         int minGap,
@@ -16,21 +18,29 @@ public static class TextAnimationInjector
         if (string.IsNullOrEmpty(text))
             return text;
 
-        var random = seed.HasValue ? new Random(seed.Value) : new Random();
-        var sb = new StringBuilder(text.Length * 2);
+        if (minGap < 0 || maxGap < minGap)
+            Debug.Log("Nieprawidłowy zakres gap.");
 
-        int nextInsertAt = random.Next(minGap, maxGap);
+        if (minLength <= 0 || maxLength < minLength)
+            Debug.Log("Nieprawidłowy zakres length.");
+
+        Random random = seed.HasValue ? new(seed.Value) : new();
+        StringBuilder sb = new(text.Length * 2);
+
+        int nextInsertAt = random.Next(minGap, maxGap + 1);
+        Debug.Log(nextInsertAt);
         bool insideExistingTag = false;
 
-        for (int i = 0; i < text.Length; i++)
+        for (int i = 0; i < text.Length;)
         {
-            // wykrywanie istniejących tagów (TMP, rich text)
+            // wykrywanie istniejących tagów
             if (text[i] == '<')
                 insideExistingTag = true;
 
             if (insideExistingTag)
             {
                 sb.Append(text[i]);
+
                 if (text[i] == '>')
                     insideExistingTag = false;
 
@@ -41,7 +51,7 @@ public static class TextAnimationInjector
             // moment rozpoczęcia wstawki
             if (i >= nextInsertAt)
             {
-                int length = random.Next(minLength, maxLength);
+                int length = random.Next(minLength, maxLength + 1);
                 int end = Math.Min(i + length, text.Length);
 
                 sb.Append("<link=").Append(linkTag).Append(">");
@@ -52,7 +62,7 @@ public static class TextAnimationInjector
                 sb.Append("</link>");
 
                 i = end;
-                nextInsertAt = i + random.Next(minGap, maxGap);
+                nextInsertAt = i + random.Next(minGap, maxGap + 1);
                 continue;
             }
 

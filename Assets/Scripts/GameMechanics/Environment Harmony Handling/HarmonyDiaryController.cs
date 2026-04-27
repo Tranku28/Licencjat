@@ -15,7 +15,7 @@ namespace GameMechanics.UI
         [SerializeField] private TMP_Text leftEntryField, rightEntryField;
         [SerializeField] private TMP_Text leftPassengerNameField, rightPassengerNameField;
         [SerializeField] private DiaryHarmonyLevel[] harmonyLevels;
-        private DiaryHarmonyLevel _selectedDiaryHarmonyLevel;
+        private DiaryHarmonyLevel _selectedHarmonyLevel;
 
         private int _pageIndex;
 
@@ -101,40 +101,54 @@ namespace GameMechanics.UI
                 return;
             }
 
-            string leftEntryResult = TextAnimationInjector.InjectAnimatedLinks(
-                text: _passengerEntries[index].GeneralEntry,
-                linkTag: _selectedDiaryHarmonyLevel.LinkTag,
-                minGap: _selectedDiaryHarmonyLevel.MinGap,
-                maxGap: _selectedDiaryHarmonyLevel.MaxGap,
-                minLength: _selectedDiaryHarmonyLevel.MinLength,
-                maxLength: _selectedDiaryHarmonyLevel.MaxLength,
-                seed: _selectedDiaryHarmonyLevel.Seed
+            if (_selectedHarmonyLevel is null)
+            {    
+                leftEntryField.text = _passengerEntries[index].GeneralEntry;
+                leftPassengerNameField.text = _passengerEntries[index].PassengerName;
+                rightEntryField.text = _passengerEntries[index].EncounterEntry;
+                rightPassengerNameField.text = _passengerEntries[index].PassengerName;
+
+                return;
+            }
+
+            string generalEntry = TextAnimationInjector.InjectAnimatedTexts
+            (
+                _passengerEntries[index].GeneralEntry,
+                _selectedHarmonyLevel.LinkTag,
+                _selectedHarmonyLevel.MinGap,
+                _selectedHarmonyLevel.MaxGap,
+                _selectedHarmonyLevel.MinLength,
+                _selectedHarmonyLevel.MaxLength,
+                _selectedHarmonyLevel.Seed
             );
 
-            string rightEntryResult = TextAnimationInjector.InjectAnimatedLinks(
-                text: _passengerEntries[index].EncounterEntry,
-                linkTag: _selectedDiaryHarmonyLevel.LinkTag,
-                minGap: _selectedDiaryHarmonyLevel.MinGap,
-                maxGap: _selectedDiaryHarmonyLevel.MaxGap,
-                minLength: _selectedDiaryHarmonyLevel.MinLength,
-                maxLength: _selectedDiaryHarmonyLevel.MaxLength,
-                seed: _selectedDiaryHarmonyLevel.Seed
+            string encounterEntry = TextAnimationInjector.InjectAnimatedTexts
+            (
+                _passengerEntries[index].EncounterEntry,
+                _selectedHarmonyLevel.LinkTag,
+                _selectedHarmonyLevel.MinGap,
+                _selectedHarmonyLevel.MaxGap,
+                _selectedHarmonyLevel.MinLength,
+                _selectedHarmonyLevel.MaxLength,
+                _selectedHarmonyLevel.Seed
             );
 
-            leftEntryField.text = leftEntryResult;
+            leftEntryField.text = generalEntry;
             leftPassengerNameField.text = _passengerEntries[index].PassengerName;
-            rightEntryField.text = rightEntryResult;
+            rightEntryField.text = encounterEntry;
             rightPassengerNameField.text = _passengerEntries[index].PassengerName;
         }
 
         private void CalculateHarmonyLevelIndex(int harmonyValue)
         {
+            if (harmonyValue == 100)
+                _selectedHarmonyLevel = null;
             if (harmonyValue >= 75 && harmonyValue < 100)
-                _selectedDiaryHarmonyLevel = harmonyLevels[0];
+                _selectedHarmonyLevel = harmonyLevels[0];
             if (harmonyValue >= 50 && harmonyValue < 75)
-                _selectedDiaryHarmonyLevel = harmonyLevels[1];
+                _selectedHarmonyLevel = harmonyLevels[1];
             if (harmonyValue >= 25 && harmonyValue < 50)
-                _selectedDiaryHarmonyLevel = harmonyLevels[2];
+                _selectedHarmonyLevel = harmonyLevels[2];
         }
 
         private void AddEntry(object sender, DialogueEndEventArgs e)

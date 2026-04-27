@@ -3549,7 +3549,7 @@ MonoBehaviour:
   m_text: 3
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2a7380eec0ad4884d9797271406573ef, type: 2}
-  m_sharedMaterial: {fileID: -7671027254856574446, guid: 2a7380eec0ad4884d9797271406573ef, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: f205e9db627b4204ebf44eddebe614e5, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -11599,14 +11599,13 @@ GameObject:
   - component: {fileID: 926664214}
   - component: {fileID: 926664217}
   - component: {fileID: 926664216}
-  - component: {fileID: 926664215}
   m_Layer: 5
   m_Name: TicketBackground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &926664214
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11633,19 +11632,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 32}
   m_SizeDelta: {x: 512, y: 256}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &926664215
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 926664213}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31a19414c41e5ae4aae2af33fee712f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ShowMaskGraphic: 1
 --- !u!114 &926664216
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11658,7 +11644,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: fc563bc32861d1b41913b3b3c64c97a8, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -26253,7 +26239,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UIVisual: {fileID: 926664213}
-  holeImage: {fileID: 2721038342944448530, guid: 3a2fcf05a5966bc4f9543349970ad72a, type: 3}
+  ticketBackgroundImage: {fileID: 926664216}
+  holeMaterial: {fileID: 2100000, guid: fc563bc32861d1b41913b3b3c64c97a8, type: 2}
   visual: {fileID: 926664213}
   passengerFullNameText: {fileID: 1431662794}
   passengerDestinationText: {fileID: 644104991}
