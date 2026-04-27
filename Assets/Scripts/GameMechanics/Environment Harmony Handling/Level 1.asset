@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Level 1
   m_EditorClassIdentifier: 
   WorksOnHarmonyLevel: 75
-  LinkTag: Shake
+  LinkTag: UpAndDown
   MinGap: 20
   MaxGap: 50
   MinLength: 5
   MaxLength: 15
-  Seed: -5
+  Seed: 0

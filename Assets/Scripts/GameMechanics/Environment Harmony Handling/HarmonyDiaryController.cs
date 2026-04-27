@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using GameMechanics.DayHandling;
 using HarmonyHandling;
@@ -119,7 +118,7 @@ namespace GameMechanics.UI
                 _selectedHarmonyLevel.MaxGap,
                 _selectedHarmonyLevel.MinLength,
                 _selectedHarmonyLevel.MaxLength,
-                _selectedHarmonyLevel.Seed
+                Random.Range(0, 20)
             );
 
             string encounterEntry = TextAnimationInjector.InjectAnimatedTexts
@@ -130,7 +129,7 @@ namespace GameMechanics.UI
                 _selectedHarmonyLevel.MaxGap,
                 _selectedHarmonyLevel.MinLength,
                 _selectedHarmonyLevel.MaxLength,
-                _selectedHarmonyLevel.Seed
+                Random.Range(0, 20)
             );
 
             leftEntryField.text = generalEntry;

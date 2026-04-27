@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Level 3
   m_EditorClassIdentifier: 
   WorksOnHarmonyLevel: 75
-  LinkTag: Move+Move1+Move2
+  LinkTag: Shake
   MinGap: 10
   MaxGap: 30
   MinLength: 10
