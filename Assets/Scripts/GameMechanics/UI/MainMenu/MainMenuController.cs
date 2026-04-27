@@ -19,7 +19,7 @@ namespace UI.MainMenu
         [SerializeField] private StartGameBoardHandler startBoard;
         [SerializeField] private SettingsWatchHandler settingsWatch;
         [SerializeField] private CreditsScrollHandler creditsScroll;
-        [SerializeField] private QuitGameCandleHandler candleQuit;
+        [SerializeField] private QuitGameCandleHandler candleQuitHandler;
         
         [Header("Menu Panels")]
         [SerializeField] private SettingsPanelController settingsPanel;
@@ -69,7 +69,7 @@ namespace UI.MainMenu
         private void DisableMenu()
         {
             settingsWatch.enabled = false;
-            candleQuit.enabled = false;
+            candleQuitHandler.enabled = false;
             creditsScroll.enabled = false;
             startBoard.enabled = false;
         }
@@ -77,7 +77,7 @@ namespace UI.MainMenu
         private void EnableMenu()
         {
             settingsWatch.enabled = true;
-            candleQuit.enabled = true;
+            candleQuitHandler.enabled = true;
             creditsScroll.enabled = true;
             startBoard.enabled = true;
             //TODO: Prettify it
