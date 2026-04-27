@@ -2272,6 +2272,7 @@ GameObject:
   - component: {fileID: 201400719}
   - component: {fileID: 201400718}
   - component: {fileID: 201400717}
+  - component: {fileID: 201400720}
   m_Layer: 5
   m_Name: Right Entry
   m_TagString: Untagged
@@ -2397,6 +2398,34 @@ RectTransform:
   m_AnchoredPosition: {x: 230, y: -11}
   m_SizeDelta: {x: 380, y: -278}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &201400720
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 201400716}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9840f87219df84505803024c796e739d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: {fileID: 201400717}
+  usePreset: 0
+  preset: {fileID: 0}
+  tagEffects:
+  - triggerWhen: 0
+    effect: {fileID: 11400000, guid: a3ddd3d4c4981d146b2d831d183eb2cc, type: 2}
+    onEffectCompleted:
+      m_PersistentCalls:
+        m_Calls: []
+  - triggerWhen: 0
+    effect: {fileID: 11400000, guid: 655311f854db1114dbb697533051222b, type: 2}
+    onEffectCompleted:
+      m_PersistentCalls:
+        m_Calls: []
+  globalEffects: []
+  updatesPerSecond: 60
 --- !u!1 &210476525
 GameObject:
   m_ObjectHideFlags: 0
@@ -3092,6 +3121,7 @@ GameObject:
   - component: {fileID: 255082581}
   - component: {fileID: 255082580}
   - component: {fileID: 255082579}
+  - component: {fileID: 255082582}
   m_Layer: 5
   m_Name: Left Entry
   m_TagString: Untagged
@@ -3219,6 +3249,34 @@ RectTransform:
   m_AnchoredPosition: {x: -230, y: -11}
   m_SizeDelta: {x: 380, y: -278}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &255082582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 255082578}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9840f87219df84505803024c796e739d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: {fileID: 255082579}
+  usePreset: 0
+  preset: {fileID: 0}
+  tagEffects:
+  - triggerWhen: 0
+    effect: {fileID: 11400000, guid: a3ddd3d4c4981d146b2d831d183eb2cc, type: 2}
+    onEffectCompleted:
+      m_PersistentCalls:
+        m_Calls: []
+  - triggerWhen: 0
+    effect: {fileID: 11400000, guid: 655311f854db1114dbb697533051222b, type: 2}
+    onEffectCompleted:
+      m_PersistentCalls:
+        m_Calls: []
+  globalEffects: []
+  updatesPerSecond: 60
 --- !u!1 &260539756
 GameObject:
   m_ObjectHideFlags: 0
@@ -9909,8 +9967,12 @@ MonoBehaviour:
   prevPageButton: {fileID: 923174426}
   leftEntryField: {fileID: 255082579}
   rightEntryField: {fileID: 201400717}
-  leftPassengerName: {fileID: 1765092074}
-  rightPassengerName: {fileID: 1749161995}
+  leftPassengerNameField: {fileID: 1765092074}
+  rightPassengerNameField: {fileID: 1749161995}
+  harmonyLevels:
+  - {fileID: 11400000, guid: 96d4cddd55192c14782e86516cb16fa4, type: 2}
+  - {fileID: 11400000, guid: ba02c871dfb63fa41a225ef085950cf6, type: 2}
+  - {fileID: 11400000, guid: 24d828ab46746cb4198bbd634f9bc5e9, type: 2}
 --- !u!1 &858982032
 GameObject:
   m_ObjectHideFlags: 0
@@ -18697,7 +18759,7 @@ Camera:
     height: 1
   near clip plane: 0.1
   far clip plane: 5000
-  field of view: 60.000004
+  field of view: 60
   orthographic: 0
   orthographic size: 10
   m_Depth: -1
@@ -18724,7 +18786,7 @@ Transform:
   m_GameObject: {fileID: 1477367495}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.008024162, z: 0, w: 0.9999679}
-  m_LocalPosition: {x: 6.920785, y: 1.5, z: 1.2902039}
+  m_LocalPosition: {x: 6.3024073, y: 1.7, z: 0.1499807}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
