@@ -1,11 +1,8 @@
-using System;
 using Core;
 using GameMechanics.Player;
 using GameMechanics.UI;
 using GameMechanics.UI.MainMenu;
-using Player;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace UI.MainMenu
 {
