@@ -15,21 +15,34 @@ MonoBehaviour:
   passengerVariants: []
   <passengerPortrait>k__BackingField: {fileID: 0}
   <prefab>k__BackingField: {fileID: 4441011520651433598, guid: 10f74a79320e2fb45b5ef9d5d694f6da, type: 3}
-  <passengerName>k__BackingField: 
-  <passengerSurname>k__BackingField: 
+  <passengerName>k__BackingField: Kaelen
+  <passengerSurname>k__BackingField: Ashenwing
   <dayAppears>k__BackingField: 4
   <dialogueVariants>k__BackingField:
   - {fileID: 4900000, guid: 058157ec754bd2347b8625bc5f1fd3a5, type: 3}
   <car>k__BackingField: 1
   <seat>k__BackingField: 32
-  <destination>k__BackingField: 
+  <destination>k__BackingField: Unknown
   <validUntil>k__BackingField:
     <Day>k__BackingField: 14
     <Month>k__BackingField: 4
     <Year>k__BackingField: 1273
-    <Hour>k__BackingField: 0
-    <Minute>k__BackingField: 0
-  <species>k__BackingField: 
-  <causeOfDeath>k__BackingField: 
-  <biography>k__BackingField: 
-  <souvenirData>k__BackingField: {fileID: 0}
+    <Hour>k__BackingField: 8
+    <Minute>k__BackingField: 13
+  <species>k__BackingField: Human
+  <causeOfDeath>k__BackingField: Beheaded
+  <biography>k__BackingField: 'A renowned dragon trainer of the royal stables. He
+    raised beasts from
+
+    hatchlings, training them with brutal force and shaping
+    them into weapons for war. Despite
+
+    his reputation, he formed a unique bond
+    with one dragon. When the king ordered the
+
+    creature to be sent to the front
+    lines, Kaelen set it free. For this act of treason against the
+
+    crown, he
+    was publicly executed, never revealing where the dragon had gone.'
+  <souvenirData>k__BackingField: {fileID: 11400000, guid: aaf3e3afd7a514d49b41f75ca75aa6c1, type: 2}

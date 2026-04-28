@@ -6304,6 +6304,13 @@ MonoBehaviour:
       Data3: -1702075991
       Data4: 813172815
     Path: event:/Music & Ambient/Train Ambient
+  <music>k__BackingField:
+    Guid:
+      Data1: 1993678311
+      Data2: 1220380274
+      Data3: 443766937
+      Data4: -969983071
+    Path: event:/Music & Ambient/Train Music
 --- !u!4 &490025816
 Transform:
   m_ObjectHideFlags: 0

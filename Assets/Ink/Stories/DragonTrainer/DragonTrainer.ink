@@ -59,7 +59,7 @@ Just... a friend.
     ~ speakerIndex = 0
     Your story doesn’t match. They weren’t friends. None of them. You trained them in harsh conditions, only to send them to die in the war.
         -> 2_1
-    * [Your ticket is valid. You can pass now. And good luck in finding your ‘friend’.]
+    * [Your ticket is valid. You can pass now. And good luck in finding your ‘friend’. (let him pass)]
     ~ speakerIndex = 0
     Your ticket is valid. You can pass now. And good luck in finding your ‘friend’.
         -> 2_2
@@ -78,7 +78,7 @@ They were... our friends.
     ~ speakerIndex = 0
     Your story doesn’t match. They weren’t friends. None of them. You trained them in harsh conditions, only to send them to die in the war.
         -> 2_1
-    * [Your ticket is valid. You can pass now. And good luck in finding your ‘friend’.]
+    * [Your ticket is valid. You can pass now. And good luck in finding your ‘friend’. (let him pass)]
     ~ speakerIndex = 0
     Your ticket is valid. You can pass now. And good luck in finding your ‘friend’.
         -> 2_2
@@ -110,6 +110,7 @@ Probably more than he ever should have.
 So that’s how it ends? No questions? Nothing?
 After everything that had happened? I thought-...
 Nevermind.
+~ encounterEntry = "I let him pass.\\nThere was something in his voice when he spoke of the dragon. Not pride. Not even redemption.\\nHope.\\nA fragile, desperate hope that somewhere beyond this journey, something he once set free still lives."
     -> END
 
 === 2_3 ===
@@ -141,8 +142,9 @@ He ordered all of the dragons to the war. And I knew what that meant.
         ~ speakerIndex = 0
         Dragons don’t return from battle.
         -> 4_1
-    * [Your ticket is valid. You can go now. Nothing is keeping you here anymore.]
+    * [Your ticket is valid. You can go now. Nothing is keeping you here anymore. (let him pass)]
         ~ speakerIndex = 0
+        Your ticket is valid. You can go now. Nothing is keeping you here anymore.
         -> 4_2
 
 === 3_2 ===
@@ -171,7 +173,7 @@ I choosed them. Over everything. Over the crown. Over my own life.
         You set them free. And you paid for it.
             -> 5_1
             
-    * [... I can hear the remorse in your voice. You may pass now. Try to find your ‘friend’.]
+    * [... I can hear the remorse in your voice. You may pass now. Try to find your ‘friend’. (let him pass)]
         ~ speakerIndex = 0
     ... I can hear the remorse in your voice. You may pass now. Try to find your ‘friend’.
             -> 5_2
@@ -181,6 +183,7 @@ I choosed them. Over everything. Over the crown. Over my own life.
 Everything is keeping me here.
 ...
 But if this is it...
+~ encounterEntry = "I did not let him continue.\\n\\nHis story was filled with sorrow, yes. But also with choices. Too many of them made too late.\\n\\nHe did not argue. He only nodded, as if he had been expecting this all along.\\n\\nBefore he vanished, he said something I cannot forget. That sometimes duty is nothing morethan fear wearing a uniform.\\n\\nSince then, I find myself hesitating more often. Because I begin to wonder...\\nHow many of my decisions are truly mine."
     -> END
     
 === 5_1 ===
@@ -192,7 +195,7 @@ Publicly. They needed to make an example.
         ~ speakerIndex = 0
         Do you regret it?
             -> 6_1
-    * [... I can hear the remorse in your voice. You may pass now. Try to find your ‘friend’.]
+    * [... I can hear the remorse in your voice. You may pass now. Try to find your ‘friend’. (let him pass)]
         ~ speakerIndex = 0
         ... I can hear the remorse in your voice. You may pass now. Try to find your ‘friend’.
             -> 6_2
@@ -202,6 +205,7 @@ Publicly. They needed to make an example.
 ~ speakerIndex = 1
 I... I regret it.
 I regret not seeing it sooner. I regret all the pain I caused them...
+~ encounterEntry = "I let him pass.\\nThere was something in his voice when he spoke of the dragon. Not pride. Not even redemption.\\nHope.\\nA fragile, desperate hope that somewhere beyond this journey, something he once set free still lives."
     -> END
     
     
@@ -210,12 +214,12 @@ I regret not seeing it sooner. I regret all the pain I caused them...
 Regret?
 No. Even now, I would do it again.
 
-    * [Your ticket is in order. And you do look like someone who regrets their decisions. You may proceed.]
+    * [Your ticket is in order. And you do look like someone who regrets their decisions. You may proceed. (let him pass)]
     ~ speakerIndex = 0
     Your ticket is in order. And you do look like someone who regrets their decisions. You may proceed.
         -> 7_1
         
-    * [All your life, you ordered dragons to death. You treated them horribly. I don’t feel that you changed.]
+    * [All your life, you ordered dragons to death. You treated them horribly. I don’t feel that you changed. (refuse)]
     ~ speakerIndex = 0
     All your life, you ordered dragons to death. You treated them horribly. I don’t feel that you changed.
         -> 7_2
@@ -224,6 +228,8 @@ No. Even now, I would do it again.
 ~ speakerIndex = 1
 Thank you...
 For seeing the real me.
+~ encounterEntry = "I let him pass.\\nThere was something in his voice when he spoke of the dragon. Not pride. Not even redemption.\\nHope.\\nA fragile, desperate hope that somewhere beyond this journey, something he once set free still lives."
+~ gift = true
     -> END
 
 
@@ -232,6 +238,8 @@ For seeing the real me.
 If there is something beyond this..
 I hope it is a sky wide enough for every dragon.
 Thank you.
+~ encounterEntry = "I let him pass.\\nThere was something in his voice when he spoke of the dragon. Not pride. Not even redemption.\\nHope.\\nA fragile, desperate hope that somewhere beyond this journey, something he once set free still lives."
+~ gift = true
     -> END
 
 
@@ -244,6 +252,6 @@ I guess it is only fair for you to decide my fate.
 ...
 Just remember, Conductor. Sometimes what we call duty, is nothing more than fear wearing
 a uniform.
-
-~ generalEntry = "I did not let him continue.\\n\\nHis story was filled with sorrow, yes. But also with choices. Too many of them made too late.\\n\\nHe did not argue. He only nodded, as if he had been expecting this all along.\\n\\nBefore he vanished, he said something I cannot forget. That sometimes duty is nothing morethan fear wearing a uniform.\\n\\nSince then, I find myself hesitating more often. Because I begin to wonder...\\nHow many of my decisions are truly mine."
+~ encounterEntry = "I did not let him continue.\\n\\nHis story was filled with sorrow, yes. But also with choices. Too many of them made too late.\\n\\nHe did not argue. He only nodded, as if he had been expecting this all along.\\n\\nBefore he vanished, he said something I cannot forget. That sometimes duty is nothing morethan fear wearing a uniform.\\n\\nSince then, I find myself hesitating more often. Because I begin to wonder...\\nHow many of my decisions are truly mine."
+~ harmony = -25
     -> END

@@ -40,8 +40,9 @@ public class FMODEvents : MonoBehaviour
     [field: Header("Rewind")]
     [field: SerializeField] public EventReference rewind { get; set; }
 
-    [Header("====== Non SFX ======")]
+    [field: Header("====== Music & Ambient ======")]
     [field: SerializeField] public EventReference ambient {get; set;}
+    [field: SerializeField] public EventReference music {get; set;}
 
 
     public static FMODEvents Instance;
