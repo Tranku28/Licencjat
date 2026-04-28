@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: RevertDayEffect
   m_EditorClassIdentifier: 
   singleUse: 1
+  passive: 0
   useSound:
     Guid:
-      Data1: 902014471
-      Data2: 1089949934
-      Data3: 2071658652
-      Data4: 1861620852
-    Path: event:/SFX/Steps
+      Data1: -1072939939
+      Data2: 1336056906
+      Data3: 767095217
+      Data4: 2078322616
+    Path: event:/SFX/Rewind

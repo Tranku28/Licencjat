@@ -19,6 +19,8 @@ namespace HarmonyHandling
 
         [SerializeField] private float generalWaitTime;
         [SerializeField] private List<HarmonyLightController> harmonyLights = new();
+        private HashSet<int> _flickeringSelected = new();
+        private int _levelOneFlickersCount = 2;
         private Coroutine _mainCoroutine;
         private Coroutine _flickerCoroutine;
         private DisorderStatus _disorderStatus;
@@ -62,9 +64,18 @@ namespace HarmonyHandling
 
             if (_disorderStatus == DisorderStatus.Low)
             {
+                _flickeringSelected.Clear();
+
                 Debug.Log("Random....");
-                int flickeringIndex = Random.Range(0, harmonyLights.Count-1);
-                harmonyLights[flickeringIndex].PlaySingleFlicker();
+                for (int i=0; i < _levelOneFlickersCount; i++)
+                {
+                    int randomIndex = Random.Range(0, harmonyLights.Count-1);
+
+                    if (_flickeringSelected.Contains(randomIndex)) continue;
+
+                    harmonyLights[randomIndex].PlaySingleFlicker();
+                    _flickeringSelected.Add(randomIndex);
+                }
                 goto End;
             }
 

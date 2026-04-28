@@ -1,30 +1,41 @@
 using Core.Scriptable_Objects.Souvenirs;
-using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.Rendering;
+using DG.Tweening;
 
 public class PostProcessController : MonoBehaviour
 {
-    [SerializeField] private CinemachineVolumeSettings playerCameraVolume;
-    [SerializeField] private VolumeProfile globalVolume;
-    [SerializeField] private VolumeProfile rewindVolume;
+    [SerializeField] private Volume gameplayVolume;
+    [SerializeField] private Volume rewindVolume;
+
+    [SerializeField] private float blendDuration = 1f;
+    [SerializeField] private float pauseDuration = 1f;
+    [SerializeField] private Ease blendEase = Ease.InOutSine;
+
+    private Tween blendTween;
 
     private void Awake()
     {
-        playerCameraVolume.Profile = globalVolume;
+        gameplayVolume.weight = 1f;
+        rewindVolume.weight = 0f;
 
         SouvenirEffectResolver.OnRewind += OnRewind;
-
-        InvokeRepeating(nameof(OnRewind), 5f, 1f);
     }
 
     private void OnDestroy()
     {
         SouvenirEffectResolver.OnRewind -= OnRewind;
+        blendTween?.Kill();
     }
 
     private void OnRewind()
     {
-        playerCameraVolume.Profile = rewindVolume;
+        blendTween = DOTween.Sequence()
+        .Append(rewindVolume.DOWeight(1f, blendDuration * 0.7f))
+        .Join(gameplayVolume.DOWeight(0f, blendDuration))
+        .AppendInterval(pauseDuration)
+        .Append(rewindVolume.DOWeight(0f, 0.5f))
+        .Join(gameplayVolume.DOWeight(1f, 0.5f))
+        .SetEase(blendEase);
     }
 }
