@@ -28,7 +28,6 @@ public static class TextAnimationInjector
         StringBuilder sb = new(text.Length * 2);
 
         int nextInsertAt = random.Next(minGap, maxGap + 1);
-        Debug.Log(nextInsertAt);
         bool insideExistingTag = false;
 
         for (int i = 0; i < text.Length;)

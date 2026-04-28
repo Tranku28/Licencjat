@@ -111,6 +111,7 @@ So that’s how it ends? No questions? Nothing?
 After everything that had happened? I thought-...
 Nevermind.
 ~ encounterEntry = "I let him pass.\\nThere was something in his voice when he spoke of the dragon. Not pride. Not even redemption.\\nHope.\\nA fragile, desperate hope that somewhere beyond this journey, something he once set free still lives."
+~ passengerAction = "Kaelen was allowed to pass"
     -> END
 
 === 2_3 ===
@@ -183,7 +184,8 @@ I choosed them. Over everything. Over the crown. Over my own life.
 Everything is keeping me here.
 ...
 But if this is it...
-~ encounterEntry = "I did not let him continue.\\n\\nHis story was filled with sorrow, yes. But also with choices. Too many of them made too late.\\n\\nHe did not argue. He only nodded, as if he had been expecting this all along.\\n\\nBefore he vanished, he said something I cannot forget. That sometimes duty is nothing morethan fear wearing a uniform.\\n\\nSince then, I find myself hesitating more often. Because I begin to wonder...\\nHow many of my decisions are truly mine."
+~ encounterEntry = "I let him pass.\\nThere was something in his voice when he spoke of the dragon. Not pride. Not even redemption.\\nHope.\\nA fragile, desperate hope that somewhere beyond this journey, something he once set free still lives."
+~ passengerAction = "Kaelen was allowed to pass, despite his "
     -> END
     
 === 5_1 ===

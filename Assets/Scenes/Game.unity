@@ -521,6 +521,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1250396996}
     m_Modifications:
+    - target: {fileID: 1695941480673375643, guid: 00408af4e68ea664e86aa95e570e8fc8, type: 3}
+      propertyPath: passengerDataList.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1695941480673375643, guid: 00408af4e68ea664e86aa95e570e8fc8, type: 3}
+      propertyPath: 'passengerDataList.Array.data[3]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 80370d1719479314ea30622e73882c8f, type: 2}
     - target: {fileID: 4108453937852131713, guid: 00408af4e68ea664e86aa95e570e8fc8, type: 3}
       propertyPath: m_Name
       value: Passenger Spawner
@@ -1109,7 +1117,7 @@ MonoBehaviour:
   m_InnerSpotPercent: 0
   m_SpotIESCutoffPercent: 100
   m_LightDimmer: 1
-  m_VolumetricDimmer: 1
+  m_VolumetricDimmer: 4.3
   m_FadeDistance: 10000
   m_VolumetricFadeDistance: 10000
   m_AffectDiffuse: 1
@@ -1349,7 +1357,7 @@ MonoBehaviour:
   m_InnerSpotPercent: 0
   m_SpotIESCutoffPercent: 100
   m_LightDimmer: 1
-  m_VolumetricDimmer: 1
+  m_VolumetricDimmer: 4.3
   m_FadeDistance: 10000
   m_VolumetricFadeDistance: 10000
   m_AffectDiffuse: 1
@@ -1726,7 +1734,7 @@ MonoBehaviour:
   m_InnerSpotPercent: 0
   m_SpotIESCutoffPercent: 100
   m_LightDimmer: 1
-  m_VolumetricDimmer: 1
+  m_VolumetricDimmer: 4.3
   m_FadeDistance: 10000
   m_VolumetricFadeDistance: 10000
   m_AffectDiffuse: 1
@@ -3929,7 +3937,7 @@ MonoBehaviour:
   m_InnerSpotPercent: 0
   m_SpotIESCutoffPercent: 100
   m_LightDimmer: 1
-  m_VolumetricDimmer: 1
+  m_VolumetricDimmer: 4.3
   m_FadeDistance: 10000
   m_VolumetricFadeDistance: 10000
   m_AffectDiffuse: 1
@@ -7270,19 +7278,19 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1365707253}
+    m_TransformParent: {fileID: 1168269391}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 25845002d25f62444a7d10e0d191c817, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.5625035
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 25845002d25f62444a7d10e0d191c817, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.37317038
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 25845002d25f62444a7d10e0d191c817, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.0042275786
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 25845002d25f62444a7d10e0d191c817, type: 3}
       propertyPath: m_LocalRotation.w
@@ -7385,7 +7393,7 @@ MonoBehaviour:
   m_InnerSpotPercent: 0
   m_SpotIESCutoffPercent: 100
   m_LightDimmer: 1
-  m_VolumetricDimmer: 1
+  m_VolumetricDimmer: 4.3
   m_FadeDistance: 10000
   m_VolumetricFadeDistance: 10000
   m_AffectDiffuse: 1
@@ -10065,6 +10073,8 @@ MonoBehaviour:
   prevPageButton: {fileID: 923174426}
   leftEntryField: {fileID: 255082579}
   rightEntryField: {fileID: 201400717}
+  leftEffects: {fileID: 255082582}
+  rightEffects: {fileID: 201400720}
   leftPassengerNameField: {fileID: 1765092074}
   rightPassengerNameField: {fileID: 1749161995}
   harmonyLevels:
@@ -11502,7 +11512,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 2100000, guid: fc563bc32861d1b41913b3b3c64c97a8, type: 2}
+  m_Material: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -13240,7 +13250,7 @@ MonoBehaviour:
   m_InnerSpotPercent: 0
   m_SpotIESCutoffPercent: 100
   m_LightDimmer: 1
-  m_VolumetricDimmer: 1
+  m_VolumetricDimmer: 4.3
   m_FadeDistance: 10000
   m_VolumetricFadeDistance: 10000
   m_AffectDiffuse: 1
@@ -15182,7 +15192,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: bda8f303a7edece4a8f895dedca62c43, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 570861366}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bda8f303a7edece4a8f895dedca62c43, type: 3}
 --- !u!4 &1168269391 stripped
@@ -17429,7 +17442,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.10000038, y: 6}
+  m_AnchoredPosition: {x: -1, y: 6}
   m_SizeDelta: {x: 32, y: 24}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1344291765
@@ -17482,8 +17495,8 @@ MonoBehaviour:
   m_fontSize: 2
   m_fontSizeBase: 2
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 1
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 1.5
   m_fontSizeMax: 2.5
   m_fontStyle: 1
   m_HorizontalAlignment: 1
@@ -17681,9 +17694,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2034665477}
-  - {fileID: 1693331130}
   - {fileID: 1168269391}
-  - {fileID: 570861366}
   - {fileID: 1577609152}
   m_Father: {fileID: 1947949865}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -20130,7 +20141,7 @@ MonoBehaviour:
   m_InnerSpotPercent: 0
   m_SpotIESCutoffPercent: 100
   m_LightDimmer: 1
-  m_VolumetricDimmer: 1
+  m_VolumetricDimmer: 4.3
   m_FadeDistance: 10000
   m_VolumetricFadeDistance: 10000
   m_AffectDiffuse: 1
@@ -21520,19 +21531,19 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1365707253}
+    m_TransformParent: {fileID: 2034665477}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 705ec9905bf3df94c9daa7a68596c9af, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.5625035
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 705ec9905bf3df94c9daa7a68596c9af, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.37317038
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 705ec9905bf3df94c9daa7a68596c9af, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.004227221
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 705ec9905bf3df94c9daa7a68596c9af, type: 3}
       propertyPath: m_LocalRotation.w
@@ -25637,7 +25648,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 90570643a4bba694885ba451e655ed51, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1693331130}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 90570643a4bba694885ba451e655ed51, type: 3}
 --- !u!4 &2034665477 stripped
@@ -25817,6 +25831,22 @@ PrefabInstance:
     - target: {fileID: 1551057830962694048, guid: 70f5d5dfa02f0164abce5e2a29cd2e88, type: 3}
       propertyPath: m_Name
       value: Desk Lamp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2387728234972021597, guid: 70f5d5dfa02f0164abce5e2a29cd2e88, type: 3}
+      propertyPath: useVolumetric
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2783204415295024613, guid: 70f5d5dfa02f0164abce5e2a29cd2e88, type: 3}
+      propertyPath: useVolumetric
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5570453368658608106, guid: 70f5d5dfa02f0164abce5e2a29cd2e88, type: 3}
+      propertyPath: useVolumetric
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8692292048531514564, guid: 70f5d5dfa02f0164abce5e2a29cd2e88, type: 3}
+      propertyPath: useVolumetric
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -26088,7 +26118,7 @@ MonoBehaviour:
   m_InnerSpotPercent: 0
   m_SpotIESCutoffPercent: 100
   m_LightDimmer: 1
-  m_VolumetricDimmer: 1
+  m_VolumetricDimmer: 4.3
   m_FadeDistance: 10000
   m_VolumetricFadeDistance: 10000
   m_AffectDiffuse: 1
@@ -27460,6 +27490,42 @@ PrefabInstance:
     - target: {fileID: 3461137484345573642, guid: ff4e053bdf86b464aacb85a52e720dd7, type: 3}
       propertyPath: m_Name
       value: Candle
+      objectReference: {fileID: 0}
+    - target: {fileID: 7798420740558735511, guid: ff4e053bdf86b464aacb85a52e720dd7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.0877
+      objectReference: {fileID: 0}
+    - target: {fileID: 7798420740558735511, guid: ff4e053bdf86b464aacb85a52e720dd7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.0164
+      objectReference: {fileID: 0}
+    - target: {fileID: 7798420740558735511, guid: ff4e053bdf86b464aacb85a52e720dd7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.0114
+      objectReference: {fileID: 0}
+    - target: {fileID: 7798420740558735511, guid: ff4e053bdf86b464aacb85a52e720dd7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.8483715
+      objectReference: {fileID: 0}
+    - target: {fileID: 7798420740558735511, guid: ff4e053bdf86b464aacb85a52e720dd7, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.039425816
+      objectReference: {fileID: 0}
+    - target: {fileID: 7798420740558735511, guid: ff4e053bdf86b464aacb85a52e720dd7, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.0638242
+      objectReference: {fileID: 0}
+    - target: {fileID: 7798420740558735511, guid: ff4e053bdf86b464aacb85a52e720dd7, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.524059
+      objectReference: {fileID: 0}
+    - target: {fileID: 7798420740558735511, guid: ff4e053bdf86b464aacb85a52e720dd7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -8.605
+      objectReference: {fileID: 0}
+    - target: {fileID: 7798420740558735511, guid: ff4e053bdf86b464aacb85a52e720dd7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -63.409
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

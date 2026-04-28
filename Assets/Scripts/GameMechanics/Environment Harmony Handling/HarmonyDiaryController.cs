@@ -1,6 +1,5 @@
 using System.Collections.Generic;
-using GameMechanics.DayHandling;
-using HarmonyHandling;
+using EasyTextEffects;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,6 +11,7 @@ namespace GameMechanics.UI
         [SerializeField] private Button nextPageButton;
         [SerializeField] private Button prevPageButton;
         [SerializeField] private TMP_Text leftEntryField, rightEntryField;
+        [SerializeField] private TextEffect leftEffects, rightEffects;
         [SerializeField] private TMP_Text leftPassengerNameField, rightPassengerNameField;
         [SerializeField] private DiaryHarmonyLevel[] harmonyLevels;
         private DiaryHarmonyLevel _selectedHarmonyLevel;
