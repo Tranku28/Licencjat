@@ -18,7 +18,7 @@ public class Souvenir : MonoBehaviour, IInteractable
     private Button _useButton;
     public int ID { get; private set; }
 
-    public event Action<Souvenir> OnSouvenirused;
+    public event Action<Souvenir> OnSouvenirUsed;
 
     public static event Action<SouvenirData> OnSouvenirInteracted;
     public static event Action OnSouvenirUiQuit;
@@ -66,7 +66,7 @@ public class Souvenir : MonoBehaviour, IInteractable
             DependencyResolver.Instance.GetType<SaveSystem>().ForceDeleteSaveSouvenirData(souvenirData.souvenirID);
 
             OnSouvenirUiQuit?.Invoke();
-            OnSouvenirused?.Invoke(this);
+            OnSouvenirUsed?.Invoke(this);
             Destroy(gameObject);
         }
     }
