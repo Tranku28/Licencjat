@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Core;
 using Core.Scriptable_Objects;
 using DG.Tweening;
 using Ink.Runtime;
@@ -47,6 +48,7 @@ namespace GameMechanics.UI
         [SerializeField] private TMP_Text playerNameText, npcNameText;
 
         [SerializeField] private Button showTicketButton;
+        [SerializeField] private Image clickableArea;
         [Header("Ticket Pulsation Settings")]
         [SerializeField] private Transform ticketImageTransform;
         [SerializeField] private float pulsationIntervalDuration;
@@ -99,6 +101,8 @@ namespace GameMechanics.UI
             (this as ISaveElement).Register(this);
 
             _textPrinter = new TextPrinter();
+
+            clickableArea.enabled = false;
         }
 
         private void OnEnable()
@@ -132,6 +136,8 @@ namespace GameMechanics.UI
 
         private void LoadPassengerDataAndStart(object sender, PassengerInteractedEventArgs passengerArgs)
         {
+            clickableArea.enabled = true;
+
             personalId.UpdatePassenderID(passengerArgs.PassengerData);
 
             _currentPassenger = sender as Passenger;
@@ -372,6 +378,7 @@ namespace GameMechanics.UI
         {
             ticketMinigame.ShowUI();
             personalId.gameObject.SetActive(!personalId.gameObject.activeSelf);
+            clickableArea.enabled = !personalId.gameObject.activeSelf;
         }
 
         public void HideTicketDisplay()
@@ -400,6 +407,8 @@ namespace GameMechanics.UI
                     _brokenRule
                     ));
 
+            clickableArea.enabled = false;
+
             _dialogueAwaitable = AwaitableDialogueQuit();
         }
         
@@ -415,11 +424,6 @@ namespace GameMechanics.UI
             _dialogueAwaitable = null;
         }
 
-        public void OnPointerClick(PointerEventData eventData)
-        {
-            if (eventData.pointerCurrentRaycast.gameObject.GetComponent<TMP_Text>() == displayedText)
-                StoryHop();
-        }
 
         public void SaveData(GameSaveData gameSaveData)
         {
@@ -429,6 +433,36 @@ namespace GameMechanics.UI
         public void LoadSave(GameSaveData gameSaveData)
         {
             
+        }
+
+        public void OnPointerClick(PointerEventData eventData)
+        {
+            GameObject pointerObject = eventData.pointerCurrentRaycast.gameObject;
+
+            if (pointerObject == displayedText.gameObject)
+            {
+                StoryHop();
+                return;
+            }
+
+            if (!clickableArea.enabled) 
+            {
+                Debug.Log("Clickable area disabled");
+                return;
+            }
+
+            if (pointerObject == showTicketButton.gameObject) 
+            {
+                Debug.Log("ticket button Clicked");
+                return;
+            }
+
+            if (pointerObject == clickableArea.gameObject)
+            {
+                Debug.Log("StoryHop");
+                StoryHop();
+                return;
+            }
         }
     }
 }

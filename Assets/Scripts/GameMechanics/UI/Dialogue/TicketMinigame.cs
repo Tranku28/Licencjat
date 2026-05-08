@@ -159,7 +159,6 @@ namespace GameMechanics
 
                 Vector2 holeUV = new(normalizedX, normalizedY);
 
-                Debug.Log($"Local: {localPoint} | UV: {holeUV}");
 
                 holeUV.x = Mathf.Clamp01(holeUV.x);
                 holeUV.y = Mathf.Clamp01(holeUV.y);
