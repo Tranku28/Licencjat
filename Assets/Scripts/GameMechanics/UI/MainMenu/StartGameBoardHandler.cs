@@ -12,6 +12,7 @@ using UnityEngine.UI;
 
 namespace GameMechanics.UI.MainMenu
 {
+    [RequireComponent(typeof(Collider))]
     public class StartGameBoardHandler : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
         private static readonly int ZoomIn = Animator.StringToHash("ZoomIn");
@@ -22,6 +23,7 @@ namespace GameMechanics.UI.MainMenu
         [SerializeField] private TMP_Text noSaveSlotsText;
         [SerializeField] private List<SaveDisplayerUI> saveDisplayers = new();
         [SerializeField] private CinemachineBlendDefinition zoomInBlendSettings;
+        [SerializeField] private Animator boardAnimator;
 
         [Header("External Dependencies")]
         [SerializeField] private CinemachineCamera saveSelectorCamera;
@@ -31,7 +33,6 @@ namespace GameMechanics.UI.MainMenu
         private CinemachineBrainController _cinemachineBrainController;
         
         public event Action<bool> OnGameplayEntered;
-        private Animator _boardAnimator;
         private Collider _collider;
         private bool _entered;
         private bool _newGame = false;
@@ -40,7 +41,6 @@ namespace GameMechanics.UI.MainMenu
 
         private void Awake()
         {
-            _boardAnimator = GetComponent<Animator>();
             _collider = GetComponent<Collider>();
         }
 
@@ -81,7 +81,7 @@ namespace GameMechanics.UI.MainMenu
 
         public void OnPointerClick(PointerEventData eventData)
         {
-            _boardAnimator.SetBool(ZoomIn, true);
+            boardAnimator.SetBool(ZoomIn, true);
             _cinemachineBrainController.BlendCustom(zoomInBlendSettings);
             saveSelectorCamera.Prioritize();
             AudioManager.Instance.PlayOneShot(FMODEvents.Instance.saveBoardOpen, transform.position);
@@ -93,14 +93,14 @@ namespace GameMechanics.UI.MainMenu
         public void OnPointerEnter(PointerEventData eventData)
         {
             if (_entered) return;
-            _boardAnimator.SetBool(Hover, true);
+            boardAnimator.SetBool(Hover, true);
             AudioManager.Instance.PlayOneShot(FMODEvents.Instance.saveBoardHover, transform.position);
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
             if (_entered) return;
-            _boardAnimator.SetBool(Hover, false);
+            boardAnimator.SetBool(Hover, false);
             AudioManager.Instance.PlayOneShot(FMODEvents.Instance.saveBoardHover, transform.position);
         }
 
@@ -141,7 +141,7 @@ namespace GameMechanics.UI.MainMenu
 
         private void GoBackButtonClicked()
         {
-            _boardAnimator.SetBool(ZoomIn, false);
+            boardAnimator.SetBool(ZoomIn, false);
             
             startJourneyButton.interactable = false;
             goBackButton.interactable = false;
@@ -154,8 +154,8 @@ namespace GameMechanics.UI.MainMenu
 
         private void OnStartButtonClicked()
         {
-            _boardAnimator.SetBool(ZoomIn, false);
-            _boardAnimator.SetBool(Hover, false);
+            boardAnimator.SetBool(ZoomIn, false);
+            boardAnimator.SetBool(Hover, false);
             _collider.enabled = false;
             playerHeadCamera.Prioritize();
 
@@ -173,7 +173,7 @@ namespace GameMechanics.UI.MainMenu
         public void MenuReturned()
         {
             SetCinemachineBrainCutBlend();
-            _boardAnimator.SetBool(ZoomIn, false);
+            boardAnimator.SetBool(ZoomIn, false);
             
             startJourneyButton.interactable = false;
             goBackButton.interactable = false;

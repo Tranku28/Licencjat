@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Core.Scriptable_Objects;
+using DG.Tweening;
 using Ink.Runtime;
 using Interactions;
 using TMPro;
@@ -46,6 +47,9 @@ namespace GameMechanics.UI
         [SerializeField] private TMP_Text playerNameText, npcNameText;
 
         [SerializeField] private Button showTicketButton;
+        [Header("Ticket Pulsation Settings")]
+        [SerializeField] private Transform ticketImageTransform;
+        [SerializeField] private float pulsationIntervalDuration;
 
         [Header("External")]
         [SerializeField] private TicketMinigame ticketMinigame;
@@ -142,6 +146,14 @@ namespace GameMechanics.UI
             StartStory(passengerArgs.PassengerData);
         }
 
+        private void PulsateTicketImage()
+        {
+            ticketImageTransform
+                .DOScale(1.05f, pulsationIntervalDuration)
+                .SetEase(Ease.InOutSine)
+                .SetLoops(5, LoopType.Yoyo);
+        }
+
         private void ResetDialogueVariables()
         {
             _ticketScanned = false;
@@ -167,6 +179,7 @@ namespace GameMechanics.UI
             _story.ObserveVariable("canScan", (string varName, object newValue) =>
             {
                 SetScannable((bool)newValue);
+                PulsateTicketImage();
             });
 
             _story.ObserveVariable("allowQuitDialogue", (string varName, object canPlayerQuitDialogue) =>
