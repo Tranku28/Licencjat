@@ -18,6 +18,7 @@ namespace GameMechanics
         [SerializeField] private TMP_Text resume, backToMenu, settings;
         [SerializeField] private GameObject pauseSettingsPanel;
         private PauseOptions _currentOption;
+        public bool opened {get; private set;}
 
         public static Action OnResume;
         public static Action OnSettingsOpened;
@@ -26,6 +27,13 @@ namespace GameMechanics
         private void Awake()
         {
             _canvas = GetComponentInParent<Canvas>();
+        }
+
+        public override void SetVisualVisibility(bool show)
+        {
+            base.SetVisualVisibility(show);
+
+            opened = show;
         }
 
         private void OnEnable()

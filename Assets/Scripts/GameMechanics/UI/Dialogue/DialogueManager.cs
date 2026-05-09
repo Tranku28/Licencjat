@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Core;
 using Core.Scriptable_Objects;
 using DG.Tweening;
+using GameMechanics.Interactions;
 using Ink.Runtime;
 using Interactions;
 using TMPro;
@@ -388,7 +389,9 @@ namespace GameMechanics.UI
         }
 
         public void OnDialogueQuit()
-        {
+        {   
+            InteractionMessenger.instance.MessagePlayer("New dialogue entry added", this);
+
             _currentPassenger.GetComponent<Collider>().enabled = true;
 
             if (_brokenRule == string.Empty)

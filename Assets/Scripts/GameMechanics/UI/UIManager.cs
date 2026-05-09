@@ -23,6 +23,7 @@ namespace GameMechanics
         [SerializeField] private SouvenirViewController souvenirTab;
         [SerializeField] private TutorialNotesController tutorialNotesTab;
         [SerializeField] private SettingsPanelController settingsTab;
+        private UIElement _settingsReturnTarget;
         
         private UIElement _currentElement;
         
@@ -115,6 +116,8 @@ namespace GameMechanics
 
         private void OpenSettings()
         {
+            _settingsReturnTarget = pauseMenu;
+
             _currentElement = settingsTab;
             settingsTab.SetVisualVisibility(true);
             pauseMenu.SetVisualVisibility(false);
@@ -126,9 +129,21 @@ namespace GameMechanics
         {
             if (_currentElement != settingsTab) return;
 
-            _currentElement = pauseMenu;
             settingsTab.SetVisualVisibility(false);
-            pauseMenu.SetVisualVisibility(true);
+
+            if (_settingsReturnTarget != null)
+            {
+                _settingsReturnTarget.SetVisualVisibility(true);
+                _currentElement = _settingsReturnTarget;
+
+                if (_settingsReturnTarget == pauseMenu)
+                    _gameStateMachine.ChangeGameState(GameState.Paused);
+            }
+            else
+            {
+                _currentElement = null;
+                _gameStateMachine.ChangeGameState(GameState.Gameplay);
+            }
         }
 
         private void OnDiaryInteracted()
@@ -186,14 +201,30 @@ namespace GameMechanics
             if (_currentElement == settingsTab)
             {
                 settingsTab.SetVisualVisibility(false);
-                pauseMenu.SetVisualVisibility(true);
-                _currentElement = pauseMenu;
+
+                if (_settingsReturnTarget != null)
+                {
+                    _settingsReturnTarget.SetVisualVisibility(true);
+                    _currentElement = _settingsReturnTarget;
+
+                    if (_settingsReturnTarget == pauseMenu)
+                        _gameStateMachine.ChangeGameState(GameState.Paused);
+                }
+                else
+                {
+                    _currentElement = null;
+                    _gameStateMachine.ChangeGameState(GameState.Gameplay);
+                }
+
+                return;
             }
 
             if (_currentElement == diaryTab)
             {
-                dialogueManager.SetVisualVisibility(false);
+                diaryTab.SetVisualVisibility(false);
                 AudioManager.Instance.PlayOneShot(FMODEvents.Instance.diaryCloseSound, transform.position);
+
+                return;
             }
             
             if (!_currentElement) return;
