@@ -32,7 +32,10 @@ I cannot go there now.
     ~ speakerIndex = 0
     Why do you refuse to cross over?
     -> unfinished_matters
-* [Your ticket is valid. You have the right to continue] -> a_right_to_continue
+* [Your ticket is valid. You have the right to continue (stamp the ticket)] 
+    ~ speakerIndex = 0
+    Your ticket is valid. You have the right to continue
+    -> a_right_to_continue
 
 
 === a_right_to_continue ===
@@ -43,7 +46,7 @@ Generations will remember this decision.
 ~ encounterEntry = "I reported him. He broke the rules. He should have known better. He wanted to fix the world. And I wanted to keep everything in order."
 ~ passengerAction = "The Ghost reached the designated destination."
 ~ decision = "Disapproved"
-~ harmony = -25
+~ harmony = 25
 ~ canScan = true
     -> END
 
@@ -74,9 +77,14 @@ no one in, no one out.
 I believed I was protecting the world…
 Yet I condemned the town to death.
 
-~ speakerIndex = 0
-* [You could not cure them?] -> hopelessness
-* [I am sorry, but there is nothing more you can do now. Your time has come.] -> my_time_has_come
+* [You could not cure them?]
+    ~ speakerIndex = 0
+    You could not cure them?
+    -> hopelessness
+* [I am sorry, but there is nothing more you can do now. Your time has come (stamp the ticket)]
+    ~ speakerIndex = 0
+    I am sorry, but there is nothing more you can do now. Your time has come
+    -> my_time_has_come
 
 
 === my_time_has_come ===
@@ -89,7 +97,7 @@ If only I had more time…
 ~ encounterEntry = "I reported him. He broke the rules. He should have known better. He wanted to fix the world. And I wanted to keep everything in order."
 ~ passengerAction = "The Ghost reached the designated destination."
 ~ decision = "Disapproved"
-~ harmony = -25
+~ harmony = 25
 ~ canScan = true
     -> END
 
@@ -115,9 +123,14 @@ The proportions… if only they had been altared…
 …
 But the answer came too late.
 
-~ speakerIndex = 0
-* [Why do you wish to remain on this train?] -> a_purpose
-* [I am sorry to hear this, but I must let you pass. These are the rules.] -> the_rules
+* [Why do you wish to remain on this train?]
+    ~ speakerIndex = 0
+    Why do you wish to remain on this train?
+    -> a_purpose
+* [I am sorry to hear this, but I must let you pass. These are the rules. (stamp the ticket)]
+    ~ speakerIndex = 0
+    I am sorry to hear this, but I must let you pass. These are the rules.
+    -> the_rules
 
 
 
@@ -129,7 +142,7 @@ Not always fair, but always unavoidable.
 ~ encounterEntry = "I reported him. He broke the rules. He should have known better. He wanted to fix the world. And I wanted to keep everything in order."
 ~ passengerAction = "The Ghost reached the designated destination."
 ~ decision = "Approved"
-~ harmony = -25
+~ harmony = 25
 ~ canScan = true
     -> END
 
@@ -146,9 +159,14 @@ This train… it remembers, does it not?
 My notes will find their place.
 Please, allow me to remain.
 
-~ speakerIndex = 0
-* […This train will wait for you a little longer.] -> train_will_wait
-* [You have already surrendered. One lives but once. And you have made your choice.] -> rest_in_peace
+* […This train will wait for you a little longer.]
+    ~ speakerIndex = 0
+    …This train will wait for you a little longer.
+    -> train_will_wait
+* [You have already surrendered. One lives but once. And you have made your choice. (stamp the ticket)]
+    You have already surrendered. One lives but once. And you have made your choice.
+    ~ speakerIndex = 0
+    -> rest_in_peace
 
 
 
@@ -163,7 +181,7 @@ But never forget. It, too, can be wrong.
 ~ encounterEntry = "I reported him. He broke the rules. He should have known better. He wanted to fix the world. And I wanted to keep everything in order."
 ~ passengerAction = "The Ghost reached the designated destination."
 ~ decision = "Approved"
-~ harmony = -25
+~ harmony = 25
 ~ canScan = true
     -> END
 
@@ -176,7 +194,7 @@ But never forget. It, too, can be wrong.
 ~ passengerAction = "The Ghost didn’t reached the designated destination, despite having a valid ticket"
 ~ brokenRule = "Unjustified Refusal"
 ~ decision = "You let the passenger to stay"
-~ harmony = 25
+~ harmony = -25
 ~ gift = true
 Then perhaps someone else will not repeat my mistake.
 Thank you.

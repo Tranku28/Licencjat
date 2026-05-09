@@ -22,7 +22,7 @@ MonoBehaviour:
   - {fileID: 4900000, guid: 058157ec754bd2347b8625bc5f1fd3a5, type: 3}
   <car>k__BackingField: 1
   <seat>k__BackingField: 32
-  <destination>k__BackingField: Unknown
+  <destination>k__BackingField: Hillfield
   <validUntil>k__BackingField:
     <Day>k__BackingField: 14
     <Month>k__BackingField: 4

@@ -2453,6 +2453,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   blinkPanelUI: {fileID: 2084357938}
   dayEndCamera: {fileID: 643912532}
+  doors: {fileID: 0}
 --- !u!1001 &195015494
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22760,6 +22761,7 @@ GameObject:
   - component: {fileID: 1773100027}
   - component: {fileID: 1773100028}
   - component: {fileID: 1773100029}
+  - component: {fileID: 1773100030}
   m_Layer: 0
   m_Name: Player Head Camera
   m_TagString: Untagged
@@ -22842,6 +22844,18 @@ MonoBehaviour:
   FocusTarget: {fileID: 0}
   FocusOffset: 0
   Profile: {fileID: 11400000, guid: 0fd9d031bc700fe47865db3ff2ec12ed, type: 2}
+--- !u!114 &1773100030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1773100026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbff94b50f9e01f4f8e19ce9ac483726, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1783445592
 GameObject:
   m_ObjectHideFlags: 0

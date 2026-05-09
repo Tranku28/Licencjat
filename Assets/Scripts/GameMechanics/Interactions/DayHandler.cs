@@ -14,6 +14,7 @@ namespace GameMechanics.DayHandling
     {
         [SerializeField] private BlinkPanelUI blinkPanelUI;
         [SerializeField] private CinemachineCamera dayEndCamera;
+        [SerializeField] private Doors doors;
         private CinemachineBrain _cinemachineBrain;
         private float _cinemachineBlendDuration;
         private bool _canNextDay;
@@ -58,6 +59,7 @@ namespace GameMechanics.DayHandling
             dayEndCamera.Prioritize();
             yield return new WaitForSeconds(_cinemachineBlendDuration);
 
+            doors.ForceClose();
             blinkPanelUI.showDaySummary = true;
             blinkPanelUI.ClosePlayerEyes();
         }
