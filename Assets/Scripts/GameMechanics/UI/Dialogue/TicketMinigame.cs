@@ -13,7 +13,6 @@ namespace GameMechanics
 {
     public class TicketMinigame : UIElement, IPointerClickHandler, IPointerMoveHandler
     {
-        [SerializeField] private Image ticketBackgroundImage;
         [SerializeField] private Material holeMaterial;
         private Material _defaultMaterial;
         [SerializeField] private GameObject visual;
@@ -26,6 +25,10 @@ namespace GameMechanics
         [SerializeField] private TMP_Text ticketNumberText;
         [SerializeField] private Image passengerPortrait;
         [SerializeField] private PuncherMover puncher;
+
+        [Header("Ticket Rendering")]
+        [SerializeField] private RawImage ticketBackgroundImage;
+        [SerializeField] private Camera ticketRenderCamera;
 
         public event Action OnTicketScanned;
         
@@ -63,6 +66,8 @@ namespace GameMechanics
 
         public void SetupTicketUI(PassengerData data)
         {
+            RenderTicket();
+
             passengerFullNameText.text = $"{data.passengerName} {data.passengerSurname}";
 
             if (data is InvalidPassengerData)
@@ -168,6 +173,11 @@ namespace GameMechanics
             }
 
             _canScan = false;
+        }
+
+        private void RenderTicket()
+        {
+            ticketRenderCamera.Render();
         }
     }
 
