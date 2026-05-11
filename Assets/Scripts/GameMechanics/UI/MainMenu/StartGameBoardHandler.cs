@@ -19,7 +19,7 @@ namespace GameMechanics.UI.MainMenu
         private static readonly int GameStarted = Animator.StringToHash("GameStarted");
         private static readonly int Hover = Animator.StringToHash("Hover");
         [Header("General")]
-        [SerializeField] private Button startJourneyButton, goBackButton;
+        [SerializeField] private Button startJourneyButton;
         [SerializeField] private TMP_Text noSaveSlotsText;
         [SerializeField] private List<SaveDisplayerUI> saveDisplayers = new();
         [SerializeField] private CinemachineBlendDefinition zoomInBlendSettings;
@@ -33,6 +33,8 @@ namespace GameMechanics.UI.MainMenu
         private CinemachineBrainController _cinemachineBrainController;
         
         public event Action<bool> OnGameplayEntered;
+        public event Action InvokeCloseButtonDissapear;
+        public event Action<bool> OnStartBoardZoomed;
         private Collider _collider;
         private bool _entered;
         private bool _newGame = false;
@@ -53,7 +55,6 @@ namespace GameMechanics.UI.MainMenu
         private void OnEnable()
         {
             startJourneyButton.onClick.AddListener(OnNewGame);
-            goBackButton.onClick.AddListener(GoBackButtonClicked);
 
             _saveSystem = DependencyResolver.Instance.GetType<SaveSystem>();
             _saveSystem.OnSaveDeleted += LoadSaves;
@@ -64,7 +65,6 @@ namespace GameMechanics.UI.MainMenu
         private void OnDisable()
         {
             startJourneyButton.onClick.RemoveListener(OnNewGame);
-            goBackButton.onClick.RemoveListener(GoBackButtonClicked);
 
             _saveSystem.OnSaveDeleted -= LoadSaves;
 
@@ -111,7 +111,7 @@ namespace GameMechanics.UI.MainMenu
             LoadSaves();
 
             startJourneyButton.interactable = true;
-            goBackButton.interactable = true;
+            OnStartBoardZoomed?.Invoke(true);
             
             _collider.enabled = false;
         }
@@ -139,12 +139,12 @@ namespace GameMechanics.UI.MainMenu
             }
         }
 
-        private void GoBackButtonClicked()
+        public void GoBackButtonClicked()
         {
             boardAnimator.SetBool(ZoomIn, false);
             
             startJourneyButton.interactable = false;
-            goBackButton.interactable = false;
+            OnStartBoardZoomed?.Invoke(false);
             
             _collider.enabled = true;
             _entered = false;
@@ -159,13 +159,14 @@ namespace GameMechanics.UI.MainMenu
             _collider.enabled = false;
             playerHeadCamera.Prioritize();
 
+            InvokeCloseButtonDissapear?.Invoke();
+
             StartCoroutine(OnStartGame(_cinemachineBrainController.Brain.DefaultBlend.Time));
         }
 
         private IEnumerator OnStartGame(float time)
         {
-            yield return new WaitForSeconds(time);
-
+            yield return new WaitForSeconds(time);     
             OnGameplayEntered?.Invoke(_newGame);
             _newGame = false;
         }
@@ -176,7 +177,6 @@ namespace GameMechanics.UI.MainMenu
             boardAnimator.SetBool(ZoomIn, false);
             
             startJourneyButton.interactable = false;
-            goBackButton.interactable = false;
             
             _collider.enabled = true;
             _entered = false;

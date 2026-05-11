@@ -88,6 +88,8 @@ namespace GameMechanics.UI
         private string _decision;
         private bool _gift;
 
+        public static event Action CloseButtonEnableEvent;
+
         private void Awake()
         {
             Button[] buttons = choiceContainer.GetComponentsInChildren<Button>();
@@ -293,6 +295,13 @@ namespace GameMechanics.UI
             if (_story.currentChoices.Count > 0)
             {
                 ShowChoices();
+                return;
+            }
+
+            if (!_story.canContinue)
+            {
+                clickableArea.enabled = false;
+                CloseButtonEnableEvent?.Invoke();
             }
         }
 

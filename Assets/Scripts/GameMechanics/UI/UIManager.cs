@@ -24,10 +24,34 @@ namespace GameMechanics
         [SerializeField] private TutorialNotesController tutorialNotesTab;
         [SerializeField] private SettingsPanelController settingsTab;
         private UIElement _settingsReturnTarget;
+
+        public event Action OnUIOpened;
+        public event Action OnUIQuit;
         
         private UIElement _currentElement;
+
+        private UIElement CurrentElement
+        {
+            get => _currentElement;
+            set
+            {
+                if (_currentElement != value)
+                {
+                    _currentElement = value;
+
+                    if (_currentElement == dialogueManager) return;
+
+                    if (_currentElement != null)
+                    {
+                        OnUIOpened?.Invoke();
+                    }
+                }
+            }
+        }
         
         private GameStateMachine _gameStateMachine;
+
+        public void ForceEscape() => OnEscapePressed();
 
         private void Start()
         {
@@ -80,14 +104,14 @@ namespace GameMechanics
             if (_gameStateMachine.GetGameState() == GameState.UIOpened)
             {
                 souvenirTab.SetVisualVisibility(false);
-                _currentElement = null;
+                CurrentElement = null;
                 _gameStateMachine.ChangeGameState(GameState.Gameplay);
                 
                 return;
             }
             
             souvenirTab.SetVisualVisibility(true);
-            _currentElement = souvenirTab;
+            CurrentElement = souvenirTab;
             _gameStateMachine.ChangeGameState(GameState.UIOpened);
         }
 
@@ -98,60 +122,60 @@ namespace GameMechanics
             if (_gameStateMachine.GetGameState() == GameState.UIOpened)
             {
                 dialogueManager.SetVisualVisibility(false);
-                _currentElement = null;
+                CurrentElement = null;
                 _gameStateMachine.ChangeGameState(GameState.Gameplay);
                 
                 return;
             }
             
             dialogueManager.SetVisualVisibility(true);
-            _currentElement = dialogueManager;
+            CurrentElement = dialogueManager;
             _gameStateMachine.ChangeGameState(GameState.UIOpened);
         }
         
         private void OnResume()
         {
-            _currentElement = null;
+            CurrentElement = null;
         }
 
         private void OpenSettings()
         {
             _settingsReturnTarget = pauseMenu;
 
-            _currentElement = settingsTab;
+            CurrentElement = settingsTab;
             settingsTab.SetVisualVisibility(true);
             pauseMenu.SetVisualVisibility(false);
         }
 
-        private void ResetCurrentElement() => _currentElement = null;
+        private void ResetCurrentElement() => CurrentElement = null;
 
         private void QuitPauseSettings()
         {
-            if (_currentElement != settingsTab) return;
+            if (CurrentElement != settingsTab) return;
 
             settingsTab.SetVisualVisibility(false);
 
             if (_settingsReturnTarget != null)
             {
                 _settingsReturnTarget.SetVisualVisibility(true);
-                _currentElement = _settingsReturnTarget;
+                CurrentElement = _settingsReturnTarget;
 
                 if (_settingsReturnTarget == pauseMenu)
                     _gameStateMachine.ChangeGameState(GameState.Paused);
             }
             else
             {
-                _currentElement = null;
+                CurrentElement = null;
                 _gameStateMachine.ChangeGameState(GameState.Gameplay);
             }
         }
 
         private void OnDiaryInteracted()
         {
-            if (!ReferenceEquals(_currentElement, null)) return;
+            if (!ReferenceEquals(CurrentElement, null)) return;
             
             AudioManager.Instance.PlayOneShot(FMODEvents.Instance.diaryOpenSound, transform.position);
-            _currentElement = diaryTab;
+            CurrentElement = diaryTab;
             diaryTab.SetVisualVisibility(true);
             diaryTab.SetDefaultDiaryState();
             _gameStateMachine.ChangeGameState(GameState.UIOpened);
@@ -159,10 +183,10 @@ namespace GameMechanics
 
         private void OnTutorialNotesInteracted()
         {
-            if (!ReferenceEquals(_currentElement, null)) return;
+            if (!ReferenceEquals(CurrentElement, null)) return;
             {
                 AudioManager.Instance.PlayOneShot(FMODEvents.Instance.creditsOpen, transform.position);
-                _currentElement = tutorialNotesTab;
+                CurrentElement = tutorialNotesTab;
                 tutorialNotesTab.SetVisualVisibility(true);
                 _gameStateMachine.ChangeGameState(GameState.UIOpened);
             }
@@ -170,26 +194,28 @@ namespace GameMechanics
         
         private void OnEscapePressed()
         {
-            if (_currentElement == null && _gameStateMachine.GetGameState() == GameState.Gameplay)
+            if (CurrentElement == null && _gameStateMachine.GetGameState() == GameState.Gameplay)
             {
                 pauseMenu.SetVisualVisibility(true);
-                _currentElement = pauseMenu;
+                CurrentElement = pauseMenu;
                 _gameStateMachine.ChangeGameState(GameState.Paused);
                 return;
             }
 
-            if (_currentElement == pauseMenu)
+            if (CurrentElement == pauseMenu)
             {
                 pauseMenu.SetVisualVisibility(false);
-                _currentElement = null;
+                OnUIQuit?.Invoke();
+                CurrentElement = null;
                 _gameStateMachine.ChangeGameState(GameState.Gameplay);
                 return;
             }
 
-            if (_currentElement == dialogueManager)
+            if (CurrentElement == dialogueManager)
             {
                 if (dialogueManager.CanCloseDialogueWindow)
                 {
+                    OnUIQuit?.Invoke();
                     dialogueManager.SetVisualVisibility(false);
                     dialogueManager.HideTicketDisplay();
                     dialogueManager.OnDialogueQuit();
@@ -198,39 +224,40 @@ namespace GameMechanics
                     return;
             }
 
-            if (_currentElement == settingsTab)
+            if (CurrentElement == settingsTab)
             {
                 settingsTab.SetVisualVisibility(false);
+                OnUIQuit?.Invoke();
 
                 if (_settingsReturnTarget != null)
                 {
                     _settingsReturnTarget.SetVisualVisibility(true);
-                    _currentElement = _settingsReturnTarget;
+                    CurrentElement = _settingsReturnTarget;
 
                     if (_settingsReturnTarget == pauseMenu)
                         _gameStateMachine.ChangeGameState(GameState.Paused);
                 }
                 else
                 {
-                    _currentElement = null;
+                    CurrentElement = null;
                     _gameStateMachine.ChangeGameState(GameState.Gameplay);
                 }
 
                 return;
             }
 
-            if (_currentElement == diaryTab)
+            if (CurrentElement == diaryTab)
             {
+                OnUIQuit?.Invoke();
                 diaryTab.SetVisualVisibility(false);
                 AudioManager.Instance.PlayOneShot(FMODEvents.Instance.diaryCloseSound, transform.position);
-
-                return;
             }
             
-            if (!_currentElement) return;
+            if (CurrentElement == null) return;
             
-            _currentElement.SetVisualVisibility(false);
-            _currentElement = null;
+            CurrentElement.SetVisualVisibility(false);
+            CurrentElement = null;
+            OnUIQuit?.Invoke();
             
             _gameStateMachine.ChangeGameState(GameState.Gameplay);
         }
@@ -238,7 +265,8 @@ namespace GameMechanics
         private void OnSouvenirUIQuit()
         {
             souvenirTab.SetVisualVisibility(false);
-            _currentElement = null;
+            CurrentElement = null;
+            OnUIQuit?.Invoke();
             _gameStateMachine.ChangeGameState(GameState.Gameplay);
         }
     }
