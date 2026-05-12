@@ -11,7 +11,7 @@ VAR encounterEntry = ""
 VAR gift = false
 
 ~ speakerIndex = 0
-Good evening, madam… Your ticket, please.
+Good evening, madam…
 ~ generalEntry = "Tonight, a woman boarded the train. \\n\\nYoung, at first glance, yet her eyes held something... ancient. I felt that this train had been waiting for her all along This train carries more than passengers."
 
 ~ speakerIndex = 1

@@ -16,8 +16,7 @@ MonoBehaviour:
   name: Old Necklace
   receivedFrom: Charlotte Bloodrose
   souvenirPrefab: {fileID: 3923819191764239479, guid: 77b5e666ce472604aaa02b658cc2926b, type: 3}
-  souvenirEffects:
-  - {fileID: 11400000, guid: d24c14d66f6d11f4baf25bb05f5aca04, type: 2}
+  souvenirEffect: {fileID: 11400000, guid: d24c14d66f6d11f4baf25bb05f5aca04, type: 2}
   souvenirDescription: "\"It's an antique-looking necklace with beautiful embellishments.
     Inside the necklace is a dried flower petal. Theres a letter written in neat
     handwriting that was attached to the necklace.\r\n\r\n\u201CYou once said the

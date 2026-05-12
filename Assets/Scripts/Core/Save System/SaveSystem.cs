@@ -148,6 +148,7 @@ namespace Core.Save_System
             }
 
             GameSaveData previousDaySaveData = CreateSaveDataFromSnapshot(snapshotSaveData);
+            _loadedSave = previousDaySaveData;
 
             foreach (ISaveElement saveElement in _saveElements)
             {

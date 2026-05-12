@@ -34,7 +34,7 @@ Material:
     - _RectAspect: 1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _HoleCenter: {r: 0.7446829, g: 0.7784159, b: 0, a: 0}
+    - _HoleCenter: {r: 0.41456413, g: 0.27404055, b: 0, a: 0}
     - _HoleSize: {r: 0.05, g: 0.1, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

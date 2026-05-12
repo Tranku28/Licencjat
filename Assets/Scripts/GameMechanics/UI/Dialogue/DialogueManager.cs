@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Core;
 using Core.Scriptable_Objects;
 using DG.Tweening;
 using GameMechanics.Interactions;
@@ -399,7 +398,7 @@ namespace GameMechanics.UI
 
         public void OnDialogueQuit()
         {   
-            InteractionMessenger.instance.MessagePlayer("New dialogue entry added", this);
+            InteractionMessenger.instance.MessagePlayer("New diary entry appeared", this);
 
             _currentPassenger.GetComponent<Collider>().enabled = true;
 

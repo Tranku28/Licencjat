@@ -59,13 +59,13 @@ namespace GameMechanics.DayHandling
             dayEndCamera.Prioritize();
             yield return new WaitForSeconds(_cinemachineBlendDuration);
 
-            doors.ForceClose();
             blinkPanelUI.showDaySummary = true;
             blinkPanelUI.ClosePlayerEyes();
         }
         
         private void OpenPlayerEyes()
         {
+            doors.ForceClose();
             StartCoroutine(OpenEyes());
         }
 
