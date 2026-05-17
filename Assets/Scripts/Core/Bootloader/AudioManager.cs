@@ -9,6 +9,7 @@ namespace Core
     {
         public static AudioManager Instance;
         private EventInstance ambientEvent;
+        private EventInstance musicEvent;
 
         private void Awake()
         {
@@ -28,17 +29,29 @@ namespace Core
             ReplayAmbient();
 
             GameStateMachine.OnMenuReturned += ReplayAmbient;
+            GameStateMachine.OnGameStarted += ReplayMusic;
         }
 
         private void OnDestroy()
         {
             GameStateMachine.OnMenuReturned -= ReplayAmbient;
+            GameStateMachine.OnGameStarted -= ReplayMusic;
+        }
+
+        private void ReplayMusic(bool obj)
+        {
+            musicEvent.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+            musicEvent.release();
+
+            musicEvent = RuntimeManager.CreateInstance(FMODEvents.Instance.music);
+            musicEvent.start();
         }
 
         private void ReplayAmbient()
         {
             ambientEvent.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
             ambientEvent.release();
+            
             ambientEvent = RuntimeManager.CreateInstance(FMODEvents.Instance.ambient);
             ambientEvent.start();
         }

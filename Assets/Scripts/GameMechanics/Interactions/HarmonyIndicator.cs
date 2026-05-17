@@ -1,3 +1,4 @@
+using System;
 using Core.Scriptable_Objects.Souvenirs;
 using GameMechanics.Interactions;
 using GameMechanics.UI;
@@ -14,6 +15,8 @@ public class HarmonyIndicator : MonoBehaviour, ISaveElement, IInteractable
     private int _cachedHarmony;
     private const int MAX_HARMONY = 100;
     private const int MIN_HARMONY = 0;
+
+    public static Action<int> OnHarmonyValueSet;
 
     private void Awake()
     {
@@ -49,6 +52,7 @@ public class HarmonyIndicator : MonoBehaviour, ISaveElement, IInteractable
         _cachedHarmony = 0;
 
         UpdateHarmonyPointerPosition(_harmonyStatus);
+        OnHarmonyValueSet?.Invoke(_harmonyStatus);
     }
 
     public void SaveData(GameSaveData gameSaveData)

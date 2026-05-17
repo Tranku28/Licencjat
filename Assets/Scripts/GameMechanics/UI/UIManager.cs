@@ -19,7 +19,7 @@ namespace GameMechanics
         [SerializeField] private MainMenuController mainMenuController;
         [SerializeField] private PauseMenuController pauseMenu;
         [SerializeField] private DialogueManager dialogueManager;
-        [SerializeField] private DiaryController diaryTab;
+        [SerializeField] private HarmonyDiaryController diaryTab;
         [SerializeField] private SouvenirViewController souvenirTab;
         [SerializeField] private TutorialNotesController tutorialNotesTab;
         [SerializeField] private SettingsPanelController settingsTab;
