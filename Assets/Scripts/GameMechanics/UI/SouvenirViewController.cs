@@ -73,6 +73,20 @@ public class SouvenirViewController : UIElement, IPointerDownHandler, IPointerUp
         effectDescription.text = obj.souvenirEffectDescription;
         receivedFrom.text = $"Received from: {obj.receivedFrom}";
         _lastSouvenir = Instantiate(obj.souvenirPrefab, souvenirContainer).GetComponent<Souvenir>();
+
+        if (obj.souvenirEffect == null)
+        {
+            useButton.interactable = false;
+            return;
+        }
+
+        if (obj.souvenirEffect.passive)
+        {
+            useButton.interactable = false;
+            return;
+        }
+
+        useButton.interactable = true;
     }
 
     public void OnPointerDown(PointerEventData eventData)

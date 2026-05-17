@@ -6,6 +6,7 @@ using TMPro;
 using UnityEngine.UI;
 using UnityEngine.Events;
 using Core;
+using System;
 
 public class TutorialNotesController : UIElement
 {

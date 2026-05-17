@@ -16,8 +16,7 @@ MonoBehaviour:
   name: Old Watch
   receivedFrom: Eliah Mistborne
   souvenirPrefab: {fileID: 428697447370338001, guid: dfcfdb414a253314a8b9adcaf8c8c1e0, type: 3}
-  souvenirEffects:
-  - {fileID: 11400000, guid: 923962c8c58ec0e4dbd494386b619863, type: 2}
+  souvenirEffect: {fileID: 11400000, guid: 923962c8c58ec0e4dbd494386b619863, type: 2}
   souvenirDescription: 'A worn watch whose hands stopped the moment the answer was
     already known.
 

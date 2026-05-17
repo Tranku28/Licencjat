@@ -6,7 +6,7 @@ namespace GameMechanics.UI
     {
         [SerializeField] private GameObject UIVisual;
 
-        public void SetVisualVisibility(bool show)
+        public virtual void SetVisualVisibility(bool show)
         {
             UIVisual.SetActive(show);
         }

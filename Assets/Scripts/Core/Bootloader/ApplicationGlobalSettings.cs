@@ -8,6 +8,11 @@ namespace Core
         private void Awake()
         {
             QualitySettings.vSyncCount = 1;
+            Cursor.visible = false;
+
+#if UNITY_EDITOR
+            Cursor.visible = true;
+#endif 
         }
-    }   
+    } 
 }

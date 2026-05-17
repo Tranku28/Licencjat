@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Dragon Trainer
   m_EditorClassIdentifier: 
   passengerVariants: []
-  <passengerPortrait>k__BackingField: {fileID: 0}
+  <passengerPortrait>k__BackingField: {fileID: 21300000, guid: 07e8857b688400e429021c0f10242898, type: 3}
   <prefab>k__BackingField: {fileID: 4441011520651433598, guid: 10f74a79320e2fb45b5ef9d5d694f6da, type: 3}
   <passengerName>k__BackingField: Kaelen
   <passengerSurname>k__BackingField: Ashenwing
@@ -22,7 +22,7 @@ MonoBehaviour:
   - {fileID: 4900000, guid: 058157ec754bd2347b8625bc5f1fd3a5, type: 3}
   <car>k__BackingField: 1
   <seat>k__BackingField: 32
-  <destination>k__BackingField: Unknown
+  <destination>k__BackingField: Hillfield
   <validUntil>k__BackingField:
     <Day>k__BackingField: 14
     <Month>k__BackingField: 4

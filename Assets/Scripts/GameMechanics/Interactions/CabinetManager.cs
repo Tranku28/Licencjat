@@ -92,12 +92,11 @@ namespace GameMechanics.Interactions
             foreach (Souvenir souvenir in _souvenirs)
             {
                 if (!souvenir.gameObject.activeSelf) continue;
+                
+                if (souvenir.Effect == null) continue;
 
-                foreach (SouvenirEffect effect in souvenir.Effects)
-                {
-                    if (effect.passive)
-                        effect.Resolve(_souvenirEffectResolver);
-                }
+                if (souvenir.Effect.passive)
+                    souvenir.Effect.Resolve(_souvenirEffectResolver);
             }
         }
 
@@ -110,9 +109,10 @@ namespace GameMechanics.Interactions
             int position = 0;
             foreach (SouvenirData souvenirData in souvenirAtlas.souvenirs)
             {
+                SouvenirEffect effect = souvenirData.souvenirEffect != null ? souvenirData.souvenirEffect : null;
                 Souvenir newSouvenir = Instantiate(souvenirData.souvenirPrefab, souvenirPositions[position]).GetComponent<Souvenir>();
                 newSouvenir.OnSouvenirUsed += OnUseDeleteSouvenir;
-                newSouvenir.Init(_souvenirEffectResolver, souvenirData.souvenirEffects, souvenirData.souvenirID);
+                newSouvenir.Init(_souvenirEffectResolver, effect, souvenirData.souvenirID);
                 _souvenirs.Add(newSouvenir);
 
                 newSouvenir.gameObject.SetActive(false);
