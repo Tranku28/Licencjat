@@ -1,8 +1,10 @@
+using System;
 using System.Collections.Generic;
 using EasyTextEffects;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 namespace GameMechanics.UI
 {

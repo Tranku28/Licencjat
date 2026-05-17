@@ -15,6 +15,7 @@ namespace GameMechanics
         private Collider _triggerCollider;
         [SerializeField] private float animationAngle;
         [SerializeField] private float animationDuration;
+        public void ForceClose() => ForceCloseDoors();
         private Quaternion _initialLeftRotation, _initialRightRotation;
         private bool _doorsOpened;
 

@@ -16,8 +16,7 @@ MonoBehaviour:
   name: Harmony Vial
   receivedFrom: Deliah
   souvenirPrefab: {fileID: 7467085152084203670, guid: 8be408d982f012e4d87273b99949ab6e, type: 3}
-  souvenirEffects:
-  - {fileID: 11400000, guid: a646435066177d44eb50855eeaf9deb2, type: 2}
+  souvenirEffect: {fileID: 11400000, guid: a646435066177d44eb50855eeaf9deb2, type: 2}
   souvenirDescription: 'A small vial filled with a faintly glowing liquid. The surface
     of the potion never settles, as if
 

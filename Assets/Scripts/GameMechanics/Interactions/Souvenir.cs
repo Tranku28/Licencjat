@@ -12,9 +12,9 @@ using UnityEngine.UI;
 public class Souvenir : MonoBehaviour, IInteractable
 {
     [SerializeField] private SouvenirData souvenirData;
-    private List<SouvenirEffect> _effects;
+    private SouvenirEffect _effect;
     private SouvenirEffectResolver _effectResolver;
-    public List<SouvenirEffect> Effects => _effects; 
+    public SouvenirEffect Effect => _effect; 
     private Button _useButton;
     public int ID { get; private set; }
 
@@ -28,10 +28,10 @@ public class Souvenir : MonoBehaviour, IInteractable
         _effectResolver = new();
     }
 
-    public void Init(SouvenirEffectResolver resolver, List<SouvenirEffect> effects, int id)
+    public void Init(SouvenirEffectResolver resolver, SouvenirEffect effect, int id)
     {
         _effectResolver = resolver;
-        _effects = effects;
+        _effect = effect;
         ID = id;
     }
 
@@ -49,17 +49,14 @@ public class Souvenir : MonoBehaviour, IInteractable
     {
         bool destroy = false;
 
-        foreach (SouvenirEffect effect in _effects)
-        {
-            effect.Resolve(_effectResolver);
+        _effect.Resolve(_effectResolver);
 
-            if (effect.singleUse)
+            if (_effect.singleUse)
             {
-                Debug.Log("Resolving: " + effect);
+                Debug.Log("Resolving: " + _effect);
                 destroy = true;
-                AudioManager.Instance.PlayOneShot(effect.useSound, transform.position);
+                AudioManager.Instance.PlayOneShot(_effect.useSound, transform.position);
             }
-        }
 
         if (destroy)
         {

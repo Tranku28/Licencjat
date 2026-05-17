@@ -7,12 +7,7 @@ namespace UI.MainMenu
 {
     public class CreditsPanelController : UIElement
     {
-        private Button _goBackButton;
-
-        private void Awake()
-        {
-            _goBackButton = GetComponentInChildren<Button>();
-        }
+        [SerializeField] private Button _goBackButton;
 
         private void OnEnable()
         {

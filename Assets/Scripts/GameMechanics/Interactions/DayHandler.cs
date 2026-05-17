@@ -14,6 +14,7 @@ namespace GameMechanics.DayHandling
     {
         [SerializeField] private BlinkPanelUI blinkPanelUI;
         [SerializeField] private CinemachineCamera dayEndCamera;
+        [SerializeField] private Doors doors;
         private CinemachineBrain _cinemachineBrain;
         private float _cinemachineBlendDuration;
         private bool _canNextDay;
@@ -41,6 +42,7 @@ namespace GameMechanics.DayHandling
         {
             if (!_canNextDay)
             {
+                InteractionMessenger.instance.MessagePlayer("Can't proceed to the next day.\n Talk to at least one passenger to continue", this);
                 return;
             }
 
@@ -63,6 +65,7 @@ namespace GameMechanics.DayHandling
         
         private void OpenPlayerEyes()
         {
+            doors.ForceClose();
             StartCoroutine(OpenEyes());
         }
 

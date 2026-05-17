@@ -22,15 +22,15 @@ MonoBehaviour:
   - {fileID: 4900000, guid: 666cb6abf0cb5ee4bbf6a9f99771e152, type: 3}
   <car>k__BackingField: 1
   <seat>k__BackingField: 9
-  <destination>k__BackingField: Crystgate
+  <destination>k__BackingField: Summerport
   <validUntil>k__BackingField:
     <Day>k__BackingField: 13
     <Month>k__BackingField: 4
     <Year>k__BackingField: 1273
     <Hour>k__BackingField: 18
     <Minute>k__BackingField: 6
-  <species>k__BackingField: Human
-  <causeOfDeath>k__BackingField: Illness
+  <species>k__BackingField: Ghost
+  <causeOfDeath>k__BackingField: Alcohol Overdose
   <biography>k__BackingField: 'A respected doctor from Crystgate, he graduated from
     medical school with the
 
@@ -43,7 +43,3 @@ MonoBehaviour:
     resulting in
     the complete extinction of the village.'
   <souvenirData>k__BackingField: {fileID: 11400000, guid: a3a373d80c4248241a9e0d5376bb21ff, type: 2}
-  <souvenirNote>k__BackingField: "\u201CA watch that stopped keeping time the moment
-    the solution was already known.\u201D"
-  <diaryContent>k__BackingField: 
-  <souvenirName>k__BackingField: Old Watch

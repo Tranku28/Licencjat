@@ -22,14 +22,14 @@ MonoBehaviour:
   - {fileID: 4900000, guid: b3de16fe21d17fb499976aedc349210d, type: 3}
   <car>k__BackingField: 1
   <seat>k__BackingField: 1
-  <destination>k__BackingField: Unknown
+  <destination>k__BackingField: Scarswall
   <validUntil>k__BackingField:
     <Day>k__BackingField: 4
     <Month>k__BackingField: 5
     <Year>k__BackingField: 1273
     <Hour>k__BackingField: 13
     <Minute>k__BackingField: 45
-  <species>k__BackingField: Human
+  <species>k__BackingField: Witch
   <causeOfDeath>k__BackingField: Eaten by wild animals
   <biography>k__BackingField: "A witch from a distant village who deceived its people
     with false promises of\nhelp. Though she possessed genuine magical abilities,
