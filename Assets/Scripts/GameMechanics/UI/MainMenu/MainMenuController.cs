@@ -27,7 +27,6 @@ namespace UI.MainMenu
         private void Start()
         {
             creditsScroll.ScrollClicked += GoToCredits;
-            settingsWatch.WatchClicked += GoToSettings;
             startBoard.OnGameplayEntered += StartGame;
 
             GameStateMachine.OnMenuReturned += EnableMenu;
@@ -36,7 +35,6 @@ namespace UI.MainMenu
         private void OnDestroy()
         {
             creditsScroll.ScrollClicked -= GoToCredits;
-            settingsWatch.WatchClicked -= GoToSettings;
             startBoard.OnGameplayEntered -= StartGame;
 
             GameStateMachine.OnMenuReturned -= EnableMenu;
@@ -50,12 +48,6 @@ namespace UI.MainMenu
             GameStateMachine gameStateMachine = DependencyResolver.Instance.GetType<GameStateMachine>();
             
             gameStateMachine.StartGame(isNewGame);
-        }
-
-
-        private void GoToSettings()
-        {
-            settingsPanel.SetVisualVisibility(true);
         }
 
         private void GoToCredits()

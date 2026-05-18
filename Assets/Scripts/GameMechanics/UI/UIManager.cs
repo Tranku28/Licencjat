@@ -28,6 +28,7 @@ namespace GameMechanics
         public event Action OnUIOpened;
         public event Action OnUIQuit;
         
+        private GameStateMachine _gameStateMachine;
         private UIElement _currentElement;
 
         private UIElement CurrentElement
@@ -49,7 +50,6 @@ namespace GameMechanics
             }
         }
         
-        private GameStateMachine _gameStateMachine;
 
         public void ForceEscape() => OnEscapePressed();
 
@@ -62,11 +62,14 @@ namespace GameMechanics
         {
             PlayerControls.OnEscapePressedEvent += OnEscapePressed;
 
+            GameStateMachine.OnMenuReturned += ClearSettingsReturnTarget;
+
             PauseMenuController.OnResume += OnResume;
             PauseMenuController.OnSettingsOpened += OpenSettings;
             PauseMenuController.OnMenuReturned += ResetCurrentElement;
 
             SettingsPanelController.OnSettingsQuit += QuitPauseSettings;
+            SettingsWatchHandler.WatchClicked += OpenSettings;
             
             Passenger.OnPassengerInteracted += OnPassengerInteracted;
             Diary.OnDiaryInteracted += OnDiaryInteracted;
@@ -86,7 +89,10 @@ namespace GameMechanics
             PauseMenuController.OnSettingsOpened -= OpenSettings;
             PauseMenuController.OnMenuReturned -= ResetCurrentElement;
 
+            GameStateMachine.OnMenuReturned += ClearSettingsReturnTarget;
+
             SettingsPanelController.OnSettingsQuit -= QuitPauseSettings;
+            SettingsWatchHandler.WatchClicked -= OpenSettings;
 
             Passenger.OnPassengerInteracted -= OnPassengerInteracted;
             Diary.OnDiaryInteracted -= OnDiaryInteracted;
@@ -96,7 +102,12 @@ namespace GameMechanics
 
             ConductorGuidelines.OnTutorialNotesInteracted -= OnTutorialNotesInteracted;
         }
-        
+
+        private void ClearSettingsReturnTarget()
+        {
+            _settingsReturnTarget = null;
+        }
+
         private void OnSouvenirInteracted(SouvenirData obj)
         {
             if (_gameStateMachine.GetGameState() == GameState.Paused) return;
@@ -140,7 +151,10 @@ namespace GameMechanics
 
         private void OpenSettings()
         {
-            _settingsReturnTarget = pauseMenu;
+            if (CurrentElement == pauseMenu)
+            {
+                _settingsReturnTarget = pauseMenu;
+            }
 
             CurrentElement = settingsTab;
             settingsTab.SetVisualVisibility(true);
@@ -240,7 +254,6 @@ namespace GameMechanics
                 else
                 {
                     CurrentElement = null;
-                    _gameStateMachine.ChangeGameState(GameState.Gameplay);
                 }
 
                 return;

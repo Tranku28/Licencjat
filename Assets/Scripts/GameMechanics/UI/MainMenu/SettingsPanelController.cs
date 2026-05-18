@@ -1,5 +1,3 @@
-using Core;
-using UI.MainMenu;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -12,7 +10,6 @@ namespace GameMechanics.UI.MainMenu
     public class SettingsPanelController : UIElement, IPointerDownHandler, IPointerUpHandler, IPointerMoveHandler
     {
         public float offset;
-        [SerializeField] private Button goBackButton;
 
         [Header("Arrows")]
         [SerializeField] private RectTransform musicArrow;
@@ -28,21 +25,6 @@ namespace GameMechanics.UI.MainMenu
         {
             RuntimeManager.StudioSystem.getVCA("vca:/Music", out _musicVCA);
             RuntimeManager.StudioSystem.getVCA("vca:/SFX", out _sfxVCA);
-        }
-
-        private void OnEnable()
-        {
-            goBackButton.onClick.AddListener(BackToMainMenu);
-        }
-
-        private void OnDisable()
-        {
-            goBackButton.onClick.RemoveListener(BackToMainMenu);
-        }
-
-        private void BackToMainMenu()
-        {
-            SetVisualVisibility(false);
         }
         
         public void OnPointerDown(PointerEventData eventData) => _clicked = true;
