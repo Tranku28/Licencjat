@@ -3,11 +3,10 @@ using DG.Tweening;
 using GameMechanics.UI;
 using TMPro;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace GameMechanics.Interactions
 {
-    public class InteractionMessenger : MonoBehaviour
+    public class PlayerMessenger : MonoBehaviour
     {
         [SerializeField] private RectTransform _messageBoxTransform;
         [SerializeField] private float _tweenTime;
@@ -17,7 +16,7 @@ namespace GameMechanics.Interactions
         private Vector2 _messageBoxInitialPosition;
         private bool _isTweening;
 
-        public static InteractionMessenger instance;
+        public static PlayerMessenger instance;
         
 
         private void Awake()

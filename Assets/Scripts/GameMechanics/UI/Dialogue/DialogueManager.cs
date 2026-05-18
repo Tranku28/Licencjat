@@ -22,18 +22,16 @@ namespace GameMechanics.UI
         public int HarmonyValue;
         public string RuleBroken;
         public int EntryId;
-        public string GeneralEntry;
-        public string EncounterEntry;
+        public PassengerEntry[] Entries;
 
-        public DialogueEndEventArgs(string passengerName, string passengerAction, string decision, int harmonyValue, int entryId, string generalEntry, string encounterEntry, string ruleBroken = null)
+        public DialogueEndEventArgs(string passengerName, string passengerAction, string decision, int harmonyValue, int entryId, PassengerEntry[] entries, string ruleBroken = null)
         {
             PassengerName = passengerName;
             PassengerAction = passengerAction;
             Decision = decision;
             HarmonyValue = harmonyValue;
             EntryId = entryId;
-            GeneralEntry = generalEntry;
-            EncounterEntry = encounterEntry;
+            Entries = entries;
             RuleBroken = ruleBroken;
         }
     }
@@ -56,6 +54,7 @@ namespace GameMechanics.UI
         [Header("External")]
         [SerializeField] private TicketMinigame ticketMinigame;
         [SerializeField] private PassengerPersonalDataLoader personalId;
+        private List<PassengerEntry> _cachedEntries = new();
 
         private List<int> _souvenirsReceived = new();
 
@@ -81,8 +80,6 @@ namespace GameMechanics.UI
         private Awaitable _dialogueAwaitable;
         private TextPrinter _textPrinter;
         private string _passengerAction;
-        private string _generalEntry;
-        private string _encounterEntry;
         private bool _canQuitDialogue;
         private string _decision;
         private bool _gift;
@@ -164,6 +161,7 @@ namespace GameMechanics.UI
 
         private void ResetDialogueVariables()
         {
+            _cachedEntries.Clear();
             _ticketScanned = false;
             _canQuitDialogue = false;
             _passengerDissapear = false;
@@ -171,14 +169,12 @@ namespace GameMechanics.UI
             _passengerAction = "";
             _brokenRule = "";
             _decision = "";
-            _generalEntry = "";
-            _encounterEntry = "";
         }
 
-        private void StartStory(PassengerData data)
+        private void StartStory(PassengerData passengerData)
         {
-            int randomDialogueIndex = Random.Range(0, data.dialogueVariants.Count-1);
-            _story = new Story(data.dialogueVariants[randomDialogueIndex].ToString());
+            int randomDialogueIndex = Random.Range(0, passengerData.dialogueVariants.Count-1);
+            _story = new Story(passengerData.dialogueVariants[randomDialogueIndex].ToString());
             
             _story.ObserveVariable("speakerIndex", (string varName, object newValue) => {
                 UpdateNameDisplays((int)newValue);
@@ -221,17 +217,12 @@ namespace GameMechanics.UI
                 _brokenRule = (string)newValue;
             });
 
-            _story.ObserveVariable("generalEntry", (string varName, object newValue) =>
+            _story.ObserveVariable("addEntry", (string varName, object newValue) =>
             {
-                _generalEntry = newValue.ToString();
-                Debug.Log($"GE: {_generalEntry}");
+                _cachedEntries.Add(new PassengerEntry(passengerData.GetFullName(), newValue.ToString()));
+                Debug.Log($"GE: {newValue}");
             });
 
-            _story.ObserveVariable("encounterEntry", (string varName, object newValue) =>
-            {
-                _encounterEntry = newValue.ToString();
-                Debug.Log($"EE: {_encounterEntry}");
-            });
             
             _story.ObserveVariable("gift", (string varName, object newValue) =>
             {
@@ -241,7 +232,7 @@ namespace GameMechanics.UI
 
                 if (_gift)
                 {
-                    OnSouvenirReceived?.Invoke(data.souvenirData.souvenirID);
+                    OnSouvenirReceived?.Invoke(passengerData.souvenirData.souvenirID);
                 }
             });
 
@@ -398,7 +389,7 @@ namespace GameMechanics.UI
 
         public void OnDialogueQuit()
         {   
-            InteractionMessenger.instance.MessagePlayer("New diary entry appeared", this);
+            PlayerMessenger.instance.MessagePlayer("New diary entry appeared", this);
 
             _currentPassenger.GetComponent<Collider>().enabled = true;
 
@@ -413,8 +404,7 @@ namespace GameMechanics.UI
                     "approved",
                     _harmonyChange,
                     _currentPassenger.PassengerData.souvenirData.souvenirID,
-                    _generalEntry,
-                    _encounterEntry,
+                    _cachedEntries.ToArray(),
                     _brokenRule
                     ));
 

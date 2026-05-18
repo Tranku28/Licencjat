@@ -1,18 +1,16 @@
 using System;
+using UnityEngine;
 
 [Serializable]
 public struct PassengerEntry
 {
     public string PassengerName;
-    public string GeneralEntry;
-    public string EncounterEntry;
-    public int ID;
+    [TextArea(3, 5)]
+    public string Entry;
 
-    public PassengerEntry(string passengerName, string generalEntry, string encounterEntry, int id)
+    public PassengerEntry(string passengerName, string generalEntry)
     {
         PassengerName = passengerName;
-        GeneralEntry = generalEntry;
-        EncounterEntry = encounterEntry;
-        ID = id;
+        Entry = generalEntry;
     }
 }

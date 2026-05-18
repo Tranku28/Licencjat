@@ -7693,8 +7693,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 8, y: -8}
-  m_SizeDelta: {x: -16, y: -16}
+  m_AnchoredPosition: {x: -18, y: 0}
+  m_SizeDelta: {x: -60, y: -48}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &549811908
 MonoBehaviour:
@@ -7716,7 +7716,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Message Box
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2a7380eec0ad4884d9797271406573ef, type: 2}
   m_sharedMaterial: {fileID: -7671027254856574446, guid: 2a7380eec0ad4884d9797271406573ef, type: 2}
@@ -7747,7 +7747,7 @@ MonoBehaviour:
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 12
+  m_fontSizeMin: 18
   m_fontSizeMax: 24
   m_fontStyle: 1
   m_HorizontalAlignment: 1
@@ -7919,7 +7919,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 429d5eb3b453c7d40b0c1ce9de5d1671, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -10982,6 +10982,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 96d4cddd55192c14782e86516cb16fa4, type: 2}
   - {fileID: 11400000, guid: ba02c871dfb63fa41a225ef085950cf6, type: 2}
   - {fileID: 11400000, guid: 24d828ab46746cb4198bbd634f9bc5e9, type: 2}
+  startingEntries: {fileID: 11400000, guid: 9680928d7e36c0f4f8410b02dfe5296c, type: 2}
 --- !u!1 &858982032
 GameObject:
   m_ObjectHideFlags: 0
@@ -12233,19 +12234,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 923174427}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 845467558}
-        m_TargetAssemblyTypeName: GameMechanics.UI.DiaryController, GameMechanics
-        m_MethodName: TurnPreviousPage
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &923174427
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13224,7 +13213,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 2d0a0de5ce7147a489860286b3877441, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6c36e5e9de074de4594d716da2ce5e34, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -19883,7 +19872,7 @@ Camera:
     height: 1
   near clip plane: 0.1
   far clip plane: 5000
-  field of view: 60.000004
+  field of view: 60
   orthographic: 0
   orthographic size: 10
   m_Depth: -1
@@ -19909,8 +19898,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1477367495}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.14881198, y: 0.30455256, z: -0.0482364, w: 0.9395616}
-  m_LocalPosition: {x: 6.6244035, y: 1.5899999, z: 0.89490926}
+  m_LocalRotation: {x: 0, y: 0.008024162, z: 0, w: 0.9999679}
+  m_LocalPosition: {x: 6.3024073, y: 1.7, z: 0.1499807}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -26631,19 +26620,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2001640440}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 845467558}
-        m_TargetAssemblyTypeName: GameMechanics.UI.DiaryController, GameMechanics
-        m_MethodName: TurnNextPage
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &2001640440
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27122,7 +27099,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 3a2054acbfa72d7419ee83114508a9ac, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a8da33f2a756878439f8d86d730293de, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -28348,7 +28325,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UIVisual: {fileID: 2123353757}
   offset: 0
-  goBackButton: {fileID: 0}
   musicArrow: {fileID: 1428374832}
   sfxArrow: {fileID: 1741028270}
   musicFill: {fileID: 737584088}

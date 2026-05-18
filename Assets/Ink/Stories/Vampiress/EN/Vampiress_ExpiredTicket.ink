@@ -6,13 +6,12 @@ VAR harmony = 0
 VAR passengerAction = ""
 VAR decision = ""
 VAR brokenRule = ""
-VAR generalEntry = ""
-VAR encounterEntry = ""
+VAR addEntry = ""
 VAR gift = false
 
 ~ speakerIndex = 0
 Good evening, madam. Your ticket, please.
-~ generalEntry = "Tonight, a woman boarded the train. Young, at first glance, yet her eyes held something... ancient. Her ticket had expired seventy years ago. When I told her, she merely smiled - as though time itself had long since lost meaning. She should not have been here. And yet, I felt that this train had been waiting for her all along. This train carries more than passengers."
+~ addEntry = "Tonight, a woman boarded the train. Young, at first glance, yet her eyes held something... ancient. Her ticket had expired seventy years ago. When I told her, she merely smiled - as though time itself had long since lost meaning. She should not have been here. And yet, I felt that this train had been waiting for her all along. This train carries more than passengers."
 
 ~ speakerIndex = 1
 Here it is. Station Maplewood, one-way ticket. No return.
@@ -46,7 +45,7 @@ Aye. It was purchased long ago. Back when I still believed in a brighter morrow.
     ~ decision = "Disapproved"
     ~ passengerAction = "Charlotte personal data was incorrect and you didn’t let her pass."
     ~ harmony = -25
-    ~ encounterEntry = "I did not let her continue. I said, those are the rules. She did not protest. She merely bowed her head and vanished before the next station. I cannot stop thinking about her. That perhaps she only wished to say goodbye. That what I saw as breach of order, was, for her, a final chance. Perhaps that is why I am here, to decide who arrives in time, and who remains behind."
+    ~ addEntry = "I did not let her continue. I said, those are the rules. She did not protest. She merely bowed her head and vanished before the next station. I cannot stop thinking about her. That perhaps she only wished to say goodbye. That what I saw as breach of order, was, for her, a final chance. Perhaps that is why I am here, to decide who arrives in time, and who remains behind."
     ~ allowQuitDialogue = true
         -> END
         
@@ -71,7 +70,7 @@ Back then, my dreams had yet to be buried beneath dust and silence.
     ~ decision = "Disapproved"
     ~ dissapear = true
     ~ harmony = -25
-    ~ encounterEntry = "I did not let her continue. I said, those are the rules. She did not protest. She merely bowed her head and vanished before the next station. I cannot stop thinking about her. That perhaps she only wished to say goodbye. That what I saw as breach of order, was, for her, a final chance. Perhaps that is why I am here, to decide who arrives in time, and who remains behind."
+    ~ addEntry = "I did not let her continue. I said, those are the rules. She did not protest. She merely bowed her head and vanished before the next station. I cannot stop thinking about her. That perhaps she only wished to say goodbye. That what I saw as breach of order, was, for her, a final chance. Perhaps that is why I am here, to decide who arrives in time, and who remains behind."
     ~ allowQuitDialogue = true
     -> END
 
@@ -106,7 +105,7 @@ And now I bear the weight of that regret…
     ~ decision = "Disapproved"
     ~ dissapear = true
     ~ harmony = -25
-    ~ encounterEntry = "I did not let her continue. I said, those are the rules. She did not protest. She merely bowed her head and vanished before the next station. I cannot stop thinking about her. That perhaps she only wished to say goodbye. That what I saw as breach of order, was, for her, a final chance. Perhaps that is why I am here, to decide who arrives in time, and who remains behind."
+    ~ addEntry = "I did not let her continue. I said, those are the rules. She did not protest. She merely bowed her head and vanished before the next station. I cannot stop thinking about her. That perhaps she only wished to say goodbye. That what I saw as breach of order, was, for her, a final chance. Perhaps that is why I am here, to decide who arrives in time, and who remains behind."
     ~ allowQuitDialogue = true
     -> END
 
@@ -137,7 +136,7 @@ I regret that I lacked the courage. The courage to defy the elders. The courage 
     ~ decision = "Disapproved"
     ~ dissapear = true
     ~ harmony = -25
-    ~ encounterEntry = "I did not let her continue. I said, those are the rules. She did not protest. She merely bowed her head and vanished before the next station. I cannot stop thinking about her. That perhaps she only wished to say goodbye. That what I saw as breach of order, was, for her, a final chance. Perhaps that is why I am here, to decide who arrives in time, and who remains behind."
+    ~ addEntry = "I did not let her continue. I said, those are the rules. She did not protest. She merely bowed her head and vanished before the next station. I cannot stop thinking about her. That perhaps she only wished to say goodbye. That what I saw as breach of order, was, for her, a final chance. Perhaps that is why I am here, to decide who arrives in time, and who remains behind."
     ~ allowQuitDialogue = true
     -> END
     
@@ -175,7 +174,7 @@ I lacked the voice to speak his name aloud - to tell the world how deeply I love
     ~ passengerAction = "Charlotte personal data was incorrect and you didn’t let her pass."
     ~ dissapear = true
     ~ harmony = -25
-    ~ encounterEntry = "I did not let her continue. I said, those are the rules. She did not protest. She merely bowed her head and vanished before the next station. I cannot stop thinking about her. That perhaps she only wished to say goodbye. That what I saw as breach of order, was, for her, a final chance. Perhaps that is why I am here, to decide who arrives in time, and who remains behind."
+    ~ addEntry = "I did not let her continue. I said, those are the rules. She did not protest. She merely bowed her head and vanished before the next station. I cannot stop thinking about her. That perhaps she only wished to say goodbye. That what I saw as breach of order, was, for her, a final chance. Perhaps that is why I am here, to decide who arrives in time, and who remains behind."
     ~ allowQuitDialogue = true
     -> END
     
@@ -218,7 +217,7 @@ Tell me, how could such a thing be?
     ~ passengerAction = "Charlotte personal data was incorrect and you didn’t let her pass."
     ~ harmony = -25
     ~ dissapear = true
-    ~ encounterEntry = "I did not let her continue. I said, those are the rules. She did not protest. She merely bowed her head and vanished before the next station. I cannot stop thinking about her. That perhaps she only wished to say goodbye. That what I saw as breach of order, was, for her, a final chance. Perhaps that is why I am here, to decide who arrives in time, and who remains behind."
+    ~ addEntry = "I did not let her continue. I said, those are the rules. She did not protest. She merely bowed her head and vanished before the next station. I cannot stop thinking about her. That perhaps she only wished to say goodbye. That what I saw as breach of order, was, for her, a final chance. Perhaps that is why I am here, to decide who arrives in time, and who remains behind."
     ~ allowQuitDialogue = true
     -> END
 
@@ -261,7 +260,7 @@ Tell me, how could such a thing be?
     ~ passengerAction = "Charlotte personal data was incorrect and you didn’t let her pass."
     ~ harmony = -25
     ~ dissapear = true
-    ~ encounterEntry = "I did not let her continue. I said, those are the rules. She did not protest. She merely bowed her head and vanished before the next station. I cannot stop thinking about her. That perhaps she only wished to say goodbye. That what I saw as breach of order, was, for her, a final chance. Perhaps that is why I am here, to decide who arrives in time, and who remains behind."
+    ~ addEntry = "I did not let her continue. I said, those are the rules. She did not protest. She merely bowed her head and vanished before the next station. I cannot stop thinking about her. That perhaps she only wished to say goodbye. That what I saw as breach of order, was, for her, a final chance. Perhaps that is why I am here, to decide who arrives in time, and who remains behind."
     ~ allowQuitDialogue = true
     -> END
 
@@ -278,7 +277,7 @@ Tell me, how could such a thing be?
     ~ decision = "Approved"
     ~ passengerAction = "Charlotte personal data was incorrect, but you let her pass."
     ~ harmony = 25
-    ~ encounterEntry = "I let her pass. I do not know why. Perhaps because in her eyes I saw something I have long forgotten - hope. She said she was going to see her beloved, one last time. A mortal man, dying. They should never have existed in the same world and yet, there was more life in her voice than in many hearts I’ve met along this endless route. Little did she know that she's already dead herself."
+    ~ addEntry = "I let her pass. I do not know why. Perhaps because in her eyes I saw something I have long forgotten - hope. She said she was going to see her beloved, one last time. A mortal man, dying. They should never have existed in the same world and yet, there was more life in her voice than in many hearts I’ve met along this endless route. Little did she know that she's already dead herself."
     ~ brokenRule = "Passenger ticket was expired"
     ~ gift = true
     -> END
@@ -297,6 +296,6 @@ Tell me, how could such a thing be?
     ~ dissapear = true
     ~ passengerAction = "Charlotte personal data was incorrect and you didn’t let her pass."
     ~ harmony = -25
-    ~ encounterEntry = "I did not let her continue. I said, those are the rules. She did not protest. She merely bowed her head and vanished before the next station. I cannot stop thinking about her. That perhaps she only wished to say goodbye. That what I saw as breach of order, was, for her, a final chance. Perhaps that is why I am here, to decide who arrives in time, and who remains behind."
+    ~ addEntry = "I did not let her continue. I said, those are the rules. She did not protest. She merely bowed her head and vanished before the next station. I cannot stop thinking about her. That perhaps she only wished to say goodbye. That what I saw as breach of order, was, for her, a final chance. Perhaps that is why I am here, to decide who arrives in time, and who remains behind."
     ~ allowQuitDialogue = true
     -> END
