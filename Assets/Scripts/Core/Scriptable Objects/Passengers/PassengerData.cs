@@ -23,6 +23,8 @@ namespace Core.Scriptable_Objects
         
         [field: SerializeField] public string destination {get; private set;}
         [field: SerializeField] public ValidUntil validUntil {get; private set;}
+        [field: SerializeField, TextArea(2,3)] public string[] barks {get; private set;}
+        [field: SerializeField, TextArea(2,3)] public string[] additionalBarks {get; private set;}
 
         [Header("Card Details")]
         [field: SerializeField] public string species {get; private set;}
