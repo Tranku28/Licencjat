@@ -83,6 +83,7 @@ namespace GameMechanics.UI
         private bool _canQuitDialogue;
         private string _decision;
         private bool _gift;
+        private bool _staysNextDay;
 
         public static event Action CloseButtonEnableEvent;
 
@@ -141,6 +142,7 @@ namespace GameMechanics.UI
 
             _currentPassenger = sender as Passenger;
             _currentPassenger.GetComponent<Collider>().enabled = false;
+            _currentPassenger.SetStay(false);
 
             _currentPassengerData = passengerArgs.PassengerData;
             ticketMinigame.SetupTicketUI(passengerArgs.PassengerData);
@@ -215,6 +217,11 @@ namespace GameMechanics.UI
             _story.ObserveVariable("brokenRule", (string varName, object newValue) =>
             {
                 _brokenRule = (string)newValue;
+            });
+
+            _story.ObserveVariable("staysNextDay", (string varName, object newValue) =>
+            {
+                _currentPassenger.SetStay((bool)newValue);
             });
 
             _story.ObserveVariable("addEntry", (string varName, object newValue) =>

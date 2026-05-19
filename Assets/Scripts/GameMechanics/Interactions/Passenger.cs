@@ -10,6 +10,9 @@ namespace Interactions
         [SerializeField] private PassengerData passengerData;
         private bool _alreadyInteracted = false;
         public PassengerData PassengerData => passengerData;
+
+        public bool StaysNextDay {get; private set;}
+        public bool SetStay(bool value) => StaysNextDay = value;
         
         public static event EventHandler<PassengerInteractedEventArgs> OnPassengerInteracted;
 

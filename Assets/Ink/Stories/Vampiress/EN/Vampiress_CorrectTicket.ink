@@ -8,6 +8,7 @@ VAR decision = ""
 VAR brokenRule = ""
 VAR addEntry = ""
 VAR gift = false
+VAR staysNextDay = false
 
 ~ speakerIndex = 0
 Good evening, madam…

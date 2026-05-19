@@ -31,7 +31,7 @@ public class PassengerSpawner : MonoBehaviour, ISaveElement
 
         foreach (Passenger passenger in currentPassengers)
         {
-            if (passenger.PassengerData.dayAppears != gameSaveData.CurrentDay)
+            if (passenger.PassengerData.dayAppears != gameSaveData.CurrentDay && !passenger.StaysNextDay)
             {
                 passenger.gameObject.SetActive(false);
                 continue;

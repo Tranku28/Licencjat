@@ -8,6 +8,7 @@ VAR decision = ""
 VAR brokenRule = ""
 VAR addEntry = ""
 VAR gift = false
+VAR staysNextDay = false
 
 ~ speakerIndex = 0
 Your ticket, please.
@@ -195,6 +196,7 @@ But never forget. It, too, can be wrong.
 ~ decision = "You let the passenger to stay"
 ~ harmony = -25
 ~ gift = true
+~ staysNextDay = true
 Then perhaps someone else will not repeat my mistake.
 Thank you.
     -> END

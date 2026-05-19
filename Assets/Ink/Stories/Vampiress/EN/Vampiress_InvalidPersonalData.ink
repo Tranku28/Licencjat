@@ -8,6 +8,7 @@ VAR decision = ""
 VAR brokenRule = ""
 VAR addEntry = ""
 VAR gift = false
+VAR staysNextDay = false
 
 ~ addEntry = "Tonight, a woman boarded the train. Young, at first glance, yet her eyes held something... ancient. Her ticket had a different name. When I told her, she smiled - as though time itself had long since lost meaning. And she started to talk about her life before all this. She should not have been here. And yet, I felt that this train had been waiting for her all along. This train carries more than passengers."
 ~ speakerIndex = 0
