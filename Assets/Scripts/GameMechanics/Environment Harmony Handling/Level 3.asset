@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3522ca9ed25ebf41b311d4297c81df2, type: 3}
   m_Name: Level 3
   m_EditorClassIdentifier: 
-  WorksOnHarmonyLevel: 75
+  WorksOnHarmonyLevel: 25
   LinkTag: Shake
   MinGap: 10
   MaxGap: 30
