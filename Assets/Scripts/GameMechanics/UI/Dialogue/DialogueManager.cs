@@ -173,7 +173,7 @@ namespace GameMechanics.UI
 
         private void StartStory(PassengerData passengerData)
         {
-            int randomDialogueIndex = Random.Range(0, passengerData.dialogueVariants.Count-1);
+            int randomDialogueIndex = Random.Range(0, passengerData.dialogueVariants.Count);
             _story = new Story(passengerData.dialogueVariants[randomDialogueIndex].ToString());
             
             _story.ObserveVariable("speakerIndex", (string varName, object newValue) => {
