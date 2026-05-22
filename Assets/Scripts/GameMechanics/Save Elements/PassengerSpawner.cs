@@ -17,12 +17,40 @@ public class PassengerSpawner : MonoBehaviour, ISaveElement
 
     public void LoadSave(GameSaveData gameSaveData)
     {
-        EnablePassengers(gameSaveData.CurrentDay);
+        foreach(Passenger passenger in _allPassengers)
+        {
+            if (passenger.PassengerData.dayAppears == gameSaveData.CurrentDay)
+            {
+                passenger.StaysNextDay = false;
+                passenger.SetBarking(false);
+                passenger.gameObject.SetActive(true);
+                continue;
+            }
+
+            bool passengerStay = gameSaveData.PassengerStayNames.Contains(passenger.PassengerData.passengerName);
+
+            if (passengerStay)
+            {
+                passenger.StaysNextDay = false;
+                passenger.SetBarking(true);
+                passenger.gameObject.SetActive(true);
+                continue;
+            }
+
+            passenger.gameObject.SetActive(false);
+        }
     }
 
     public void SaveData(GameSaveData gameSaveData)
     {
-        
+        foreach (Passenger passenger in _allPassengers)
+        {
+            if (passenger.StaysNextDay)
+            {
+                Debug.Log("Passenger name saved");
+                gameSaveData.PassengerStayNames.Add(passenger.PassengerData.passengerName);
+            }
+        }
     }
 
     private void InstantiatePassengers()
@@ -31,22 +59,6 @@ public class PassengerSpawner : MonoBehaviour, ISaveElement
         {
             Passenger passenger = Instantiate(data.prefab).GetComponent<Passenger>();
             _allPassengers.Add(passenger);
-            passenger.gameObject.SetActive(false);
-        }
-    }
-
-    private void EnablePassengers(int day)
-    {
-        foreach(Passenger passenger in _allPassengers)
-        {
-            bool passengerStay = passenger.StaysNextDay && passenger.PassengerData.dayAppears + 1 == day;
-
-            if (passenger.PassengerData.dayAppears == day || passengerStay)
-            {
-                passenger.gameObject.SetActive(true);
-                continue;
-            }
-
             passenger.gameObject.SetActive(false);
         }
     }

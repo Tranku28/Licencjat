@@ -220,6 +220,7 @@ namespace GameMechanics.UI
             _story.ObserveVariable("staysNextDay", (string varName, object newValue) =>
             {
                 _currentPassenger.StaysNextDay = (bool)newValue;
+                Debug.Log($"{_currentPassenger.PassengerData.name} stays next day {newValue}");
             });
 
             _story.ObserveVariable("addEntry", (string varName, object newValue) =>

@@ -1,4 +1,6 @@
 using System;
+using Core;
+using Core.Save_System;
 using Core.Scriptable_Objects;
 using GameMechanics.Interactions;
 using UnityEngine;
@@ -12,7 +14,6 @@ namespace Interactions
         public PassengerData PassengerData => passengerData;
 
         public bool StaysNextDay {get; set;}
-        public bool CanBark => _canBark;
         
         public static event EventHandler<PassengerInteractedEventArgs> OnPassengerInteracted;
         public static event Action<string[], Sprite> OnBark;
@@ -26,7 +27,8 @@ namespace Interactions
         {
             if (_canBark) 
             {
-                if (StaysNextDay)
+                GameSaveData gameSaveData = DependencyResolver.Instance.GetType<SaveSystem>().GetCurrentSave();
+                if (passengerData.dayAppears + 1 == gameSaveData.CurrentDay)
                 {
                     OnBark?.Invoke(passengerData.additionalBarks, passengerData.passengerPortrait);
                     return;
@@ -37,11 +39,11 @@ namespace Interactions
             }
 
             _canBark = true;
-            //TODO: additional short answer on multiple interactions
             OnPassengerInteracted?.Invoke(this, new PassengerInteractedEventArgs(passengerData));
         }
 
         public void ResetInteractable() => _canBark = false;
+        public void SetBarking(bool value) => _canBark = value;
     }
     
     public class PassengerInteractedEventArgs : EventArgs
