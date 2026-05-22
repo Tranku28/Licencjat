@@ -6,43 +6,48 @@ using UnityEngine;
 public class PassengerSpawner : MonoBehaviour, ISaveElement
 {
     [SerializeField] private List<PassengerData> passengerDataList = new();
-    private List<int> spawnedDays = new();
-    private List<Passenger> currentPassengers = new();
+    private List<Passenger> _allPassengers = new();
 
     private void Awake()
     {
         (this as ISaveElement).Register(this);
+
+        InstantiatePassengers();
     }
 
     public void LoadSave(GameSaveData gameSaveData)
     {
-        foreach(PassengerData passengerData in passengerDataList)
-        {
-            if (spawnedDays.Contains(passengerData.dayAppears)) continue;
-
-            if (passengerData.dayAppears == gameSaveData.CurrentDay)
-            {
-                Passenger passenger = Instantiate(passengerData.prefab).GetComponent<Passenger>();
-                currentPassengers.Add(passenger);
-                spawnedDays.Add(passengerData.dayAppears);
-            }
-        }
-
-        foreach (Passenger passenger in currentPassengers)
-        {
-            if (passenger.PassengerData.dayAppears != gameSaveData.CurrentDay && !passenger.StaysNextDay)
-            {
-                passenger.gameObject.SetActive(false);
-                continue;
-            }
-
-            passenger.ResetInteractable();
-            passenger.gameObject.SetActive(true);
-        }
+        EnablePassengers(gameSaveData.CurrentDay);
     }
 
     public void SaveData(GameSaveData gameSaveData)
     {
         
+    }
+
+    private void InstantiatePassengers()
+    {
+        foreach (PassengerData data in passengerDataList)
+        {
+            Passenger passenger = Instantiate(data.prefab).GetComponent<Passenger>();
+            _allPassengers.Add(passenger);
+            passenger.gameObject.SetActive(false);
+        }
+    }
+
+    private void EnablePassengers(int day)
+    {
+        foreach(Passenger passenger in _allPassengers)
+        {
+            bool passengerStay = passenger.StaysNextDay && passenger.PassengerData.dayAppears + 1 == day;
+
+            if (passenger.PassengerData.dayAppears == day || passengerStay)
+            {
+                passenger.gameObject.SetActive(true);
+                continue;
+            }
+
+            passenger.gameObject.SetActive(false);
+        }
     }
 }
