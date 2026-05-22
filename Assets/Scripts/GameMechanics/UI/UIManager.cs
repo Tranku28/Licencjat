@@ -1,6 +1,5 @@
 using System;
 using Core;
-using Core.Scriptable_Objects;
 using Core.Scriptable_Objects.Souvenirs;
 using GameMechanics.Interactions;
 using GameMechanics.UI;
@@ -8,8 +7,6 @@ using GameMechanics.UI.MainMenu;
 using Interactions;
 using UI.MainMenu;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.Serialization;
 
 namespace GameMechanics
 {
@@ -20,6 +17,7 @@ namespace GameMechanics
         [SerializeField] private PauseMenuController pauseMenu;
         [SerializeField] private DialogueManager dialogueManager;
         [SerializeField] private HarmonyDiaryController diaryTab;
+        [SerializeField] private BarkController barkController;
         [SerializeField] private SouvenirViewController souvenirTab;
         [SerializeField] private TutorialNotesController tutorialNotesTab;
         [SerializeField] private SettingsPanelController settingsTab;
@@ -72,6 +70,7 @@ namespace GameMechanics
             SettingsWatchHandler.WatchClicked += OpenSettings;
             
             Passenger.OnPassengerInteracted += OnPassengerInteracted;
+            Passenger.OnBark += OnPassengerBarked;
             Diary.OnDiaryInteracted += OnDiaryInteracted;
 
             Souvenir.OnSouvenirInteracted += OnSouvenirInteracted;
@@ -95,6 +94,7 @@ namespace GameMechanics
             SettingsWatchHandler.WatchClicked -= OpenSettings;
 
             Passenger.OnPassengerInteracted -= OnPassengerInteracted;
+            Passenger.OnBark -= OnPassengerBarked;
             Diary.OnDiaryInteracted -= OnDiaryInteracted;
 
             Souvenir.OnSouvenirInteracted -= OnSouvenirInteracted;
@@ -141,6 +141,24 @@ namespace GameMechanics
             
             dialogueManager.SetVisualVisibility(true);
             CurrentElement = dialogueManager;
+            _gameStateMachine.ChangeGameState(GameState.UIOpened);
+        }
+
+        private void OnPassengerBarked(string[] obj, Sprite sprite)
+        {
+            if (_gameStateMachine.GetGameState() == GameState.Paused) return;
+            
+            if (_gameStateMachine.GetGameState() == GameState.UIOpened)
+            {
+                barkController.SetVisualVisibility(false);
+                CurrentElement = null;
+                _gameStateMachine.ChangeGameState(GameState.Gameplay);
+                
+                return;
+            }
+            
+            barkController.SetVisualVisibility(true);
+            CurrentElement = barkController;
             _gameStateMachine.ChangeGameState(GameState.UIOpened);
         }
         

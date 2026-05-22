@@ -29,6 +29,14 @@ MonoBehaviour:
     <Year>k__BackingField: 1273
     <Hour>k__BackingField: 18
     <Minute>k__BackingField: 6
+  <barks>k__BackingField:
+  - '*mutters something*'
+  - "I\u2019m so grateful, Conductor. We are gonna achieve great things."
+  - "I\u2019m not finished yet.. far from it."
+  <additionalBarks>k__BackingField:
+  - "It\u2019s almost finished\u2026"
+  - "Last finishing touches\u2026"
+  - Yes.. Yes.. It should be like this..
   <species>k__BackingField: Ghost
   <causeOfDeath>k__BackingField: Alcohol Overdose
   <biography>k__BackingField: 'A respected doctor from Crystgate, he graduated from

@@ -31,15 +31,13 @@ MonoBehaviour:
     <Year>k__BackingField: 1203
     <Hour>k__BackingField: 11
     <Minute>k__BackingField: 30
+  <barks>k__BackingField:
+  - '*Hums quietly*'
+  - Thank you, Conductor. I cannot wait to meet with Him once again.
+  <additionalBarks>k__BackingField: []
   <species>k__BackingField: Vampire
   <causeOfDeath>k__BackingField: Sunlight
   <biography>k__BackingField: "The firstborn daughter of the Bloodrose family. After
     her father\u2019s death, she took over the family business. However, she never
     married, and the Bloodrose line ended with her."
   <souvenirData>k__BackingField: {fileID: 11400000, guid: 9445aa4f19727c1499a6df95d5250517, type: 2}
-  <souvenirNote>k__BackingField: "\u201CYou once said the night would never end.\r\nBut
-    you were wrong - \r\nIt ends the moment someone dares to light a candle.\r\n\r\nYou
-    were my light.\u201D\r\n\r\nThere is also short note on the back:\r\n\r\n\u201CLove
-    ~\r\nEven when the world forbiddeth it.\r\nFor love alone is the law worth breaking.\u201D\r\n"
-  <diaryContent>k__BackingField: 
-  <souvenirName>k__BackingField: The Old Necklace

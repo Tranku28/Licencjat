@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Core;
 using Core.Scriptable_Objects;
 using Interactions;
 using UnityEngine;
