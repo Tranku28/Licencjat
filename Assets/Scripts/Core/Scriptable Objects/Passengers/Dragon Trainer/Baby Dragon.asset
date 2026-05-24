@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20242c5bf305c8146ad6e0628db2d7fd, type: 3}
   m_Name: Baby Dragon
   m_EditorClassIdentifier: 
-  souvenirID: 0
-  name: 
-  receivedFrom: 
-  souvenirPrefab: {fileID: 0}
-  souvenirEffects: []
+  souvenirID: 3
+  name: Baby Dragon
+  receivedFrom: Kaelen Ashenwing
+  souvenirPrefab: {fileID: 8821805408691735995, guid: 839dd90c7a3f5f047b7f4361acaf3cdc, type: 3}
+  souvenirEffect: {fileID: 0}
   souvenirDescription: 
   souvenirEffectDescription: 
