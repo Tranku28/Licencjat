@@ -55,7 +55,12 @@ namespace GameMechanics.Interactions
 
             if (sender is DialogueManager)
             {
-                AudioManager.Instance.PlayOneShot(FMODEvents.Instance.candleBlow, transform.position);
+                AudioManager.Instance.PlayOneShot(FMODEvents.Instance.diaryEntry, transform.position);
+            }
+
+            if (sender is IInteractable)
+            {
+                AudioManager.Instance.PlayOneShot(FMODEvents.Instance.notification, transform.position);
             }
         }
     }    

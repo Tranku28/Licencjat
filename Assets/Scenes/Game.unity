@@ -7017,6 +7017,41 @@ MonoBehaviour:
       Data3: 767095217
       Data4: 2078322616
     Path: event:/SFX/Rewind
+  <harmonyDisorder>k__BackingField:
+    Guid:
+      Data1: 134547550
+      Data2: 1291511697
+      Data3: 5184425
+      Data4: 1968577856
+    Path: event:/SFX/Harmony Disorder
+  <notification>k__BackingField:
+    Guid:
+      Data1: 1261966309
+      Data2: 1239968189
+      Data3: 38942866
+      Data4: -1583661489
+    Path: event:/SFX/Notification
+  <diaryEntry>k__BackingField:
+    Guid:
+      Data1: 730215661
+      Data2: 1339675336
+      Data3: -214069119
+      Data4: 1401492710
+    Path: event:/SFX/Diary Entry
+  <dayEndTypewriter>k__BackingField:
+    Guid:
+      Data1: -1829291087
+      Data2: 1244519719
+      Data3: -1230204797
+      Data4: -1062086119
+    Path: event:/SFX/Day End Typewriter
+  <potionUse>k__BackingField:
+    Guid:
+      Data1: 1243255632
+      Data2: 1100731680
+      Data3: -321727847
+      Data4: -1782079195
+    Path: event:/SFX/Potion
   <ambient>k__BackingField:
     Guid:
       Data1: 167033494
@@ -20677,8 +20712,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1477367495}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0.008024162, z: 0, w: 0.9999679}
-  m_LocalPosition: {x: 6.3024073, y: 1.7, z: 0.1499807}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 6.5, y: 1.2, z: -1.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
