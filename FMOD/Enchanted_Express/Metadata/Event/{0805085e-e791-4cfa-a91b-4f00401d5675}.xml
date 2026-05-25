@@ -201,10 +201,6 @@
 			<value>-9.39999962</value>
 		</property>
 	</object>
-	<object class="GainEffect" id="{fccb7f74-33cb-4180-8e85-c88b9d85d81f}">
-		<property name="gain">
-			<value>-5</value>
-		</property>
-	</object>
+	<object class="GainEffect" id="{fccb7f74-33cb-4180-8e85-c88b9d85d81f}" />
 	<object class="MixerBusFader" id="{fa333c2b-c4bd-4f01-beb2-49a2221a89f0}" />
 </objects>

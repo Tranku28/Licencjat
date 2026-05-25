@@ -49,7 +49,6 @@ namespace GameMechanics.UI
         
         public void SetDefaultDiaryState()
         {
-            Debug.Log(_passengerEntries.Count);
             _pageIndex = 0;
             DisplayEntries(_pageIndex);
             UpdateNavigationButtons();
@@ -58,8 +57,6 @@ namespace GameMechanics.UI
         
         public void TurnNextPage()
         {
-            Debug.Log("Turning next page");
-
             int nextIndex = _pageIndex + 2;
 
             if (nextIndex < _passengerEntries.Count)
@@ -73,8 +70,6 @@ namespace GameMechanics.UI
 
         public void TurnPreviousPage()
         {
-            Debug.Log("Turning previous page");
-
             int prevIndex = _pageIndex - 2;
 
             if (prevIndex >= 0)
@@ -118,6 +113,10 @@ namespace GameMechanics.UI
                     rightPassengerNameField
                 );
             }
+            else
+            {
+                rightEntryField.enabled = false;
+            }
         }
 
         private void DisplaySingleEntry(int index, TMP_Text entryField, TMP_Text passengerNameField)
@@ -154,6 +153,9 @@ namespace GameMechanics.UI
 
             leftPassengerNameField.text = "";
             rightPassengerNameField.text = "";
+
+            rightPassengerNameField.enabled = true;
+            rightEntryField.enabled = true;
         }
 
         private void AddEntries(object sender, DialogueEndEventArgs e)
