@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: DiaryStartingEntries
   m_EditorClassIdentifier: 
   <entries>k__BackingField:
-  - PassengerName: Day 1
+  - PassengerName: Conductor's Duty
     Entry: "My duty is simple: to check the tickets, to keep order, to ensure that\r\nevery
       passenger reaches their destination.\r\nAt least, that\u2019s what they told
       me when they sent me here.\r\nYet the longer this journey lasts, the less I
       understand where we are\r\ntruly heading.\r\nSome passengers look as though
       they are travelling for the first\r\ntime."
-  - PassengerName: Day 1
+  - PassengerName: Conductor's Duty
     Entry: 'Others, as if they know way too much.
 
       This train does not stop

@@ -13,6 +13,7 @@ public class TutorialNotesController : UIElement
     [SerializeField] private TutorialEntriesContainer tutorialEntriesContainer;
     [SerializeField] private List<TMP_Text> textFields = new();
     [SerializeField] private Button nextPageButton, previousPageButton;
+    [SerializeField] private Image stamp;
 
     private int _entriesPerPage;
     private List<TutorialEntry> tutorialEntries = new();
@@ -22,6 +23,8 @@ public class TutorialNotesController : UIElement
 
     private void Awake()
     {
+        stamp.enabled = false;
+
         tutorialEntries.Clear();
         if (tutorialEntriesContainer != null && tutorialEntriesContainer.tutorialEntries != null)
             tutorialEntries.AddRange(tutorialEntriesContainer.tutorialEntries);
@@ -87,7 +90,7 @@ public class TutorialNotesController : UIElement
 
         index = Mathf.Clamp(index, 0, _pageCount - 1);
 
-        int entryListStartPoint = index * _entriesPerPage; // ✅ bez -1
+        int entryListStartPoint = index * _entriesPerPage;
         int remaining = Mathf.Max(0, tutorialEntries.Count - entryListStartPoint);
         int countThisPage = Mathf.Min(_entriesPerPage, remaining);
 
