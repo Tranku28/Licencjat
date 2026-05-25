@@ -34,6 +34,7 @@ public class PassengerSpawner : MonoBehaviour, ISaveElement
                 passenger.StaysNextDay = false;
                 passenger.SetBarking(true);
                 passenger.gameObject.SetActive(true);
+                gameSaveData.PassengerStayNames.Remove(passenger.PassengerData.passengerName);
                 continue;
             }
 

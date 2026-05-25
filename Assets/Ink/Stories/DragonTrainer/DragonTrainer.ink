@@ -10,7 +10,8 @@ VAR addEntry = ""
 VAR gift = false
 VAR staysNextDay = false
 
-~ addEntry = "Tonight, a man boarded the train.\\nHe carried himself like someone who once commanded respect... and lost it.\\nHis hands were steady, yet there was something in his gaze. Not fear, not quite regret.\\nSomething heavier.\\nWhen I took his ticket, he did not hesitate. Yet when I asked about his purpose, his voice changed.\\nHe said he was looking for someone. Not a person.\\n\\nHe told me everything. About the dragons. About the war. About the choice he made.\\nHe spoke of them not as beasts, but as something... closer.\\nAs if, somewhere along the way, the line between master and companion had shattered.\\n\\nAnd yet, I could still see it.\\nThe weight of all the creatures he had sent to their deaths before that final act.\\n\\nHe opened the gates.\\nToo late for many.\\n\\nI wonder... Does one act of defiance erase a lifetime of obedience?\\nOr does it only make the silence louder?"
+~ addEntry = "Tonight, a man boarded the train.\\nHe carried himself like someone who once commanded respect... and lost it.\\nHis hands were steady, yet there was something in his gaze. Not fear, not quite regret.\\nSomething heavier.\\nWhen I took his ticket, he did not hesitate. Yet when I asked about his purpose, his voice changed.\\nHe said he was looking for someone. Not a person."
+~ addEntry = "He told me everything. About the dragons. About the war. About the choice he made.\\nHe spoke of them not as beasts, but as something... closer.\\nAs if, somewhere along the way, the line between master and companion had shattered.\\n\\nAnd yet, I could still see it.\\nThe weight of all the creatures he had sent to their deaths before that final act.\\n\\nHe opened the gates.\\nToo late for many.\\n\\nI wonder... Does one act of defiance erase a lifetime of obedience?\\nOr does it only make the silence louder?"
 
 ~ speakerIndex = 0
 Ticket, please.
@@ -112,6 +113,7 @@ After everything that had happened? I thought-...
 Nevermind.
 ~ addEntry = "I let him pass.\\nThere was something in his voice when he spoke of the dragon. Not pride. Not even redemption.\\nHope.\\nA fragile, desperate hope that somewhere beyond this journey, something he once set free still lives."
 ~ passengerAction = "Kaelen was allowed to pass"
+~ canScan = true
     -> END
 
 === 2_3 ===
@@ -150,6 +152,7 @@ He ordered all of the dragons to the war. And I knew what that meant.
 
 === 3_2 ===
 ~ speakerIndex = 1
+~ allowQuitDialogue = true
 Everything is keeping me here.
 ...
 But if this is it...
@@ -186,6 +189,7 @@ Everything is keeping me here.
 But if this is it...
 ~ addEntry = "I let him pass.\\nThere was something in his voice when he spoke of the dragon. Not pride. Not even redemption.\\nHope.\\nA fragile, desperate hope that somewhere beyond this journey, something he once set free still lives."
 ~ passengerAction = "Kaelen was allowed to pass, despite his "
+~ canScan = true
     -> END
     
 === 5_1 ===
@@ -208,6 +212,7 @@ Publicly. They needed to make an example.
 I... I regret it.
 I regret not seeing it sooner. I regret all the pain I caused them...
 ~ addEntry = "I let him pass.\\nThere was something in his voice when he spoke of the dragon. Not pride. Not even redemption.\\nHope.\\nA fragile, desperate hope that somewhere beyond this journey, something he once set free still lives."
+~ canScan = true
     -> END
     
     
@@ -231,6 +236,7 @@ No. Even now, I would do it again.
 Thank you...
 For seeing the real me.
 ~ addEntry = "I let him pass.\\nThere was something in his voice when he spoke of the dragon. Not pride. Not even redemption.\\nHope.\\nA fragile, desperate hope that somewhere beyond this journey, something he once set free still lives."
+~ canScan = true
 ~ gift = true
     -> END
 

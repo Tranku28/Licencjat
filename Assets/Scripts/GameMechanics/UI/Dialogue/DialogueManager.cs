@@ -407,7 +407,7 @@ namespace GameMechanics.UI
                 new DialogueEndEventArgs(
                     _currentPassenger.PassengerData.GetFullName(),
                     _passengerAction,
-                    "approved",
+                    _decision,
                     _harmonyChange,
                     _currentPassenger.PassengerData.souvenirData.souvenirID,
                     _cachedEntries.ToArray(),
