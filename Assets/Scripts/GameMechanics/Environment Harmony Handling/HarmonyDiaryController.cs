@@ -96,6 +96,8 @@ namespace GameMechanics.UI
         private void DisplayEntries(int leftIndex)
         {
             ClearDiaryFields();
+            leftEffects.StartManualEffects();
+            rightEffects.StartManualEffects();
 
             if (_passengerEntries.Count == 0)
                 return;

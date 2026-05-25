@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Level 3
   m_EditorClassIdentifier: 
   WorksOnHarmonyLevel: 25
-  LinkTag: Shake
+  LinkTag: Shake+Rotate
   MinGap: 10
-  MaxGap: 30
+  MaxGap: 25
   MinLength: 10
-  MaxLength: 20
+  MaxLength: 30
   Seed: 0

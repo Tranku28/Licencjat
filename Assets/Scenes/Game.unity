@@ -3388,8 +3388,13 @@ MonoBehaviour:
     onEffectCompleted:
       m_PersistentCalls:
         m_Calls: []
+  - triggerWhen: 0
+    effect: {fileID: 11400000, guid: 26d13bcd78004c2439181f63a4820783, type: 2}
+    onEffectCompleted:
+      m_PersistentCalls:
+        m_Calls: []
   globalEffects: []
-  updatesPerSecond: 60
+  updatesPerSecond: 45
 --- !u!1 &210476525
 GameObject:
   m_ObjectHideFlags: 0
@@ -4288,6 +4293,11 @@ MonoBehaviour:
         m_Calls: []
   - triggerWhen: 0
     effect: {fileID: 11400000, guid: 655311f854db1114dbb697533051222b, type: 2}
+    onEffectCompleted:
+      m_PersistentCalls:
+        m_Calls: []
+  - triggerWhen: 0
+    effect: {fileID: 11400000, guid: 26d13bcd78004c2439181f63a4820783, type: 2}
     onEffectCompleted:
       m_PersistentCalls:
         m_Calls: []
