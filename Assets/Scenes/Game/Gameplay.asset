@@ -26,7 +26,7 @@ MonoBehaviour:
     m_OverrideState: 1
     m_Value: 0.3
   shadowsEnd:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 0.3
   highlightsStart:
     m_OverrideState: 0
@@ -282,12 +282,12 @@ MonoBehaviour:
     m_Value: {x: 0.5, y: 0.5}
   intensity:
     m_OverrideState: 1
-    m_Value: 0.1
+    m_Value: 0.15
   smoothness:
     m_OverrideState: 1
     m_Value: 1
   roundness:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 1
   rounded:
     m_OverrideState: 0
@@ -409,7 +409,7 @@ MonoBehaviour:
     m_Value: 50
   meanFreePath:
     m_OverrideState: 1
-    m_Value: 75
+    m_Value: 110
   enableVolumetricFog:
     m_OverrideState: 1
     m_Value: 1
