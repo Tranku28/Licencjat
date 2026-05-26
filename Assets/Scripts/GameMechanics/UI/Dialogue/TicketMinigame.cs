@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using Core;
 using Core.Scriptable_Objects;
@@ -67,15 +68,20 @@ namespace GameMechanics
             ticketRenderCamera.enabled = false;
         }
 
-        public void SetupTicketUI(PassengerData data)
+        public void SetupTicketUI(PassengerData data, int index)
         {
-            RenderTicket();
+            StartCoroutine(RenderTicket());
 
             passengerFullNameText.text = $"{data.passengerName} {data.passengerSurname}";
 
             if (data is InvalidPassengerData)
             {
                 passengerFullNameText.text = $"{(data as InvalidPassengerData).invalidName} {(data as InvalidPassengerData).invalidSurname}";
+            }
+
+            if (index == data.dialogueVariants.Count - 1 && data.passengerName == "Charlotte")
+            {
+                passengerFullNameText.text = data.invalidFullName;
             }
 
             passengerCarNumber.text = data.car.ToString();
@@ -178,8 +184,9 @@ namespace GameMechanics
             _canScan = false;
         }
 
-        private void RenderTicket()
+        private IEnumerator RenderTicket()
         {
+            yield return new WaitForEndOfFrame();
             ticketRenderCamera.Render();
         }
     }

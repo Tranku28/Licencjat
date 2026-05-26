@@ -143,12 +143,15 @@ namespace GameMechanics.UI
             _currentPassenger.GetComponent<Collider>().enabled = false;
 
             _currentPassengerData = passengerArgs.PassengerData;
-            ticketMinigame.SetupTicketUI(passengerArgs.PassengerData);
+
+            int randomDialogueIndex = Random.Range(0, passengerArgs.PassengerData.dialogueVariants.Count);
+
+            ticketMinigame.SetupTicketUI(passengerArgs.PassengerData, randomDialogueIndex);
             npcNameText.text = passengerArgs.PassengerData.passengerName;
 
             ResetDialogueVariables();
 
-            StartStory(passengerArgs.PassengerData);
+            StartStory(passengerArgs.PassengerData, randomDialogueIndex);
         }
 
         private void PulsateTicketImage()
@@ -171,9 +174,8 @@ namespace GameMechanics.UI
             _decision = "";
         }
 
-        private void StartStory(PassengerData passengerData)
+        private void StartStory(PassengerData passengerData, int randomDialogueIndex)
         {
-            int randomDialogueIndex = Random.Range(0, passengerData.dialogueVariants.Count);
             _story = new Story(passengerData.dialogueVariants[randomDialogueIndex].ToString());
             
             _story.ObserveVariable("speakerIndex", (string varName, object newValue) => {

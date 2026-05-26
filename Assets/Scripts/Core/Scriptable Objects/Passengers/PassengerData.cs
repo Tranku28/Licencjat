@@ -14,6 +14,7 @@ namespace Core.Scriptable_Objects
         [field: SerializeField] public GameObject prefab {get; private set;}
         [field: SerializeField] public string passengerName {get; private set;}
         [field: SerializeField] public string passengerSurname {get; private set;}
+        [field: SerializeField] public string invalidFullName {get; private set;}
         [field: SerializeField] public int dayAppears {get; private set;}
 
         [field: SerializeField] public List<TextAsset> dialogueVariants {get; private set;}
