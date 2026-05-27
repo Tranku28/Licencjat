@@ -3,10 +3,11 @@ using UnityEngine;
 namespace Core
 {
     [InitializeSystem("App Global Settings")]
-    public class ApplicationGlobalSettings : MonoBehaviour
+    public class ApplicationGlobalSettings : BaseSystem
     {
-        private void Awake()
+        protected override void Awake()
         {
+            base.Awake();
             QualitySettings.vSyncCount = 1;
             Cursor.visible = false;
 
@@ -14,5 +15,7 @@ namespace Core
             Cursor.visible = true;
 #endif 
         }
+
+        public void CursorActive (bool value) => Cursor.visible = value;
     } 
 }

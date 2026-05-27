@@ -9,7 +9,7 @@ namespace GameMechanics.UI.MainMenu
     {
         private static readonly int Selected = Animator.StringToHash("Selected");
         [SerializeField] private Animator scrollAnimator;
-        public event Action ScrollClicked;
+        public static event Action ScrollClicked;
         public void OnPointerClick(PointerEventData eventData)
         {
             ScrollClicked?.Invoke();

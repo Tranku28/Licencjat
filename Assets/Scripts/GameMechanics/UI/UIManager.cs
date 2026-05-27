@@ -21,6 +21,8 @@ namespace GameMechanics
         [SerializeField] private SouvenirViewController souvenirTab;
         [SerializeField] private TutorialNotesController tutorialNotesTab;
         [SerializeField] private SettingsPanelController settingsTab;
+        [SerializeField] private CreditsPanelController creditsPanelController;
+        private ApplicationGlobalSettings _appSettings;
         private UIElement _settingsReturnTarget;
 
         public event Action OnUIOpened;
@@ -42,8 +44,13 @@ namespace GameMechanics
 
                     if (_currentElement != null)
                     {
+                        Debug.Log("Cursor Visible");
                         OnUIOpened?.Invoke();
+                        _appSettings.CursorActive(true);
+                        return;
                     }
+
+                    OnUIQuit?.Invoke();
                 }
             }
         }
@@ -54,6 +61,7 @@ namespace GameMechanics
         private void Start()
         {
             _gameStateMachine = DependencyResolver.Instance.GetType<GameStateMachine>();
+            _appSettings = DependencyResolver.Instance.GetType<ApplicationGlobalSettings>();
         }
 
         private void OnEnable()
@@ -65,6 +73,8 @@ namespace GameMechanics
             PauseMenuController.OnResume += OnResume;
             PauseMenuController.OnSettingsOpened += OpenSettings;
             PauseMenuController.OnMenuReturned += ResetCurrentElement;
+
+            CreditsScrollHandler.ScrollClicked += OpenCredits;
 
             SettingsPanelController.OnSettingsQuit += QuitPauseSettings;
             SettingsWatchHandler.WatchClicked += OpenSettings;
@@ -88,6 +98,8 @@ namespace GameMechanics
             PauseMenuController.OnSettingsOpened -= OpenSettings;
             PauseMenuController.OnMenuReturned -= ResetCurrentElement;
 
+            CreditsScrollHandler.ScrollClicked += OpenCredits;
+
             GameStateMachine.OnMenuReturned += ClearSettingsReturnTarget;
 
             SettingsPanelController.OnSettingsQuit -= QuitPauseSettings;
@@ -101,6 +113,12 @@ namespace GameMechanics
             Souvenir.OnSouvenirUiQuit -= OnSouvenirUIQuit;
 
             ConductorGuidelines.OnTutorialNotesInteracted -= OnTutorialNotesInteracted;
+        }
+
+        private void OpenCredits()
+        {
+            creditsPanelController.SetVisualVisibility(true);
+            CurrentElement = creditsPanelController;
         }
 
         private void ClearSettingsReturnTarget()
@@ -227,6 +245,9 @@ namespace GameMechanics
         
         private void OnEscapePressed()
         {
+            if (_gameStateMachine.GetGameState() != GameState.MainMenu)
+                _appSettings.CursorActive(false);
+
             if (CurrentElement == null && _gameStateMachine.GetGameState() == GameState.Gameplay)
             {
                 pauseMenu.SetVisualVisibility(true);
@@ -275,6 +296,13 @@ namespace GameMechanics
                     CurrentElement = null;
                 }
 
+                return;
+            }
+
+            if (CurrentElement == creditsPanelController)
+            {
+                creditsPanelController.SetVisualVisibility(false);
+                CurrentElement = null;
                 return;
             }
 

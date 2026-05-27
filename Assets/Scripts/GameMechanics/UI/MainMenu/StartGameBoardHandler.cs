@@ -81,6 +81,8 @@ namespace GameMechanics.UI.MainMenu
 
         public void OnPointerClick(PointerEventData eventData)
         {
+            DependencyResolver.Instance.GetType<ApplicationGlobalSettings>().CursorActive(true);
+
             boardAnimator.SetBool(ZoomIn, true);
             _cinemachineBrainController.BlendCustom(zoomInBlendSettings);
             saveSelectorCamera.Prioritize();
@@ -140,6 +142,8 @@ namespace GameMechanics.UI.MainMenu
 
         public void GoBackButtonClicked()
         {
+            DependencyResolver.Instance.GetType<ApplicationGlobalSettings>().CursorActive(true);
+
             boardAnimator.SetBool(ZoomIn, false);
             
             startJourneyButton.interactable = false;
@@ -189,6 +193,7 @@ namespace GameMechanics.UI.MainMenu
 
         private void OnNewGame()
         {
+            DependencyResolver.Instance.GetType<ApplicationGlobalSettings>().CursorActive(false);
             _newGame = true;
 
             SaveSystem saveSystem = DependencyResolver.Instance.GetType<SaveSystem>();
@@ -222,6 +227,7 @@ namespace GameMechanics.UI.MainMenu
         {
             SaveSystem saveSystem = DependencyResolver.Instance.GetType<SaveSystem>();
             saveSystem.LoadSave(saveSystem.GetSaves[saveIndex]);
+            DependencyResolver.Instance.GetType<ApplicationGlobalSettings>().CursorActive(false);
 
             OnStartButtonClicked();
         }

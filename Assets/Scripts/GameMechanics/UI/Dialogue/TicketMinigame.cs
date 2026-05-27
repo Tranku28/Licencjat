@@ -31,6 +31,7 @@ namespace GameMechanics
         [SerializeField] private RawImage ticketBackgroundImage;
         [SerializeField] private Camera ticketRenderCamera;
         private PuncherOrientation _lastOrientation;
+        private Material _runtimeHoleMaterial;
 
         public event Action OnTicketScanned;
         
@@ -63,6 +64,7 @@ namespace GameMechanics
             _camera = Camera.main;
 
             _defaultMaterial = new Material(ticketBackgroundImage.material);
+            _runtimeHoleMaterial = new Material(holeMaterial);
             ticketBackgroundImage.material = _defaultMaterial;
 
             ticketRenderCamera.enabled = false;
@@ -177,8 +179,8 @@ namespace GameMechanics
                 holeUV.x = Mathf.Clamp01(holeUV.x);
                 holeUV.y = Mathf.Clamp01(holeUV.y);
 
-                var mat = ticketBackgroundImage.material;
-                mat.SetVector("_HoleCenter", holeUV);
+                _runtimeHoleMaterial.SetVector("_HoleCenter", holeUV);
+                ticketBackgroundImage.material = _runtimeHoleMaterial;
             }
 
             _canScan = false;
