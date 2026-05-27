@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Core;
 using Core.Scriptable_Objects;
 using Interactions;
 using UnityEngine;
@@ -7,43 +6,61 @@ using UnityEngine;
 public class PassengerSpawner : MonoBehaviour, ISaveElement
 {
     [SerializeField] private List<PassengerData> passengerDataList = new();
-    private List<int> spawnedDays = new();
-    private List<Passenger> currentPassengers = new();
+    private List<Passenger> _allPassengers = new();
 
     private void Awake()
     {
         (this as ISaveElement).Register(this);
+
+        InstantiatePassengers();
     }
 
     public void LoadSave(GameSaveData gameSaveData)
     {
-        foreach(PassengerData passengerData in passengerDataList)
+        foreach(Passenger passenger in _allPassengers)
         {
-            if (spawnedDays.Contains(passengerData.dayAppears)) continue;
-
-            if (passengerData.dayAppears == gameSaveData.CurrentDay)
+            if (passenger.PassengerData.dayAppears == gameSaveData.CurrentDay)
             {
-                Passenger passenger = Instantiate(passengerData.prefab).GetComponent<Passenger>();
-                currentPassengers.Add(passenger);
-                spawnedDays.Add(passengerData.dayAppears);
-            }
-        }
-
-        foreach (Passenger passenger in currentPassengers)
-        {
-            if (passenger.PassengerData.dayAppears != gameSaveData.CurrentDay)
-            {
-                passenger.gameObject.SetActive(false);
+                passenger.StaysNextDay = false;
+                passenger.SetBarking(false);
+                passenger.gameObject.SetActive(true);
                 continue;
             }
 
-            passenger.ResetInteractable();
-            passenger.gameObject.SetActive(true);
+            bool passengerStay = gameSaveData.PassengerStayNames.Contains(passenger.PassengerData.passengerName);
+
+            if (passengerStay)
+            {
+                passenger.StaysNextDay = false;
+                passenger.SetBarking(true);
+                passenger.gameObject.SetActive(true);
+                gameSaveData.PassengerStayNames.Remove(passenger.PassengerData.passengerName);
+                continue;
+            }
+
+            passenger.gameObject.SetActive(false);
         }
     }
 
     public void SaveData(GameSaveData gameSaveData)
     {
-        
+        foreach (Passenger passenger in _allPassengers)
+        {
+            if (passenger.StaysNextDay)
+            {
+                Debug.Log("Passenger name saved");
+                gameSaveData.PassengerStayNames.Add(passenger.PassengerData.passengerName);
+            }
+        }
+    }
+
+    private void InstantiatePassengers()
+    {
+        foreach (PassengerData data in passengerDataList)
+        {
+            Passenger passenger = Instantiate(data.prefab).GetComponent<Passenger>();
+            _allPassengers.Add(passenger);
+            passenger.gameObject.SetActive(false);
+        }
     }
 }

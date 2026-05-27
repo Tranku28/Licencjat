@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Core.Scriptable_Objects.Souvenirs;
 using UnityEngine;
@@ -15,6 +14,7 @@ namespace Core.Scriptable_Objects
         [field: SerializeField] public GameObject prefab {get; private set;}
         [field: SerializeField] public string passengerName {get; private set;}
         [field: SerializeField] public string passengerSurname {get; private set;}
+        [field: SerializeField] public string invalidFullName {get; private set;}
         [field: SerializeField] public int dayAppears {get; private set;}
 
         [field: SerializeField] public List<TextAsset> dialogueVariants {get; private set;}
@@ -24,6 +24,8 @@ namespace Core.Scriptable_Objects
         
         [field: SerializeField] public string destination {get; private set;}
         [field: SerializeField] public ValidUntil validUntil {get; private set;}
+        [field: SerializeField, TextArea(2,3)] public string[] barks {get; private set;}
+        [field: SerializeField, TextArea(2,3)] public string[] additionalBarks {get; private set;}
 
         [Header("Card Details")]
         [field: SerializeField] public string species {get; private set;}

@@ -6,11 +6,12 @@ VAR harmony = 0
 VAR passengerAction = ""
 VAR decision = ""
 VAR brokenRule = ""
-VAR generalEntry = ""
-VAR encounterEntry = ""
+VAR addEntry = ""
 VAR gift = false
+VAR staysNextDay = false
 
-~ generalEntry = "Tonight, a man boarded the train.\\nHe carried himself like someone who once commanded respect... and lost it.\\nHis hands were steady, yet there was something in his gaze. Not fear, not quite regret.\\nSomething heavier.\\nWhen I took his ticket, he did not hesitate. Yet when I asked about his purpose, his voice changed.\\nHe said he was looking for someone. Not a person.\\n\\nHe told me everything. About the dragons. About the war. About the choice he made.\\nHe spoke of them not as beasts, but as something... closer.\\nAs if, somewhere along the way, the line between master and companion had shattered.\\n\\nAnd yet, I could still see it.\\nThe weight of all the creatures he had sent to their deaths before that final act.\\n\\nHe opened the gates.\\nToo late for many.\\n\\nI wonder... Does one act of defiance erase a lifetime of obedience?\\nOr does it only make the silence louder?"
+~ addEntry = "Tonight, a man boarded the train.\\nHe carried himself like someone who once commanded respect... and lost it.\\nHis hands were steady, yet there was something in his gaze. Not fear, not quite regret.\\nSomething heavier.\\nWhen I took his ticket, he did not hesitate. Yet when I asked about his purpose, his voice changed.\\nHe said he was looking for someone. Not a person."
+~ addEntry = "He told me everything. About the dragons. About the war. About the choice he made.\\nHe spoke of them not as beasts, but as something... closer.\\nAs if, somewhere along the way, the line between master and companion had shattered.\\n\\nAnd yet, I could still see it.\\nThe weight of all the creatures he had sent to their deaths before that final act.\\n\\nHe opened the gates.\\nToo late for many.\\n\\nI wonder... Does one act of defiance erase a lifetime of obedience?\\nOr does it only make the silence louder?"
 
 ~ speakerIndex = 0
 Ticket, please.
@@ -110,8 +111,9 @@ Probably more than he ever should have.
 So that’s how it ends? No questions? Nothing?
 After everything that had happened? I thought-...
 Nevermind.
-~ encounterEntry = "I let him pass.\\nThere was something in his voice when he spoke of the dragon. Not pride. Not even redemption.\\nHope.\\nA fragile, desperate hope that somewhere beyond this journey, something he once set free still lives."
+~ addEntry = "I let him pass.\\nThere was something in his voice when he spoke of the dragon. Not pride. Not even redemption.\\nHope.\\nA fragile, desperate hope that somewhere beyond this journey, something he once set free still lives."
 ~ passengerAction = "Kaelen was allowed to pass"
+~ canScan = true
     -> END
 
 === 2_3 ===
@@ -150,6 +152,7 @@ He ordered all of the dragons to the war. And I knew what that meant.
 
 === 3_2 ===
 ~ speakerIndex = 1
+~ allowQuitDialogue = true
 Everything is keeping me here.
 ...
 But if this is it...
@@ -184,8 +187,9 @@ I choosed them. Over everything. Over the crown. Over my own life.
 Everything is keeping me here.
 ...
 But if this is it...
-~ encounterEntry = "I let him pass.\\nThere was something in his voice when he spoke of the dragon. Not pride. Not even redemption.\\nHope.\\nA fragile, desperate hope that somewhere beyond this journey, something he once set free still lives."
+~ addEntry = "I let him pass.\\nThere was something in his voice when he spoke of the dragon. Not pride. Not even redemption.\\nHope.\\nA fragile, desperate hope that somewhere beyond this journey, something he once set free still lives."
 ~ passengerAction = "Kaelen was allowed to pass, despite his "
+~ canScan = true
     -> END
     
 === 5_1 ===
@@ -207,7 +211,8 @@ Publicly. They needed to make an example.
 ~ speakerIndex = 1
 I... I regret it.
 I regret not seeing it sooner. I regret all the pain I caused them...
-~ encounterEntry = "I let him pass.\\nThere was something in his voice when he spoke of the dragon. Not pride. Not even redemption.\\nHope.\\nA fragile, desperate hope that somewhere beyond this journey, something he once set free still lives."
+~ addEntry = "I let him pass.\\nThere was something in his voice when he spoke of the dragon. Not pride. Not even redemption.\\nHope.\\nA fragile, desperate hope that somewhere beyond this journey, something he once set free still lives."
+~ canScan = true
     -> END
     
     
@@ -230,7 +235,8 @@ No. Even now, I would do it again.
 ~ speakerIndex = 1
 Thank you...
 For seeing the real me.
-~ encounterEntry = "I let him pass.\\nThere was something in his voice when he spoke of the dragon. Not pride. Not even redemption.\\nHope.\\nA fragile, desperate hope that somewhere beyond this journey, something he once set free still lives."
+~ addEntry = "I let him pass.\\nThere was something in his voice when he spoke of the dragon. Not pride. Not even redemption.\\nHope.\\nA fragile, desperate hope that somewhere beyond this journey, something he once set free still lives."
+~ canScan = true
 ~ gift = true
     -> END
 
@@ -240,7 +246,7 @@ For seeing the real me.
 If there is something beyond this..
 I hope it is a sky wide enough for every dragon.
 Thank you.
-~ encounterEntry = "I let him pass.\\nThere was something in his voice when he spoke of the dragon. Not pride. Not even redemption.\\nHope.\\nA fragile, desperate hope that somewhere beyond this journey, something he once set free still lives."
+~ addEntry = "I let him pass.\\nThere was something in his voice when he spoke of the dragon. Not pride. Not even redemption.\\nHope.\\nA fragile, desperate hope that somewhere beyond this journey, something he once set free still lives."
 ~ gift = true
     -> END
 
@@ -254,6 +260,6 @@ I guess it is only fair for you to decide my fate.
 ...
 Just remember, Conductor. Sometimes what we call duty, is nothing more than fear wearing
 a uniform.
-~ encounterEntry = "I did not let him continue.\\n\\nHis story was filled with sorrow, yes. But also with choices. Too many of them made too late.\\n\\nHe did not argue. He only nodded, as if he had been expecting this all along.\\n\\nBefore he vanished, he said something I cannot forget. That sometimes duty is nothing morethan fear wearing a uniform.\\n\\nSince then, I find myself hesitating more often. Because I begin to wonder...\\nHow many of my decisions are truly mine."
+~ addEntry = "I did not let him continue.\\n\\nHis story was filled with sorrow, yes. But also with choices. Too many of them made too late.\\n\\nHe did not argue. He only nodded, as if he had been expecting this all along.\\n\\nBefore he vanished, he said something I cannot forget. That sometimes duty is nothing morethan fear wearing a uniform.\\n\\nSince then, I find myself hesitating more often. Because I begin to wonder...\\nHow many of my decisions are truly mine."
 ~ harmony = -25
     -> END

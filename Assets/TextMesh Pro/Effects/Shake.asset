@@ -17,7 +17,7 @@ MonoBehaviour:
   charLength: 0
   animationType: 2
   fixedDuration: 0
-  durationPerChar: 0.2
+  durationPerChar: 0.15
   timeBetweenChars: 0.05
   noDelayForChars: 0
   reverseCharOrder: 0
@@ -47,5 +47,5 @@ MonoBehaviour:
     m_RotationOrder: 4
   clampBetween0And1: 0
   timeType: 1
-  startOffset: {x: -5, y: -5}
-  endOffset: {x: 5, y: 5}
+  startOffset: {x: -3, y: -3}
+  endOffset: {x: 3, y: 3}

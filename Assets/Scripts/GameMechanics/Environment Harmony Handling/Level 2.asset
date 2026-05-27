@@ -17,5 +17,5 @@ MonoBehaviour:
   MinGap: 15
   MaxGap: 40
   MinLength: 7
-  MaxLength: 20
+  MaxLength: 25
   Seed: 0

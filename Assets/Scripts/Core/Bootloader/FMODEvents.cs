@@ -39,6 +39,16 @@ public class FMODEvents : MonoBehaviour
     [field: SerializeField] public EventReference doorClose { get; set; }
     [field: Header("Rewind")]
     [field: SerializeField] public EventReference rewind { get; set; }
+    [field: Header("Harmony")]
+    [field: SerializeField] public EventReference harmonyDisorder { get; set; }
+    [field: Header("Notification")]
+    [field: SerializeField] public EventReference notification { get; set; }
+    [field: Header("Diary Entry")]
+    [field: SerializeField] public EventReference diaryEntry { get; set; }
+    [field: Header("Typewriter")]
+    [field: SerializeField] public EventReference dayEndTypewriter { get; set; }
+    [field: Header("Potion")]
+    [field: SerializeField] public EventReference potionUse { get; set; }
 
     [field: Header("====== Music & Ambient ======")]
     [field: SerializeField] public EventReference ambient {get; set;}

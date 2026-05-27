@@ -11,6 +11,7 @@ public class GameSaveData
     public int HarmonyStatus = 100;
     public int TicketsAccepted;
     public int TicketsRejected;
+    public List<string> PassengerStayNames = new();
     public List<int> CollectedSouvenirIdList = new();
     public List<PassengerEntry> PassengerEntries = new();
     public PreviousDaySnapshot LastDayData;

@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bbe5e923751fa748af65c8e2b6c3986, type: 3}
+  m_Name: DiaryStartingEntries
+  m_EditorClassIdentifier: 
+  <entries>k__BackingField:
+  - PassengerName: Conductor's Duty
+    Entry: "My duty is simple: to check the tickets, to keep order, to ensure that\r\nevery
+      passenger reaches their destination.\r\nAt least, that\u2019s what they told
+      me when they sent me here.\r\nYet the longer this journey lasts, the less I
+      understand where we are\r\ntruly heading.\r\nSome passengers look as though
+      they are travelling for the first\r\ntime."
+  - PassengerName: Conductor's Duty
+    Entry: 'Others, as if they know way too much.
+
+      This train does not stop
+      in ordinary places. I do not know who writes
+
+      the timetable of this voyage.
+      Nor do I know what lies at its end.
+
+      And I?
+
+      I am to keep order.
+
+      And
+      not ask questions.'

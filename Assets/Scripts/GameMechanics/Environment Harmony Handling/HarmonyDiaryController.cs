@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Core;
 using EasyTextEffects;
 using TMPro;
 using UnityEngine;
@@ -16,6 +17,7 @@ namespace GameMechanics.UI
         [SerializeField] private TextEffect leftEffects, rightEffects;
         [SerializeField] private TMP_Text leftPassengerNameField, rightPassengerNameField;
         [SerializeField] private DiaryHarmonyLevel[] harmonyLevels;
+        [SerializeField] private DiaryStartingEntries startingEntries;
         private DiaryHarmonyLevel _selectedHarmonyLevel;
 
         private int _pageIndex;
@@ -29,132 +31,147 @@ namespace GameMechanics.UI
 
         private void Start()
         {
-            DialogueManager.OnDialogueQuitEvent += AddEntry;
+            DialogueManager.OnDialogueQuitEvent += AddEntries;
             HarmonyIndicator.OnHarmonyValueSet += CalculateHarmonyLevelIndex;
-        }
 
-        private void OnDestroy()
-        {
-            DialogueManager.OnDialogueQuitEvent -= AddEntry;
-            HarmonyIndicator.OnHarmonyValueSet -= CalculateHarmonyLevelIndex;
-        }
-
-        private void OnEnable()
-        {
             nextPageButton.onClick.AddListener(TurnNextPage);
             prevPageButton.onClick.AddListener(TurnPreviousPage);
         }
 
-        private void OnDisable()
+        private void OnDestroy()
         {
+            DialogueManager.OnDialogueQuitEvent -= AddEntries;
+            HarmonyIndicator.OnHarmonyValueSet -= CalculateHarmonyLevelIndex;
+
             nextPageButton.onClick.RemoveListener(TurnNextPage);
             prevPageButton.onClick.RemoveListener(TurnPreviousPage);
         }
-
+        
         public void SetDefaultDiaryState()
         {
             _pageIndex = 0;
-            DisplayEntry(_pageIndex);
-            prevPageButton.gameObject.SetActive(false);
-            nextPageButton.gameObject.SetActive(false);
-
-            if (_passengerEntries.Count > 1)
-            {
-                nextPageButton.gameObject.SetActive(true);
-            }
+            DisplayEntries(_pageIndex);
+            UpdateNavigationButtons();
         }
+
         
         public void TurnNextPage()
         {
-            _pageIndex++;
-            if (_pageIndex >= _passengerEntries.Count-1)
+            int nextIndex = _pageIndex + 2;
+
+            if (nextIndex < _passengerEntries.Count)
             {
-                nextPageButton.gameObject.SetActive(false);
-                _pageIndex = _passengerEntries.Count-1;
+                _pageIndex = nextIndex;
             }
 
-            DisplayEntry(_pageIndex);
-            prevPageButton.gameObject.SetActive(true);
+            DisplayEntries(_pageIndex);
+            UpdateNavigationButtons();
         }
-        
+
         public void TurnPreviousPage()
         {
-            _pageIndex--;
-            if (_pageIndex <= -1)
+            int prevIndex = _pageIndex - 2;
+
+            if (prevIndex >= 0)
             {
-                prevPageButton.gameObject.SetActive(false);
-                _pageIndex = 0;
-                return;
+                _pageIndex = prevIndex;
             }
 
-            DisplayEntry(_pageIndex);
-            nextPageButton.gameObject.SetActive(true);
+            DisplayEntries(_pageIndex);
+            UpdateNavigationButtons();
         }
 
-        private void DisplayEntry(int index)
+        private void UpdateNavigationButtons()
         {
-            if (_passengerEntries.Count == 0 || 
-                index < 0 || 
-                index >= _passengerEntries.Count)
-            {
-                leftEntryField.text = "";
-                rightEntryField.text = "";
+            prevPageButton.gameObject.SetActive(_pageIndex > 0);
+            nextPageButton.gameObject.SetActive(_pageIndex + 2 < _passengerEntries.Count);
+        }
+
+
+        private void DisplayEntries(int leftIndex)
+        {
+            ClearDiaryFields();
+            leftEffects.StartManualEffects();
+            rightEffects.StartManualEffects();
+
+            if (_passengerEntries.Count == 0)
                 return;
-            }
 
-            if (_selectedHarmonyLevel is null)
-            {    
-                leftEntryField.text = _passengerEntries[index].GeneralEntry;
-                leftPassengerNameField.text = _passengerEntries[index].PassengerName;
-                rightEntryField.text = _passengerEntries[index].EncounterEntry;
-                rightPassengerNameField.text = _passengerEntries[index].PassengerName;
-
-                return;
-            }
-
-            string generalEntry = TextAnimationInjector.InjectAnimatedTexts
-            (
-                _passengerEntries[index].GeneralEntry,
-                _selectedHarmonyLevel.LinkTag,
-                _selectedHarmonyLevel.MinGap,
-                _selectedHarmonyLevel.MaxGap,
-                _selectedHarmonyLevel.MinLength,
-                _selectedHarmonyLevel.MaxLength,
-                Random.Range(0, 20)
+            DisplaySingleEntry(
+                leftIndex,
+                leftEntryField,
+                leftPassengerNameField
             );
 
-            string encounterEntry = TextAnimationInjector.InjectAnimatedTexts
-            (
-                _passengerEntries[index].EncounterEntry,
-                _selectedHarmonyLevel.LinkTag,
-                _selectedHarmonyLevel.MinGap,
-                _selectedHarmonyLevel.MaxGap,
-                _selectedHarmonyLevel.MinLength,
-                _selectedHarmonyLevel.MaxLength,
-                Random.Range(0, 20)
-            );
+            int rightIndex = leftIndex + 1;
 
-            leftEntryField.text = generalEntry;
-            leftPassengerNameField.text = _passengerEntries[index].PassengerName;
-            rightEntryField.text = encounterEntry;
-            rightPassengerNameField.text = _passengerEntries[index].PassengerName;
+            if (rightIndex < _passengerEntries.Count)
+            {
+                DisplaySingleEntry(
+                    rightIndex,
+                    rightEntryField,
+                    rightPassengerNameField
+                );
+            }
+            else
+            {
+                rightEntryField.enabled = false;
+            }
         }
 
-        private void CalculateHarmonyLevelIndex(int harmonyValue)
+        private void DisplaySingleEntry(int index, TMP_Text entryField, TMP_Text passengerNameField)
         {
-            if (harmonyValue == 100)
-                _selectedHarmonyLevel = null;
-            if (harmonyValue >= 75 && harmonyValue < 100)
-                _selectedHarmonyLevel = harmonyLevels[0];
-            if (harmonyValue >= 50 && harmonyValue < 75)
-                _selectedHarmonyLevel = harmonyLevels[1];
-            if (harmonyValue >= 25 && harmonyValue < 50)
-                _selectedHarmonyLevel = harmonyLevels[2];
+            if (index < 0 || index >= _passengerEntries.Count)
+                return;
+
+            PassengerEntry entry = _passengerEntries[index];
+
+            string entryText = entry.Entry;
+
+            if (_selectedHarmonyLevel is not null)
+            {
+                entryText = TextAnimationInjector.InjectAnimatedTexts
+                (
+                    entry.Entry,
+                    _selectedHarmonyLevel.LinkTag,
+                    _selectedHarmonyLevel.MinGap,
+                    _selectedHarmonyLevel.MaxGap,
+                    _selectedHarmonyLevel.MinLength,
+                    _selectedHarmonyLevel.MaxLength,
+                    Random.Range(0, 20)
+                );
+            }
+
+            entryField.text = entryText;
+            passengerNameField.text = entry.PassengerName;
         }
 
-        private void AddEntry(object sender, DialogueEndEventArgs e)
+        private void ClearDiaryFields()
         {
-            _passengerEntries.Add(new PassengerEntry(e.PassengerName, e.GeneralEntry, e.EncounterEntry, e.EntryId));
+            leftEntryField.text = "";
+            rightEntryField.text = "";
+
+            leftPassengerNameField.text = "";
+            rightPassengerNameField.text = "";
+
+            rightPassengerNameField.enabled = true;
+            rightEntryField.enabled = true;
+        }
+
+        private void AddEntries(object sender, DialogueEndEventArgs e)
+        {
+            foreach (PassengerEntry entry in e.Entries)
+            {
+                _passengerEntries.Add(entry);
+            }
+        }
+
+        private void AddEntries(PassengerEntry[] entries)
+        {
+            foreach (PassengerEntry entry in entries)
+            {
+                _passengerEntries.Add(entry);
+            }
         }
 
         public void SaveData(GameSaveData gameSaveData)
@@ -170,7 +187,38 @@ namespace GameMechanics.UI
             _passengerEntries.Clear();
             _passengerEntries.AddRange(gameSaveData.PassengerEntries);
 
+            if (gameSaveData.CurrentDay == 1)
+            {
+                AddEntries(startingEntries.entries);
+            }
+
             SetDefaultDiaryState();
+        }
+
+        private void CalculateHarmonyLevelIndex(int harmonyValue)
+        {
+            if (harmonyValue >= 100)
+            {
+                _selectedHarmonyLevel = null;
+            }
+            else if (harmonyValue >= 75)
+            {
+                _selectedHarmonyLevel = harmonyLevels[0];
+            }
+            else if (harmonyValue >= 50)
+            {
+                _selectedHarmonyLevel = harmonyLevels[1];
+            }
+            else if (harmonyValue >= 25)
+            {
+                _selectedHarmonyLevel = harmonyLevels[2];
+            }
+            else
+            {
+                _selectedHarmonyLevel = harmonyLevels.Length > 3 
+                    ? harmonyLevels[3] 
+                    : harmonyLevels[^1];
+            }
         }
     }
 }

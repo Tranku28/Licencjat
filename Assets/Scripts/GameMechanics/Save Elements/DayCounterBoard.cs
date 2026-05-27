@@ -6,6 +6,7 @@ using UnityEngine;
 public class DayCounterBoard : MonoBehaviour, ISaveElement
 {
     [SerializeField] private TMP_Text dayDisplay;
+    [SerializeField] private int dayOffset = 11;
     private int _currentDay;
 
     private void Awake()
@@ -17,7 +18,7 @@ public class DayCounterBoard : MonoBehaviour, ISaveElement
     public void LoadSave(GameSaveData gameSaveData)
     {
         _currentDay = gameSaveData.CurrentDay == 0 ? 1 : gameSaveData.CurrentDay;
-        dayDisplay.text = _currentDay.ToString();
+        dayDisplay.text = $"{dayOffset + _currentDay}th April 1273";
     }
 
     public void SaveData(GameSaveData gameSaveData)

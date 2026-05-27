@@ -14,7 +14,6 @@ public class CloseUIButton : MonoBehaviour
     private Button _button;
     private Image _buttonImage;
     private bool _startBoardMode = false;
-    public event Action OnCloseUI;
 
     private void Awake()
     {

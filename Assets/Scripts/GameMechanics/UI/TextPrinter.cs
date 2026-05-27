@@ -1,11 +1,18 @@
 using System;
+using Core;
 using DG.Tweening;
+using FMOD.Studio;
+using FMODUnity;
+using GameMechanics.UI;
 using TMPro;
 using UnityEngine;
 
 public class TextPrinter
 {
     private const float CHAR_PRINT_INTERVAL = 0.025f;
+
+    private EventInstance _typewriterInstance;
+    private bool _instanceInitialized = false;
 
     public bool IsPrinting { get; private set; }
 
@@ -76,10 +83,18 @@ public class TextPrinter
         return this;
     }
 
-    public TextPrinter ThenPrint(TMP_Text target, string text)
+    public TextPrinter ThenPrint(TMP_Text target, string text, DaySummaryHandler daySummaryHandler)
     {
-        if (_sequence == null)
-            _sequence = DOTween.Sequence().SetAutoKill(true);
+        if (!_instanceInitialized)
+        {
+            _instanceInitialized = true;
+            _typewriterInstance = RuntimeManager.CreateInstance(FMODEvents.Instance.dayEndTypewriter);
+        }
+
+        _typewriterInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+        _typewriterInstance.start();
+
+        _sequence ??= DOTween.Sequence().SetAutoKill(true);
 
         target.enabled = true;
         target.SetText(text);
@@ -119,6 +134,7 @@ public class TextPrinter
         _sequence.OnComplete(() =>
         {
             IsPrinting = false;
+            _typewriterInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
             action?.Invoke();
             OnChainFinished?.Invoke();
         });

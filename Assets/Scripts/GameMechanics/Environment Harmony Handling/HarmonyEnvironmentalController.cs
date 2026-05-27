@@ -8,7 +8,7 @@ namespace HarmonyHandling
 {    
     public class HarmonyEnvironmentalController : MonoBehaviour
     {
-        private enum DisorderStatus
+        public enum DisorderStatus
         {
             Order,
             Low,
@@ -19,14 +19,18 @@ namespace HarmonyHandling
 
         [SerializeField] private float generalWaitTime;
         [SerializeField] private List<HarmonyLightController> harmonyLights = new();
+        private HarmonySoundController _harmonySoundController;
         private HashSet<int> _flickeringSelected = new();
         private int _levelOneFlickersCount = 2;
         private Coroutine _mainCoroutine;
         private Coroutine _flickerCoroutine;
+        private Coroutine _soundCoroutine;
         private DisorderStatus _disorderStatus;
 
         private void Start()
         {
+            _harmonySoundController = new(this);
+
             HarmonyIndicator.OnHarmonyValueSet += UpdateDisorder;
             GameStateMachine.OnMenuReturned += StopAllCoroutines;
             GameStateMachine.OnGameStarted += SetupMainCoroutine;
@@ -48,8 +52,8 @@ namespace HarmonyHandling
         {
             while (true)
             {
-                Debug.Log("Main Coroutine Invoked");
                 _flickerCoroutine ??= StartCoroutine(HandleFlickering());
+                HandleSounds();
                 
                 yield return new WaitForSeconds(generalWaitTime);
             }
@@ -57,8 +61,6 @@ namespace HarmonyHandling
 
         private IEnumerator HandleFlickering()
         {
-            Debug.Log("Flickering");
-
             if (_disorderStatus == DisorderStatus.Order)
                 goto End;
 
@@ -66,7 +68,6 @@ namespace HarmonyHandling
             {
                 _flickeringSelected.Clear();
 
-                Debug.Log("Random....");
                 for (int i=0; i < _levelOneFlickersCount; i++)
                 {
                     int randomIndex = Random.Range(0, harmonyLights.Count-1);
@@ -81,7 +82,6 @@ namespace HarmonyHandling
 
             if (_disorderStatus == DisorderStatus.Medium)
             {
-                Debug.Log("All sequentially");
                 foreach (var lightController in harmonyLights)
                 {
                     Sequence sequence = lightController.PlaySingleFlicker();
@@ -93,7 +93,6 @@ namespace HarmonyHandling
 
             if (_disorderStatus == DisorderStatus.Chaos)
             {
-                Debug.Log("All at once");
                 foreach (var lightController in harmonyLights)
                 {
                     lightController.PlaySingleFlicker();
@@ -104,10 +103,28 @@ namespace HarmonyHandling
             _flickerCoroutine = null;
         }
 
+        private void HandleSounds()
+        {
+            switch (_disorderStatus)
+            {
+                case DisorderStatus.Low:
+                    _harmonySoundController.TryPlaySound(1);
+                    break;
+                case DisorderStatus.Medium:
+                    _harmonySoundController.TryPlaySound(3);
+                    break;
+                case DisorderStatus.Chaos:
+                    _harmonySoundController.TryPlaySound(5);
+                    break;
+                default:
+                    _harmonySoundController.TryPlaySound(0);
+                    break;
+            }
+        }
+
         private void UpdateDisorder(int value)
         {
-            _disorderStatus = SetDisorderStatus(value);
-            Debug.Log(_disorderStatus);   
+            _disorderStatus = SetDisorderStatus(value);  
         }
 
         private DisorderStatus SetDisorderStatus(int value)

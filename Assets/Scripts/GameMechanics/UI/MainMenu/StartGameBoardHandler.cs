@@ -125,7 +125,6 @@ namespace GameMechanics.UI.MainMenu
             }
 
             GameSaveData[] saves = DependencyResolver.Instance.GetType<SaveSystem>().GetSaves;
-            Debug.Log(saves.Length);
             if (saves.Length == 0) return;
 
             for (int i=0; i < saves.Length; i++)

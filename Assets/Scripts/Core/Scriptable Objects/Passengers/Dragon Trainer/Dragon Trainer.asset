@@ -24,11 +24,16 @@ MonoBehaviour:
   <seat>k__BackingField: 32
   <destination>k__BackingField: Hillfield
   <validUntil>k__BackingField:
-    <Day>k__BackingField: 14
+    <Day>k__BackingField: 15
     <Month>k__BackingField: 4
     <Year>k__BackingField: 1273
     <Hour>k__BackingField: 8
     <Minute>k__BackingField: 13
+  <barks>k__BackingField:
+  - If I find him, I won't let him down again.
+  - "Thank you, Conductor. You are saving my life\u2026"
+  - '*Whistles a quiet song*'
+  <additionalBarks>k__BackingField: []
   <species>k__BackingField: Human
   <causeOfDeath>k__BackingField: Beheaded
   <biography>k__BackingField: 'A renowned dragon trainer of the royal stables. He

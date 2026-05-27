@@ -6,13 +6,13 @@ VAR harmony = 0
 VAR passengerAction = ""
 VAR decision = ""
 VAR brokenRule = ""
-VAR generalEntry = ""
-VAR encounterEntry = ""
+VAR addEntry = ""
 VAR gift = false
+VAR staysNextDay = false
 
 ~ speakerIndex = 0
 Your ticket, please.
-~ generalEntry = "Today I met a doctor, who was late for his own solution. He said that the time wasn’t the one who let him down."
+~ addEntry = "Today I met a doctor, who was late for his own solution. He said that the time wasn’t the one who let him down."
 
 ~ speakerIndex = 1
 Of course.
@@ -43,7 +43,7 @@ I cannot go there now.
 ~ speakerIndex = 1
 You do not yet grasp the gravity of your mistake.
 Generations will remember this decision.
-~ encounterEntry = "I reported him. He broke the rules. He should have known better. He wanted to fix the world. And I wanted to keep everything in order."
+~ addEntry = "I reported him. He broke the rules. He should have known better. He wanted to fix the world. And I wanted to keep everything in order."
 ~ passengerAction = "The Ghost reached the designated destination."
 ~ decision = "Disapproved"
 ~ harmony = 25
@@ -94,7 +94,7 @@ Yet I condemned the town to death.
 Perhaps you are right.
 Still, I hoped I might atone for my mistake.
 If only I had more time…
-~ encounterEntry = "I reported him. He broke the rules. He should have known better. He wanted to fix the world. And I wanted to keep everything in order."
+~ addEntry = "I reported him. He broke the rules. He should have known better. He wanted to fix the world. And I wanted to keep everything in order."
 ~ passengerAction = "The Ghost reached the designated destination."
 ~ decision = "Disapproved"
 ~ harmony = 25
@@ -139,7 +139,7 @@ But the answer came too late.
 …
 Rules are like diagnoses.
 Not always fair, but always unavoidable.
-~ encounterEntry = "I reported him. He broke the rules. He should have known better. He wanted to fix the world. And I wanted to keep everything in order."
+~ addEntry = "I reported him. He broke the rules. He should have known better. He wanted to fix the world. And I wanted to keep everything in order."
 ~ passengerAction = "The Ghost reached the designated destination."
 ~ decision = "Approved"
 ~ harmony = 25
@@ -178,7 +178,7 @@ I always knew that not every mistake can be undone.
 Yet every choice remains with us forever…
 Look after the Harmony.
 But never forget. It, too, can be wrong.
-~ encounterEntry = "I reported him. He broke the rules. He should have known better. He wanted to fix the world. And I wanted to keep everything in order."
+~ addEntry = "I reported him. He broke the rules. He should have known better. He wanted to fix the world. And I wanted to keep everything in order."
 ~ passengerAction = "The Ghost reached the designated destination."
 ~ decision = "Approved"
 ~ harmony = 25
@@ -190,12 +190,13 @@ But never forget. It, too, can be wrong.
 ~ speakerIndex = 1
 ~ allowQuitDialogue = true
 ~ canScan = false
-~ encounterEntry = "I broke the rules. I should have reported this incident. But I didn't. Why? Was it for him? Because I pity him? Or was it because I hoped that him breaking the rules would bring peace to others who are still alive?"
+~ addEntry = "I broke the rules. I should have reported this incident. But I didn't. Why? Was it for him? Because I pity him? Or was it because I hoped that him breaking the rules would bring peace to others who are still alive?"
 ~ passengerAction = "The Ghost didn’t reached the designated destination, despite having a valid ticket"
 ~ brokenRule = "Unjustified Refusal"
 ~ decision = "You let the passenger to stay"
 ~ harmony = -25
 ~ gift = true
+~ staysNextDay = true
 Then perhaps someone else will not repeat my mistake.
 Thank you.
     -> END
