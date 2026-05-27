@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2055929186394926073}
-  - component: {fileID: 1400730406212284700}
+  - component: {fileID: 5352202717348816739}
   - component: {fileID: 5588692383678111479}
   m_Layer: 0
   m_Name: Ghost
@@ -34,7 +34,7 @@ Transform:
   - {fileID: 2235648099809254242}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
---- !u!114 &1400730406212284700
+--- !u!114 &5352202717348816739
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

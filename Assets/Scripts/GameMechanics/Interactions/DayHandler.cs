@@ -42,7 +42,7 @@ namespace GameMechanics.DayHandling
         {
             if (!_canNextDay)
             {
-                InteractionMessenger.instance.MessagePlayer("Can't proceed to the next day.\n Talk to at least one passenger to continue", this);
+                PlayerMessenger.instance.MessagePlayer("Can't proceed to the next day.\n Talk to at least one passenger to continue", this);
                 return;
             }
 

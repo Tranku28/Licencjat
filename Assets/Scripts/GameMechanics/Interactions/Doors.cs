@@ -87,6 +87,7 @@ namespace GameMechanics
 
         private void ForceCloseDoors()
         {
+            _doorsOpened = false;
             leftDoor.rotation = _initialLeftRotation;
             rightDoor.rotation = _initialRightRotation;
         }

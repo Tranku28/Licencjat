@@ -9,7 +9,7 @@ namespace GameMechanics.UI.MainMenu
     {
         private static readonly int Selected = Animator.StringToHash("Selected");
         [SerializeField] private Animator watchAnimator;
-        public event Action WatchClicked;
+        public static event Action WatchClicked;
     
         public void OnPointerClick(PointerEventData eventData)
         {

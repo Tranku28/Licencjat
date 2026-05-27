@@ -6,13 +6,13 @@ VAR harmony = 0
 VAR passengerAction = ""
 VAR decision = ""
 VAR brokenRule = ""
-VAR generalEntry = ""
-VAR encounterEntry = ""
+VAR addEntry = ""
 VAR gift = false
+VAR staysNextDay = false
 
 ~ speakerIndex = 0
 Good evening, madam…
-~ generalEntry = "Tonight, a woman boarded the train. \\n\\nYoung, at first glance, yet her eyes held something... ancient. I felt that this train had been waiting for her all along This train carries more than passengers."
+~ addEntry = "Tonight, a woman boarded the train. \\n\\nYoung, at first glance, yet her eyes held something... ancient. I felt that this train had been waiting for her all along This train carries more than passengers."
 
 ~ speakerIndex = 1
 Charlotte Bloodrose.
@@ -59,7 +59,7 @@ The protocols. Please leave at the nearest station.
     ~ decision = "Disapproved"
     ~ passengerAction = "Charlotte didn’t reached the designated destination, despite having a valid ticket"
     ~ brokenRule = "Unjustified refusal"
-    ~ encounterEntry = "I did not let her continue. Perhaps that is why I am here, to decide who arrives in time, and who remains behind."
+    ~ addEntry = "I did not let her continue. Perhaps that is why I am here, to decide who arrives in time, and who remains behind."
     ~ passengerAction = "Charlotte didn’t reached the designated destination, despite having a valid ticket."
     ~ dissapear = true
     ~ allowQuitDialogue = true

@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using Core;
 using Core.Scriptable_Objects;
@@ -29,6 +30,7 @@ namespace GameMechanics
         [Header("Ticket Rendering")]
         [SerializeField] private RawImage ticketBackgroundImage;
         [SerializeField] private Camera ticketRenderCamera;
+        private PuncherOrientation _lastOrientation;
 
         public event Action OnTicketScanned;
         
@@ -62,17 +64,24 @@ namespace GameMechanics
 
             _defaultMaterial = new Material(ticketBackgroundImage.material);
             ticketBackgroundImage.material = _defaultMaterial;
+
+            ticketRenderCamera.enabled = false;
         }
 
-        public void SetupTicketUI(PassengerData data)
+        public void SetupTicketUI(PassengerData data, int index)
         {
-            RenderTicket();
+            StartCoroutine(RenderTicket());
 
             passengerFullNameText.text = $"{data.passengerName} {data.passengerSurname}";
 
             if (data is InvalidPassengerData)
             {
                 passengerFullNameText.text = $"{(data as InvalidPassengerData).invalidName} {(data as InvalidPassengerData).invalidSurname}";
+            }
+
+            if (index == data.dialogueVariants.Count - 1 && data.passengerName == "Charlotte")
+            {
+                passengerFullNameText.text = data.invalidFullName;
             }
 
             passengerCarNumber.text = data.car.ToString();
@@ -121,21 +130,24 @@ namespace GameMechanics
             float distBottom = Mathf.Abs(localPoint.y - rect.yMin);
             float distTop = Mathf.Abs(localPoint.y - rect.yMax);
             
+            PuncherOrientation newOrientation;
+
             if (distLeft <= distRight && distLeft <= distTop && distLeft <= distBottom)
-            {
-                OnTicketMoved?.Invoke(this, new OnTicketPointerMovedEventArgs(PuncherOrientation.Left, visual.transform.rotation));
-            }
+                newOrientation = PuncherOrientation.Left;
             else if (distRight <= distLeft && distRight <= distTop && distRight <= distBottom)
-            {
-                OnTicketMoved?.Invoke(this, new OnTicketPointerMovedEventArgs(PuncherOrientation.Right, visual.transform.rotation));
-            }
+                newOrientation = PuncherOrientation.Right;
             else if (distTop <= distLeft && distTop <= distRight && distTop <= distBottom)
-            {
-                OnTicketMoved?.Invoke(this, new OnTicketPointerMovedEventArgs(PuncherOrientation.Bottom, visual.transform.rotation));
-            }
+                newOrientation = PuncherOrientation.Bottom;
             else
+                newOrientation = PuncherOrientation.Top;
+
+            if (newOrientation != _lastOrientation)
             {
-                OnTicketMoved?.Invoke(this, new OnTicketPointerMovedEventArgs(PuncherOrientation.Top, visual.transform.rotation));
+                _lastOrientation = newOrientation;
+                OnTicketMoved?.Invoke(
+                    this,
+                    new OnTicketPointerMovedEventArgs(newOrientation, visual.transform.rotation)
+                );
             }
         }
 
@@ -147,36 +159,34 @@ namespace GameMechanics
             AudioManager.Instance.PlayOneShot(FMODEvents.Instance.puncherSound, transform.position);
 
             Vector2 cursorPos = Mouse.current.position.ReadValue();
-
             RectTransform rectTransform = visual.transform as RectTransform;
 
             if (RectTransformUtility.ScreenPointToLocalPointInRectangle(
                     rectTransform,
                     cursorPos,
-                    Camera.main,
+                    _camera,
                     out Vector2 localPoint))
             {
                 Rect rect = rectTransform.rect;
                 Vector2 pivot = rectTransform.pivot;
-                
+
                 float normalizedX = (localPoint.x + rect.width * pivot.x) / rect.width;
                 float normalizedY = (localPoint.y + rect.height * pivot.y) / rect.height;
 
                 Vector2 holeUV = new(normalizedX, normalizedY);
-
-
                 holeUV.x = Mathf.Clamp01(holeUV.x);
                 holeUV.y = Mathf.Clamp01(holeUV.y);
 
-                ticketBackgroundImage.material = holeMaterial;
-                ticketBackgroundImage.material.SetVector("_HoleCenter", holeUV);
+                var mat = ticketBackgroundImage.material;
+                mat.SetVector("_HoleCenter", holeUV);
             }
 
             _canScan = false;
         }
 
-        private void RenderTicket()
+        private IEnumerator RenderTicket()
         {
+            yield return new WaitForEndOfFrame();
             ticketRenderCamera.Render();
         }
     }

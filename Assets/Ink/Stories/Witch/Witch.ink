@@ -6,13 +6,13 @@ VAR harmony = 0
 VAR passengerAction = ""
 VAR decision = ""
 VAR brokenRule = ""
-VAR generalEntry = ""
-VAR encounterEntry = ""
+VAR addEntry = ""
 VAR gift = false
+VAR staysNextDay = false
 
 ~ speakerIndex = 0
 Ticket, please.
-~ generalEntry = "Delliah. For years, she healed with the trust of others more than with herbs. She knew the names of plants, but she didn't know the limits of her own knowledge. When the real illness came, she was left all alone, with empty hands and overly proud tongue."
+~ addEntry = "Delliah. For years, she healed with the trust of others more than with herbs. She knew the names of plants, but she didn't know the limits of her own knowledge. When the real illness came, she was left all alone, with empty hands and overly proud tongue."
 
 ~ speakerIndex = 1
 Of course, dear.
@@ -209,7 +209,7 @@ That’s why, expect a gift from me.
 A little charm, for you, to bend more rules.
 ~ canScan = true
 ~ harmony = 25
-~ encounterEntry = "I let her stay. She spoke of knowledge as if it were something owned, not earned. Her hands knew poisons as well as cures, yet she called both wisdom. She believed herself clever until the very end. Perhaps that belief is what kept her standing when everyone else fell. The Train feels heavier tonight."
+~ addEntry = "I let her stay. She spoke of knowledge as if it were something owned, not earned. Her hands knew poisons as well as cures, yet she called both wisdom. She believed herself clever until the very end. Perhaps that belief is what kept her standing when everyone else fell. The Train feels heavier tonight."
 ~ brokenRule = "Passenger data does not match with the ticket"
 ~ decision = "Approved"
 ~ passengerAction = "Deliah continued her journey despite an invalid ticket"

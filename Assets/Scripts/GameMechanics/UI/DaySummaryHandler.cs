@@ -51,13 +51,13 @@ namespace GameMechanics.UI
                 ruleBreak.enabled = false;
             else
                 ruleBreak.enabled = true;
-
+ 
             _textPrinter
                 .BeginChain()
-                .ThenPrint(passengerAction, _summary.PassengerAction)
-                .ThenPrint(decision, $"Decision: {_summary.Decision}")
-                .ThenPrint(harmonyValue, $"Harmony Status: {harmonyFormat}")
-                .ThenPrint(ruleBreak, string.IsNullOrEmpty(_summary.RuleBroken) ? "" : _summary.RuleBroken)
+                .ThenPrint(passengerAction, _summary.PassengerAction, this)
+                .ThenPrint(decision, $"Decision: {_summary.Decision}", this)
+                .ThenPrint(harmonyValue, $"Harmony Status: {harmonyFormat}", this)
+                .ThenPrint(ruleBreak, string.IsNullOrEmpty(_summary.RuleBroken) ? "" : _summary.RuleBroken, this)
                 .OnChainComplete(() =>
                 {
                     Debug.Log("Summary Finished");

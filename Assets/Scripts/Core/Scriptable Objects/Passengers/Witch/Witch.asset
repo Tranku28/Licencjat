@@ -24,11 +24,19 @@ MonoBehaviour:
   <seat>k__BackingField: 1
   <destination>k__BackingField: Scarswall
   <validUntil>k__BackingField:
-    <Day>k__BackingField: 4
-    <Month>k__BackingField: 5
+    <Day>k__BackingField: 14
+    <Month>k__BackingField: 4
     <Year>k__BackingField: 1273
     <Hour>k__BackingField: 13
     <Minute>k__BackingField: 45
+  <barks>k__BackingField:
+  - 'I knew you were just like me. Hurt by the world, willing to do whatever it takes
+    to
+
+    achieve the goal you set for yourself.'
+  - '*Incomprehensible muttering*'
+  - "People disgust me.. But not you. Although it\u2019s hard to call you a Human\u2026"
+  <additionalBarks>k__BackingField: []
   <species>k__BackingField: Witch
   <causeOfDeath>k__BackingField: Eaten by wild animals
   <biography>k__BackingField: "A witch from a distant village who deceived its people

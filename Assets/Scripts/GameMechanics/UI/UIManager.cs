@@ -1,6 +1,5 @@
 using System;
 using Core;
-using Core.Scriptable_Objects;
 using Core.Scriptable_Objects.Souvenirs;
 using GameMechanics.Interactions;
 using GameMechanics.UI;
@@ -8,8 +7,6 @@ using GameMechanics.UI.MainMenu;
 using Interactions;
 using UI.MainMenu;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.Serialization;
 
 namespace GameMechanics
 {
@@ -20,6 +17,7 @@ namespace GameMechanics
         [SerializeField] private PauseMenuController pauseMenu;
         [SerializeField] private DialogueManager dialogueManager;
         [SerializeField] private HarmonyDiaryController diaryTab;
+        [SerializeField] private BarkController barkController;
         [SerializeField] private SouvenirViewController souvenirTab;
         [SerializeField] private TutorialNotesController tutorialNotesTab;
         [SerializeField] private SettingsPanelController settingsTab;
@@ -28,6 +26,7 @@ namespace GameMechanics
         public event Action OnUIOpened;
         public event Action OnUIQuit;
         
+        private GameStateMachine _gameStateMachine;
         private UIElement _currentElement;
 
         private UIElement CurrentElement
@@ -49,7 +48,6 @@ namespace GameMechanics
             }
         }
         
-        private GameStateMachine _gameStateMachine;
 
         public void ForceEscape() => OnEscapePressed();
 
@@ -62,13 +60,17 @@ namespace GameMechanics
         {
             PlayerControls.OnEscapePressedEvent += OnEscapePressed;
 
+            GameStateMachine.OnMenuReturned += ClearSettingsReturnTarget;
+
             PauseMenuController.OnResume += OnResume;
             PauseMenuController.OnSettingsOpened += OpenSettings;
             PauseMenuController.OnMenuReturned += ResetCurrentElement;
 
             SettingsPanelController.OnSettingsQuit += QuitPauseSettings;
+            SettingsWatchHandler.WatchClicked += OpenSettings;
             
             Passenger.OnPassengerInteracted += OnPassengerInteracted;
+            Passenger.OnBark += OnPassengerBarked;
             Diary.OnDiaryInteracted += OnDiaryInteracted;
 
             Souvenir.OnSouvenirInteracted += OnSouvenirInteracted;
@@ -86,9 +88,13 @@ namespace GameMechanics
             PauseMenuController.OnSettingsOpened -= OpenSettings;
             PauseMenuController.OnMenuReturned -= ResetCurrentElement;
 
+            GameStateMachine.OnMenuReturned += ClearSettingsReturnTarget;
+
             SettingsPanelController.OnSettingsQuit -= QuitPauseSettings;
+            SettingsWatchHandler.WatchClicked -= OpenSettings;
 
             Passenger.OnPassengerInteracted -= OnPassengerInteracted;
+            Passenger.OnBark -= OnPassengerBarked;
             Diary.OnDiaryInteracted -= OnDiaryInteracted;
 
             Souvenir.OnSouvenirInteracted -= OnSouvenirInteracted;
@@ -96,7 +102,12 @@ namespace GameMechanics
 
             ConductorGuidelines.OnTutorialNotesInteracted -= OnTutorialNotesInteracted;
         }
-        
+
+        private void ClearSettingsReturnTarget()
+        {
+            _settingsReturnTarget = null;
+        }
+
         private void OnSouvenirInteracted(SouvenirData obj)
         {
             if (_gameStateMachine.GetGameState() == GameState.Paused) return;
@@ -132,6 +143,24 @@ namespace GameMechanics
             CurrentElement = dialogueManager;
             _gameStateMachine.ChangeGameState(GameState.UIOpened);
         }
+
+        private void OnPassengerBarked(string[] obj, Sprite sprite)
+        {
+            if (_gameStateMachine.GetGameState() == GameState.Paused) return;
+            
+            if (_gameStateMachine.GetGameState() == GameState.UIOpened)
+            {
+                barkController.SetVisualVisibility(false);
+                CurrentElement = null;
+                _gameStateMachine.ChangeGameState(GameState.Gameplay);
+                
+                return;
+            }
+            
+            barkController.SetVisualVisibility(true);
+            CurrentElement = barkController;
+            _gameStateMachine.ChangeGameState(GameState.UIOpened);
+        }
         
         private void OnResume()
         {
@@ -140,7 +169,10 @@ namespace GameMechanics
 
         private void OpenSettings()
         {
-            _settingsReturnTarget = pauseMenu;
+            if (CurrentElement == pauseMenu)
+            {
+                _settingsReturnTarget = pauseMenu;
+            }
 
             CurrentElement = settingsTab;
             settingsTab.SetVisualVisibility(true);
@@ -188,6 +220,7 @@ namespace GameMechanics
                 AudioManager.Instance.PlayOneShot(FMODEvents.Instance.creditsOpen, transform.position);
                 CurrentElement = tutorialNotesTab;
                 tutorialNotesTab.SetVisualVisibility(true);
+                tutorialNotesTab.DisplayPage(0);
                 _gameStateMachine.ChangeGameState(GameState.UIOpened);
             }
         }
@@ -240,7 +273,6 @@ namespace GameMechanics
                 else
                 {
                     CurrentElement = null;
-                    _gameStateMachine.ChangeGameState(GameState.Gameplay);
                 }
 
                 return;
