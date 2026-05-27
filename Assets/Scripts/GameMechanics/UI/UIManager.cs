@@ -220,6 +220,7 @@ namespace GameMechanics
                 AudioManager.Instance.PlayOneShot(FMODEvents.Instance.creditsOpen, transform.position);
                 CurrentElement = tutorialNotesTab;
                 tutorialNotesTab.SetVisualVisibility(true);
+                tutorialNotesTab.DisplayPage(0);
                 _gameStateMachine.ChangeGameState(GameState.UIOpened);
             }
         }

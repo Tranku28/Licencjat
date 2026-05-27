@@ -15,6 +15,6 @@ public class TutorialEntriesContainer : ScriptableObject
 public struct TutorialEntry
 {
         [SerializeField] public int id;
-        [TextArea(2, 4)]
+        [TextArea(8, 20)]
         [SerializeField] public string tutorialEntryText;
 }
