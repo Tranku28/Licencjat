@@ -26,6 +26,7 @@ public class BlinkPanelUI : MonoBehaviour
 
     public void OnNextDayButtonClick()
     {
+        DependencyResolver.Instance.GetType<ApplicationGlobalSettings>().CursorActive(false);
         summaryPanel.SetActive(false);
         showDaySummary = false;
         OnNextDayButtonClicked?.Invoke();

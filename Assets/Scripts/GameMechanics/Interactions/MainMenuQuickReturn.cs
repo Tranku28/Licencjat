@@ -42,6 +42,7 @@ public class MainMenuQuickReturn : MonoBehaviour, IInteractable
     public void Interact()
     {
         _interactionCollider.enabled = false;
+        DependencyResolver.Instance.GetType<ApplicationGlobalSettings>().CursorActive(true);
         DependencyResolver.Instance.GetType<GameStateMachine>().OnMainMenuReturn();
     }
 }

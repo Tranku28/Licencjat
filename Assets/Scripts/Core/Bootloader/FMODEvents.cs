@@ -49,6 +49,8 @@ public class FMODEvents : MonoBehaviour
     [field: SerializeField] public EventReference dayEndTypewriter { get; set; }
     [field: Header("Potion")]
     [field: SerializeField] public EventReference potionUse { get; set; }
+    [field: Header("Lamp")]
+    [field: SerializeField] public EventReference lampInteracted { get; set; }
 
     [field: Header("====== Music & Ambient ======")]
     [field: SerializeField] public EventReference ambient {get; set;}

@@ -44,6 +44,7 @@ namespace GameMechanics.Interactions
         {
             DialogueManager.OnSouvenirReceived -= CacheSouvenirId;
             Souvenir.OnSouvenirInteracted -= CacheSouvenir;
+            GameStateMachine.OnMenuReturned -= DisableSouvenirs;
             useButton.onClick.RemoveListener(UseSouvenir);
 
             foreach(Souvenir souvenir in _souvenirs)
@@ -62,7 +63,10 @@ namespace GameMechanics.Interactions
 
         private void UseSouvenir()
         {
-            Souvenir selectedSouvenir = _souvenirs.First(x => x.ID == _cachedSouvenir);
+            Souvenir selectedSouvenir = _souvenirs.FirstOrDefault(x => x.ID == _cachedSouvenir && x.gameObject.activeSelf);
+            if (selectedSouvenir == null)
+                return;
+
             selectedSouvenir.ApplyEffects();
         }
 
@@ -137,9 +141,6 @@ namespace GameMechanics.Interactions
 
         private void OnUseDeleteSouvenir(Souvenir souvenir)
         {
-            souvenir.OnSouvenirUsed -= OnUseDeleteSouvenir;
-        
-            _souvenirs.Remove(souvenir);
             souvenirIdList.Remove(souvenir.ID);
         }
     }

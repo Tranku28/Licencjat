@@ -10,8 +10,7 @@ VAR addEntry = ""
 VAR gift = false
 VAR staysNextDay = false
 
-~ addEntry = "Tonight, a man boarded the train.\\nHe carried himself like someone who once commanded respect... and lost it.\\nHis hands were steady, yet there was something in his gaze. Not fear, not quite regret.\\nSomething heavier.\\nWhen I took his ticket, he did not hesitate. Yet when I asked about his purpose, his voice changed.\\nHe said he was looking for someone. Not a person."
-~ addEntry = "He told me everything. About the dragons. About the war. About the choice he made.\\nHe spoke of them not as beasts, but as something... closer.\\nAs if, somewhere along the way, the line between master and companion had shattered.\\n\\nAnd yet, I could still see it.\\nThe weight of all the creatures he had sent to their deaths before that final act.\\n\\nHe opened the gates.\\nToo late for many.\\n\\nI wonder... Does one act of defiance erase a lifetime of obedience?\\nOr does it only make the silence louder?"
+~ addEntry = "Tonight, a man boarded the train. He carried himself like someone who once commanded respect... and lost it. His hands were steady, yet there was something in his gaze. Not fear, not quite regret. Something heavier. When I took his ticket, he did not hesitate. Yet when I asked about his purpose, his voice changed. He said he was looking for someone. Not a person. He told me everything. About the dragons. About the war. About the choice he made."
 
 ~ speakerIndex = 0
 Ticket, please.
@@ -22,6 +21,7 @@ Of course.
 I suppose even here, some rules still remain.
 
 ~ speakerIndex = 0
+~ addEntry = "He spoke of them not as beasts, but as something... closer. As if, somewhere along the way, the line between master and companion had shattered. And yet, I could still see it. The weight of all the creatures he had sent to their deaths before that final act. He opened the gates. Too late for many. I wonder... Does one act of defiance erase a lifetime of obedience? Or does it only make the silence louder?"
 Name?
 
 ~ speakerIndex = 1
@@ -60,7 +60,7 @@ Just... a friend.
     ~ speakerIndex = 0
     Your story doesn’t match. They weren’t friends. None of them. You trained them in harsh conditions, only to send them to die in the war.
         -> 2_1
-    * [Your ticket is valid. You can pass now. And good luck in finding your ‘friend’. (let him pass)]
+    * [Your ticket is valid. You can pass now. And good luck in finding your ‘friend’. (scan the ticket)]
     ~ speakerIndex = 0
     Your ticket is valid. You can pass now. And good luck in finding your ‘friend’.
         -> 2_2
@@ -81,7 +81,7 @@ They were... our friends.
         -> 2_1
     * [Your ticket is valid. You can pass now. And good luck in finding your ‘friend’. (let him pass)]
     ~ speakerIndex = 0
-    Your ticket is valid. You can pass now. And good luck in finding your ‘friend’.
+    Your ticket is valid. You can pass now. And good luck in finding your ‘friend’
         -> 2_2
     * [Your story doesn’t match. I do not see any remorse in your eyes.]
     ~ speakerIndex = 0
@@ -103,7 +103,13 @@ Probably more than he ever should have.
     * [I’m sorry. But I cannot let you pass (refuse).]
         ~ speakerIndex = 0
         I’m sorry. But I cannot let you pass.
-        -> 3_2
+        ~ gift = false
+        ~ allowQuitDialogue = true
+        ~ harmony = -25
+        ~ dissapear = true
+        ~ decision = "Disapproved"
+        ~ passengerAction = "Dragon Trainer was refused to pass"
+        -> END
 
 === 2_2 ===
 ~ speakerIndex = 1
@@ -112,8 +118,11 @@ So that’s how it ends? No questions? Nothing?
 After everything that had happened? I thought-...
 Nevermind.
 ~ addEntry = "I let him pass.\\nThere was something in his voice when he spoke of the dragon. Not pride. Not even redemption.\\nHope.\\nA fragile, desperate hope that somewhere beyond this journey, something he once set free still lives."
-~ passengerAction = "Kaelen was allowed to pass"
+~ passengerAction = "Dragon Trainer was allowed to pass, but he still wanted to tell something."
 ~ canScan = true
+~ gift = true
+~ harmony = -25
+~ decision = "Approved"
     -> END
 
 === 2_3 ===
@@ -128,7 +137,15 @@ But there’s more story to be told.
     * [I’m sorry. But I cannot let you pass (refuse).]
         ~ speakerIndex = 0
         I’m sorry. But I cannot let you pass.
-        -> 3_2
+        ~ gift = false
+        ~ allowQuitDialogue = true
+        ~ harmony = -25
+        ~ dissapear = true
+        ~ addEntry = "I did not let him continue.\\n\\nHis story was filled with sorrow, yes. But also with choices. Too many of them made too late.\\n\\nHe did not argue. He only nodded, as if he had been expecting this all along."
+        ~ addEntry = "Before he vanished, he said something I cannot forget. That sometimes duty is nothing morethan fear wearing a uniform.\\n\\nSince then, I find myself hesitating more often. Because I begin to wonder...\\nHow many of my decisions are truly mine."
+        ~ passengerAction = "Dragon Trainer was refused to pass"
+        ~ decision = "Disapproved"
+        -> END
 
 
 
@@ -145,17 +162,22 @@ He ordered all of the dragons to the war. And I knew what that meant.
         ~ speakerIndex = 0
         Dragons don’t return from battle.
         -> 4_1
-    * [Your ticket is valid. You can go now. Nothing is keeping you here anymore. (let him pass)]
+    * [Your ticket is valid. You can go now. Nothing is keeping you here anymore. (scan the ticket)]
         ~ speakerIndex = 0
         Your ticket is valid. You can go now. Nothing is keeping you here anymore.
         -> 4_2
 
 === 3_2 ===
-~ speakerIndex = 1
-~ allowQuitDialogue = true
 Everything is keeping me here.
 ...
 But if this is it...
+~ speakerIndex = 1
+~ canScan = true
+~ gift = true
+~ harmony = -25
+~ passengerAction = "Dragon Trainer was allowed to pass, but he still wanted to tell something."
+~ addEntry = "I let him pass.\\nThere was something in his voice when he spoke of the dragon. Not pride. Not even redemption.\\nHope.\\nA fragile, desperate hope that somewhere beyond this journey, something he once set free still lives."
+~ decision = "Approved"
     -> END
 
 
@@ -188,8 +210,11 @@ Everything is keeping me here.
 ...
 But if this is it...
 ~ addEntry = "I let him pass.\\nThere was something in his voice when he spoke of the dragon. Not pride. Not even redemption.\\nHope.\\nA fragile, desperate hope that somewhere beyond this journey, something he once set free still lives."
-~ passengerAction = "Kaelen was allowed to pass, despite his "
+~ passengerAction = "Dragon Trainer was allowed to pass, but he still wanted to tell something."
 ~ canScan = true
+~ gift = true
+~ harmony = -25
+~ decision = "Approved"
     -> END
     
 === 5_1 ===
@@ -212,7 +237,11 @@ Publicly. They needed to make an example.
 I... I regret it.
 I regret not seeing it sooner. I regret all the pain I caused them...
 ~ addEntry = "I let him pass.\\nThere was something in his voice when he spoke of the dragon. Not pride. Not even redemption.\\nHope.\\nA fragile, desperate hope that somewhere beyond this journey, something he once set free still lives."
+~ passengerAction = "Dragon Trainer was allowed to pass, but he still wanted to tell something."
 ~ canScan = true
+~ harmony = -25
+~ gift = true
+~ decision = "Approved"
     -> END
     
     
@@ -236,8 +265,11 @@ No. Even now, I would do it again.
 Thank you...
 For seeing the real me.
 ~ addEntry = "I let him pass.\\nThere was something in his voice when he spoke of the dragon. Not pride. Not even redemption.\\nHope.\\nA fragile, desperate hope that somewhere beyond this journey, something he once set free still lives."
+~ passengerAction = "Dragon Trainer was let through after his confession"
 ~ canScan = true
+~ harmony = 25
 ~ gift = true
+~ decision = "Approved"
     -> END
 
 
@@ -247,7 +279,11 @@ If there is something beyond this..
 I hope it is a sky wide enough for every dragon.
 Thank you.
 ~ addEntry = "I let him pass.\\nThere was something in his voice when he spoke of the dragon. Not pride. Not even redemption.\\nHope.\\nA fragile, desperate hope that somewhere beyond this journey, something he once set free still lives."
+~ passengerAction = "Dragon Trainer was let through after his confession"
 ~ gift = true
+~ harmony = 25
+~ canScan = true
+~ decision = "Approved"
     -> END
 
 
@@ -260,6 +296,11 @@ I guess it is only fair for you to decide my fate.
 ...
 Just remember, Conductor. Sometimes what we call duty, is nothing more than fear wearing
 a uniform.
-~ addEntry = "I did not let him continue.\\n\\nHis story was filled with sorrow, yes. But also with choices. Too many of them made too late.\\n\\nHe did not argue. He only nodded, as if he had been expecting this all along.\\n\\nBefore he vanished, he said something I cannot forget. That sometimes duty is nothing morethan fear wearing a uniform.\\n\\nSince then, I find myself hesitating more often. Because I begin to wonder...\\nHow many of my decisions are truly mine."
+~ addEntry = "I did not let him continue.\\n\\nHis story was filled with sorrow, yes. But also with choices. Too many of them made too late.\\n\\nHe did not argue. He only nodded, as if he had been expecting this all along."
+~ addEntry = "Before he vanished, he said something I cannot forget. That sometimes duty is nothing morethan fear wearing a uniform.\\n\\nSince then, I find myself hesitating more often. Because I begin to wonder...\\nHow many of my decisions are truly mine."
+~ passengerAction = "Dragon Trainer was refused to pass"
 ~ harmony = -25
+~ allowQuitDialogue = true
+~ dissapear = true
+~ decision = "Disapproved"
     -> END

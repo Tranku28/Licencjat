@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Core;
 using Core.Scriptable_Objects;
 using DG.Tweening;
 using GameMechanics.Interactions;
@@ -145,6 +146,8 @@ namespace GameMechanics.UI
             _currentPassengerData = passengerArgs.PassengerData;
 
             int randomDialogueIndex = Random.Range(0, passengerArgs.PassengerData.dialogueVariants.Count);
+
+            DependencyResolver.Instance.GetType<ApplicationGlobalSettings>().CursorActive(true);
 
             ticketMinigame.SetupTicketUI(passengerArgs.PassengerData, randomDialogueIndex);
             npcNameText.text = passengerArgs.PassengerData.passengerName;
@@ -397,12 +400,13 @@ namespace GameMechanics.UI
 
         public void OnDialogueQuit()
         {   
+            DependencyResolver.Instance.GetType<ApplicationGlobalSettings>().CursorActive(false);
             PlayerMessenger.instance.MessagePlayer("New diary entry appeared", this);
 
             _currentPassenger.GetComponent<Collider>().enabled = true;
 
-            if (_brokenRule == string.Empty)
-                _brokenRule = "No rules broken";
+            //if (_brokenRule == string.Empty)
+            //    _brokenRule = "No rules broken";
 
             OnDialogueQuitEvent?.Invoke(
                 this,

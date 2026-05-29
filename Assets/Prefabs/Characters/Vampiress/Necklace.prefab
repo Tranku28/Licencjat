@@ -47,6 +47,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   souvenirData: {fileID: 11400000, guid: 9445aa4f19727c1499a6df95d5250517, type: 2}
+  opensSouvenirUI: 1
+  <souvenirInteractionSound>k__BackingField:
+    Guid:
+      Data1: -465688803
+      Data2: 1123498219
+      Data3: 93183367
+      Data4: 732616956
+    Path: event:/SFX/UI/WatchHover
 --- !u!65 &8705367058595173683
 BoxCollider:
   m_ObjectHideFlags: 0

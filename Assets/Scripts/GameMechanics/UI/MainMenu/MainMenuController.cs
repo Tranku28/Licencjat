@@ -20,13 +20,11 @@ namespace UI.MainMenu
         
         [Header("Menu Panels")]
         [SerializeField] private SettingsPanelController settingsPanel;
-        [SerializeField] private GameObject creditsPanel;
         
         private Camera _playerCamera;
         
         private void Start()
         {
-            creditsScroll.ScrollClicked += GoToCredits;
             startBoard.OnGameplayEntered += StartGame;
 
             GameStateMachine.OnMenuReturned += EnableMenu;
@@ -34,7 +32,6 @@ namespace UI.MainMenu
 
         private void OnDestroy()
         {
-            creditsScroll.ScrollClicked -= GoToCredits;
             startBoard.OnGameplayEntered -= StartGame;
 
             GameStateMachine.OnMenuReturned -= EnableMenu;
@@ -48,11 +45,6 @@ namespace UI.MainMenu
             GameStateMachine gameStateMachine = DependencyResolver.Instance.GetType<GameStateMachine>();
             
             gameStateMachine.StartGame(isNewGame);
-        }
-
-        private void GoToCredits()
-        {
-            creditsPanel.SetActive(true);
         }
 
         private void DisableMenu()

@@ -58,7 +58,7 @@ Clever enough to find my way even now, between the worlds.
 *[Your Life Card marks you as a village herbalist. Is that who you truly were?]
     ~ speakerIndex = 0
     Your Life Card marks you as a village herbalist. Is that who you truly were?
-        -> option1_1
+        -> option1_2
 *[I’m sorry. But it’s a theft. I cannot let you pass. Please leave the train. (refuse)]
     ~ speakerIndex = 0
     I’m sorry. But it’s a theft. I cannot let you pass. Please leave the train.
@@ -128,11 +128,12 @@ So everyone still believes in purity...
 Remember this, Conductor.
 The righteous die just as easily as liars.
 The difference is that liars are better prepared.
-~ harmony = -25
+~ harmony = 25
 ~ dissapear = true
 ~ decision = "Disapproved"
 ~ passengerAction = "Deliah was ordered to leave the train due to invalid ticket"
 ~ allowQuitDialogue = true
+~ addEntry = "I turned her away.\\nSomehow she knew the rules. She knew what she had done. And still, she believed herselfworthy of the journey. \\nThe train did not protest. The rules were clear, and this time, I followed them. \\nI wonder if silence means balance. Or only that another story was buried before it could be finished."
     -> END
     
 
@@ -164,11 +165,12 @@ If I couldn’t have what I wanted, why would they get anything?
 You think sending me away restores balance?
 Balance is already broken.
 You are just choosing which cracks you prefer not to see.
-~ harmony = -25
+~ harmony = 25
 ~ dissapear = true
 ~ decision = "Disapproved"
 ~ passengerAction = "Deliah was ordered to leave the train due to invalid ticket"
 ~ allowQuitDialogue = true
+~ addEntry = "I turned her away.\\nSomehow she knew the rules. She knew what she had done. And still, she believed herselfworthy of the journey. \\nThe train did not protest. The rules were clear, and this time, I followed them. \\nI wonder if silence means balance. Or only that another story was buried before it could be finished."
     -> END
     
     
@@ -194,11 +196,12 @@ So let me pass, and I will help you keep everything neat here.
 ~ speakerIndex = 0
 Journeys don't end when you say they do.
 They just stop bothering you.
-~ harmony = -25
+~ harmony = 25
 ~ dissapear = true
 ~ decision = "Disapproved"
 ~ passengerAction = "Deliah was ordered to leave the train due to invalid ticket"
 ~ allowQuitDialogue = true
+~ addEntry = "I turned her away.\\nSomehow she knew the rules. She knew what she had done. And still, she believed herselfworthy of the journey. \\nThe train did not protest. The rules were clear, and this time, I followed them. \\nI wonder if silence means balance. Or only that another story was buried before it could be finished."
     -> END
     
 === option4_1 ===
@@ -208,7 +211,7 @@ I know my ways. I always knew them.
 That’s why, expect a gift from me.
 A little charm, for you, to bend more rules.
 ~ canScan = true
-~ harmony = 25
+~ harmony = -25
 ~ addEntry = "I let her stay. She spoke of knowledge as if it were something owned, not earned. Her hands knew poisons as well as cures, yet she called both wisdom. She believed herself clever until the very end. Perhaps that belief is what kept her standing when everyone else fell. The Train feels heavier tonight."
 ~ brokenRule = "Passenger data does not match with the ticket"
 ~ decision = "Approved"

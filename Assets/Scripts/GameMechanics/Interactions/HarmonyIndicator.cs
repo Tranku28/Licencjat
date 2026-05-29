@@ -1,7 +1,9 @@
 using System;
+using Core;
 using Core.Scriptable_Objects.Souvenirs;
 using GameMechanics.Interactions;
 using GameMechanics.UI;
+using GameMechanics.UI.MainMenu;
 using UnityEngine;
 
 public class HarmonyIndicator : MonoBehaviour, ISaveElement, IInteractable
@@ -13,6 +15,7 @@ public class HarmonyIndicator : MonoBehaviour, ISaveElement, IInteractable
     private float _bottomYPosition;
     private float _distanceStep;
     private int _cachedHarmony;
+    private int _valueToDisplay;
     private const int MAX_HARMONY = 100;
     private const int MIN_HARMONY = 0;
 
@@ -29,16 +32,39 @@ public class HarmonyIndicator : MonoBehaviour, ISaveElement, IInteractable
     private void Start()
     {
         DialogueManager.OnHarmonyDecreased += CacheHarmonyStatus;
-        SouvenirEffectResolver.OnHarmonyValueUpdate += CacheHarmonyStatus;
+        SouvenirEffectResolver.OnHarmonyValueUpdate += UpdateHarmonyValueInstantly;
+        GameStateMachine.OnMenuReturned += ResetValues;
     }
 
     void OnDestroy()
     {
         DialogueManager.OnHarmonyDecreased -= CacheHarmonyStatus;
-        SouvenirEffectResolver.OnHarmonyValueUpdate -= CacheHarmonyStatus;
+        SouvenirEffectResolver.OnHarmonyValueUpdate -= UpdateHarmonyValueInstantly;
+        GameStateMachine.OnMenuReturned -= ResetValues;
     }
 
-    private void CacheHarmonyStatus(int value) => _cachedHarmony += value;
+    private void ResetValues()
+    {
+        _cachedHarmony = 0;
+        _harmonyStatus = 100;
+        _valueToDisplay = 100;
+    }
+
+    private void CacheHarmonyStatus(int value)
+    {
+        _cachedHarmony += value;
+        int currentValue = Mathf.Clamp(_harmonyStatus + _cachedHarmony, MIN_HARMONY, MAX_HARMONY);
+        OnHarmonyValueSet?.Invoke(currentValue);
+    }
+
+    private void UpdateHarmonyValueInstantly(int value)
+    {
+        _cachedHarmony += value;
+        _valueToDisplay += value;
+        int currentValue = Mathf.Clamp(_harmonyStatus + _cachedHarmony, MIN_HARMONY, MAX_HARMONY);
+        UpdateHarmonyPointerPosition(_harmonyStatus + _cachedHarmony);
+        OnHarmonyValueSet?.Invoke(currentValue);
+    }
 
     private void UpdateHarmonyPointerPosition(int value)
     {
@@ -49,6 +75,7 @@ public class HarmonyIndicator : MonoBehaviour, ISaveElement, IInteractable
     public void LoadSave(GameSaveData gameSaveData)
     {
         _harmonyStatus = gameSaveData.HarmonyStatus;
+        _valueToDisplay = _harmonyStatus;
         _cachedHarmony = 0;
 
         UpdateHarmonyPointerPosition(_harmonyStatus);
@@ -57,17 +84,18 @@ public class HarmonyIndicator : MonoBehaviour, ISaveElement, IInteractable
 
     public void SaveData(GameSaveData gameSaveData)
     {
-        gameSaveData.HarmonyStatus = Mathf.Clamp(_harmonyStatus + _cachedHarmony, MIN_HARMONY, MAX_HARMONY);
-        Debug.Log($"Save Harmony: {gameSaveData.HarmonyStatus}");
+        _harmonyStatus = Mathf.Clamp(_harmonyStatus + _cachedHarmony, MIN_HARMONY, MAX_HARMONY);
+        gameSaveData.HarmonyStatus = _harmonyStatus;
+        _cachedHarmony = 0;
     }
 
     public void Interact()
     {
-        
+        PlayerMessenger.instance.MessagePlayer("The lower the harmony, the greater the chaos", this);
     }
 
     public string GetName()
     {
-        return $"Harmony: {_harmonyStatus}%";
+        return $"Harmony: {_valueToDisplay}%";
     }
 }
