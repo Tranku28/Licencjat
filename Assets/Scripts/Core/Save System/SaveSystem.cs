@@ -22,7 +22,7 @@ namespace Core.Save_System
 
         public event Action OnSaveDeleted;
 
-        public GameSaveData GetCurrentSave() => _loadedSave;
+        public GameSaveData GetCurrentSave() => _loadedSave; 
         public GameSaveData[] GetSaves => _saves.ToArray();
 
         protected override void Awake()
@@ -276,12 +276,10 @@ namespace Core.Save_System
         {
             try
             {
-                GameSaveData runtimeSave = GetCurrentSave();
-
-                if (runtimeSave?.CollectedSouvenirIdList == null)
+                if (_loadedSave?.CollectedSouvenirIdList == null)
                     return;
 
-                runtimeSave.CollectedSouvenirIdList.Remove(id);
+                _loadedSave.CollectedSouvenirIdList.Remove(id);
             }
             catch (Exception e)
             {

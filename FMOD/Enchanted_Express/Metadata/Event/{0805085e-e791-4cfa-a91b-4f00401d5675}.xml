@@ -92,6 +92,9 @@
 		<property name="length">
 			<value>6.3360000000000003</value>
 		</property>
+		<property name="volume">
+			<value>-6</value>
+		</property>
 		<relationship name="modulators">
 			<destination>{af6e399a-faf0-405b-9801-c20bda08dda6}</destination>
 			<destination>{e1968d3e-33f8-46b3-9f95-2b784e81cffa}</destination>
@@ -100,8 +103,9 @@
 		<relationship name="sounds">
 			<destination>{5c2382e9-4167-443a-b6aa-60507f396c47}</destination>
 			<destination>{49feff50-881f-47be-9719-f11d38cdf397}</destination>
-			<destination>{02e6302e-9e9b-494d-b7d4-6497c72cccf9}</destination>
 			<destination>{05335da8-5006-4507-8979-40fdd5ecc668}</destination>
+			<destination>{58485fc9-b465-42a8-90d1-043dc060c7c9}</destination>
+			<destination>{125f3d76-49f9-4ba9-af22-6098b2403c57}</destination>
 		</relationship>
 	</object>
 	<object class="EventMixerGroup" id="{314dee14-62fc-4675-a469-c949db2e514a}">
@@ -157,16 +161,39 @@
 		</relationship>
 	</object>
 	<object class="SingleSound" id="{49feff50-881f-47be-9719-f11d38cdf397}">
+		<property name="volume">
+			<value>-4</value>
+		</property>
+		<property name="pitch">
+			<value>-5</value>
+		</property>
 		<relationship name="audioFile">
 			<destination>{fe932ee0-0154-4bdb-8244-46adff222684}</destination>
 		</relationship>
 	</object>
-	<object class="SingleSound" id="{02e6302e-9e9b-494d-b7d4-6497c72cccf9}">
+	<object class="SingleSound" id="{05335da8-5006-4507-8979-40fdd5ecc668}">
+		<property name="volume">
+			<value>-2</value>
+		</property>
 		<relationship name="audioFile">
-			<destination>{046d32f4-895e-429d-8cfc-45f17ef5b7f1}</destination>
+			<destination>{e69ccb9a-a609-4ccb-ace0-ff137618ae7f}</destination>
 		</relationship>
 	</object>
-	<object class="SingleSound" id="{05335da8-5006-4507-8979-40fdd5ecc668}">
+	<object class="SingleSound" id="{58485fc9-b465-42a8-90d1-043dc060c7c9}">
+		<property name="pitch">
+			<value>-6</value>
+		</property>
+		<relationship name="audioFile">
+			<destination>{be4610a6-0799-4423-87a5-fdb41e445ea0}</destination>
+		</relationship>
+	</object>
+	<object class="SingleSound" id="{125f3d76-49f9-4ba9-af22-6098b2403c57}">
+		<property name="volume">
+			<value>-2</value>
+		</property>
+		<property name="pitch">
+			<value>-7</value>
+		</property>
 		<relationship name="audioFile">
 			<destination>{e69ccb9a-a609-4ccb-ace0-ff137618ae7f}</destination>
 		</relationship>
@@ -180,25 +207,25 @@
 	<object class="MixerBusFader" id="{16305458-bf22-4b4f-b076-4c746df7977f}" />
 	<object class="SFXReverbEffect" id="{26325d4a-c0cf-4e36-b5df-23975b98144b}">
 		<property name="decayTime">
-			<value>400</value>
+			<value>500</value>
 		</property>
 		<property name="earlyDelay">
-			<value>2</value>
-		</property>
-		<property name="lateDelay">
 			<value>3</value>
 		</property>
+		<property name="lateDelay">
+			<value>4</value>
+		</property>
 		<property name="HFDecayRatio">
-			<value>83</value>
+			<value>10</value>
 		</property>
 		<property name="highCut">
-			<value>6050</value>
+			<value>160</value>
 		</property>
 		<property name="earlyLateMix">
-			<value>88</value>
+			<value>58</value>
 		</property>
 		<property name="wetLevel">
-			<value>-9.39999962</value>
+			<value>-19</value>
 		</property>
 	</object>
 	<object class="GainEffect" id="{fccb7f74-33cb-4180-8e85-c88b9d85d81f}" />

@@ -39,13 +39,12 @@ I cannot go there now.
 
 
 === a_right_to_continue ===
-
 ~ speakerIndex = 1
 You do not yet grasp the gravity of your mistake.
 Generations will remember this decision.
 ~ addEntry = "I reported him. He broke the rules. He should have known better. He wanted to fix the world. And I wanted to keep everything in order."
 ~ passengerAction = "The Ghost reached the designated destination."
-~ decision = "Disapproved"
+~ decision = "Approved"
 ~ harmony = 25
 ~ canScan = true
     -> END
@@ -96,7 +95,7 @@ Still, I hoped I might atone for my mistake.
 If only I had more time…
 ~ addEntry = "I reported him. He broke the rules. He should have known better. He wanted to fix the world. And I wanted to keep everything in order."
 ~ passengerAction = "The Ghost reached the designated destination."
-~ decision = "Disapproved"
+~ decision = "Approved"
 ~ harmony = 25
 ~ canScan = true
     -> END
@@ -193,7 +192,7 @@ But never forget. It, too, can be wrong.
 ~ addEntry = "I broke the rules. I should have reported this incident. But I didn't. Why? Was it for him? Because I pity him? Or was it because I hoped that him breaking the rules would bring peace to others who are still alive?"
 ~ passengerAction = "The Ghost didn’t reached the designated destination, despite having a valid ticket"
 ~ brokenRule = "Unjustified Refusal"
-~ decision = "You let the passenger to stay"
+~ decision = "Disapproved"
 ~ harmony = -25
 ~ gift = true
 ~ staysNextDay = true

@@ -43,9 +43,8 @@ I am bound for a meeting… though, in truth, it comes many years too late.
 Thank you, kind man. I hope everything goes well for you.
     ~ harmony = 25
     ~ decision = "Approved"
-    ~ passengerAction = "Charlotte reached the designated destination"
     ~ canScan = true
-    ~ passengerAction = "Charlotte reached the designated destination"
+    ~ passengerAction = "Vampiress reached the designated destination"
     ~ gift = true
     -> END
 
@@ -55,12 +54,11 @@ W-what? Why not?
 
 ~ speakerIndex = 0
 The protocols. Please leave at the nearest station.
-~ harmony = -25
+    ~ harmony = -25
     ~ decision = "Disapproved"
-    ~ passengerAction = "Charlotte didn’t reached the designated destination, despite having a valid ticket"
+    ~ passengerAction = "Vampiress didn’t reached the designated destination, despite having a valid ticket"
     ~ brokenRule = "Unjustified refusal"
     ~ addEntry = "I did not let her continue. Perhaps that is why I am here, to decide who arrives in time, and who remains behind."
-    ~ passengerAction = "Charlotte didn’t reached the designated destination, despite having a valid ticket."
     ~ dissapear = true
     ~ allowQuitDialogue = true
     -> END

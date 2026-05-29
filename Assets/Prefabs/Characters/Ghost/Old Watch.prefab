@@ -68,6 +68,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   souvenirData: {fileID: 11400000, guid: a3a373d80c4248241a9e0d5376bb21ff, type: 2}
+  opensSouvenirUI: 1
+  <souvenirInteractionSound>k__BackingField:
+    Guid:
+      Data1: -1072939939
+      Data2: 1336056906
+      Data3: 767095217
+      Data4: 2078322616
+    Path: event:/SFX/Rewind
 --- !u!1001 &9152760180950821140
 PrefabInstance:
   m_ObjectHideFlags: 0

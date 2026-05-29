@@ -405,8 +405,8 @@ namespace GameMechanics.UI
 
             _currentPassenger.GetComponent<Collider>().enabled = true;
 
-            if (_brokenRule == string.Empty)
-                _brokenRule = "No rules broken";
+            //if (_brokenRule == string.Empty)
+            //    _brokenRule = "No rules broken";
 
             OnDialogueQuitEvent?.Invoke(
                 this,

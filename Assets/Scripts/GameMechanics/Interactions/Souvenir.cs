@@ -93,7 +93,7 @@ public class Souvenir : MonoBehaviour, IInteractable
 
             OnSouvenirUiQuit?.Invoke();
             OnSouvenirUsed?.Invoke(this);
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
 }

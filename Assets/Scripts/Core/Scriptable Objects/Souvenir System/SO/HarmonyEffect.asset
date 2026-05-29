@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: HarmonyEffect
   m_EditorClassIdentifier: 
   singleUse: 1
+  passive: 0
   useSound:
     Guid:
-      Data1: -1612662806
-      Data2: 1316720019
-      Data3: -24688216
-      Data4: -209171374
-    Path: event:/SFX/UI/CreditsOpen
+      Data1: -465688803
+      Data2: 1123498219
+      Data3: 93183367
+      Data4: 732616956
+    Path: event:/SFX/UI/WatchHover
   harmonyValueUpdate: 25

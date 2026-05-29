@@ -52,7 +52,7 @@ public class SouvenirViewController : UIElement, IPointerDownHandler, IPointerUp
 
     private void RotateLeft(bool direction)
     {
-        _rotationDir = direction ? -1 : 0;
+        _rotationDir = direction ? 1 : 0;
         _isRotatingObject = direction;
     }
 

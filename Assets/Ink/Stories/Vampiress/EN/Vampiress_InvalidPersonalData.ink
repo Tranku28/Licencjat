@@ -50,12 +50,11 @@ Aye. It is the nickname my beloved called me once… Till this day it feels like
 I possess too much of it.
 Others, far too little.
 I shall alight at the next station…
-~ harmony = -25
+~ harmony = 25
 ~ dissapear = true
 ~ decision = "Disapproved"
-~ passengerAction = "Charlotte didn’t reach the designated destination"
 ~ addEntry = "I did not let her continue. I said, those are the rules. She did not protest. She merely bowed her head and vanished before the next station. I cannot stop thinking about her. That perhaps she only wished to say goodbye. That what I saw as breach of order, was, for her, a final chance. Perhaps that is why I am here, to decide who arrives in time, and who remains behind."
-~ passengerAction = "Charlotte personal data was incorrect and you didn’t let her pass."
+~ passengerAction = "Vampiress personal data was incorrect and you didn’t let her pass."
 ~ allowQuitDialogue = true
     -> END
 
@@ -78,12 +77,11 @@ Something that you want to chase so dearly… Yet none of your dreams did come t
 … Perhaps they were right after all.
 One cannot live upon dreams alone.
 Thank you for reminding me of that truth, just as I began to doubt it.
-~ harmony = -25
+~ harmony = 25
 ~ dissapear = true
 ~ decision = "Disapproved"
-~ passengerAction = "Charlotte didn’t reach the designated destination"
 ~ addEntry = "I did not let her continue. I said, those are the rules. She did not protest. She merely bowed her head and vanished before the next station. I cannot stop thinking about her. That perhaps she only wished to say goodbye. That what I saw as breach of order, was, for her, a final chance. Perhaps that is why I am here, to decide who arrives in time, and who remains behind."
-~ passengerAction = "Charlotte personal data was incorrect and you didn’t let her pass."
+~ passengerAction = "Vampiress personal data was incorrect and you didn’t let her pass."
 ~ allowQuitDialogue = true
     -> END
 
@@ -116,12 +114,11 @@ And now I bear the weight of that regret…
 === cannot_allow_3 ===
 … And yet nothing has changed…
 Men still despise and fear the dreams and wishes of other beings.
-~ harmony = -25
+~ harmony = 25
 ~ dissapear = true
 ~ decision = "Disapproved"
-~ passengerAction = "Charlotte didn’t reach the designated destination"
 ~ addEntry = "I did not let her continue. I said, those are the rules. She did not protest. She merely bowed her head and vanished before the next station. I cannot stop thinking about her. That perhaps she only wished to say goodbye. That what I saw as breach of order, was, for her, a final chance. Perhaps that is why I am here, to decide who arrives in time, and who remains behind."
-~ passengerAction = "Charlotte personal data was incorrect and you didn’t let her pass."
+~ passengerAction = "Vampiress personal data was incorrect and you didn’t let her pass."
 ~ allowQuitDialogue = true
     -> END
 
@@ -153,12 +150,11 @@ I lacked the voice to speak his name aloud - to tell the world how deeply I love
 When there was still time.
 But now…
 … Forget it.
-~ harmony = -25
+~ harmony = 25
 ~ dissapear = true
 ~ decision = "Disapproved"
-~ passengerAction = "Charlotte didn’t reach the designated destination"
 ~ addEntry = "I did not let her continue. I said, those are the rules. She did not protest. She merely bowed her head and vanished before the next station. I cannot stop thinking about her. That perhaps she only wished to say goodbye. That what I saw as breach of order, was, for her, a final chance. Perhaps that is why I am here, to decide who arrives in time, and who remains behind."
-~ passengerAction = "Charlotte personal data was incorrect and you didn’t let her pass."
+~ passengerAction = "Vampiress personal data was incorrect and you didn’t let her pass."
 ~ allowQuitDialogue = true
     -> END
 
@@ -238,12 +234,11 @@ Tell me, how could such a thing be?
 …And yet, I was wrong.
 We were never meant for one another. For had we been, fate would have guided us together…
 Would it not..?
-~ harmony = -25
+~ harmony = 25
 ~ dissapear = true
 ~ decision = "Disapproved"
-~ passengerAction = "Charlotte didn’t reach the designated destination"
 ~ addEntry = "I did not let her continue. I said, those are the rules. She did not protest. She merely bowed her head and vanished before the next station. I cannot stop thinking about her. That perhaps she only wished to say goodbye. That what I saw as breach of order, was, for her, a final chance. Perhaps that is why I am here, to decide who arrives in time, and who remains behind."
-~ passengerAction = "Charlotte personal data was incorrect and you didn’t let her pass."
+~ passengerAction = "Vampiress personal data was incorrect and you didn’t let her pass."
 ~ allowQuitDialogue = true
     -> END
 
@@ -282,11 +277,10 @@ Young man, please… have mercy. Allow me to see him, if only this once. Now tha
 We all have them.
 We all chase unseen purposes.
 But remember, young man.
-~ harmony = -25
+~ harmony = 25
 ~ decision = "Disapproved"
-~ passengerAction = "Charlotte didn’t reach the designated destination"
 ~ addEntry = "I did not let her continue. I said, those are the rules. She did not protest. She merely bowed her head and vanished before the next station. I cannot stop thinking about her. That perhaps she only wished to say goodbye. That what I saw as breach of order, was, for her, a final chance. Perhaps that is why I am here, to decide who arrives in time, and who remains behind."
-~ passengerAction = "Charlotte personal data was incorrect and you didn’t let her pass."
+~ passengerAction = "Vampiress personal data was incorrect and you didn’t let her pass."
 ~ dissapear = true
 ~ allowQuitDialogue = true
     -> END
@@ -296,11 +290,10 @@ Thank you, young man. You have my eternal gratitude.
 But remember, never ignore your heart.
 It alone knows the way.
 ~ canScan = true
-~ harmony = 25
+~ harmony = -25
 ~ decision = "Approved"
-~ passengerAction = "Charlotte reached the designated destination"
 ~ addEntry = "I let her pass. I do not know why. Perhaps because in her eyes I saw something I have long forgotten - hope. She said she was going to see her beloved, one last time. A mortal man, dying. They should never have existed in the same world and yet, there was more life in her voice than in many hearts I’ve met along this endless route. Little did she know that she's already dead herself."
-~ passengerAction = "Charlotte personal data was incorrect, but you let her pass"
+~ passengerAction = "Vampiress personal data was incorrect, but you let her pass"
 ~ brokenRule = "Invalid Personal Data."
 ~ gift = true
     -> END

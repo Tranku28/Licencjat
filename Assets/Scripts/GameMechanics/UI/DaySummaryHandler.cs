@@ -1,3 +1,4 @@
+using Core;
 using TMPro;
 using UnityEngine;
 
@@ -39,13 +40,12 @@ namespace GameMechanics.UI
         private void CacheSummaryData(object sender, DialogueEndEventArgs e)
         {
             _summary = new CachedSummary(e.PassengerAction, e.Decision, e.HarmonyValue, e.RuleBroken);
-            Debug.Log(
-                $"Harmony: {e.HarmonyValue}"
-                );
         }
 
         public void DisplaySummary()
         {
+            DependencyResolver.Instance.GetType<ApplicationGlobalSettings>().CursorActive(true);
+
             string harmonyFormat = _summary.HarmonyValue > 0 ? $"+{_summary.HarmonyValue}" : $"{_summary.HarmonyValue}";
             if (string.IsNullOrEmpty(_summary.RuleBroken))
                 ruleBreak.enabled = false;
