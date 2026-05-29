@@ -53,7 +53,14 @@ namespace Core.Save_System
 
                     _loadedSave = new GameSaveData
                     {
-                        SaveID = Guid.NewGuid().ToString()
+                        SaveID = Guid.NewGuid().ToString(),
+                        DateSaved = DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss"),
+                        CurrentDay = 0,
+                        HarmonyStatus = 100,
+                        PassengerStayNames = new(),
+                        CollectedSouvenirIdList = new(),
+                        PassengerEntries = new(),
+                        LastDayData = new()
                     };
                 }
 
@@ -73,10 +80,13 @@ namespace Core.Save_System
                 _loadedSave.CurrentDay++;
                 _loadedSave.DateSaved = DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss");
 
-                foreach (ISaveElement saveElement in _saveElements)
+                if (!isNewGame)
                 {
-                    if (saveElement == null) continue;
-                    saveElement.SaveData(_loadedSave);
+                    foreach (ISaveElement saveElement in _saveElements)
+                    {
+                        if (saveElement == null) continue;
+                        saveElement.SaveData(_loadedSave);
+                    }
                 }
 
                 string saveDataJson = JsonUtility.ToJson(_loadedSave, true);
