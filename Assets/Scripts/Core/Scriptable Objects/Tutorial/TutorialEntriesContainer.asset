@@ -16,11 +16,11 @@ MonoBehaviour:
   - id: 0
     tutorialEntryText: '<b>Confidential Document</b>
 
-      
+
 
       <b>Conductor</b>,
 
-      
+
 
       If
       you are reading this document, it means you have been assigned to duty aboard
@@ -43,13 +43,13 @@ MonoBehaviour:
       <b>Ensure that every
       soul reaches where it is meant to go.</b>
 
-      
 
-      The train under your
-      care is a <b>Bridge</b>.
 
-      It connects the world of the viking with what
-      lies beyond.
+      The train under your care
+      is a <b>Bridge</b>.
+
+      It connects the world of the living with what lies
+      beyond.
 
       Not all passengers are aware that their journey has already
       ended.'
@@ -64,19 +64,19 @@ MonoBehaviour:
 
       Not an executioner.
 
-      
 
-      Your task is not to pass
-      judgement upon the deeds of the passengers, but to <b>enforce the rules of
-      passage</b>.
 
-      Yet remember - every decision you make affects the delicate
-      balance of the Train and yourself.
+      Your task is not to pass judgement
+      upon the deeds of the passengers, but to <b>enforce the rules of passage</b>.
 
-      
+      Yet
+      remember - every decision you make affects the delicate balance of the Train
+      and yourself.
 
-      <b>Keep in mind - Rules
-      exist so that the Train may continue its journey.</b>'
+
+
+      <b>Keep in mind - Rules exist so that the Train may
+      continue its journey.</b>'
   - id: 2
     tutorialEntryText: "During each shift you will:\r\n    - walk between the carriages
       of the Train,\r\n    - speak with travelers,\r\n    - inspect their tickets

@@ -9,7 +9,6 @@ namespace Core
         {
             base.Awake();
             QualitySettings.vSyncCount = 1;
-            Cursor.visible = false;
 
 #if UNITY_EDITOR
             Cursor.visible = true;
