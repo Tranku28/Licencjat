@@ -91,7 +91,7 @@ public class HarmonyIndicator : MonoBehaviour, ISaveElement, IInteractable
 
     public void Interact()
     {
-        
+        PlayerMessenger.instance.MessagePlayer("The lower the harmony, the greater the chaos", this);
     }
 
     public string GetName()

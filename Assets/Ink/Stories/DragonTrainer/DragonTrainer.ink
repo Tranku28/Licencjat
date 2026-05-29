@@ -10,8 +10,7 @@ VAR addEntry = ""
 VAR gift = false
 VAR staysNextDay = false
 
-~ addEntry = "Tonight, a man boarded the train.\\nHe carried himself like someone who once commanded respect... and lost it.\\nHis hands were steady, yet there was something in his gaze. Not fear, not quite regret.\\nSomething heavier.\\nWhen I took his ticket, he did not hesitate. Yet when I asked about his purpose, his voice changed.\\nHe said he was looking for someone. Not a person. He told me everything. About the dragons. About the war. About the choice he made.\\n"
-~ addEntry = "He spoke of them not as beasts, but as something... closer.\\nAs if, somewhere along the way, the line between master and companion had shattered.\\n\\nAnd yet, I could still see it.\\nThe weight of all the creatures he had sent to their deaths before that final act.\\n\\nHe opened the gates.\\nToo late for many.\\n\\nI wonder... Does one act of defiance erase a lifetime of obedience?\\nOr does it only make the silence louder?"
+~ addEntry = "Tonight, a man boarded the train. He carried himself like someone who once commanded respect... and lost it. His hands were steady, yet there was something in his gaze. Not fear, not quite regret. Something heavier. When I took his ticket, he did not hesitate. Yet when I asked about his purpose, his voice changed. He said he was looking for someone. Not a person. He told me everything. About the dragons. About the war. About the choice he made."
 
 ~ speakerIndex = 0
 Ticket, please.
@@ -22,6 +21,7 @@ Of course.
 I suppose even here, some rules still remain.
 
 ~ speakerIndex = 0
+~ addEntry = "He spoke of them not as beasts, but as something... closer. As if, somewhere along the way, the line between master and companion had shattered. And yet, I could still see it. The weight of all the creatures he had sent to their deaths before that final act. He opened the gates. Too late for many. I wonder... Does one act of defiance erase a lifetime of obedience? Or does it only make the silence louder?"
 Name?
 
 ~ speakerIndex = 1
