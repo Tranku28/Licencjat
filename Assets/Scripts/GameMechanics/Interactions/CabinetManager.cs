@@ -44,6 +44,7 @@ namespace GameMechanics.Interactions
         {
             DialogueManager.OnSouvenirReceived -= CacheSouvenirId;
             Souvenir.OnSouvenirInteracted -= CacheSouvenir;
+            GameStateMachine.OnMenuReturned -= DisableSouvenirs;
             useButton.onClick.RemoveListener(UseSouvenir);
 
             foreach(Souvenir souvenir in _souvenirs)
