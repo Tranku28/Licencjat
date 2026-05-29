@@ -89,8 +89,6 @@ public class Souvenir : MonoBehaviour, IInteractable
 
         if (destroy)
         {
-            DependencyResolver.Instance.GetType<SaveSystem>().ForceDeleteSaveSouvenirData(souvenirData.souvenirID);
-
             OnSouvenirUiQuit?.Invoke();
             OnSouvenirUsed?.Invoke(this);
             gameObject.SetActive(false);

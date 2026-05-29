@@ -62,7 +62,10 @@ namespace GameMechanics.Interactions
 
         private void UseSouvenir()
         {
-            Souvenir selectedSouvenir = _souvenirs.First(x => x.ID == _cachedSouvenir);
+            Souvenir selectedSouvenir = _souvenirs.FirstOrDefault(x => x.ID == _cachedSouvenir && x.gameObject.activeSelf);
+            if (selectedSouvenir == null)
+                return;
+
             selectedSouvenir.ApplyEffects();
         }
 
@@ -137,9 +140,6 @@ namespace GameMechanics.Interactions
 
         private void OnUseDeleteSouvenir(Souvenir souvenir)
         {
-            souvenir.OnSouvenirUsed -= OnUseDeleteSouvenir;
-        
-            _souvenirs.Remove(souvenir);
             souvenirIdList.Remove(souvenir.ID);
         }
     }

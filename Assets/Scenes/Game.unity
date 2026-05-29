@@ -6904,6 +6904,13 @@ MonoBehaviour:
       Data3: -321727847
       Data4: -1782079195
     Path: event:/SFX/Potion
+  <lampInteracted>k__BackingField:
+    Guid:
+      Data1: 318585560
+      Data2: 1170111342
+      Data3: 1465005974
+      Data4: 568430222
+    Path: event:/SFX/Desk Lamp
   <ambient>k__BackingField:
     Guid:
       Data1: 167033494
@@ -19795,8 +19802,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1477367495}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0.008024162, z: 0, w: 0.9999679}
-  m_LocalPosition: {x: 6.3024073, y: 1.7, z: 0.1499807}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 6.5, y: 1.2, z: -1.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

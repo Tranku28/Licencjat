@@ -489,6 +489,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 35884476487225840}
+  - component: {fileID: 7795046778083498438}
+  - component: {fileID: 8119081252649865258}
   m_Layer: 0
   m_Name: Desk Lamp
   m_TagString: Untagged
@@ -517,6 +519,45 @@ Transform:
   - {fileID: 6930147676544767805}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7795046778083498438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1551057830962694048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 660b207294cbe5448b5b198da34d521c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lights:
+  - {fileID: 1031242242165854653}
+  - {fileID: 6523487068202166755}
+  - {fileID: 8950936341832428782}
+  - {fileID: 4582114432101598673}
+  - {fileID: 3212233305822013116}
+--- !u!65 &8119081252649865258
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1551057830962694048}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.2, y: 0.6, z: 0.2}
+  m_Center: {x: 0, y: 0.3, z: 0}
 --- !u!1 &6805903216054190774
 GameObject:
   m_ObjectHideFlags: 0
