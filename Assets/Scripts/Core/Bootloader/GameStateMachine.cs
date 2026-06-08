@@ -8,6 +8,7 @@ namespace Core
     {
         GameState _gameState;
         public static Action OnMenuReturned;
+        public static Action OnGameOver;
 
         protected override void Awake()
         {
@@ -47,6 +48,11 @@ namespace Core
             _gameState = gameState;
             
             OnGameStateChanged?.Invoke(_gameState);
+        }
+
+        public void InvokeGameOver()
+        {
+            OnGameOver?.Invoke();
         }
     }
     

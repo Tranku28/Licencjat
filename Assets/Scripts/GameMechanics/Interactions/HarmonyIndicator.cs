@@ -80,6 +80,11 @@ public class HarmonyIndicator : MonoBehaviour, ISaveElement, IInteractable
 
         UpdateHarmonyPointerPosition(_harmonyStatus);
         OnHarmonyValueSet?.Invoke(_harmonyStatus);
+
+        if (!gameSaveData.CollectedSouvenirIdList.Contains(2) && _harmonyStatus == 0)
+        {
+            DependencyResolver.Instance.GetType<GameStateMachine>().InvokeGameOver();
+        }
     }
 
     public void SaveData(GameSaveData gameSaveData)

@@ -25,12 +25,21 @@ namespace Player
         private Awaitable _checkForInteractable;
         
         private GameStateMachine _gameManager;
+        private bool _interactionsEnabled;
 
         private void Awake()
         {
+            _interactionsEnabled = true;
             _playerCamera = GetComponent<Camera>();
             PlayerControls.OnInteractEvent += Interact;
+
+            GameStateMachine.OnGameOver += DisableInteractions;
+            GameStateMachine.OnMenuReturned += EnableInteractions;
         }
+
+        private void DisableInteractions() => _interactionsEnabled = false;
+
+        private void EnableInteractions() => _interactionsEnabled = true;
 
         private void Start()
         {
@@ -40,6 +49,8 @@ namespace Player
         private void OnEnable()
         {
             _checkForInteractable = CheckIfInteractable();
+            GameStateMachine.OnGameOver -= DisableInteractions;
+            GameStateMachine.OnMenuReturned -= EnableInteractions;
         }
 
         private void Interact()
@@ -59,6 +70,8 @@ namespace Player
                     interactionUI.SetActive(false);
                     continue;
                 }
+
+                if (!_interactionsEnabled) continue;
                 
                 Ray ray = _playerCamera.ScreenPointToRay(new Vector3(Screen.width / 2f, Screen.height / 2f, 0f));
                 int hitsCount = Physics.RaycastNonAlloc(ray.origin, ray.direction, _hitResults, raycastMaxDistance);

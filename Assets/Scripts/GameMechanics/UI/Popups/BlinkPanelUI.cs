@@ -18,18 +18,44 @@ public class BlinkPanelUI : MonoBehaviour
 
     public event Action OnNextDayButtonClicked;
     public static Action OnSummaryDisplay;
-    
+    public static Action OnSummaryDisplayFinalDay;
+    private bool _finalNotesDisplayed;
+
+    private void Awake()
+    {
+        _finalNotesDisplayed = false;
+        GameStateMachine.OnMenuReturned += OnMenuReturned;
+    }
+
+
     private void OnDestroy()
     {
         _current = null;
+        GameStateMachine.OnMenuReturned -= OnMenuReturned;
+    }
+
+    private void OnMenuReturned()
+    {
+        _finalNotesDisplayed = false;
     }
 
     public void OnNextDayButtonClick()
     {
+        GameSaveData currentSave = DependencyResolver.Instance.GetType<SaveSystem>().GetCurrentSave();
+
+        if (currentSave.CurrentDay == 5 && !_finalNotesDisplayed)
+        {
+            _finalNotesDisplayed = true;
+            OnSummaryDisplayFinalDay?.Invoke();
+            return;
+        }
+
         DependencyResolver.Instance.GetType<ApplicationGlobalSettings>().CursorActive(false);
         summaryPanel.SetActive(false);
         showDaySummary = false;
         OnNextDayButtonClicked?.Invoke();
+
+        _finalNotesDisplayed = false;
     }
     
     public Awaitable ClosePlayerEyes()

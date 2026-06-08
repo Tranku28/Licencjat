@@ -1,12 +1,13 @@
 using Core;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace GameMechanics.UI
 {
     public class DaySummaryHandler : MonoBehaviour
     {
-        [SerializeField] private TMP_Text passengerAction, decision, harmonyValue, ruleBreak;
+        [SerializeField] private TMP_Text passengerAction, decision, harmonyValue, ruleBreak, finalNote;
 
         private CachedSummary _summary;
         private struct CachedSummary
@@ -27,12 +28,14 @@ namespace GameMechanics.UI
         {
             DialogueManager.OnDialogueQuitEvent += CacheSummaryData;
             BlinkPanelUI.OnSummaryDisplay += DisplaySummary;
+            BlinkPanelUI.OnSummaryDisplayFinalDay += DisplayFifthDaySummary;
         }
 
         private void OnDestroy()
         {
             DialogueManager.OnDialogueQuitEvent -= CacheSummaryData;
             BlinkPanelUI.OnSummaryDisplay -= DisplaySummary;
+            BlinkPanelUI.OnSummaryDisplayFinalDay -= DisplayFifthDaySummary;
         }
 
         private TextPrinter _textPrinter = new TextPrinter();
@@ -44,6 +47,7 @@ namespace GameMechanics.UI
 
         public void DisplaySummary()
         {
+            finalNote.enabled = false;
             DependencyResolver.Instance.GetType<ApplicationGlobalSettings>().CursorActive(true);
 
             string harmonyFormat = _summary.HarmonyValue > 0 ? $"+{_summary.HarmonyValue}" : $"{_summary.HarmonyValue}";
@@ -63,6 +67,18 @@ namespace GameMechanics.UI
                     Debug.Log("Summary Finished");
                 })
                 .PlayChain();
+        }
+
+        public void DisplayFifthDaySummary()
+        {
+            passengerAction.enabled = false;
+            decision.enabled = false;
+            harmonyValue.enabled = false;
+            ruleBreak.enabled = false;
+
+            _textPrinter.Print(finalNote, "You've reached day five of your journey.\nThis is the last day you can review everything you've done so far.\nThank you for playing The Enchanted Express. We hope you liked the journey. Take care \n\n ~ The Enchanted Express crew");
+
+            AudioManager.Instance.PlayOneShot(FMODEvents.Instance.dayEndTypewriter, transform.position);
         }
     }
 }

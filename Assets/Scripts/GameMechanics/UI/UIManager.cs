@@ -44,13 +44,13 @@ namespace GameMechanics
 
                     if (_currentElement != null)
                     {
-                        Debug.Log("Cursor Visible");
                         OnUIOpened?.Invoke();
                         _appSettings.CursorActive(true);
                         return;
                     }
 
                     OnUIQuit?.Invoke();
+                    _appSettings.CursorActive(false);
                 }
             }
         }
@@ -245,9 +245,6 @@ namespace GameMechanics
         
         private void OnEscapePressed()
         {
-            if (_gameStateMachine.GetGameState() != GameState.MainMenu)
-                _appSettings.CursorActive(false);
-
             if (CurrentElement == null && _gameStateMachine.GetGameState() == GameState.Gameplay)
             {
                 pauseMenu.SetVisualVisibility(true);
