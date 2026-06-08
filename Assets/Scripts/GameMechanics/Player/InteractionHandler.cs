@@ -85,7 +85,7 @@ namespace Player
                     if (!hit.collider || !hit.collider.TryGetComponent(out IInteractable interactable)) continue;
                     
                     _currentInteractable = interactable;
-                    interactionObjectName.text = interactable.GetName();
+                    interactionObjectName.text = $"{interactable.GetName()}\n(E)";
 
                     break;
                 }
